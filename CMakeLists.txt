@@ -11,6 +11,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(external/SDL2)
 include_directories(external/SDL2/include)
 
+# Add header search path
+include_directories(include)
+
+
 # Your project sources
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
     src/*.cpp
