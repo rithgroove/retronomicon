@@ -5,7 +5,7 @@
 // Dov Grobgeld <dov.grobgeld@gmail.com>
 //----------------------------------------------------------------------
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
