@@ -1,22 +1,32 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
+project(retronomicon)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_COMPILER g++)
-set(CMAKE_PREFIX_PATH /usr/bin/sdl2-config)
 
-# Output directories
+# Output folders
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-# Include headers
-include_directories(include)
+# Add SDL2
+add_subdirectory(external/SDL2)
+include_directories(external/SDL2/include)
 
-project(retronomicon VERSION 0.0.0 LANGUAGES CXX)
+# Your project sources
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
+    src/*.cpp
+    include/*.h
+)
 
-add_executable(retronomicon /src/main.cpp)
+# Define executable
+add_executable(retronomicon ${SOURCES})
 
-find_package(SDL2 REQUIRED)
-target_link_libraries(retronomicon PRIVATE SDL2)
+# Link SDL2 statically
+target_link_libraries(retronomicon SDL2)
 
+# Optional: Add SDL2main if you're using it
+# target_link_libraries(retronomicon SDL2main)
+
+# On Windows, you might need this
+if (WIN32)
+    target_compile_definitions(retronomicon PRIVATE SDL_MAIN_HANDLED)
+endif()
