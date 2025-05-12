@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
 
         SDL_RenderPresent(ren);
 
-        // Exit after 5 seconds
+        // Exit after 10 seconds
         if (elapsed > 10000)
             break;
     }    
@@ -90,3 +90,35 @@ int main(int argc, char* argv[])
 
     return 0;
 }
+// #include "MyGame/core/Window.h"
+// #include <SDL.h>
+
+// int main() {
+//     MyGame::Window window("My SDL2 Game", 800, 600);
+
+//     bool isRunning = true;
+//     SDL_Event event;
+
+//     while (isRunning) {
+//         while (SDL_PollEvent(&event)) {
+//             if (event.type == SDL_QUIT)
+//                 isRunning = false;
+
+//             else if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_RESIZED) {
+//                 window.handleResize(event.window.data1, event.window.data2);
+//             }
+
+//             else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_f) {
+//                 window.toggleFullscreen();
+//             }
+//         }
+
+//         window.clear();
+
+//         // draw...
+
+//         window.present();
+//     }
+
+//     return 0;
+// }
