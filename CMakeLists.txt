@@ -13,6 +13,7 @@ include_directories(external/SDL2/include)
 
 # Add header search path
 include_directories(include)
+include_directories(include/*)
 
 
 # Your project sources

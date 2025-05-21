@@ -1,8 +1,8 @@
-#include "Retronomicon/lib/graphic/Window.h"
-#include <SDL2/SDL.h>
+#include "retronomicon/lib/graphic/Window.h"
+#include <SDL.h>
 
 int main(int argc, char* argv[]) {
-    YourGame::Window window("My SDL2 Game", 800, 600);
+    retronomicon::lib::graphic::Window window("My SDL2 Game", 800, 600);
 
     bool running = true;
     SDL_Event event;
