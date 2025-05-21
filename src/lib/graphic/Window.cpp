@@ -1,7 +1,7 @@
 #include "Retronomicon/lib/graphic/Window.h"
 #include <iostream>
 
-namespace Retronomicon {
+namespace retronomicon {
     namespace lib{
         namespace graphic{
 
