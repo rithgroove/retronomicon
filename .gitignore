@@ -32,5 +32,6 @@
 *.app
 
 build/
+build-aarch64/
 CMakeFiles/
 external/
