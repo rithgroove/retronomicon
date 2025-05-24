@@ -1,4 +1,4 @@
-#include "/retronomicon/lib/input/InputController.h"
+#include "/retronomicon/lib/input/input_controller.h"
 
 namespace retronomicon {
     namespace lib{
@@ -42,6 +42,6 @@ namespace retronomicon {
                 auto it = m_currentState.find(buttonCode);
                 return it != m_currentState.end() && it->second;
             }
-        } // namespaceinput
+        } // namespace input
     } // namespace lib
 } // namespace retronomicon

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "InputDevice.h"
+#include "input_device.h"
 #include <SDL.h>
 #include <unordered_map>
 
