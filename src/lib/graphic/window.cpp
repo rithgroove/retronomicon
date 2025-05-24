@@ -1,4 +1,4 @@
-#include "retronomicon/lib/graphic/Window.h"
+#include "retronomicon/lib/graphic/window.h"
 #include <iostream>
 
 namespace retronomicon {
