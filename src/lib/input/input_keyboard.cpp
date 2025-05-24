@@ -1,4 +1,4 @@
-#include "/retronomicon/lib/input/input_keyboard.h"
+#include "retronomicon/lib/input/input_keyboard.h"
 
 namespace retronomicon {
     namespace lib{

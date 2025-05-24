@@ -23,7 +23,7 @@ static void die(const char *fmt, ...)
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
-int main(int argc, char* argv[])
+int main2(int argc, char* argv[])
 {
     // Initialize SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
