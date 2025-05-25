@@ -27,3 +27,10 @@ C/C++ game dev library for retro game emulator
 `
 	$ ./clean.sh
 `
+
+
+# Credits:
+
+## font:
+
+- Manaspace from Cody Boisclair "codeman38" [Link](https://www.zone38.net/font/)
