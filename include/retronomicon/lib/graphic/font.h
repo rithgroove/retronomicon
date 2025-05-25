@@ -13,7 +13,7 @@ namespace retronomicon {
 				    ~Font();
 
 				    TTF_Font* getRawFont() const;
-
+		            bool isInitialized() const;
 				private:
 				    TTF_Font* m_font;
 			};

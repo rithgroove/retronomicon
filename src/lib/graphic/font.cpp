@@ -13,6 +13,7 @@ namespace retronomicon {
                 m_font = TTF_OpenFont(filePath.c_str(), fontSize);
                 if (!m_font) {
                     std::cerr << "Failed to load font: " << filePath << ", Error: " << TTF_GetError() << std::endl;
+                    fflush(stdout);
                 }
             }
 
@@ -21,6 +22,10 @@ namespace retronomicon {
                     TTF_CloseFont(m_font);
                 }
                 TTF_Quit();
+            }
+
+            bool Font::isInitialized() const{
+                return m_font != NULL;
             }
 
             TTF_Font* Font::getRawFont() const {

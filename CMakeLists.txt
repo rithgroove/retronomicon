@@ -9,7 +9,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Add SDL2
 add_subdirectory(external/SDL2)
+add_subdirectory(external/SDL2_ttf)
 include_directories(external/SDL2/include)
+include_directories(external/SDL2_ttf/include)
 
 # Add header search path
 include_directories(include)
@@ -27,6 +29,7 @@ add_executable(retronomicon ${SOURCES})
 
 # Link SDL2 statically
 target_link_libraries(retronomicon SDL2)
+target_link_libraries(retronomicon SDL2_ttf)
 
 # Optional: Add SDL2main if you're using it
 # target_link_libraries(retronomicon SDL2main)
