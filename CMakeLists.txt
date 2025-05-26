@@ -26,10 +26,13 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
 
 # Define executable
 add_executable(retronomicon ${SOURCES})
+find_package(PNG REQUIRED)
+include_directories(${PNG_INCLUDE_DIR})
 
 # Link SDL2 statically
 target_link_libraries(retronomicon SDL2)
 target_link_libraries(retronomicon SDL2_ttf)
+target_link_libraries(retronomicon ${PNG_LIBRARY})
 
 # Optional: Add SDL2main if you're using it
 # target_link_libraries(retronomicon SDL2main)

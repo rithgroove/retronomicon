@@ -28,7 +28,7 @@ namespace retronomicon {
                 m_window = SDL_CreateWindow(title.c_str(),
                                             SDL_WINDOWPOS_CENTERED,
                                             SDL_WINDOWPOS_CENTERED,
-                                            width, height, windowFlags);
+                                            width, height, SDL_WINDOW_FOREIGN);
                 if (!m_window) {
                     std::cerr << "Window could not be created: " << SDL_GetError() << std::endl;
                     return;
