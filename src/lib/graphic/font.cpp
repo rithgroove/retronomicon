@@ -17,12 +17,20 @@ namespace retronomicon {
                 }
             }
 
-            Font::~Font() {
-                if (m_font) {
-                    TTF_CloseFont(m_font);
-                }
-                TTF_Quit();
-            }
+            // Font::~Font() {
+            //     std::cout << "destroying font\n";
+            //     fflush(stdout);
+            //     if (m_font) {
+            //         std::cout << "masuk if\n";
+            //         fflush(stdout);
+            //         TTF_CloseFont(m_font);
+            //     }
+            //     std::cout << "destroying font complete";
+            //     fflush(stdout);
+            //     TTF_Quit();
+            //     std::cout << "ttf quit complete";
+            //     fflush(stdout);
+            // }
 
             bool Font::isInitialized() const{
                 return m_font != NULL;

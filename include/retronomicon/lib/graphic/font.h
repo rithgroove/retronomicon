@@ -10,7 +10,7 @@ namespace retronomicon {
 			class Font {
 				public:
 				    Font(const std::string& filePath, int fontSize);
-				    ~Font();
+				    // ~Font();
 
 				    TTF_Font* getRawFont() const;
 		            bool isInitialized() const;
