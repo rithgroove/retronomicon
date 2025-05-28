@@ -19,6 +19,13 @@ git clone -b release-2.8.x git@github.com:libsdl-org/SDL_image.git SDL2_image
 cd ./SDL2_image
 cd ..
 
+echo cloning nlohmann/json
+git clone git@github.com:nlohmann/json.git nlohmann/json
+cd ./nlohmann/json
+cd ../..
+
+
+
 
 
 # if you get sdl2 init error: no display detected, try installing these:

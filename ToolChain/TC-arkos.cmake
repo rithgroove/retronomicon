@@ -19,7 +19,7 @@ set(CMAKE_FIND_ROOT_PATH  /media/rithgroove/root/usr/lib/aarch64-linux-gnu)
 # adjust the default behavior of the FIND_XXX() commands:
 # search programs in the host environment
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH)
-
+\
 # search headers and libraries in the target environment
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY BOTH)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE BOTH)

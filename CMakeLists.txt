@@ -35,7 +35,7 @@ add_executable(retronomicon ${SOURCES})
 target_link_libraries(retronomicon SDL2)
 target_link_libraries(retronomicon SDL2_ttf)
 target_link_libraries(retronomicon SDL2_image)
-target_link_libraries(retronomicon ${PNG_LIBRARY})
+#target_link_libraries(retronomicon ${PNG_LIBRARY})
 
 # Optional: Add SDL2main if you're using it
 # target_link_libraries(retronomicon SDL2main)

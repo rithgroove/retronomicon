@@ -4,6 +4,7 @@
 namespace retronomicon {
     namespace lib{
         namespace graphic{
+            
             Font::Font(const std::string& filePath, int fontSize) : m_font(nullptr) {
                 if (TTF_Init() == -1) {
                     std::cerr << "TTF_Init failed: " << TTF_GetError() << std::endl;
