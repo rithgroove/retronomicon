@@ -10,8 +10,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # Add SDL2
 add_subdirectory(external/SDL2)
 add_subdirectory(external/SDL2_ttf)
+add_subdirectory(external/SDL2_image)
 include_directories(external/SDL2/include)
 include_directories(external/SDL2_ttf/include)
+include_directories(external/SDL2_image/include)
 
 # Add header search path
 include_directories(include)
@@ -26,12 +28,13 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
 
 # Define executable
 add_executable(retronomicon ${SOURCES})
-find_package(PNG REQUIRED)
-include_directories(${PNG_INCLUDE_DIR})
+#find_package(PNG REQUIRED)
+#include_directories(${PNG_INCLUDE_DIR})
 
 # Link SDL2 statically
 target_link_libraries(retronomicon SDL2)
 target_link_libraries(retronomicon SDL2_ttf)
+target_link_libraries(retronomicon SDL2_image)
 target_link_libraries(retronomicon ${PNG_LIBRARY})
 
 # Optional: Add SDL2main if you're using it
