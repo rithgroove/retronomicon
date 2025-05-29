@@ -1,7 +1,9 @@
 #include "retronomicon/lib/asset/raw_image.h"
 // #include <iostream>
 
-
+/**
+ * This namespace is for handling asset loading 
+ */
 namespace retronomicon::lib::asset{
 
     /*************************************************************************************************

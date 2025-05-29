@@ -17,7 +17,7 @@ namespace retronomicon:lib:asset{
 
 		    TTF_Font* getRawFont() const; // function to get the raw font (it's accesible, but not recommended for use)
             bool isInitialized() const; // check if font is initialized 
-            SDL_Texture* generateTexture(const std::string& filePath); //generate texture from text using this font (might add size later)
+            // SDL_Texture* generateTexture(const std::string& filePath); //generate texture from text using this font (might add size later)
 		private:
 		    TTF_Font* m_font; // the loaded font
 	};
