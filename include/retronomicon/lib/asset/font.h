@@ -3,7 +3,7 @@
 #include <SDL_ttf.h>
 #include <string>
 
-namespace retronomicon:lib:graphic{
+namespace retronomicon:lib:asset{
 	class Font {
 		public:
 		    Font(const std::string& filePath, int fontSize);
