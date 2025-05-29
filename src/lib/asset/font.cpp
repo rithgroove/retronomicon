@@ -1,12 +1,12 @@
-#include "retronomicon/lib/graphic/font.h"
+#include "retronomicon/lib/asset/font.h"
 #include <iostream>
 
-namespace retronomicon:lib:graphic{
+namespace retronomicon:lib:asset{
             
-    Font::Font(const std::string& filePath, int fontSize) : m_font(nullptr) {
+    Font::Font(const std::string& filePath, int fontSize){
         if (TTF_Init() == -1) {
             std::cerr << "TTF_Init failed: " << TTF_GetError() << std::endl;
-            return;
+            fflush(stdout);
         }
 
         m_font = TTF_OpenFont(filePath.c_str(), fontSize);
