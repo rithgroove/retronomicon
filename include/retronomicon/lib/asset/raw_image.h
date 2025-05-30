@@ -16,7 +16,7 @@ namespace retronomicon::lib::asset{
      */    
     class RawImage {
         public:
-            RawImage(string imagePath,string name,SDL_Renderer* renderer); // Constructor: accept path to image and build SDL_Texture, store the width and the height too
+            RawImage(const string& imagePath,const string& name, SDL_Renderer* renderer); // Constructor: accept path to image and build SDL_Texture, store the width and the height too
             ~RawImage(); // Destructor: remove sdl texture
 
             int getWidth() const; // Get image width

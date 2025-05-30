@@ -53,12 +53,19 @@ int main(int argc, char* argv[])
 
     AssetManager* temp = new AssetManager(ren);
     
-    temp->loadImage("./asset/sprite/miho-test.png", "miho");
+    if (temp->loadImage("./asset/sprite/miho-test.png", "miho")){
+        cout << "good" << endl;
+    }else{
+        cout << "bad" << endl;
+    }
+    cout << ("miho" == "miho") << endl;
     RawImage* test = temp->getImage("miho");
+    cout << "Crap" << endl;
 
 
-    std::cout <<test->getName() <<std::endl;
-    std::cout <<test->getPath() <<std::endl;
+    std::cout << test->getName() <<std::endl;
+    std::cout << test->getPath() <<std::endl;
+    cout << "Crap2" << endl;
 
     return 0;
 }

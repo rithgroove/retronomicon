@@ -14,11 +14,11 @@ namespace retronomicon::lib::asset{
     *************************************************************************************************/
     // AssetManager::~AssetManager(){}
 	
-    bool AssetManager::loadImage(string imagePath,string name){
+    bool AssetManager::loadImage(const string& imagePath,const string& name){
 	    try{
 	  		RawImage* image= new RawImage(imagePath,name,m_renderer);
-	  		m_imageMap[image->getName()] = image;
-	  		m_imageFileNameMap[image->getPath()] = image;	    	
+	  		m_imageMap[name] = image;
+	  		m_imageFileNameMap[imagePath] = image;
 	    } catch (const runtime_error& error) {
 	        cerr << "Error: " << error.what() << endl;
 	        return false;
@@ -29,15 +29,24 @@ namespace retronomicon::lib::asset{
   		return true;
   	}
 
-	RawImage* AssetManager::getImage(string name){
-    	RawImage* temp = m_imageMap[name];
-    	if (temp != NULL){
-    		temp = m_imageFileNameMap[name];
-    	}
-    	return temp;
+	RawImage* AssetManager::getImage(const string& name){
+
+    	cout << "debug 1 = "<<name << endl;
+    	auto it = m_imageMap.find(name);
+        if (it != m_imageMap.end()) {
+            return it->second;
+        } else {
+	    	auto it = m_imageFileNameMap.find(name);
+	        if (it != m_imageFileNameMap.end()) {
+	            return it->second;
+	        } else {
+				throw std::runtime_error("Image not found for key: " + name);
+	        }
+
+        }
     }
 
-    bool AssetManager::removeImage(string name){
+    bool AssetManager::removeImage(const string& name){
     	RawImage* image =this->getImage(name);
     	if (image){
     		m_imageMap.erase(image->getName());

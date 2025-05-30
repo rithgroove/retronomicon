@@ -8,6 +8,9 @@
 using namespace std;
 using namespace retronomicon::lib::asset;
 namespace retronomicon::lib::asset{
+
+
+
 	/**
 	 * A class that loads assets from storage and put in memory for ease of use
 	 *
@@ -19,9 +22,9 @@ namespace retronomicon::lib::asset{
 	        AssetManager(SDL_Renderer* m_renderer); //Constructor initialize the maps	    	
 	        // ~AssetManager(); //Destructor destroys the maps
 
-	        bool loadImage(string imagePath,string name);
-	        RawImage* getImage(string name);
-	        bool removeImage(string name);
+	        bool loadImage(const string& imagePath,const string& name);
+	        RawImage* getImage(const string& name);
+	        bool removeImage(const string& name);
 
 	        // bool loadFont( const std::string& name, const std::string& imagePath);
 	        // bool getFont(const std::string& name);
@@ -32,7 +35,7 @@ namespace retronomicon::lib::asset{
 	    	// std::unordered_map<std::string,retronomicon::lib:graphic::Font> m_fontMap;
 	    	// std::unordered_map<std::string,retronomicon::lib:graphic:Font> m_fontFileNameMap;
 	    	SDL_Renderer* m_renderer;
-	    	unordered_map<string,RawImage*> m_imageMap;
-	    	unordered_map<string,RawImage*> m_imageFileNameMap;
+	    	unordered_map<std::string,RawImage*> m_imageMap{};
+	    	unordered_map<std::string,RawImage*> m_imageFileNameMap{};
     };
 } // namespace Retronomicon

@@ -9,9 +9,10 @@ namespace retronomicon::lib::asset{
     /*************************************************************************************************
      * Constructor: accept path to image and build SDL_Texture, store the width and the height too 
      *************************************************************************************************/
-    RawImage::RawImage(string imagePath,string name,SDL_Renderer* renderer ){
+    RawImage::RawImage(const string& imagePath,const string& name,SDL_Renderer* renderer){
         m_imagePath = imagePath;
         m_name = name;
+
         // init sdl image PNG loader
         if (IMG_Init(IMG_INIT_PNG) == 0) {
             throw std::runtime_error("Failed to initialize SDL_image: " + std::string(IMG_GetError()));
@@ -71,6 +72,10 @@ namespace retronomicon::lib::asset{
      * Get image name
      *************************************************************************************************/
     string RawImage::getName()  {
+
+        cout << "getName " << endl;
+        cout << &m_name << endl;
+        cout <<"name = " << m_name << endl;
         return m_name;
     }
 
@@ -78,6 +83,7 @@ namespace retronomicon::lib::asset{
      * Get image file path
      *************************************************************************************************/
     string RawImage::getPath()  {
+        cout << "getPath" << endl;
         return m_imagePath;
     }
 }
