@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "retronomicon/lib/asset/raw_image.h"
+#include "retronomicon/lib/asset/asset_manager.h"
 #include "retronomicon/lib/asset/font.h"
 // #include "retronomicon.lib.asset.asset_manager.h"
 
@@ -45,12 +46,17 @@ int main(int argc, char* argv[])
                                        SDL_WINDOWPOS_UNDEFINED,
                                        SCREEN_WIDTH, SCREEN_HEIGHT,
                                        SDL_WINDOW_FOREIGN);
-    SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_SOFTWARE);
-
     if (win == NULL) 
         die("SDL_CreateWindow Error: %s\n", SDL_GetError());
 
-    RawImage* test = new RawImage("./asset/sprite/miho-test.png", "miho", ren);
+    SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_SOFTWARE);
+
+    AssetManager* temp = new AssetManager(ren);
+    
+    temp->loadImage("./asset/sprite/miho-test.png", "miho");
+    RawImage* test = temp->getImage("miho");
+
+
     std::cout <<test->getName() <<std::endl;
     std::cout <<test->getPath() <<std::endl;
 
