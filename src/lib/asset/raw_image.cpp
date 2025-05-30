@@ -9,7 +9,7 @@ namespace retronomicon::lib::asset{
     /*************************************************************************************************
      * Constructor: accept path to image and build SDL_Texture, store the width and the height too 
      *************************************************************************************************/
-    RawImage::RawImage(const std::string& imagePath,const std::string& name){
+    RawImage::RawImage(string imagePath,string name,SDL_Renderer* renderer ){
         m_imagePath = imagePath;
         m_name = name;
         // init sdl image PNG loader
@@ -18,7 +18,7 @@ namespace retronomicon::lib::asset{
         }
 
         // load image to memory for CPU use
-        SDL_Surface* surface = IMG_Load(imagePath.c_str());
+        SDL_Surface* surface = IMG_Load(m_imagePath.c_str());
         if (!surface) {
             throw std::runtime_error("Failed to load image: " + std::string(IMG_GetError()));
         }
@@ -49,35 +49,35 @@ namespace retronomicon::lib::asset{
     /*************************************************************************************************
      * Get image width
      *************************************************************************************************/
-    SDL_Texture* Sprite::getTexture() const {
+    SDL_Texture* RawImage::getTexture() const {
         return m_texture;
     }
 
     /*************************************************************************************************
      * Get image width
      *************************************************************************************************/
-    int Sprite::getWidth() const {
+    int RawImage::getWidth() const {
         return m_width;
     }
 
     /*************************************************************************************************
      * Get image height
      *************************************************************************************************/
-    int Sprite::getHeight() const {
+    int RawImage::getHeight() const {
         return m_height;
     }
 
     /*************************************************************************************************
      * Get image name
      *************************************************************************************************/
-    int Sprite::getName() const {
+    string RawImage::getName()  {
         return m_name;
     }
 
     /*************************************************************************************************
-     * Get image height
+     * Get image file path
      *************************************************************************************************/
-    int Sprite::getPath() const {
+    string RawImage::getPath()  {
         return m_imagePath;
     }
 }

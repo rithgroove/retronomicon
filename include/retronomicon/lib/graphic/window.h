@@ -3,7 +3,7 @@
 #include <SDL.h>
 #include <string>
 
-namespace retronomicoN::lib::graphic{
+namespace retronomicon::lib::graphic{
     class Window {
         public:
             Window(const std::string& title, int width, int height, bool fullscreen = false);
