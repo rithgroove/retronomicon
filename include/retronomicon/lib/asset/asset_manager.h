@@ -14,20 +14,20 @@ namespace retronomicon::lib::asset{
     class AssetManager {
 	    public:
 	        AssetManager(); //Constructor initialize the maps	    	
-	        ~AssetManager(); //Destructor destroys the maps
+	        // ~AssetManager(); //Destructor destroys the maps
 
-	        bool loadImage( const std::string& name, const std::string& imagePath);
-	        bool getImage(const std::string& name);
+	        bool loadImage( const std::string& imagePath, const std::string& name);
+	        RawImage* getImage(const std::string& name);
 	        bool removeImage(const std::string& name);
 
-	        bool loadFont( const std::string& name, const std::string& imagePath);
-	        bool getFont(const std::string& name);
-	        bool removeFont(const std::string& name);
+	        // bool loadFont( const std::string& name, const std::string& imagePath);
+	        // bool getFont(const std::string& name);
+	        // bool removeFont(const std::string& name);
 	        
 
 	    private:
-	    	std::unordered_map<std::string,retronomicon::lib:graphic::Font> m_fontMap;
-	    	std::unordered_map<std::string,retronomicon::lib:graphic:Font> m_fontFileNameMap;
+	    	// std::unordered_map<std::string,retronomicon::lib:graphic::Font> m_fontMap;
+	    	// std::unordered_map<std::string,retronomicon::lib:graphic:Font> m_fontFileNameMap;
 	    	std::unordered_map<std::string,retronomicon::lib:graphic::RawImage> m_imageMap;
 	    	std::unordered_map<std::string,retronomicon::lib:graphic::RawImage> m_imageFileNameMap;
     };

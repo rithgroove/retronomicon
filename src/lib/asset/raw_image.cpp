@@ -9,7 +9,9 @@ namespace retronomicon::lib::asset{
     /*************************************************************************************************
      * Constructor: accept path to image and build SDL_Texture, store the width and the height too 
      *************************************************************************************************/
-    RawImage::RawImage(const std::string& imagePath){
+    RawImage::RawImage(const std::string& imagePath,const std::string& name){
+        m_imagePath = imagePath;
+        m_name = name;
         // init sdl image PNG loader
         if (IMG_Init(IMG_INIT_PNG) == 0) {
             throw std::runtime_error("Failed to initialize SDL_image: " + std::string(IMG_GetError()));
@@ -47,6 +49,13 @@ namespace retronomicon::lib::asset{
     /*************************************************************************************************
      * Get image width
      *************************************************************************************************/
+    SDL_Texture* Sprite::getTexture() const {
+        return m_texture;
+    }
+
+    /*************************************************************************************************
+     * Get image width
+     *************************************************************************************************/
     int Sprite::getWidth() const {
         return m_width;
     }
@@ -56,5 +65,19 @@ namespace retronomicon::lib::asset{
      *************************************************************************************************/
     int Sprite::getHeight() const {
         return m_height;
+    }
+
+    /*************************************************************************************************
+     * Get image name
+     *************************************************************************************************/
+    int Sprite::getName() const {
+        return m_name;
+    }
+
+    /*************************************************************************************************
+     * Get image height
+     *************************************************************************************************/
+    int Sprite::getPath() const {
+        return m_imagePath;
     }
 }

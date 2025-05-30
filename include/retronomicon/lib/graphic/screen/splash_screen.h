@@ -16,6 +16,10 @@ namespace retronomicon::lib::graphic::screen{
 	    	virtual ~Screen() = default;
 	    	virtual bool update() = 0;
 	    	virtual bool render() = 0;
-	        
+	    private:
+	    	int fadeInDuration;
+	    	int showDuration;
+	    	int fadeOutDuration;
+	    	
     };
 } // namespace Retronomicon
