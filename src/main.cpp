@@ -13,6 +13,8 @@
 #include "retronomicon/lib/asset/raw_image.h"
 #include "retronomicon/lib/asset/asset_manager.h"
 #include "retronomicon/lib/asset/font.h"
+#include "retronomicon/lib/graphic/window.h"
+
 // #include "retronomicon.lib.asset.asset_manager.h"
 
 #define SCREEN_WIDTH 640
@@ -40,18 +42,9 @@ int main(int argc, char* argv[])
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         die("SDLInit Error: %s\n", SDL_GetError());
 
-    // Create a window
-    SDL_Window *win = SDL_CreateWindow("Hello, World!",
-                                       SDL_WINDOWPOS_UNDEFINED,
-                                       SDL_WINDOWPOS_UNDEFINED,
-                                       SCREEN_WIDTH, SCREEN_HEIGHT,
-                                       SDL_WINDOW_FOREIGN);
-    if (win == NULL) 
-        die("SDL_CreateWindow Error: %s\n", SDL_GetError());
+    retronomicon::lib::graphic::Window window("My SDL2 Game", SCREEN_WIDTH, SCREEN_HEIGHT); 
 
-    SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_SOFTWARE);
-
-    AssetManager* temp = new AssetManager(ren);
+    AssetManager* temp = new AssetManager(window.getRenderer());
     
     if (temp->loadImage("./asset/sprite/miho-test.png", "miho")){
         cout << "good" << endl;

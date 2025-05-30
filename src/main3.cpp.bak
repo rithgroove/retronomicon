@@ -27,7 +27,7 @@ SDL_Texture* renderText (retronomicon::lib::graphic::Font main_font,SDL_Renderer
     //printf("[ERROR] Unknown error in drawText(): %s\n", TTF_GetError()); return 1;
 }
 
-int main(int argc, char* argv[]) {
+int main2(int argc, char* argv[]) {
     retronomicon::lib::graphic::Window window("My SDL2 Game", SCREEN_WIDTH, SCREEN_HEIGHT); //directly initiate to a variable named "window"
     SDL_Event wEvent;                               // Enable the Window Event handler...
     SDL_Surface* screenSurface = SDL_GetWindowSurface(window.getRawWindow());
