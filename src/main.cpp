@@ -33,9 +33,6 @@ static void die(const char *fmt, ...)
 int main(int argc, char* argv[])
 {
 
-    Font main_font("./asset/font/Code38-manaspace/manaspc.ttf","ManaSpace-16",16); 
-    std::cout <<main_font.getName() <<std::endl;
-    std::cout <<main_font.getPath() <<std::endl;
 
 
     // Initialize SDL
@@ -59,6 +56,13 @@ int main(int argc, char* argv[])
     std::cout << test->getName() <<std::endl;
     std::cout << test->getPath() <<std::endl;
     cout << "Crap2" << endl;
+
+    temp->loadFont("./asset/font/Code38-manaspace/manaspc.ttf","ManaSpace",16);
+
+    Font * main_font = temp->getFont("ManaSpace",16);
+
+    std::cout <<main_font->getName() <<std::endl;
+    std::cout <<main_font->getPath() <<std::endl;
 
     return 0;
 }
