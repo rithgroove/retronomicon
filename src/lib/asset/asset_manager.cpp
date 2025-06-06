@@ -59,7 +59,7 @@ namespace retronomicon::lib::asset{
     bool AssetManager::loadFont(const string& fontPath,const string& name, int size){
 	    try{
 	    	string tempName = name + "-" + to_string(size);
-		    Font *font = new Font(fontPath,tempName,size); 
+		    Font *font = new Font(fontPath,tempName,size,m_renderer); 
 	  		m_fontMap[tempName] = font;
 	    } catch (const runtime_error& error) {
 	        cerr << "Error: " << error.what() << endl;
