@@ -22,7 +22,7 @@ namespace retronomicon::lib::asset{
             string getPath() ;
             SDL_Texture* generateTexture(const std::string& filePath); //generate texture from text using this font (might add size later)
 		private:
-			SDL_Renderer* m_renderer
+			SDL_Renderer* m_renderer;
             string m_fontPath;
             string m_name;
 		    TTF_Font* m_font; // the loaded font
