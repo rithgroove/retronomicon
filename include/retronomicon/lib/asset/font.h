@@ -20,7 +20,7 @@ namespace retronomicon::lib::asset{
             bool isInitialized() const; // check if font is initialized 
             string getName() ;
             string getPath() ;
-            SDL_Texture* generateTexture(const std::string& filePath); //generate texture from text using this font (might add size later)
+            SDL_Texture* generateTexture(const string text, int horizontalPadding, int verticalPadding,int width, int height,SDL_Color fgC, SDL_Color bgC); //generate texture from text using this font (might add size later)
 		private:
 			SDL_Renderer* m_renderer;
             string m_fontPath;
