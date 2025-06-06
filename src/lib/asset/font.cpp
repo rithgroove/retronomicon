@@ -8,8 +8,9 @@ namespace retronomicon::lib::asset{
     /*************************************************************************************************
      * Constructor: initialize the font (TTF_Font)   
      *************************************************************************************************/
-    Font::Font(string filePath, string name, int fontSize){
+    Font::Font(string filePath, string name, int fontSize,SDL_Renderer* renderer){
         //ttf init (might need to move it to load more than 1 font)
+        m_renderer = renderer;
         if (TTF_Init() == -1) {
             std::cerr << "TTF_Init failed: " << TTF_GetError() << std::endl;
             return;
