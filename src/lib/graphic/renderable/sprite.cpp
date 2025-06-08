@@ -8,33 +8,17 @@ namespace retronomicon::lib::graphic::renderable{
     /*************************************************************************************************
      * Constructor: initialize the font (TTF_Font)   
      *************************************************************************************************/
-    Sprite::Sprite(RawImage image, int x, int y, SDL_Renderer* renderer){
-        //ttf init (might need to move it to load more than 1 font)
-        m_renderer = renderer;
-        if (TTF_Init() == -1) {
-            std::cerr << "TTF_Init failed: " << TTF_GetError() << std::endl;
-            return;
-        }
-
-        // load the font
-        m_font = TTF_OpenFont(filePath.c_str(), fontSize);
-        if (!m_font) {
-            std::cerr << "Failed to load font: " << filePath << ", Error: " << TTF_GetError() << std::endl;
-        }
+    Sprite::Sprite(RawImage image, int x, int y){
+        m_rawImage = image;
 
         m_name =name;
         m_fontPath = filePath;
     }
 
-
     /*************************************************************************************************
      * Destructor: remove the font
      *************************************************************************************************/
-    Font::~Font() {
-        if (m_font) {
-            TTF_CloseFont(m_font);
-            m_font = nullptr;
-        }
+    Sprite::~Sprite() {
         //TTF_Quit(); //might need this later
     }
 
