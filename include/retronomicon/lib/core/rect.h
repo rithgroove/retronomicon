@@ -14,6 +14,7 @@ namespace retronomicon::lib::core{
 	 */
     class Rect {
 	    public:
+	    	Rect(int x, int y, int width, int height); //constructor position, width, and height
 	    	Rect(Point* position, int width, int height); //constructor position, width, and height
 	    	Rect(Point* position, Point* anchor, int width, int height); //constructor position, anchor point, width, and height
 	    	// ~Point(); // no need for destructor since all attributes are native
@@ -26,6 +27,7 @@ namespace retronomicon::lib::core{
 	    	int getHeight() const;
 	    	int getX() const;
 	    	int getY() const;
+	    	SDL_Rect generateSDLRect();
 
 	    private:
 	    	Point* m_anchor;

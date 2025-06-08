@@ -32,6 +32,8 @@ namespace retronomicon::lib::graphic::renderable{
      * Render function
      *************************************************************************************************/
     bool Sprite::render(SDL_Renderer* m_renderer){
-        return true;
+        SDL_Rect dstRect = m_rect->generateSDLRect();
+        SDL_RenderCopyEx(m_renderer, m_rawImage->getTexture(), nullptr, &dstRect, 0.0, nullptr, SDL_FLIP_NONE);
     } 
+
 }

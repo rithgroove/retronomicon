@@ -14,12 +14,16 @@
 #include "retronomicon/lib/asset/asset_manager.h"
 #include "retronomicon/lib/asset/font.h"
 #include "retronomicon/lib/graphic/window.h"
+#include "retronomicon/lib/graphic/renderable/sprite.h"
+#include "retronomicon/lib/core/rect.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 using namespace retronomicon::lib::asset;
+using namespace retronomicon::lib::graphic::renderable;
+using namespace retronomicon::lib::core;
 
 static void die(const char *fmt, ...)
 {
@@ -43,15 +47,16 @@ int main(int argc, char* argv[])
 
     AssetManager* temp = new AssetManager(window.getRenderer());
     
-    if (temp->loadImage("./asset/sprite/miho-test.png", "miho")){
+    if (temp->loadImage("./asset/sprite/building2.png", "building2")){
         cout << "good" << endl;
     }else{
         cout << "bad" << endl;
     }
     cout << ("miho" == "miho") << endl;
-    RawImage* test = temp->getImage("miho");
+    RawImage* test = temp->getImage("building2");
     cout << "Crap" << endl;
 
+    Sprite* tempSprite = new Sprite(test,new Rect(50,50,test->getWidth(),test->getHeight()));
 
     std::cout << test->getName() <<std::endl;
     std::cout << test->getPath() <<std::endl;
@@ -85,6 +90,8 @@ int main(int argc, char* argv[])
         SDL_Texture* texture = main_font->generateTexture( "Hello Dum dum! ",5,5,630,190,fgC1,bgC1);
         fillRect = { 5, 280, 630, 190 }; // render with 5 pixel from the left, 280 pixels from the top, for width and height minus padding
         SDL_RenderCopy(ren,texture, NULL,&fillRect);
+
+        tempSprite->render(ren);
 
         window.present();
 

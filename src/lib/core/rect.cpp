@@ -9,6 +9,15 @@ namespace retronomicon::lib::core{
     /*************************************************************************************************
      * Constructor: set m_x and m_y
      *************************************************************************************************/
+    Rect::Rect(int x, int y, int width, int height){
+        m_position = new Point(x,y);
+        m_anchor = new Point(0,0);
+        setSize(width,height);
+    }
+
+    /*************************************************************************************************
+     * Constructor: set m_x and m_y
+     *************************************************************************************************/
     Rect::Rect(Point* position, int width, int height){
         m_position = position;
         m_anchor = new Point(0,0);
@@ -89,5 +98,11 @@ namespace retronomicon::lib::core{
         return m_height;
     }
 
+    /*************************************************************************************************
+     * Generate SDL rect for rendering purpose
+     *************************************************************************************************/
+    SDL_Rect Rect::generateSDLRect(){
+        return { this->getX(), this->getY(), this->getWidth(), this->getHeight() };
+    }
 
 }
