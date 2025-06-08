@@ -20,8 +20,11 @@ namespace retronomicon::lib::graphic::renderable{
 	    	// ~Sprite();
 	    	bool update() override; //update function (might change in the future)
 	    	bool render(SDL_Renderer* m_renderer) override; //render function (might change in the future to include renderer)
+	    	bool getFlip();
+	    	bool flip();
 	    private:
 	    	RawImage* m_rawImage;
 	    	Rect* m_rect;   
+	    	bool m_flip; // true = facing right
     };
 } // namespace Retronomicon

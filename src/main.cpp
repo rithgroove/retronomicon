@@ -91,6 +91,8 @@ int main(int argc, char* argv[])
         fillRect = { 5, 280, 630, 190 }; // render with 5 pixel from the left, 280 pixels from the top, for width and height minus padding
         SDL_RenderCopy(ren,texture, NULL,&fillRect);
 
+
+        tempSprite->flip();
         tempSprite->render(ren);
 
         window.present();
@@ -128,7 +130,7 @@ int main(int argc, char* argv[])
                     break;
             }
         }
-        SDL_Delay(100); // Keep < 500 [ms]
+        SDL_Delay(200); // Keep < 500 [ms]
     }
     SDL_Quit();
     TTF_Quit();
