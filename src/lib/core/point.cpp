@@ -16,7 +16,7 @@ namespace retronomicon::lib::core{
     /*************************************************************************************************
      * Constructor: change position of the point
      *************************************************************************************************/
-    Point::set(int x,int y){
+    void Point::set(int x,int y){
         m_x = x;
         m_y = y;
     }
@@ -39,7 +39,7 @@ namespace retronomicon::lib::core{
     /*************************************************************************************************
      * get float distance to a point 
      *************************************************************************************************/
-    Point::calculateDistance(Point target){
+    float Point::calculateDistance(Point target){
         float distance_x = abs(((float) m_x - (float) target.getX()));
         float distance_y = abs(((float) m_y - (float) target.getY()));
         return sqrt((distance_x*distance_x) + (distance_y*distance_y));
