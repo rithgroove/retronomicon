@@ -1,6 +1,7 @@
 #include "retronomicon/lib/core/point.h"
 #include <cmath>
 
+using namespace retronomicon::lib::core;
 /**
  * The namespace for basic libraries such as points, rectangle cirle, etc.
  */
@@ -32,16 +33,16 @@ namespace retronomicon::lib::core{
      * Get y position
      *************************************************************************************************/
     int Point::getY() const {
-        return m_Y;
+        return m_y;
     }
 
 
     /*************************************************************************************************
      * get float distance to a point 
      *************************************************************************************************/
-    float Point::calculateDistance(Point target){
-        float distance_x = abs(((float) m_x - (float) target.getX()));
-        float distance_y = abs(((float) m_y - (float) target.getY()));
+    float Point::calculateDistance(Point* target){
+        float distance_x = abs(((float) m_x - (float) target->getX()));
+        float distance_y = abs(((float) m_y - (float) target->getY()));
         return sqrt((distance_x*distance_x) + (distance_y*distance_y));
     }
 }

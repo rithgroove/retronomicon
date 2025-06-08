@@ -10,24 +10,24 @@ namespace retronomicon::lib::core{
 	/**
 	 * A class that represent a single point
 	 */
-    class Point {
+    class Rect {
 	    public:
-	    	Rectangle(Point& position, int width, int height); //constructor position, width, and height
-	    	Rectangle(Point& position, Point& anchor, int width, int height); //constructor position, anchor point, width, and height
+	    	Rect(Point* position, int width, int height); //constructor position, width, and height
+	    	Rect(Point* position, Point* anchor, int width, int height); //constructor position, anchor point, width, and height
 	    	// ~Point(); // no need for destructor since all attributes are native
 	    	void setSize(int width, int height);//render function (might change in the future to include renderer)
 	    	void setPosition(int x, int y);
-	    	void setPosition(Point& position);
-	    	Point* getPosition(); 
-	    	Point* getAnchor();
-	    	int getWidth();
-	    	int getHeight();
-	    	int getX();
-	    	int getY();
+	    	void setPosition(Point* position);
+	    	Point* getPosition() const; 
+	    	Point* getAnchor() const;
+	    	int getWidth() const;
+	    	int getHeight() const;
+	    	int getX() const;
+	    	int getY() const;
 
 	    private:
 	    	Point* m_anchor;
-	    	Point* position;
+	    	Point* m_position;
 	    	int m_width;
 	    	int m_height;
     };

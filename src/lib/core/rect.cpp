@@ -9,8 +9,17 @@ namespace retronomicon::lib::core{
     /*************************************************************************************************
      * Constructor: set m_x and m_y
      *************************************************************************************************/
-    Rect::rect(Point& position, int width, int height){
+    Rect::Rect(Point* position, int width, int height){
         m_position = position;
+        m_anchor = new Point(0,0);
+        setSize(width,height);
+    }
+    /*************************************************************************************************
+     * Constructor: set m_x and m_y
+     *************************************************************************************************/
+    Rect::Rect(Point* position,Point* anchor, int width, int height){
+        m_position = position;
+        m_anchor = anchor;
         m_anchor = new Point(0,0);
         setSize(width,height);
     }
@@ -27,13 +36,13 @@ namespace retronomicon::lib::core{
      * Constructor: change position of this rectangle
      *************************************************************************************************/
     void Rect::setPosition(int x,int y){
-        m_position.set(x,y);
+        m_position->set(x,y);
     }
 
     /*************************************************************************************************
      * Constructor: change position of this rectangle with another point
      *************************************************************************************************/
-    void Rect::setPosition(Point& position){
+    void Rect::setPosition(Point* position){
         delete m_position;
         m_position = position;
     }
@@ -56,14 +65,28 @@ namespace retronomicon::lib::core{
      * Get x position
      *************************************************************************************************/
     int Rect::getX() const {
-        return m_position.getX();
+        return m_position->getX();
     }
 
     /*************************************************************************************************
      * Get y position
      *************************************************************************************************/
     int Rect::getY() const {
-        return m_position.getY();
+        return m_position->getY();
+    }
+
+    /*************************************************************************************************
+     * Get x width
+     *************************************************************************************************/
+    int Rect::getWidth() const {
+        return m_width;
+    }
+
+    /*************************************************************************************************
+     * Get y height
+     *************************************************************************************************/
+    int Rect::getHeight() const {
+        return m_height;
     }
 
 
