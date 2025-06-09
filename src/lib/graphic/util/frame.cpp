@@ -9,39 +9,40 @@ namespace retronomicon::lib::graphic::util{
     /*************************************************************************************************
      * Constructor: set m_x and m_y
      *************************************************************************************************/
-    Frame::Frame(int x, int y){
-        set(x,y);
+    Frame::Frame(int x, int y,int width, int height,RawImage* rawImage,int sequence_order, string &name){
+        m_rect = new Rect(x,y,width,height);
+        m_image = rawImage;
+        m_sequence_order= sequence_order;
+        m_name = name;
     }
 
-    /*************************************************************************************************
-     * Constructor: change position of the point
-     *************************************************************************************************/
-    void Point::set(int x,int y){
-        m_x = x;
-        m_y = y;
+    Frame::Frame(Point* point ,int width, int height,RawImage* rawImage,int sequence_order, string &name){
+        m_rect = new Rect(point,width,height);
+        m_image = rawImage;
+        m_sequence_order= sequence_order;
+        m_name = name;
+    }
+
+    
+    Frame::Frame(Rect* rect,RawImage* rawImage,int sequence_order, string &name){
+        m_rect = rect;
+        m_image = rawImage;
+        m_sequence_order= sequence_order;
+        m_name = name;
     }
 
     /*************************************************************************************************
      * Get x position
      *************************************************************************************************/
-    int Point::getX() const {
-        return m_x;
+    int Frame::getX() const {
+        return m_rect->getX();
     }
 
     /*************************************************************************************************
      * Get y position
      *************************************************************************************************/
-    int Point::getY() const {
-        return m_y;
+    int Frame::getY() const {
+        return m_rect->getY();
     }
 
-
-    /*************************************************************************************************
-     * get float distance to a point 
-     *************************************************************************************************/
-    float Point::calculateDistance(Point* target){
-        float distance_x = abs(((float) m_x - (float) target->getX()));
-        float distance_y = abs(((float) m_y - (float) target->getY()));
-        return sqrt((distance_x*distance_x) + (distance_y*distance_y));
-    }
 }
