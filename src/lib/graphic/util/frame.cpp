@@ -7,7 +7,7 @@ using namespace retronomicon::lib::core;
 namespace retronomicon::lib::graphic::util{
 
     /*************************************************************************************************
-     * Constructor: set m_x and m_y
+     * Constructor: with all 4 int 
      *************************************************************************************************/
     Frame::Frame(int x, int y,int width, int height,RawImage* rawImage,int sequence_order, string &name){
         m_rect = new Rect(x,y,width,height);
@@ -16,6 +16,9 @@ namespace retronomicon::lib::graphic::util{
         m_name = name;
     }
 
+    /*************************************************************************************************
+     * Constructor: with points, width, height 
+     *************************************************************************************************/
     Frame::Frame(Point* point ,int width, int height,RawImage* rawImage,int sequence_order, string &name){
         m_rect = new Rect(point,width,height);
         m_image = rawImage;
@@ -23,7 +26,9 @@ namespace retronomicon::lib::graphic::util{
         m_name = name;
     }
 
-    
+    /*************************************************************************************************
+     * Constructor: with points, width, height 
+     *************************************************************************************************/
     Frame::Frame(Rect* rect,RawImage* rawImage,int sequence_order, string &name){
         m_rect = rect;
         m_image = rawImage;
