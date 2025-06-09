@@ -34,3 +34,7 @@ C/C++ game dev library for retro game emulator
 ## font:
 
 - Manaspace from Cody Boisclair "codeman38" [Link](https://www.zone38.net/font/)
+- Building2 (City Mega Pack) by  GrafxKid
+- Miho by rithgroove & ceteee21
+- Funny Swish (funny-swish-101878.mp3) by Freesound Community
+- Background Music (best-background-music-no-copyright-244084.mp3) by DesiFreeMusic
