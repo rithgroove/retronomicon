@@ -47,7 +47,8 @@ int main(int argc, char* argv[])
 
     retronomicon::lib::graphic::Window window("My SDL2 Game", SCREEN_WIDTH, SCREEN_HEIGHT); 
 
-    AssetManager* temp = new AssetManager(window.getRenderer());
+    SDL_Renderer *ren = window.getRenderer();
+    AssetManager* temp = new AssetManager(ren);
     
     if (temp->loadImage("./asset/sprite/building2.png", "building2")){
         cout << "good" << endl;
@@ -93,23 +94,23 @@ int main(int argc, char* argv[])
     SDL_Color fgC1 = { 0xff,0xff,0xff }, bgC1 = {0x00,0x00,0xa0};       
     bool eQuit = false;
     std::cout <<"\nmain loop"<<std::endl;
+    SDL_Rect fillRect = { SCREEN_WIDTH  / 4, SCREEN_HEIGHT / 4,
+                              SCREEN_WIDTH/2, SCREEN_HEIGHT / 2 };
+    SDL_Rect fillrect2= { 5, 280, 630, 190 };
     while (!eQuit) {
         std::cout <<"\nmasuk while\n"<<std::endl;
 
-        SDL_Renderer *ren = window.getRenderer();
         SDL_SetRenderDrawColor(ren, 78, 215, 241, 255);
         SDL_RenderClear(ren);
 
 
         // Draw and animate
         SDL_SetRenderDrawColor(ren, 111, 230, 252, 255);
-        SDL_Rect fillRect = { SCREEN_WIDTH  / 4, SCREEN_HEIGHT / 4,
-                                  SCREEN_WIDTH/2, SCREEN_HEIGHT / 2 };
         SDL_RenderFillRect(ren, &fillRect);
 
         SDL_Texture* texture = main_font->generateTexture( "Hello Dum dum! ",5,5,630,190,fgC1,bgC1);
-        fillRect = { 5, 280, 630, 190 }; // render with 5 pixel from the left, 280 pixels from the top, for width and height minus padding
-        SDL_RenderCopy(ren,texture, NULL,&fillRect);
+        SDL_RenderCopy(ren,texture, NULL,&fillrect2);
+        SDL_DestroyTexture(texture);
 
 
         // tempSprite->flip();

@@ -96,6 +96,7 @@ namespace retronomicon::lib::asset{
         }
 
         SDL_Texture* texture = SDL_CreateTextureFromSurface(m_renderer,textBox);
+        SDL_FreeSurface(textSurface);
         SDL_FreeSurface(textBox);
         return texture;
     }
