@@ -17,9 +17,9 @@ namespace retronomicon::lib::graphic::util{
 	 */
     class Frame {
 	    public:
-	    	Frame(int x, int y,int width, int height,RawImage* rawImage,int sequence_order, string &name);
-	    	Frame(Point* point,int width, int height,RawImage* rawImage,int sequence_order, string &name);
-	    	Frame(Rect* rect,RawImage* rawImage,int sequence_order, string &name); //constructor with 2 points (still considering wether we should use int or float or double)
+	    	Frame(int x, int y,int width, int height,RawImage* rawImage,int sequence_order, const string &name);
+	    	Frame(Point* point,int width, int height,RawImage* rawImage,int sequence_order, const string &name);
+	    	Frame(Rect* rect,RawImage* rawImage,int sequence_order, const string &name); //constructor with 2 points (still considering wether we should use int or float or double)
 	    	// ~Point(); // no need for destructor since all attributes are native
 	    	// void set(int x, int y);//render function (might change in the future to include renderer)
 	    	int getX() const; // get X position

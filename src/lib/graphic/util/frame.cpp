@@ -9,7 +9,7 @@ namespace retronomicon::lib::graphic::util{
     /*************************************************************************************************
      * Constructor: with all 4 int 
      *************************************************************************************************/
-    Frame::Frame(int x, int y,int width, int height,RawImage* rawImage,int sequence_order, string &name){
+    Frame::Frame(int x, int y,int width, int height,RawImage* rawImage,int sequence_order, const string &name){
         m_rect = new Rect(x,y,width,height);
         m_image = rawImage;
         m_sequence_order= sequence_order;
@@ -19,7 +19,7 @@ namespace retronomicon::lib::graphic::util{
     /*************************************************************************************************
      * Constructor: with points, width, height 
      *************************************************************************************************/
-    Frame::Frame(Point* point ,int width, int height,RawImage* rawImage,int sequence_order, string &name){
+    Frame::Frame(Point* point ,int width, int height,RawImage* rawImage,int sequence_order,const string &name){
         m_rect = new Rect(point,width,height);
         m_image = rawImage;
         m_sequence_order= sequence_order;
@@ -29,7 +29,7 @@ namespace retronomicon::lib::graphic::util{
     /*************************************************************************************************
      * Constructor: with points, width, height 
      *************************************************************************************************/
-    Frame::Frame(Rect* rect,RawImage* rawImage,int sequence_order, string &name){
+    Frame::Frame(Rect* rect,RawImage* rawImage,int sequence_order,const string &name){
         m_rect = rect;
         m_image = rawImage;
         m_sequence_order= sequence_order;

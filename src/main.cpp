@@ -10,11 +10,15 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
+#include <vector>
 #include "retronomicon/lib/asset/raw_image.h"
 #include "retronomicon/lib/asset/asset_manager.h"
 #include "retronomicon/lib/asset/font.h"
 #include "retronomicon/lib/graphic/window.h"
 #include "retronomicon/lib/graphic/renderable/sprite.h"
+#include "retronomicon/lib/graphic/renderable/stateless_animated_sprite.h"
+#include "retronomicon/lib/graphic/util/frame.h"
+#include "retronomicon/lib/graphic/util/sequence.h"
 #include "retronomicon/lib/core/rect.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
@@ -23,6 +27,7 @@
 #define SCREEN_HEIGHT 480
 using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::graphic::renderable;
+using namespace retronomicon::lib::graphic::util;
 using namespace retronomicon::lib::core;
 
 static void die(const char *fmt, ...)
@@ -36,9 +41,6 @@ static void die(const char *fmt, ...)
 
 int main(int argc, char* argv[])
 {
-
-
-
     // Initialize SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         die("SDLInit Error: %s\n", SDL_GetError());
@@ -48,6 +50,11 @@ int main(int argc, char* argv[])
     AssetManager* temp = new AssetManager(window.getRenderer());
     
     if (temp->loadImage("./asset/sprite/building2.png", "building2")){
+        cout << "good" << endl;
+    }else{
+        cout << "bad" << endl;
+    }
+    if (temp->loadImage("./asset/sprite/miho-test.png", "miho")){
         cout << "good" << endl;
     }else{
         cout << "bad" << endl;
@@ -69,6 +76,19 @@ int main(int argc, char* argv[])
     std::cout <<main_font->getName() <<std::endl;
     std::cout <<main_font->getPath() <<std::endl;
     
+    RawImage* miho = temp->getImage("miho");
+    // string sequenceName = "miho-standby";
+
+    vector<Frame>frames;
+    frames.push_back(Frame(0,0,64,64,miho,0,"miho-standby"));
+    frames.push_back(Frame(64,0,64,64,miho,1,"miho-standby"));
+    frames.push_back(Frame(128,0,64,64,miho,2,"miho-standby"));
+    frames.push_back(Frame(192,0,64,64,miho,3,"miho-standby"));
+    frames.push_back(Frame(256,0,64,64,miho,4,"miho-standby"));
+
+    Sequence * seq = new Sequence (frames, 5, "miho-standby", true);
+
+    Sprite* tempSprite2 = new StatelessAnimatedSprite(miho, new Rect(220,300,128,128),seq);
 
     SDL_Color fgC1 = { 0xff,0xff,0xff }, bgC1 = {0x00,0x00,0xa0};       
     bool eQuit = false;
@@ -77,12 +97,12 @@ int main(int argc, char* argv[])
         std::cout <<"\nmasuk while\n"<<std::endl;
 
         SDL_Renderer *ren = window.getRenderer();
-        SDL_SetRenderDrawColor(ren, 0, 0, 255, 255);
+        SDL_SetRenderDrawColor(ren, 78, 215, 241, 255);
         SDL_RenderClear(ren);
 
 
         // Draw and animate
-        SDL_SetRenderDrawColor(ren, 255, 0, 0, 255);
+        SDL_SetRenderDrawColor(ren, 111, 230, 252, 255);
         SDL_Rect fillRect = { SCREEN_WIDTH  / 4, SCREEN_HEIGHT / 4,
                                   SCREEN_WIDTH/2, SCREEN_HEIGHT / 2 };
         SDL_RenderFillRect(ren, &fillRect);
@@ -92,10 +112,11 @@ int main(int argc, char* argv[])
         SDL_RenderCopy(ren,texture, NULL,&fillRect);
 
 
-        tempSprite->flip();
+        // tempSprite->flip();
         tempSprite->render(ren);
-
+        tempSprite2->render(ren);
         window.present();
+        tempSprite2->update();
 
 
         SDL_Event wEvent;   

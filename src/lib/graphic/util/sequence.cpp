@@ -8,7 +8,7 @@ namespace retronomicon::lib::graphic::util{
     /*************************************************************************************************
      * Constructor: with all 4 int 
      *************************************************************************************************/
-    Sequence::Sequence(Frame* frames, int frameCount, string &name , bool repeat){
+    Sequence::Sequence(vector<Frame> frames, int frameCount, const string &name , bool repeat){
     	m_frames = frames;
     	m_frameCount = frameCount;
         m_name = name;
@@ -20,8 +20,8 @@ namespace retronomicon::lib::graphic::util{
     	return m_currentFrame;
     }
 
-    Frame* Sequence::getCurrentFrame(){
-    	return &m_frames[m_currentFrame];
+    Frame& Sequence::getCurrentFrame(){
+    	return m_frames.at(m_currentFrame);
     }
 
     bool Sequence::update(){

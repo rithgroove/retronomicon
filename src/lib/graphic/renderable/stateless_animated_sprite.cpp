@@ -39,7 +39,7 @@ namespace retronomicon::lib::graphic::renderable{
             cout << ("flip") << endl;
             flip = SDL_FLIP_HORIZONTAL;   
         }
-        SDL_Rect srcRect =  m_sequence->getCurrentFrame()->getRect()->generateSDLRect();
+        SDL_Rect srcRect =  m_sequence->getCurrentFrame().getRect()->generateSDLRect();
         SDL_RenderCopyEx(m_renderer, m_rawImage->getTexture(), &srcRect, &dstRect, 0.0, nullptr, flip);
     } 
 
