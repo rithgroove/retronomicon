@@ -36,3 +36,4 @@ C/C++ game dev library for retro game emulator
 - [Sprite] Miho by rithgroove & ceteee21
 - [Sound] Funny Swish (funny-swish-101878.mp3) by Freesound Community [Link](https://pixabay.com/sound-effects/funny-swish-101878/)
 - [Sound] Background Music (best-background-music-no-copyright-244084.mp3) by DesiFreeMusic [Link](https://pixabay.com/music/beats-best-background-music-no-copyright-244084/)
+- Special thanks to Dov Grobgeld [dov](https://github.com/dov) for his example repository. 
