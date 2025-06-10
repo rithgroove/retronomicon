@@ -1,4 +1,4 @@
-#include "retronomicon/lib/graphic/renderable/sprite.h"
+#include "retronomicon/lib/graphic/renderable/stateless_animated_sprite.h"
 #include <iostream>
 /**
  * This namespace is for handling asset loading 
@@ -8,10 +8,9 @@ namespace retronomicon::lib::graphic::renderable{
     /*************************************************************************************************
      * Constructor: initialize the font (TTF_Font)   
      *************************************************************************************************/
-    Sprite::Sprite(RawImage* image, Rect* rect){
-        m_rawImage = image;
-        m_rect = rect;
-        m_flip = false;
+    StatelessAnimatedSprite::StatelessAnimatedSprite(RawImage* image, Rect* rect, Sequence* sequence)
+    :Sprite(image,rect){
+        m_sequence = sequence;
     }
 
     /*************************************************************************************************
@@ -24,14 +23,15 @@ namespace retronomicon::lib::graphic::renderable{
     /*************************************************************************************************
      * Update function
      *************************************************************************************************/
-    bool Sprite::update(){
+    bool StatelessAnimatedSprite::update(){
+        m_sequence->update();
         return true;
     } 
 
     /*************************************************************************************************
      * Render function
      *************************************************************************************************/
-    bool Sprite::render(SDL_Renderer* m_renderer){
+    bool StatelessAnimatedSprite::render(SDL_Renderer* m_renderer){
         SDL_Rect dstRect = m_rect->generateSDLRect();
         SDL_RendererFlip flip = SDL_FLIP_NONE ;
         cout << ("render") << endl;
@@ -39,17 +39,9 @@ namespace retronomicon::lib::graphic::renderable{
             cout << ("flip") << endl;
             flip = SDL_FLIP_HORIZONTAL;   
         }
-        SDL_RenderCopyEx(m_renderer, m_rawImage->getTexture(), nullptr, &dstRect, 0.0, nullptr, flip);
+        SDL_Rect srcRect =  m_sequence->getCurrentFrame()->getRect()->generateSDLRect();
+        SDL_RenderCopyEx(m_renderer, m_rawImage->getTexture(), &srcRect, &dstRect, 0.0, nullptr, flip);
     } 
 
-    bool Sprite::getFlip(){
-        return m_flip;
-    }
-
-    bool Sprite::flip(){
-            cout << ("\npanggil flip") << endl;
-        m_flip = !m_flip;
-        return m_flip;
-    }
 
 }

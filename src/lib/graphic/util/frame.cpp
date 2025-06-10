@@ -50,4 +50,8 @@ namespace retronomicon::lib::graphic::util{
         return m_rect->getY();
     }
 
+
+    Rect* Frame::getRect() const{
+        return m_rect;
+    }
 }

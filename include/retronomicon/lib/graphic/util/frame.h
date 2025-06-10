@@ -24,7 +24,7 @@ namespace retronomicon::lib::graphic::util{
 	    	// void set(int x, int y);//render function (might change in the future to include renderer)
 	    	int getX() const; // get X position
 	    	int getY() const; // get Y position
-
+	    	Rect* getRect() const;
 	    private:
 	    	Rect* m_rect;
 	    	RawImage* m_image;
