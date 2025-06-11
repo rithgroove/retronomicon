@@ -11,10 +11,6 @@ namespace retronomicon::lib::asset{
     Font::Font(string filePath, string name, int fontSize,SDL_Renderer* renderer){
         //ttf init (might need to move it to load more than 1 font)
         m_renderer = renderer;
-        if (TTF_Init() == -1) {
-            std::cerr << "TTF_Init failed: " << TTF_GetError() << std::endl;
-            return;
-        }
 
         // load the font
         m_font = TTF_OpenFont(filePath.c_str(), fontSize);

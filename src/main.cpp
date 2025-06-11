@@ -45,6 +45,14 @@ int main(int argc, char* argv[])
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         die("SDLInit Error: %s\n", SDL_GetError());
 
+    if (TTF_Init() == -1) {
+        std::cerr << "TTF_Init failed: " << TTF_GetError() << std::endl;
+    }
+
+    if (IMG_Init(IMG_INIT_PNG) == 0) {
+        std::cerr << "IMG_INIT failed: " << TTF_GetError() << std::endl;
+    }
+
     retronomicon::lib::graphic::Window window("My SDL2 Game", SCREEN_WIDTH, SCREEN_HEIGHT); 
 
     SDL_Renderer *ren = window.getRenderer();
@@ -154,8 +162,8 @@ int main(int argc, char* argv[])
         }
         SDL_Delay(200); // Keep < 500 [ms]
     }
-    TTF_Quit();
     IMG_Quit();
+    TTF_Quit();
     SDL_Quit();
     return 0;
 }

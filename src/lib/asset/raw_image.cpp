@@ -14,9 +14,7 @@ namespace retronomicon::lib::asset{
         m_name = name;
 
         // init sdl image PNG loader
-        if (IMG_Init(IMG_INIT_PNG) == 0) {
-            throw std::runtime_error("Failed to initialize SDL_image: " + std::string(IMG_GetError()));
-        }
+
 
         // load image to memory for CPU use
         SDL_Surface* surface = IMG_Load(m_imagePath.c_str());
