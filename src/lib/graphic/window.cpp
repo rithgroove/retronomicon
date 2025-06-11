@@ -50,7 +50,7 @@ namespace retronomicon::lib::graphic{
             m_window = nullptr;
         }
 
-        SDL_Quit();
+        // SDL_Quit();
     }
 
     void Window::clear() {

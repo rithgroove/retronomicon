@@ -154,7 +154,8 @@ int main(int argc, char* argv[])
         }
         SDL_Delay(200); // Keep < 500 [ms]
     }
-    SDL_Quit();
     TTF_Quit();
+    IMG_Quit();
+    SDL_Quit();
     return 0;
 }
