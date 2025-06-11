@@ -19,7 +19,7 @@ namespace retronomicon::lib::asset{
     class AssetManager {
 	    public:
 	        AssetManager(SDL_Renderer* m_renderer); //Constructor initialize the maps	    	
-	        // ~AssetManager(); //Destructor destroys the maps
+	        ~AssetManager(); //Destructor destroys the maps
 
 	        bool loadImage(const string& imagePath,const string& name);
 	        RawImage* getImage(const string& name);

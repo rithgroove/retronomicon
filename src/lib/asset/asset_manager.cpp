@@ -12,7 +12,10 @@ namespace retronomicon::lib::asset{
 	/*************************************************************************************************
     * Destructor initialize the maps	    	
     *************************************************************************************************/
-    // AssetManager::~AssetManager(){}
+    AssetManager::~AssetManager(){
+    	m_imageMap.clear();
+    	m_fontMap.clear()
+    }
 	
     bool AssetManager::loadImage(const string& imagePath,const string& name){
 	    try{

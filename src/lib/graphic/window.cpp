@@ -41,7 +41,7 @@ namespace retronomicon::lib::graphic{
 
     void Window::cleanup() {
         if (m_renderer) {
-            SDL_DestroyRenderer(m_renderer);
+            // SDL_DestroyRenderer(m_renderer);
             m_renderer = nullptr;
         }
 
