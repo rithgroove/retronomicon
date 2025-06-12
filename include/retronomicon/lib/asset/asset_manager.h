@@ -9,6 +9,9 @@
 
 using namespace std;
 using namespace retronomicon::lib::asset;
+/**
+ * This namespace is for handling asset loading 
+ */
 namespace retronomicon::lib::asset{
 	/**
 	 * A class that loads assets from storage and put in memory for ease of use

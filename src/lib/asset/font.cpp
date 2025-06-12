@@ -20,8 +20,8 @@ namespace retronomicon::lib::asset{
 
         m_name =name;
         m_fontPath = filePath;
+        m_fontSize = fontSize;
     }
-
 
     /*************************************************************************************************
      * Destructor: remove the font
@@ -31,9 +31,7 @@ namespace retronomicon::lib::asset{
             TTF_CloseFont(m_font);
             m_font = nullptr;
         }
-        //TTF_Quit(); //might need this later
     }
-
 
     /*************************************************************************************************
      * check if font is initialized 
@@ -63,8 +61,20 @@ namespace retronomicon::lib::asset{
         return m_fontPath;
     }
 
-    // SDL_Texture* renderText (retronomicon::lib::graphic::Font main_font,SDL_Renderer *ren, SDL_Surface* screen, char* string,int x, int y, SDL_Color fgC, SDL_Color bgC) {
+    /*************************************************************************************************
+     * Get font size
+     *************************************************************************************************/
+    int Font::getFontSize()  {
+        return m_fontSize;
+    }
 
+
+    /*************************************************************************************************
+     * Generate texture for text
+     * 
+     * I think this method shouldn't be here (i should be the responsibilities of a renderable child).
+     * Will rethink the position later.
+     *************************************************************************************************/
     SDL_Texture* Font::generateTexture(const string text, int horizontalPadding, int verticalPadding,int width,  int height, SDL_Color fgC, SDL_Color bgC){
         TTF_SetFontStyle(m_font, TTF_STYLE_BOLD);
         SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), fgC);     // aliased glyphs
