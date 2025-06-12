@@ -24,7 +24,7 @@ namespace retronomicon::lib::asset{
 	    	 * 
 	    	 * @param renderer a renderer that will be passed to any object loaded by this asset manager.
 	    	 */
-	        AssetManager(SDL_Renderer* renderer); //Constructor initialize the maps	    	
+	        AssetManager(SDL_Renderer* renderer);   	
 
 	    	/**
 	    	 * @brief The destructor of the object, used to destroy maps using unsorted_map.clear() function
@@ -36,23 +36,26 @@ namespace retronomicon::lib::asset{
 	         * 
 	         * @param imagePath the path to the image
 	         * @param name the name or key for the image so we can request it again in the future
+	         * @return return true if success, return false if failed
 	         */
-	        bool loadImage(const string& imagePath,const string& name); //load image to memory. 
+	        bool loadImage(const string& imagePath,const string& name); 
 
 
 	        /**
 	         * @brief A method to get the loaded image
 	         *
 	         * @param name the name/key for the image
+	         * @return the instance of RawImage that represent the image
 	         */
-	        RawImage* getImage(const string& name); // get image from memory
+	        RawImage* getImage(const string& name);
 
 	        /**
 	         * @brief A method to remove the loaded image from memory
 	         *
 	         * @param name the name/key for the image
+	         * @return return true if success, return false if failed
 	         */
-	        bool removeImage(const string& name); // remove image from memory (destroy it)
+	        bool removeImage(const string& name); 
 
 	        /**
 	         * @brief A method to load font from drive and put it in local map (m_fontMap)
@@ -60,8 +63,9 @@ namespace retronomicon::lib::asset{
 	         * @param imagePath the path to the font
 	         * @param name the name or key for the font so we can request it again in the future
 	         * @param size the size for the font so we can request it again in the future
+	         * @return return true if success, return false if failed
 	         */
-	        bool loadFont(const string& fontPath, const string& name, int size); //load font to memory
+	        bool loadFont(const string& fontPath, const string& name, int size); 
 
 	        /**
 	         * @brief A method to get the font from memory
@@ -69,17 +73,17 @@ namespace retronomicon::lib::asset{
 	         * @param name the name/key for the font
 	         * @param size the size of the font
 	         */
-	        Font* getFont(const string& name, int size); // get font from memory
+	        Font* getFont(const string& name, int size);
 
 	        /**
 	         * @brief A method to remove the loaded font from memory
 	         *
 	         * @param name the name/key for the font
 	         * @param size the size of the font
+	         * @return return true if success, return false if failed
 	         */
 	        bool removeFont(const string& name, int size); 
 	        
-
 	    private:
 	    	SDL_Renderer* m_renderer; // the renderer to be passed to font and images
 	    	unordered_map<string,RawImage*> m_imageMap{}; //map of name with loaded image (RawImage)
