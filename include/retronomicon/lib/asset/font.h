@@ -48,7 +48,7 @@ namespace retronomicon::lib::asset{
              * 
              * @return the name in string format
              */
-            string getName() ; // get the name of the font
+            string getName() ; 
             
             /**
              * @brief a method to get the file path of this font
@@ -62,7 +62,7 @@ namespace retronomicon::lib::asset{
              * 
              * @return the font size
              */
-            int getFontSize(); //get the Font Size
+            int getFontSize(); 
 
             /**
              * @brief a method to generate texture so we could put it in renderer
@@ -76,7 +76,7 @@ namespace retronomicon::lib::asset{
              * @param background color (drop shadow) // not used at current moment
              * @return SDL_Texture the texture where the text is rendered
              */
-            SDL_Texture* generateTexture(const string text, int horizontalPadding, int verticalPadding,int width, int height,SDL_Color fgC, SDL_Color bgC); //generate texture from text using this font (might add size later)
+            SDL_Texture* generateTexture(const string text, int horizontalPadding, int verticalPadding,int width, int height,SDL_Color fgC, SDL_Color bgC);
 		private:
 			SDL_Renderer* m_renderer;
             string m_fontPath; // path to file

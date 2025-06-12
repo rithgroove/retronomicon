@@ -8,11 +8,11 @@
 
 using namespace std;
 /**
- * This namespace is for handling asset loading 
+ * @brief This namespace is for handling asset loading 
  */
 namespace retronomicon::lib::asset{
     /**
-     *  A class that represent a loaded image from storage to memory
+     *  @brief A class that represent a loaded image from storage to memory
      */    
     class RawImage {
         public:
