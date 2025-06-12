@@ -30,15 +30,52 @@ namespace retronomicon::lib::asset{
 		    ~Font();
 
 		    /**
-		     * @brief function to get the raw font (it's accesible, but not recommended for use)
+		     * @brief a method to get the raw font
 		     * 
 		     * @return TTF_Font the raw font
 		     */
-		    TTF_Font* getRawFont() const; // 
-            bool isInitialized() const; // check if font is initialized 
+		    TTF_Font* getRawFont() const; 
+		    
+		    /**
+		     * @brief a method to check if font is initialized 
+		     * 
+		     * @return true if initialized
+		     */
+            bool isInitialized() const; 
+
+            /**
+             * @brief a method to get the given name to this font
+             * 
+             * @return the name in string format
+             */
             string getName() ; // get the name of the font
-            string getPath() ; //get the path of the font
+            
+            /**
+             * @brief a method to get the file path of this font
+             * 
+             * @return the filepath in string format
+             */
+            string getPath() ;
+
+            /**
+             * @brief a method to get the font size of this font
+             * 
+             * @return the font size
+             */
             int getFontSize(); //get the Font Size
+
+            /**
+             * @brief a method to generate texture so we could put it in renderer
+             * 
+             * @param text the text we wanted to render
+             * @param horizontalPadding the horizontal padding for this text
+             * @param verticalPadding for this text
+             * @param width of the texture
+             * @param height of the texture
+             * @param foreground color 
+             * @param background color (drop shadow) // not used at current moment
+             * @return SDL_Texture the texture where the text is rendered
+             */
             SDL_Texture* generateTexture(const string text, int horizontalPadding, int verticalPadding,int width, int height,SDL_Color fgC, SDL_Color bgC); //generate texture from text using this font (might add size later)
 		private:
 			SDL_Renderer* m_renderer;
