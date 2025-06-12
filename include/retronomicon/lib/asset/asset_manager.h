@@ -21,18 +21,18 @@ namespace retronomicon::lib::asset{
 	        AssetManager(SDL_Renderer* m_renderer); //Constructor initialize the maps	    	
 	        ~AssetManager(); //Destructor destroys the maps
 
-	        bool loadImage(const string& imagePath,const string& name);
-	        RawImage* getImage(const string& name);
-	        bool removeImage(const string& name);
+	        bool loadImage(const string& imagePath,const string& name); //load image to memory. 
+	        RawImage* getImage(const string& name); // get image from memory
+	        bool removeImage(const string& name); // remove image from memory (destroy it)
 
-	        bool loadFont(const string& fontPath, const string& name, int size);
-	        Font* getFont(const string& name, int size);
-	        bool removeFont(const string& name, int size);
+	        bool loadFont(const string& fontPath, const string& name, int size); //load font to memory
+	        Font* getFont(const string& name, int size); // get font from memory
+	        bool removeFont(const string& name, int size); // remove font from memory
 	        
 
 	    private:
-	    	SDL_Renderer* m_renderer;
-	    	unordered_map<string,RawImage*> m_imageMap{};
-	    	unordered_map<string,Font*> m_fontMap;
+	    	SDL_Renderer* m_renderer; // the renderer to be passed to font and images
+	    	unordered_map<string,RawImage*> m_imageMap{}; //map of name with loaded image (RawImage)
+	    	unordered_map<string,Font*> m_fontMap; //map of font name (and size) with loaded font (the actual format is "{font_name}-{size}")
     };
 } // namespace Retronomicon
