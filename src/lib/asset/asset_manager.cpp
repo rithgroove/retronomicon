@@ -1,30 +1,41 @@
 #include "retronomicon/lib/asset/asset_manager.h"
 
 using namespace std;
+/**
+ * @brief This namespace is for handling asset loading 
+ */
 namespace retronomicon::lib::asset{
-
-	/*************************************************************************************************
-    * Constructor initialize the maps	    	
-    *************************************************************************************************/
+	/**
+	 * @brief Constructor using renderer
+	 * 
+	 * @param renderer a renderer that will be passed to any object loaded by this asset manager.
+	 */
     AssetManager::AssetManager(SDL_Renderer* renderer){
     	m_renderer = renderer; //set renderer
     }
 	
-	/*************************************************************************************************
-    * Destructor initialize the maps	    	
-    *************************************************************************************************/
+	/**
+	 * @brief The destructor of the object, used to destroy maps using unsorted_map.clear() function
+	 */
     AssetManager::~AssetManager(){
     	m_imageMap.clear(); //clear image map
     	m_fontMap.clear(); //clear font map
     }
 	
-	/*************************************************************************************************
-    * Load image and store it to memory
-    * 
-    * return true if successfull
-    * return false if fails
-    *************************************************************************************************/
-    
+    /**
+     * @brief A method to load image from drive and put it in local map (m_imageMap) 
+     * caveats:
+     * - Currently only accept PNG.
+     * - will return nullptr if not found 
+     * - will return nullptr if name exist but have different filepath
+     * - will load the image from drive if not exist
+     * - if exists in cache will use the one preloaded before
+     * 
+     * @param imagePath the path to the image
+     * @param name the name or key for the image so we can request it again in the future
+     * @param forceReplace set true if you want to load the image from the drive again
+     * @return the image
+     */
 	RawImage* AssetManager::loadImage(const string& imagePath,const string& name, bool forceReplace){
 		//declare
     	RawImage* image = nullptr;
@@ -61,9 +72,12 @@ namespace retronomicon::lib::asset{
 	  	return image;
   	}
 
-	/*************************************************************************************************
-    * get image by name(key) from memory
-    *************************************************************************************************/
+    /**
+     * @brief  A method to get the loaded image
+     *
+     * @param name the name/key for the image
+     * @return the instance of RawImage that represent the image
+     */
 	RawImage* AssetManager::getImage(const string& name){
 
     	cout << "debug 1 = "<<name << endl;
@@ -74,10 +88,13 @@ namespace retronomicon::lib::asset{
 			throw std::runtime_error("Image not found for key: " + name);
         }
     }
-
-	/*************************************************************************************************
-    * remove image from memory
-    *************************************************************************************************/
+    
+    /**
+     * @brief A method to remove the loaded image from memory
+     *
+     * @param name the name/key for the image
+     * @return return true if success, return false if failed
+     */
     bool AssetManager::removeImage(const string& name){
     	RawImage* image =this->getImage(name);
     	if (image){
@@ -90,12 +107,22 @@ namespace retronomicon::lib::asset{
 
     }
 	
-	/*************************************************************************************************
-    * Load font and store it to memory
-    * 
-    * return true if successfull
-    * return false if fails
-    *************************************************************************************************/
+    /**
+     * @brief A method to load font from drive and put it in local map (m_fontMap)
+     * caveats:
+     * - Currently only accept TTF.
+     * - each size needs to be initiated differently (so Arial 16 and Arial 18 will be initiated as 2 different font)
+     * - will return nullptr if not found 
+     * - will return nullptr if name exist but have different filepath
+     * - will load the front from drive if not exist
+     * - if exists in cache will use the one preloaded before
+     * 
+     * @param imagePath the path to the font
+     * @param name the name or key for the font so we can request it again in the future
+     * @param size the size for the font so we can request it again in the future
+     * @param forceReplace set true if you want to load the image from the drive again
+     * @return return true if success, return false if failed
+     */
     Font * AssetManager::loadFont(const string& fontPath,const string& name, int size, bool forceReplace){
     	//setup keys
 	    string tempName = name + "-" + to_string(size);
@@ -131,9 +158,12 @@ namespace retronomicon::lib::asset{
   		return font;
   	}
 
-	/*************************************************************************************************
-    * get font by name(key) and size from memory
-    *************************************************************************************************/
+    /**
+     * @brief A method to get the font from memory
+     *
+     * @param name the name/key for the font
+     * @param size the size of the font
+     */
 	Font* AssetManager::getFont(const string& name, int size){
 
     	string tempName = name + "-" + to_string(size);
@@ -146,9 +176,13 @@ namespace retronomicon::lib::asset{
         }
     }
 
-	/*************************************************************************************************
-    * remove font from memory
-    *************************************************************************************************/
+    /**
+     * @brief A method to remove the loaded font from memory
+     *
+     * @param name the name/key for the font
+     * @param size the size of the font
+     * @return return true if success, return false if failed
+     */
     bool AssetManager::removeFont(const string& name, int size){
     	string tempName = name + "-" + to_string(size);
     	RawImage* image =this->getImage(tempName);

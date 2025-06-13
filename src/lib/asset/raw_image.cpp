@@ -1,14 +1,17 @@
 #include "retronomicon/lib/asset/raw_image.h"
-// #include <iostream>
 
 /**
- * This namespace is for handling asset loading 
+ * @brief This namespace is for handling asset loading 
  */
 namespace retronomicon::lib::asset{
 
-    /*************************************************************************************************
-     * Constructor: accept path to image and build SDL_Texture, store the width and the height too 
-     *************************************************************************************************/
+    /**
+     * @brief constructor for the raw image
+     * 
+     * @param imagePath the path to the image
+     * @param the name of the image
+     * @renderer used to generate texture from the surface (image files -> SDL_SURFACE -> SDL_TEXTURE)
+     */
     RawImage::RawImage(const string& imagePath,const string& name,SDL_Renderer* renderer){
         m_imagePath = imagePath;
         m_name = name;
@@ -35,9 +38,11 @@ namespace retronomicon::lib::asset{
         SDL_FreeSurface(surface); // clear surface
     }
 
-    /*************************************************************************************************
-     * Destructor: remove sdl texture
-     *************************************************************************************************/
+    /**
+     * @brief Destructor of the raw image
+     * 
+     * @param remove the sdl texture
+     */
     RawImage::~RawImage(){
         if (m_texture) {
             SDL_DestroyTexture(m_texture); // destroy the texture to free the memory
@@ -45,30 +50,38 @@ namespace retronomicon::lib::asset{
         }
     }
 
-    /*************************************************************************************************
-     * Get image width
-     *************************************************************************************************/
+    /**
+     * @brief get the loaded texture
+     * 
+     * @return the image in texture format
+     */
     SDL_Texture* RawImage::getTexture() const {
         return m_texture;
-    }
+    }    
 
-    /*************************************************************************************************
-     * Get image width
-     *************************************************************************************************/
-    int RawImage::getWidth() const {
+    /**
+     * @brief get the width of the image 
+     * 
+     * @return the image width
+     */
+        int RawImage::getWidth() const {
         return m_width;
     }
 
-    /*************************************************************************************************
-     * Get image height
-     *************************************************************************************************/
+    /**
+     * @brief get the height of the image 
+     * 
+     * @return the image height
+     */
     int RawImage::getHeight() const {
         return m_height;
     }
 
-    /*************************************************************************************************
-     * Get image name
-     *************************************************************************************************/
+    /**
+     * @brief get the name of the image 
+     * 
+     * @return the name of the image
+     */
     string RawImage::getName()  {
 
         cout << "getName " << endl;
@@ -77,9 +90,11 @@ namespace retronomicon::lib::asset{
         return m_name;
     }
 
-    /*************************************************************************************************
-     * Get image file path
-     *************************************************************************************************/
+    /**
+     * @brief get the filepath to the image
+     * 
+     * @return the filepath of the image
+     */
     string RawImage::getPath()  {
         cout << "getPath" << endl;
         return m_imagePath;
