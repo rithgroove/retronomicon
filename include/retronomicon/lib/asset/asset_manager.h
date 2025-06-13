@@ -32,17 +32,24 @@ namespace retronomicon::lib::asset{
 	        ~AssetManager(); //Destructor destroys the maps
 
 	        /**
-	         * @brief A method to load image from drive and put it in local map (m_imageMap)
+	         * @brief A method to load image from drive and put it in local map (m_imageMap) 
+	         * caveats:
+	         * - Currently only accept PNG.
+	         * - will return nullptr if not found 
+	         * - will return nullptr if name exist but have different filepath
+	         * - will load the image from drive if not exist
+	         * - if exists in cache will use the one preloaded before
 	         * 
 	         * @param imagePath the path to the image
 	         * @param name the name or key for the image so we can request it again in the future
-	         * @return return true if success, return false if failed
+	         * @param forceReplace set true if you want to load the image from the drive again
+	         * @return the image
 	         */
-	        bool loadImage(const string& imagePath,const string& name); 
+	        RawImage* loadImage(const string& imagePath,const string& name, bool forceReplace = false); 
 
 
 	        /**
-	         * @brief A method to get the loaded image
+	         * @brief  A method to get the loaded image
 	         *
 	         * @param name the name/key for the image
 	         * @return the instance of RawImage that represent the image
@@ -59,13 +66,21 @@ namespace retronomicon::lib::asset{
 
 	        /**
 	         * @brief A method to load font from drive and put it in local map (m_fontMap)
+	         * caveats:
+	         * - Currently only accept TTF.
+	         * - each size needs to be initiated differently (so Arial 16 and Arial 18 will be initiated as 2 different font)
+	         * - will return nullptr if not found 
+	         * - will return nullptr if name exist but have different filepath
+	         * - will load the front from drive if not exist
+	         * - if exists in cache will use the one preloaded before
 	         * 
 	         * @param imagePath the path to the font
 	         * @param name the name or key for the font so we can request it again in the future
 	         * @param size the size for the font so we can request it again in the future
+	         * @param forceReplace set true if you want to load the image from the drive again
 	         * @return return true if success, return false if failed
 	         */
-	        bool loadFont(const string& fontPath, const string& name, int size); 
+	        Font* loadFont(const string& fontPath, const string& name, int size,bool forceReplace = false); 
 
 	        /**
 	         * @brief A method to get the font from memory

@@ -24,18 +24,41 @@ namespace retronomicon::lib::asset{
     * return true if successfull
     * return false if fails
     *************************************************************************************************/
-    bool AssetManager::loadImage(const string& imagePath,const string& name){
+    
+	RawImage* AssetManager::loadImage(const string& imagePath,const string& name, bool forceReplace){
+		//declare
+    	RawImage* image = nullptr;
+
+    	//get from cache first
 	    try{
-	  		RawImage* image= new RawImage(imagePath,name,m_renderer); //try to create image
-	  		m_imageMap[name] = image;
-	    } catch (const runtime_error& error) {
-	        cerr << "Error: " << error.what() << endl; // if runtime error catch it
-	        return false;
+	    	image = this->getImage(name);
+	    	if (imagePath.compare(image->getPath()) != 0 && !forceReplace){
+	    		return nullptr;
+	    	}
 	    } catch (const exception& error) {
-	        cerr << "Error: " << error.what() << endl; // if other exception error catch it
-	        return false;
+	        cerr << "Error: " << error.what() << endl; 
 	    }
-  		return true;
+
+	    //return if exist in cache
+	    if (image){
+	    	if (!forceReplace){
+	    		this->removeImage(name);
+	    	}else{
+	    		return image;
+	    	}
+	    }
+
+	    // if not exists in cache, try load from drive
+    	try {
+	  		image = new RawImage(imagePath,name,m_renderer); //try to create image
+	  		m_imageMap[name] = image;	    		
+    		cout <<"Load " << name << " from memory" <<endl;
+    	}catch (const exception& error) {
+	        cerr << "Error: " << error.what() << endl; 
+	    } 
+
+	    // return the result
+	  	return image;
   	}
 
 	/*************************************************************************************************
@@ -73,19 +96,39 @@ namespace retronomicon::lib::asset{
     * return true if successfull
     * return false if fails
     *************************************************************************************************/
-    bool AssetManager::loadFont(const string& fontPath,const string& name, int size){
+    Font * AssetManager::loadFont(const string& fontPath,const string& name, int size, bool forceReplace){
+    	//setup keys
+	    string tempName = name + "-" + to_string(size);
+		Font *font = nullptr;
+
+		// load from existing
 	    try{
-	    	string tempName = name + "-" + to_string(size);
-		    Font *font = new Font(fontPath, tempName,size,m_renderer); 
-	  		m_fontMap[tempName] = font;
-	    } catch (const runtime_error& error) {
-	        cerr << "Error: " << error.what() << endl;
-	        return false;
+	    	font = this->getFont(name,size);
+	    	if (fontPath.compare(font->getPath()) != 0 && !forceReplace){
+	    		return nullptr;
+	    	}
 	    } catch (const exception& error) {
 	        cerr << "Error: " << error.what() << endl;
-	        return false;
+	    } 
+
+	    // if not empty return font
+	    if (font){
+	    	if (!forceReplace){
+	    		this->removeFont(name,size);
+	    	}else{
+		    	return font;
+	    	}
 	    }
-  		return true;
+
+	    // load from memory
+	    try{
+		    font = new Font(fontPath, tempName,size,m_renderer); 
+	  		m_fontMap[tempName] = font;
+    		cout <<"Load " << name << " from memory" <<endl;
+	    } catch (const exception& error) {
+	        cerr << "Error: " << error.what() << endl;
+	    }
+  		return font;
   	}
 
 	/*************************************************************************************************

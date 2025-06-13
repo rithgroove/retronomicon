@@ -76,10 +76,14 @@ namespace retronomicon::lib::asset{
      * Will rethink the position later.
      *************************************************************************************************/
     SDL_Texture* Font::generateTexture(const string text, int horizontalPadding, int verticalPadding,int width,  int height, SDL_Color fgC, SDL_Color bgC){
+
+        std::cout <<"\n step 1\n"<<std::endl;
         TTF_SetFontStyle(m_font, TTF_STYLE_BOLD);
+        std::cout <<"\n step 2\n"<<std::endl;
         SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), fgC);     // aliased glyphs
         // SDL_Surface* textSurface = TTF_RenderText_Shaded(main_font.getRawFont(), string, fgC, bgC);   // anti-aliased glyphs
         
+        std::cout <<"\n step 3\n"<<std::endl;
         SDL_Surface* textBox = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_RGBA8888);
         if (!textBox) {
             SDL_Log("Failed to create surface: %s", SDL_GetError());
@@ -92,6 +96,7 @@ namespace retronomicon::lib::asset{
         // Fill the entire surface with the brown color
         // SDL_FillRect(surface, nullptr, brown);
         
+        std::cout <<"\n step 4\n"<<std::endl;
         SDL_Rect textLocation = { horizontalPadding, verticalPadding, 0, 0 };
         if (SDL_BlitSurface(textSurface, NULL, textBox, &textLocation) == 0){
             printf("\nsuccess to blit surface");
@@ -101,9 +106,13 @@ namespace retronomicon::lib::asset{
             fflush(stdout);
         }
 
+        std::cout <<"\n step 5\n"<<std::endl;
         SDL_Texture* texture = SDL_CreateTextureFromSurface(m_renderer,textBox);
+        std::cout <<"\n step 6\n"<<std::endl;
         SDL_FreeSurface(textSurface);
+        std::cout <<"\n step 7\n"<<std::endl;
         SDL_FreeSurface(textBox);
+        std::cout <<"\n step 8\n"<<std::endl;
         return texture;
     }
 }

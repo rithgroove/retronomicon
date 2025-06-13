@@ -57,36 +57,25 @@ int main(int argc, char* argv[])
 
     SDL_Renderer *ren = window.getRenderer();
     AssetManager* temp = new AssetManager(ren);
-    
-    if (temp->loadImage("./asset/sprite/building2.png", "building2")){
-        cout << "good" << endl;
-    }else{
-        cout << "bad" << endl;
-    }
-    if (temp->loadImage("./asset/sprite/miho-test.png", "miho")){
-        cout << "good" << endl;
-    }else{
-        cout << "bad" << endl;
-    }
-    cout << ("miho" == "miho") << endl;
-    RawImage* test = temp->getImage("building2");
-    cout << "Crap" << endl;
 
+    // load building
+    RawImage* test =temp->loadImage("./asset/sprite/building2.png", "building2");
+    if (test){
+        cout << "good" << endl;
+    }else{
+        cout << "bad" << endl;
+    }
     Sprite* tempSprite = new Sprite(test,new Rect(50,50,test->getWidth(),test->getHeight()));
 
-    std::cout << test->getName() <<std::endl;
-    std::cout << test->getPath() <<std::endl;
-    cout << "Crap2" << endl;
+    // load character
+    RawImage* miho = temp->loadImage("./asset/sprite/miho-test.png", "miho");
+    if (miho){
+        cout << "good" << endl;
+    }else{
+        cout << "bad" << endl;
+    }
 
-    temp->loadFont("./asset/font/Code38-manaspace/manaspc.ttf","ManaSpace",16);
-
-    Font * main_font = temp->getFont("ManaSpace",16);
-
-    std::cout <<main_font->getName() <<std::endl;
-    std::cout <<main_font->getPath() <<std::endl;
-    
-    RawImage* miho = temp->getImage("miho");
-    // string sequenceName = "miho-standby";
+    Font * main_font = temp->loadFont("./asset/font/Code38-manaspace/manaspc.ttf","ManaSpace",16);
 
     vector<Frame>frames;
     frames.push_back(Frame(0,0,64,64,miho,0,"miho-standby"));
@@ -94,7 +83,6 @@ int main(int argc, char* argv[])
     frames.push_back(Frame(128,0,64,64,miho,2,"miho-standby"));
     frames.push_back(Frame(192,0,64,64,miho,3,"miho-standby"));
     frames.push_back(Frame(256,0,64,64,miho,4,"miho-standby"));
-
     Sequence * seq = new Sequence (frames, 5, "miho-standby", true);
 
     Sprite* tempSprite2 = new StatelessAnimatedSprite(miho, new Rect(220,300,128,128),seq);
@@ -105,24 +93,34 @@ int main(int argc, char* argv[])
     SDL_Rect fillRect = { SCREEN_WIDTH  / 4, SCREEN_HEIGHT / 4,
                               SCREEN_WIDTH/2, SCREEN_HEIGHT / 2 };
     SDL_Rect fillrect2= { 5, 280, 630, 190 };
+
     while (!eQuit) {
         std::cout <<"\nmasuk while\n"<<std::endl;
 
         SDL_SetRenderDrawColor(ren, 78, 215, 241, 255);
         SDL_RenderClear(ren);
 
-
         // Draw and animate
         SDL_SetRenderDrawColor(ren, 111, 230, 252, 255);
         SDL_RenderFillRect(ren, &fillRect);
 
+        std::cout <<"\nmasuk render text\n"<<std::endl;
         SDL_Texture* texture = main_font->generateTexture( "Hello Dum dum! ",5,5,630,190,fgC1,bgC1);
+        std::cout <<"\ndone render text1\n"<<std::endl;
         SDL_RenderCopy(ren,texture, NULL,&fillrect2);
+        std::cout <<"\ndone render text2\n"<<std::endl;
         SDL_DestroyTexture(texture);
 
+        std::cout <<"\ndone render text3\n"<<std::endl;
 
+
+        std::cout <<"\nrender bangunan\n"<<std::endl;
         // tempSprite->flip();
         tempSprite->render(ren);
+
+        std::cout <<"\nrender miho\n"<<std::endl;
+
+
         tempSprite2->render(ren);
         window.present();
         tempSprite2->update();
