@@ -1,13 +1,14 @@
-
 #pragma once
+
 #include <string>
 #include <SDL.h>
-#include <math.h>
 #include "point.h"
+
+using namespace retronomicon::lib::core;
+
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
-using namespace retronomicon::lib::core;
 namespace retronomicon::lib::core{
 	/**
 	 * @brief A class that represent a rectangle
@@ -48,21 +49,22 @@ namespace retronomicon::lib::core{
 	    	Rect(Point* position, Point* anchor, int width, int height); 
 
 
-	    	// ~Rect(); // to do : dev later
-	    	/**
-	    	 * @brief a method to change the size of the rectangle
-	    	 * 
+	    	// ~Rect(); // to do : dev 
+
+	       /**
+	    	* @brief a method to change the size of the rectangle
+	    	* 
 	    	* @param width the new width for this rectangle
 	    	* @param height the new height for this rectangle
-	    	 */
+	    	*/
 	    	void setSize(int width, int height);
 
-	    	/**
-	    	 * @brief a method to change the position of the rectangle
-	    	 * 
+	       /**
+	    	* @brief a method to change the position of the rectangle
+	    	* 
 	    	* @param x the new x position for this rectangle
 	    	* @param y the new y position for this rectangle
-	    	 */
+	    	*/
 	    	void setPosition(int x, int y);
 
 	    	/**
