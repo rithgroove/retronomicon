@@ -5,17 +5,46 @@
 #include <math.h>
 #include "point.h"
 /**
- * The namespace for basic libraries such as points, rectangle cirle, etc.
+ * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
 using namespace retronomicon::lib::core;
 namespace retronomicon::lib::core{
 	/**
-	 * A class that represent a single point
+	 * @brief A class that represent a rectangle
 	 */
     class Rect {
 	    public:
-	    	Rect(int x, int y, int width, int height); //constructor position, width, and height
-	    	Rect(Point* position, int width, int height); //constructor position, width, and height
+	    	/**
+	    	* @brief constructor that accept 4 integer
+	    	* also create anchor on top left. Point(0,0)
+	    	* 
+	    	* @param x the x position of this rectangle
+	    	* @param y the y position of this rectangle
+	    	* @param width the width this rectangle
+	    	* @param height the height this rectangle
+	    	*/
+	    	Rect(int x, int y, int width, int height); 
+
+	    	/**
+	    	* @brief constructor with the position of this rectangle
+	    	* also create anchor on top left. Point(0,0)
+	    	* 
+	    	* @param position the position int Point format
+	    	* @param width the width this rectangle
+	    	* @param height the height this rectangle
+	    	*/
+	    	Rect(Point* position, int width, int height); 
+
+
+	    	/**
+	    	* @brief constructor with the position of this rectangle
+	    	* also create anchor on top left. Point(0,0)
+	    	* 
+	    	* @param position the position int Point format
+	    	* @param anchor the anchor position of this rectangle
+	    	* @param width the width this rectangle
+	    	* @param height the height this rectangle
+	    	*/
 	    	Rect(Point* position, Point* anchor, int width, int height); //constructor position, anchor point, width, and height
 	    	// ~Point(); // no need for destructor since all attributes are native
 	    	void setSize(int width, int height);//render function (might change in the future to include renderer)
