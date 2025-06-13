@@ -20,7 +20,7 @@ namespace retronomicon::lib::graphic::renderable{
         	StatelessAnimatedSprite(RawImage* rawImage, Rect*rect, Sequence* sequence); //set texture and render position
 	    	// ~Sprite();
 	    	bool update() override; //update function (might change in the future)
-	    	bool render(SDL_Renderer* m_renderer) override; //render function (might change in the future to include renderer)
+	    	bool render(SDL_Renderer* renderer) override; //render function (might change in the future to include renderer)
 	    private:
 	    	Sequence* m_sequence;
     };

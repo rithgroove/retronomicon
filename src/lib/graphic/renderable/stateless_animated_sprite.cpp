@@ -31,7 +31,7 @@ namespace retronomicon::lib::graphic::renderable{
     /*************************************************************************************************
      * Render function
      *************************************************************************************************/
-    bool StatelessAnimatedSprite::render(SDL_Renderer* m_renderer){
+    bool StatelessAnimatedSprite::render(SDL_Renderer* renderer){
         SDL_Rect dstRect = m_rect->generateSDLRect();
         SDL_RendererFlip flip = SDL_FLIP_NONE ;
         cout << ("render") << endl;
@@ -40,7 +40,7 @@ namespace retronomicon::lib::graphic::renderable{
             flip = SDL_FLIP_HORIZONTAL;   
         }
         SDL_Rect srcRect =  m_sequence->getCurrentFrame().getRect()->generateSDLRect();
-        SDL_RenderCopyEx(m_renderer, m_rawImage->getTexture(), &srcRect, &dstRect, 0.0, nullptr, flip);
+        SDL_RenderCopyEx(renderer, m_rawImage->getTexture(), &srcRect, &dstRect, 0.0, nullptr, flip);
     } 
 
 

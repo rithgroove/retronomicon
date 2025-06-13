@@ -19,7 +19,7 @@ namespace retronomicon::lib::graphic::renderable{
         	Sprite(RawImage* rawImage, Rect* rect); //set texture and render position
 	    	// ~Sprite();
 	    	bool update() override; //update function (might change in the future)
-	    	bool render(SDL_Renderer* m_renderer) override; //render function (might change in the future to include renderer)
+	    	bool render(SDL_Renderer* renderer) override; //render function (might change in the future to include renderer)
 	    	bool getFlip();
 	    	bool flip();
 	    protected:

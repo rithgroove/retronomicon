@@ -46,7 +46,7 @@ namespace retronomicon::lib::asset{
              */
             int getHeight() const;
 
-1            /**
+            /**
              * @brief get the loaded texture
              * 
              * @return the image in texture format
