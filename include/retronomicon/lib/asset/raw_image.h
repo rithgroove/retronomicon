@@ -16,13 +16,55 @@ namespace retronomicon::lib::asset{
      */    
     class RawImage {
         public:
-            RawImage(const string& imagePath,const string& name, SDL_Renderer* renderer); // Constructor: accept path to image and build SDL_Texture, store the width and the height too
-            ~RawImage(); // Destructor: remove sdl texture
+            /**
+             * @brief constructor for the raw image
+             * 
+             * @param imagePath the path to the image
+             * @param the name of the image
+             * @renderer used to generate texture from the surface (image files -> SDL_SURFACE -> SDL_TEXTURE)
+             */
+            RawImage(const string& imagePath,const string& name, SDL_Renderer* renderer); 
 
-            int getWidth() const; // Get image width
-            int getHeight() const; // Get image height
-            SDL_Texture* getTexture() const; // Get the texture
+            /**
+             * @brief Destructor of the raw image
+             * 
+             * @param remove the sdl texture
+             */
+            ~RawImage(); 
+
+            /**
+             * @brief get the width of the image 
+             * 
+             * @return the image width
+             */
+            int getWidth() const;
+
+            /**
+             * @brief get the height of the image 
+             * 
+             * @return the image height
+             */
+            int getHeight() const;
+
+1            /**
+             * @brief get the loaded texture
+             * 
+             * @return the image in texture format
+             */
+            SDL_Texture* getTexture() const; 
+ 
+            /**
+             * @brief get the name of the image 
+             * 
+             * @return the name of the image
+             */
             string getName() ;
+
+            /**
+             * @brief get the filepath to the image
+             * 
+             * @return the filepath of the image
+             */
             string getPath() ;
         private:
             string m_imagePath;
