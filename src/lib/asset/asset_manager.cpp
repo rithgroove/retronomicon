@@ -15,7 +15,7 @@ namespace retronomicon::lib::asset{
     *************************************************************************************************/
     AssetManager::~AssetManager(){
     	m_imageMap.clear(); //clear image map
-    	m_fontMap.clear() //clear font map
+    	m_fontMap.clear(); //clear font map
     }
 	
 	/*************************************************************************************************
