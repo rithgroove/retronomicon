@@ -5,23 +5,50 @@
 #include "frame.h"
 #include <vector>
 
-/**
- * The namespace for basic libraries such as points, rectangle cirle, etc.
- */
 using namespace retronomicon::lib::graphic::util;
 using namespace std;
+
+/**
+ * @brief The namespace for graphic utilities
+ */
 namespace retronomicon::lib::graphic::util{
 	/**
-	 * A class that represent a frame
+	 * @brief A class that represent an animation sequence.
+	 * each frame will be represented by an instance of Frame class.
 	 */
     class Sequence {
 	    public:
+	    	/**
+	    	 * @brief the constructor
+	    	 * 
+	    	 * @param frames the std::vector respresentation of the frames
+	    	 * @param frameCount the number of frame in this sequcne
+	    	 * @param name the name of of this animation
+	    	 * @param repeat set true if this animation is repeated
+	    	 */
 	    	Sequence(vector<Frame> frames, int frameCount,const string &name , bool repeat);
-	    	 //constructor with 2 points (still considering wether we should use int or float or double)
+
 	    	// ~Point(); // no need for destructor since all attributes are native
-	    	// void set(int x, int y);//render function (might change in the future to include renderer)
+
+	    	/**
+	    	 * @brief get the current frame index
+	    	 * 
+	    	 * @return the current frame number
+	    	 */
 	    	int getCurrentFrameIndex();
+
+	    	/**
+	    	 * @brief get the current frame
+	    	 * 
+	    	 * @return the current frame
+	    	 */
 	    	Frame& getCurrentFrame();
+
+	    	/**
+	    	 * @brief update the frame to the next one
+	    	 * 
+	    	 * @return true if successful, false if failed.
+	    	 */
 	    	bool update();
 
 	    private:
