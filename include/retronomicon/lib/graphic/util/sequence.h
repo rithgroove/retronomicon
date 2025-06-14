@@ -1,9 +1,8 @@
 #pragma once
+
 #include <string>
-#include <SDL.h>
-#include <math.h>
-#include "frame.h"
 #include <vector>
+#include "frame.h"
 
 using namespace retronomicon::lib::graphic::util;
 using namespace std;

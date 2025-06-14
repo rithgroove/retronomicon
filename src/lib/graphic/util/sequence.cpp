@@ -1,13 +1,18 @@
 #include "retronomicon/lib/graphic/util/sequence.h"
 
 /**
- * The namespace for basic libraries such as points, rectangle cirle, etc.
+ * @brief The namespace for graphic utilities
  */
 namespace retronomicon::lib::graphic::util{
 
-    /*************************************************************************************************
-     * Constructor: with all 4 int 
-     *************************************************************************************************/
+    /**
+     * @brief the constructor
+     * 
+     * @param frames the std::vector respresentation of the frames
+     * @param frameCount the number of frame in this sequcne
+     * @param name the name of of this animation
+     * @param repeat set true if this animation is repeated
+     */
     Sequence::Sequence(vector<Frame> frames, int frameCount, const string &name , bool repeat){
     	m_frames = frames;
     	m_frameCount = frameCount;
@@ -16,14 +21,29 @@ namespace retronomicon::lib::graphic::util{
         m_currentFrame = 0;
     }
 
+    /**
+     * @brief get the current frame index
+     * 
+     * @return the current frame number
+     */
     int Sequence::getCurrentFrameIndex(){
     	return m_currentFrame;
     }
 
+    /**
+     * @brief get the current frame
+     * 
+     * @return the current frame
+     */
     Frame& Sequence::getCurrentFrame(){
     	return m_frames.at(m_currentFrame);
     }
-
+    
+    /**
+     * @brief update the frame to the next one
+     * 
+     * @return true if successful, false if failed.
+     */
     bool Sequence::update(){
     	m_currentFrame++;
     	if (m_currentFrame >= m_frameCount){
