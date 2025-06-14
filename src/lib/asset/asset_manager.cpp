@@ -1,6 +1,5 @@
 #include "retronomicon/lib/asset/asset_manager.h"
 
-using namespace std;
 /**
  * @brief This namespace is for handling asset loading 
  */
