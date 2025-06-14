@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <string>
+#include <iostream>
 
 /**
  * @brief The namespace for graphic classes
@@ -39,7 +40,6 @@ namespace retronomicon::lib::graphic{
              * @return the window width
              */
             int getWidth() const;
-
 
             /**
              * @brief the method to get the window height

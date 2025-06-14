@@ -1,19 +1,31 @@
 #include "retronomicon/lib/graphic/window.h"
-#include <iostream>
 
+/**
+ * @brief The namespace for graphic classes
+ */
 namespace retronomicon::lib::graphic{
-
+    /**
+     * @brief the constructor for our windows
+     * 
+     * @param title the name of the window
+     * @param width the width of the window
+     * @param height the height of the window
+     * @param fullscreen  boolean representing fullscreen
+     */
     Window::Window(const std::string& title, int width, int height, bool fullscreen)
         : m_width(width), m_height(height), m_fullscreen(fullscreen) {
         initialize(title, width, height, fullscreen);
     }
 
+    /**
+     * @brief the destructor for the windows
+     */
     Window::~Window() {
         cleanup();
     }
 
     void Window::initialize(const std::string& title, int width, int height, bool fullscreen) {
-        if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        if (SDL_Init(SDL_INIT_VIDEO) < 0) { //wait why is this here???
             std::cerr << "SDL could not initialize: " << SDL_GetError() << std::endl;
             return;
         }
@@ -72,19 +84,39 @@ namespace retronomicon::lib::graphic{
         m_height = newHeight;
         // Optional: adjust render scale or UI here
     }
-
+    
+    /**
+     * @brief the method to get the window width
+     * 
+     * @return the window width
+     */
     int Window::getWidth() const {
         return m_width;
     }
 
+    /**
+     * @brief the method to get the window height
+     * 
+     * @return the window height
+     */
     int Window::getHeight() const {
         return m_height;
     }
 
+    /**
+     * @brief the method to get the renderer
+     * 
+     * @return the SDL_Renderer
+     */
     SDL_Renderer* Window::getRenderer() const {
         return m_renderer;
     }
 
+    /**
+     * @brief the method to get the SDL_Window
+     * 
+     * @return the SDL_Window
+     */
     SDL_Window* Window::getRawWindow() const {
         return m_window;
     }
