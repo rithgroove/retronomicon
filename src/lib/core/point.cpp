@@ -1,45 +1,58 @@
 #include "retronomicon/lib/core/point.h"
-#include <cmath>
+// #include <cmath>
 
-using namespace retronomicon::lib::core;
 /**
- * The namespace for basic libraries such as points, rectangle cirle, etc.
+ * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
 namespace retronomicon::lib::core{
 
-    /*************************************************************************************************
-     * Constructor: set m_x and m_y
-     *************************************************************************************************/
+    /**
+     * @brief constructor with 2 points 
+     * 
+     * Notes : still considering wether we should use int or float or doubles
+     * 
+     * @param x the x position
+     * @param y the y position
+     */
     Point::Point(int x, int y){
         set(x,y);
     }
 
-    /*************************************************************************************************
-     * Constructor: change position of the point
-     *************************************************************************************************/
+    /**
+     * @brief a function to change the position of the points
+     * 
+     * @param x the x position
+     * @param y the y position
+     */
     void Point::set(int x,int y){
         m_x = x;
         m_y = y;
     }
 
-    /*************************************************************************************************
-     * Get x position
-     *************************************************************************************************/
+    /**
+     * @brief return the x position of the point
+     * 
+     * @return the x position of the point
+     */
     int Point::getX() const {
         return m_x;
     }
 
-    /*************************************************************************************************
-     * Get y position
-     *************************************************************************************************/
+    /**
+     * @brief return the y position of the point
+     * 
+     * @return the y position of the point
+     */
     int Point::getY() const {
         return m_y;
     }
 
-
-    /*************************************************************************************************
-     * get float distance to a point 
-     *************************************************************************************************/
+    /**
+     * @brief calculate the distance between this point and target point
+     * 
+     * @param target the target point
+     * @return the distance in float
+     */
     float Point::calculateDistance(Point* target){
         float distance_x = abs(((float) m_x - (float) target->getX()));
         float distance_y = abs(((float) m_y - (float) target->getY()));

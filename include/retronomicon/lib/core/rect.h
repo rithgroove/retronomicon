@@ -1,6 +1,5 @@
 #pragma once
 
-#include <string>
 #include <SDL.h>
 #include "point.h"
 
@@ -70,7 +69,7 @@ namespace retronomicon::lib::core{
 	    	/**
 	    	 * @brief a method to change the position of the rectangle
 	    	 * 
-	    	* @param position the new position in Point class
+	    	 * @param position the new position in Point class
 	    	 */
 	    	void setPosition(Point* position);
 

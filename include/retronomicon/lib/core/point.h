@@ -1,8 +1,7 @@
 #pragma once
 
-#include <string>
-#include <SDL.h>
 #include <math.h>
+
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
