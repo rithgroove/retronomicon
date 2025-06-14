@@ -65,5 +65,16 @@ namespace retronomicon::lib::graphic::util{
     	}
     }
 
+    /**
+     * @brief a method to check if the animation is finished?
+     * 
+     * @return true if m_repeat is false, and is currently on the last frame
+     */
+    bool Sequence::isFinished(){
+        if (m_repeat && m_currentFrame >= m_frameCount){
+            return true;
+        }
+        return false;
+    }
 
 }

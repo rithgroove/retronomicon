@@ -57,6 +57,13 @@ namespace retronomicon::lib::graphic::util{
 	    	 */
 	    	bool update();
 
+	    	/**
+	    	 * @brief a method to check if the animation is finished?
+	    	 * 
+	    	 * @return true if m_repeat is false, and is currently on the last frame
+	    	 */
+	    	bool isFinished() ;
+
 	    private:
 	    	vector<Frame> m_frames;
 	    	string m_name;
