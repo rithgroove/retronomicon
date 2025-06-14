@@ -40,6 +40,16 @@ namespace retronomicon::lib::graphic::util{
     }
     
     /**
+     * @brief get the name of this sequence
+     * 
+     * @return name of the sequence
+     */
+    string Sequence::getName() const{
+        return m_name;
+    }
+
+
+    /**
      * @brief update the frame to the next one
      * 
      * @return true if successful, false if failed.
@@ -54,4 +64,6 @@ namespace retronomicon::lib::graphic::util{
     		}
     	}
     }
+
+
 }
