@@ -49,6 +49,14 @@ namespace retronomicon::lib::graphic::util{
              * @return the current sequence name
              */
             string getCurrentStateName() const;
+
+            /**
+             * @brief update function (might change in the future).
+             * Potential update is to use time interval so we could do frame skipping
+             * 
+             * @return true if successfull, false if failed
+             */
+            bool update();
         private:
             unordered_map<string, Sequence*> m_sequences;
             Sequence* m_currentSequence;

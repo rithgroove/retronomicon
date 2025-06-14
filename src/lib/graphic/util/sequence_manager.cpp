@@ -56,4 +56,13 @@ namespace retronomicon::lib::graphic::util{
         return m_currentSequence->getName();
     }
 
+    /**
+     * @brief update function (might change in the future).
+     * Potential update is to use time interval so we could do frame skipping
+     * 
+     * @return true if successfull, false if failed
+     */
+    bool SequenceManager::update(){
+        m_currentSequence->update();
+    }
 }
