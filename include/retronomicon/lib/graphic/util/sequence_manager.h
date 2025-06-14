@@ -1,7 +1,7 @@
 #pragma once
 
 #include <unordered_map>
-#include <vector>
+#include <queue>
 #include "retronomicon/lib/graphic/util/sequence.h"
 
 using namespace retronomicon::lib::asset;
@@ -66,7 +66,7 @@ namespace retronomicon::lib::graphic::util{
             void queueSequence(Sequence* Sequence);
         private:
             unordered_map<string, Sequence*> m_sequences;
-            vector<Sequence*> m_sequenceQueue;
+            queue<Sequence*> m_sequenceQueue;
             Sequence* m_currentSequence;
             Sequence* m_defaultSequence;
     };

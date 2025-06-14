@@ -63,6 +63,15 @@ namespace retronomicon::lib::graphic::util{
      * @return true if successfull, false if failed
      */
     bool SequenceManager::update(){
+        // if current sequence is not the default and is finished, change it
+        // this will not change if the animation is manually controlled (move,run etc, because those are repeated)
+        if (m_currentSequence != m_defaultSequence && m_currentSequence.isFinished()){
+            if (m_sequenceQueue.empty()){
+                m_currentSequence = m_defaultSequence;
+            }else{
+                m_currentSequence = m_sequenceQueue.pop();
+            }
+        }
         m_currentSequence->update();
     }
 
@@ -71,6 +80,6 @@ namespace retronomicon::lib::graphic::util{
      * @brief insert sequence to sequence Queue
      */
     void SequenceManager::queueSequence(Sequence* sequence){
-        m_sequenceQueue.push_back(sequence);
+        m_sequenceQueue.push(sequence);
     }
 }
