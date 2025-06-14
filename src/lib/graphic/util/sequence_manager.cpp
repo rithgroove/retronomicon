@@ -65,4 +65,12 @@ namespace retronomicon::lib::graphic::util{
     bool SequenceManager::update(){
         m_currentSequence->update();
     }
+
+
+    /**
+     * @brief insert sequence to sequence Queue
+     */
+    void SequenceManager::queueSequence(Sequence* sequence){
+        m_sequenceQueue.push_back(sequence);
+    }
 }

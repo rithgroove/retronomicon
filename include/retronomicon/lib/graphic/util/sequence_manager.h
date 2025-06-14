@@ -1,11 +1,13 @@
 #pragma once
 
 #include <unordered_map>
+#include <vector>
 #include "retronomicon/lib/graphic/util/sequence.h"
 
 using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::core;
 using namespace retronomicon::lib::graphic::util;
+
 /**
  * @brief The namespace for graphic utilities
  */
@@ -57,8 +59,14 @@ namespace retronomicon::lib::graphic::util{
              * @return true if successfull, false if failed
              */
             bool update();
+
+            /**
+             * @brief insert sequence to sequence Queue
+             */
+            void queueSequence(Sequence* Sequence);
         private:
             unordered_map<string, Sequence*> m_sequences;
+            vector<Sequence*> m_sequenceQueue;
             Sequence* m_currentSequence;
             Sequence* m_defaultSequence;
     };

@@ -62,7 +62,7 @@ namespace retronomicon::lib::graphic::util{
 	    	 * 
 	    	 * @return true if m_repeat is false, and is currently on the last frame
 	    	 */
-	    	bool isFinished() ;
+	    	bool isFinished();
 
 	    private:
 	    	vector<Frame> m_frames;
