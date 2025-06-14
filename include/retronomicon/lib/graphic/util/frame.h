@@ -1,9 +1,9 @@
 #pragma once
+
 #include <string>
 #include <SDL.h>
 #include <math.h>
 #include "retronomicon/lib/core/rect.h"
-#include "retronomicon/lib/core/point.h"
 #include "retronomicon/lib/asset/raw_image.h"
 
 using namespace retronomicon::lib::asset;

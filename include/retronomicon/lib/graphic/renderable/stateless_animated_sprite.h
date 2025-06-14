@@ -1,10 +1,8 @@
 #pragma once
+
 #include "sprite.h"
-#include "retronomicon/lib/asset/raw_image.h"
-#include <SDL.h>
 #include "retronomicon/lib/graphic/util/sequence.h"
-#include "retronomicon/lib/core/point.h"
-#include "retronomicon/lib/core/rect.h"
+
 using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::graphic::renderable;
 using namespace std;
