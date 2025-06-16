@@ -65,11 +65,12 @@ namespace retronomicon::lib::graphic::util{
     bool SequenceManager::update(){
         // if current sequence is not the default and is finished, change it
         // this will not change if the animation is manually controlled (move,run etc, because those are repeated)
-        if (m_currentSequence != m_defaultSequence && m_currentSequence.isFinished()){
+        if (m_currentSequence != m_defaultSequence && m_currentSequence->isFinished()){
             if (m_sequenceQueue.empty()){
                 m_currentSequence = m_defaultSequence;
             }else{
-                m_currentSequence = m_sequenceQueue.pop();
+                m_sequenceQueue.pop();
+                m_currentSequence = m_sequenceQueue.front();
             }
         }
         m_currentSequence->update();
