@@ -1,9 +1,9 @@
-#include "retronomicon/lib/graphic/util/frame.h"
+#include "retronomicon/lib/graphic/animation/frame.h"
 
 /**
  * @brief The namespace for graphic utilities
  */
-namespace retronomicon::lib::graphic::util{
+namespace retronomicon::lib::graphic::animation{
 
     /**
      * @brief basic constructor

@@ -1,9 +1,9 @@
-#include "retronomicon/lib/graphic/util/sequence.h"
+#include "retronomicon/lib/graphic/animation/sequence.h"
 
 /**
  * @brief The namespace for graphic utilities
  */
-namespace retronomicon::lib::graphic::util{
+namespace retronomicon::lib::graphic::animation{
 
     /**
      * @brief the constructor

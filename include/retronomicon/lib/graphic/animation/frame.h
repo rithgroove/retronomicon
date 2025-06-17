@@ -11,7 +11,7 @@ using namespace retronomicon::lib::core;
 /**
  * @brief The namespace for graphic utilities
  */
-namespace retronomicon::lib::graphic::util{
+namespace retronomicon::lib::graphic::animation{
 	/**
 	 * @brief A class that represent a frame in the animation sequence (the source image from sprite sheet)
 	 */

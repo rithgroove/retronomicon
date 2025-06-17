@@ -2,16 +2,16 @@
 
 #include <unordered_map>
 #include <queue>
-#include "retronomicon/lib/graphic/util/sequence.h"
+#include "sequence.h"
 
 using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::core;
-using namespace retronomicon::lib::graphic::util;
+using namespace retronomicon::lib::graphic::animation;
 
 /**
  * @brief The namespace for graphic utilities
  */
-namespace retronomicon::lib::graphic::util{
+namespace retronomicon::lib::graphic::animation{
     /**
      * @brief A class that represent a frame in the animation sequence (the source image from sprite sheet)
      */
@@ -44,6 +44,14 @@ namespace retronomicon::lib::graphic::util{
              * @return the current sequence
              */
             Sequence* getCurrentSequence() const;
+
+
+            /**
+             * @brief get the current frome of the current active sequence
+             * 
+             * @return the current frame
+             */
+            Frame* getCurrentFrame() const;
 
             /**
              * @brief get the current active sequence name

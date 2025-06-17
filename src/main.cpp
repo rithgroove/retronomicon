@@ -17,8 +17,8 @@
 #include "retronomicon/lib/graphic/window.h"
 #include "retronomicon/lib/graphic/renderable/sprite.h"
 #include "retronomicon/lib/graphic/renderable/stateless_animated_sprite.h"
-#include "retronomicon/lib/graphic/util/frame.h"
-#include "retronomicon/lib/graphic/util/sequence.h"
+#include "retronomicon/lib/graphic/animation/frame.h"
+#include "retronomicon/lib/graphic/animation/sequence.h"
 #include "retronomicon/lib/core/rect.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
@@ -27,7 +27,7 @@
 #define SCREEN_HEIGHT 480
 using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::graphic::renderable;
-using namespace retronomicon::lib::graphic::util;
+using namespace retronomicon::lib::graphic::animation;
 using namespace retronomicon::lib::core;
 
 static void die(const char *fmt, ...)

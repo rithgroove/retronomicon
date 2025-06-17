@@ -1,10 +1,11 @@
 #pragma once
 
 #include "sprite.h"
-#include "retronomicon/lib/graphic/util/sequence_manager.h"
+#include "retronomicon/lib/graphic/animation/sequence_manager.h"
 
 using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::graphic::renderable;
+using namespace retronomicon::lib::graphic::animation;
 using namespace std;
 /**
  * @brief The namespace for anything renderable that is not a screen.

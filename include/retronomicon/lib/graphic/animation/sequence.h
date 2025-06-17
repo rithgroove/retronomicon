@@ -4,13 +4,13 @@
 #include <vector>
 #include "frame.h"
 
-using namespace retronomicon::lib::graphic::util;
+using namespace retronomicon::lib::graphic::animation;
 using namespace std;
 
 /**
  * @brief The namespace for graphic utilities
  */
-namespace retronomicon::lib::graphic::util{
+namespace retronomicon::lib::graphic::animation{
 	/**
 	 * @brief A class that represent an animation sequence.
 	 * each frame will be represented by an instance of Frame class.
