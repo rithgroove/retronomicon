@@ -1,6 +1,6 @@
-#include "retronomicon/lib/core/transform_component.h"
+#include "retronomicon/lib/core/component/transform_component.h"
 
-namespace retronomicon::lib::core{
+namespace retronomicon::lib::core::component{
 
     TransformComponent::TransformComponent()
         : x(0), y(0), rotation(0), scaleX(1.0f), scaleY(1.0f) {}

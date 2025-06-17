@@ -3,9 +3,9 @@
 class GameObject; // Forward declaration
 
 /**
- * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
+ * @brief The namespace for core libraries such as game object and components
  */
-namespace retronomicon::lib::core{
+namespace retronomicon::lib::core::component{
     /**
      * @brief The interface for components (so we could easily includes multiple tipes in game objects)
      */

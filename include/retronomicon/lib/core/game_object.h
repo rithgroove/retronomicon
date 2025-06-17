@@ -5,17 +5,20 @@
 #include <typeinfo>
 #include <memory>
 
-#include "component.h"
+#include "retronomicon/lib/core/component/component.h"
 
+using namespace retronomicon::lib::core::component;
 /**
- * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
+ * @brief The namespace for core libraries such as game object and components
  */
 namespace retronomicon::lib::core{
     class GameObject {
         public:
             GameObject();
             ~GameObject();
-
+            /**
+             * @brief start function (used to initialize stuff)
+             */
             void start();
             void update(float dt);
             void render();

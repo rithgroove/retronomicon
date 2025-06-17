@@ -2,7 +2,7 @@
 
 #include "component.h"
 
-namespace retronomicon::lib::core{
+namespace retronomicon::lib::core::component{
 
     class TransformComponent : public Component {
         public:
