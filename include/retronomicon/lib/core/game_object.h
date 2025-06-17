@@ -14,18 +14,47 @@ using namespace retronomicon::lib::core::component;
 namespace retronomicon::lib::core{
     class GameObject {
         public:
+            /**
+             * @brief empty constructor 
+             */
             GameObject();
+
+            /**
+             * @brief default destructor 
+             */
             ~GameObject();
+
             /**
              * @brief start function (used to initialize stuff)
              */
             void start();
+
+            /**
+             * @brief method to update the component
+             * 
+             * @param dt time interval since last update
+             */
             void update(float dt);
+
+            /**
+             * @brief a method to render the component if any
+             */
             void render();
 
+
+            /**
+             * @brief a method to add components. this will use templates
+             * 
+             * @param args the component 
+             */
             template <typename T, typename... Args>
             T* addComponent(Args&&... args);
 
+            /**
+             * @brief a method to return a components with a specific types
+             * 
+             * @return the component 
+             */
             template <typename T>
             T* getComponent();
 
