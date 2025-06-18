@@ -54,15 +54,22 @@ namespace retronomicon::lib::graphic::animation{
      * 
      * @return true if successful, false if failed.
      */
-    bool Sequence::update(){
-    	m_currentFrame++;
-    	if (m_currentFrame >= m_frameCount){
-    		if (m_repeat){
-    			m_currentFrame = 0;
-    		}else{
-	    		m_currentFrame = m_frameCount-1;
-    		}
-    	}
+    float Sequence::update(float dt){
+        float leftOver = dt;
+        while (leftOver >0.0f){
+            Frame* curFrame = m_frames[m_currentFrame];
+            leftOver = curFrame->update(leftOver);
+            if (leftOver > 0.0f){
+                m_currentFrame++;
+                if (m_currentFrame >= m_frameCount){
+                    if (m_repeat){
+                        m_currentFrame = 0;
+                    }else{
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     /**
