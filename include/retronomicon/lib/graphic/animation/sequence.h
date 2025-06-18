@@ -53,9 +53,9 @@ namespace retronomicon::lib::graphic::animation{
 	    	/**
 	    	 * @brief update the frame to the next one
 	    	 * 
-	    	 * @return true if successful, false if failed.
+	    	 * @return left over delta time
 	    	 */
-	    	bool update();
+            float update(float dt) {
 
 	    	/**
 	    	 * @brief a method to check if the animation is finished?

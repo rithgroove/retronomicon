@@ -12,15 +12,15 @@ namespace retronomicon::lib::graphic::animation{
      * @param y the y position of the start of the current frame from the spritesheet
      * @param width the width of the current frame from the spritesheet
      * @param height the height of the current frame from the spritesheet
-     * @param rawImage the raw image (might remove it later, not used)
      * @param sequence_order (a number to indicate which frame number this is)
      * @param name the name of this frame
      */    
-    Frame::Frame(int x, int y,int width, int height,RawImage* rawImage,int sequence_order, const string &name){
+    Frame::Frame(int x, int y,int width, int height,int sequence_order, const string &name,float duration){
         m_rect = new Rect(x,y,width,height);
-        m_image = rawImage;
         m_sequence_order= sequence_order;
         m_name = name;
+        m_duration = duration;
+        m_spentDuration = 0.0f;
     }
 
     /**
@@ -29,30 +29,30 @@ namespace retronomicon::lib::graphic::animation{
      * @param point the point representing the starting point of this frame
      * @param width the width of the current frame from the spritesheet
      * @param height the height of the current frame from the spritesheet
-     * @param rawImage the raw image (might remove it later, not used)
      * @param sequence_order (a number to indicate which frame number this is)
      * @param name the name of this frame
      */
-    Frame::Frame(Point* point ,int width, int height,RawImage* rawImage,int sequence_order,const string &name){
+    Frame::Frame(Point* point ,int width, int height,int sequence_order,const string &name){
         m_rect = new Rect(point,width,height);
-        m_image = rawImage;
         m_sequence_order= sequence_order;
         m_name = name;
+        m_duration = duration;
+        m_spentDuration = 0.0f;
     }
 
     /**
      * @brief basic constructor
      * 
      * @param rect the source rectangle of this frame
-     * @param rawImage the raw image (might remove it later, not used)
      * @param sequence_order (a number to indicate which frame number this is)
      * @param name the name of this frame
      */
-    Frame::Frame(Rect* rect,RawImage* rawImage,int sequence_order,const string &name){
+    Frame::Frame(Rect* rect,int sequence_order,const string &name){
         m_rect = rect;
-        m_image = rawImage;
         m_sequence_order= sequence_order;
         m_name = name;
+        m_duration = duration;
+        m_spentDuration = 0.0f;
     }
     
     /**
@@ -80,5 +80,28 @@ namespace retronomicon::lib::graphic::animation{
      */
     Rect* Frame::getRect() const{
         return m_rect;
+    }
+
+    /**
+     * @brief a method to reset spent duration (set m_spentDuration to 0)
+     */
+    void Frame:reset(){
+        m_spentDuration = 0.0f;
+    }
+
+    /**
+     * @brief check how many time spent on this frame
+     * 
+     * @return left over delta time
+     */
+    float update(float dt){
+        m_spentDuration += dt;
+        if (m_spentDuration > m_duration){
+            float leftover =  m_spentDuration - m_duration; 
+            this->reset();
+            return leftover;
+        }else{
+            return 0.0f;
+        }
     }
 }

@@ -6,7 +6,8 @@
 #include <string>
 #include "component.h"
 #include "transform_component.h"
-#include "retronomicon/lib/graphic/animation/sequence_manager.h" // Your animation system
+#include "retronomicon/lib/graphic/animation/sequence_manager.h"
+#include "retronomicon/lib/asset/raw_image.h"
 
 using namespace retronomicon::lib::graphic::animation;
 

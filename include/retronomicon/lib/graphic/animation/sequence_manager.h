@@ -66,7 +66,7 @@ namespace retronomicon::lib::graphic::animation{
              * 
              * @return true if successfull, false if failed
              */
-            bool update();
+            float update(float dt) {
 
             /**
              * @brief insert sequence to sequence Queue

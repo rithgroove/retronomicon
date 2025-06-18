@@ -2,7 +2,7 @@
 
 namespace retronomicon::lib::core::component {
 
-    SpriteComponent::SpriteComponent(const std::string& path, SDL_Renderer* renderer)
+    SpriteComponent::SpriteComponent(RawImage, SDL_Renderer* renderer)
         : texture(nullptr),
           renderer(renderer),
           transform(nullptr)

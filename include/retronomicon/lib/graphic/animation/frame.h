@@ -4,7 +4,6 @@
 #include <SDL.h>
 #include <math.h>
 #include "retronomicon/lib/core/rect.h"
-#include "retronomicon/lib/asset/raw_image.h"
 
 using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::core;
@@ -24,11 +23,11 @@ namespace retronomicon::lib::graphic::animation{
 	    	 * @param y the y position of the start of the current frame from the spritesheet
 	    	 * @param width the width of the current frame from the spritesheet
 	    	 * @param height the height of the current frame from the spritesheet
-	    	 * @param rawImage the raw image (might remove it later, not used)
 	    	 * @param sequence_order (a number to indicate which frame number this is)
 	    	 * @param name the name of this frame
+	    	 * @param duration in milisecond
 	    	 */
-	    	Frame(int x, int y,int width, int height,RawImage* rawImage,int sequence_order, const string &name);
+	    	Frame(int x, int y,int width, int height,int sequence_order, const string &name, float duration);
 
 	    	/**
 	    	 * @brief basic constructor
@@ -36,21 +35,21 @@ namespace retronomicon::lib::graphic::animation{
 	    	 * @param point the point representing the starting point of this frame
 	    	 * @param width the width of the current frame from the spritesheet
 	    	 * @param height the height of the current frame from the spritesheet
-	    	 * @param rawImage the raw image (might remove it later, not used)
 	    	 * @param sequence_order (a number to indicate which frame number this is)
 	    	 * @param name the name of this frame
+	    	 * @param duration in milisecond
 	    	 */
-	    	Frame(Point* point,int width, int height,RawImage* rawImage,int sequence_order, const string &name);
+	    	Frame(Point* point,int width, int height,int sequence_order, const string &name, float duration);
 
 	    	/**
 	    	 * @brief basic constructor
 	    	 * 
 	    	 * @param rect the source rectangle of this frame
-	    	 * @param rawImage the raw image (might remove it later, not used)
 	    	 * @param sequence_order (a number to indicate which frame number this is)
 	    	 * @param name the name of this frame
+	    	 * @param duration in milisecond
 	    	 */
-	    	Frame(Rect* rect,RawImage* rawImage,int sequence_order, const string &name); //constructor with 2 points (still considering wether we should use int or float or double)
+	    	Frame(Rect* rect,int sequence_order, const string &name, float duration); //constructor with 2 points (still considering wether we should use int or float or double)
 	    	// ~Point(); // no need for destructor since all attributes are native
 
 	    	/**
@@ -73,10 +72,24 @@ namespace retronomicon::lib::graphic::animation{
 	    	 * @return the source rectangle
 	    	 */
 	    	Rect* getRect() const;
+
+	    	/**
+	    	 * @brief a method to reset spent duration (set m_spentDuration to 0)
+	    	 */
+	    	void reset()
+
+	    	/**
+	    	 * @brief update the frame to the next one
+	    	 * 
+	    	 * @return left over delta time
+	    	 */
+            float update(float dt) {
+
 	    private:
 	    	Rect* m_rect;
-	    	RawImage* m_image;
 	    	int m_sequence_order;
 	    	string m_name;
+	    	float m_duration; // duration for this frame in ms
+	    	float m_spentDuration; //how many of the duration is spent currently
     };
 } // namespace Retronomicon
