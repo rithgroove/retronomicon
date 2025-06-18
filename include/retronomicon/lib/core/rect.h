@@ -15,7 +15,7 @@ namespace retronomicon::lib::core{
     class Rect {
 	    public:
 	    	/**
-	    	* @brief constructor that accept 4 integer
+	    	* @brief constructor that accept 4 floating value
 	    	* also create anchor on top left. Point(0,0)
 	    	* 
 	    	* @param x the x position of this rectangle
@@ -23,29 +23,29 @@ namespace retronomicon::lib::core{
 	    	* @param width the width this rectangle
 	    	* @param height the height this rectangle
 	    	*/
-	    	Rect(int x, int y, int width, int height); 
+	    	Rect(float x, float y, float width, float height); 
 
 	    	/**
 	    	* @brief constructor with the position of this rectangle
 	    	* also create anchor on top left. Point(0,0)
 	    	* 
-	    	* @param position the position int Point format
+	    	* @param position the position float Pofloat format
 	    	* @param width the width this rectangle
 	    	* @param height the height this rectangle
 	    	*/
-	    	Rect(Point* position, int width, int height); 
+	    	Rect(Point* position, float width, float height); 
 
 
 	    	/**
 	    	* @brief constructor with the position of this rectangle
 	    	* also create anchor on top left. Point(0,0)
 	    	* 
-	    	* @param position the position int Point format
+	    	* @param position the position float Pofloat format
 	    	* @param anchor the anchor position of this rectangle
 	    	* @param width the width this rectangle
 	    	* @param height the height this rectangle
 	    	*/
-	    	Rect(Point* position, Point* anchor, int width, int height); 
+	    	Rect(Point* position, Point* anchor, float width, float height); 
 
 
 	    	// ~Rect(); // to do : dev 
@@ -56,7 +56,7 @@ namespace retronomicon::lib::core{
 	    	* @param width the new width for this rectangle
 	    	* @param height the new height for this rectangle
 	    	*/
-	    	void setSize(int width, int height);
+	    	void setSize(float width, float height);
 
 	       /**
 	    	* @brief a method to change the position of the rectangle
@@ -64,7 +64,7 @@ namespace retronomicon::lib::core{
 	    	* @param x the new x position for this rectangle
 	    	* @param y the new y position for this rectangle
 	    	*/
-	    	void setPosition(int x, int y);
+	    	void setPosition(float x, float y);
 
 	    	/**
 	    	 * @brief a method to change the position of the rectangle
@@ -92,28 +92,28 @@ namespace retronomicon::lib::core{
 	    	 * 
 	    	 * @return the width of the rectangle
 	    	 */
-	    	int getWidth() const;
+	    	float getWidth() const;
 
 	    	/**
 	    	 * @brief a method to get the height of rectangle
 	    	 * 
 	    	 * @return the height of the rectangle
 	    	 */
-	    	int getHeight() const;
+	    	float getHeight() const;
 
 	    	/**
 	    	 * @brief a method to get the x position of this rectangle
 	    	 * 
 	    	 * @return the x position of the rectangle
 	    	 */
-	    	int getX() const;
+	    	float getX() const;
 
 	    	/**
 	    	 * @brief a method to get the y position of this rectangle
 	    	 * 
 	    	 * @return the y position of the rectangle
 	    	 */
-	    	int getY() const;
+	    	float getY() const;
 
 
 	    	/**
@@ -127,7 +127,7 @@ namespace retronomicon::lib::core{
 	    private:
 	    	Point* m_anchor;
 	    	Point* m_position;
-	    	int m_width;
-	    	int m_height;
+	    	float m_width;
+	    	float m_height;
     };
 } // namespace Retronomicon

@@ -14,7 +14,7 @@ namespace retronomicon::lib::core{
     * @param width the width this rectangle
     * @param height the height this rectangle
     */
-    Rect::Rect(int x, int y, int width, int height){
+    Rect::Rect(float x, float y, float width, float height){
         m_position = new Point(x,y);
         m_anchor = new Point(0,0);
         setSize(width,height);
@@ -24,11 +24,11 @@ namespace retronomicon::lib::core{
     * @brief constructor with the position of this rectangle
     * also create anchor on top left. Point(0,0)
     * 
-    * @param position the position int Point format
+    * @param position the position float point format
     * @param width the width this rectangle
     * @param height the height this rectangle
     */
-    Rect::Rect(Point* position, int width, int height){
+    Rect::Rect(Point* position, float width, float height){
         m_position = position;
         m_anchor = new Point(0,0);
         setSize(width,height);
@@ -38,12 +38,12 @@ namespace retronomicon::lib::core{
     * @brief constructor with the position of this rectangle
     * also create anchor on top left. Point(0,0)
     * 
-    * @param position the position int Point format
+    * @param position the position float Point format
     * @param anchor the anchor position of this rectangle
     * @param width the width this rectangle
     * @param height the height this rectangle
     */
-    Rect::Rect(Point* position,Point* anchor, int width, int height){
+    Rect::Rect(Point* position,Point* anchor, float width, float height){
         m_position = position;
         m_anchor = anchor;
         m_anchor = new Point(0,0);
@@ -56,7 +56,7 @@ namespace retronomicon::lib::core{
      * @param width the new width for this rectangle
      * @param height the new height for this rectangle
      */
-    void Rect::setSize(int width,int height){
+    void Rect::setSize(float width,float height){
         m_width = width;
         m_height = height;
     }
@@ -67,14 +67,14 @@ namespace retronomicon::lib::core{
     * @param x the new x position for this rectangle
     * @param y the new y position for this rectangle
     */
-    void Rect::setPosition(int x,int y){
+    void Rect::setPosition(float x,float y){
         m_position->set(x,y);
     }
 
     /**
      * @brief a method to change the position of the rectangle
      * 
-     * @param position the new position in Point class
+     * @param position the new position in Pofloat class
      */
     void Rect::setPosition(Point* position){
         delete m_position;
@@ -104,7 +104,7 @@ namespace retronomicon::lib::core{
      * 
      * @return the width of the rectangle
      */
-    int Rect::getX() const {
+    float Rect::getX() const {
         return m_position->getX();
     }
 
@@ -113,7 +113,7 @@ namespace retronomicon::lib::core{
      * 
      * @return the height of the rectangle
      */
-    int Rect::getY() const {
+    float Rect::getY() const {
         return m_position->getY();
     }
 
@@ -122,7 +122,7 @@ namespace retronomicon::lib::core{
      * 
      * @return the x position of the rectangle
      */
-    int Rect::getWidth() const {
+    float Rect::getWidth() const {
         return m_width;
     }
 
@@ -131,7 +131,7 @@ namespace retronomicon::lib::core{
      * 
      * @return the y position of the rectangle
      */
-    int Rect::getHeight() const {
+    float Rect::getHeight() const {
         return m_height;
     }
 
@@ -142,7 +142,7 @@ namespace retronomicon::lib::core{
      * @return the SDL_Rect
      */
     SDL_Rect Rect::generateSDLRect(){
-        return { this->getX(), this->getY(), this->getWidth(), this->getHeight() };
+        return { (int) this->getX(), (int)this->getY(), (int)this->getWidth(), (int)this->getHeight() };
     }
 
 }

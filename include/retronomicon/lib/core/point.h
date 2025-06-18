@@ -12,14 +12,12 @@ namespace retronomicon::lib::core{
     class Point {
 	    public:
 	    	/**
-	    	 * @brief constructor with 2 points 
-	    	 * 
-	    	 * Notes : still considering wether we should use int or float or doubles
+	    	 * @brief constructor with 2 points 	    	 
 	    	 * 
 	    	 * @param x the x position
 	    	 * @param y the y position
 	    	 */
-	    	Point(int x, int y);
+	    	Point(float x, float y);
 	    	
 	    	// ~Point(); // no need for custom destructor (yet) since all attributes are native 
 
@@ -29,21 +27,21 @@ namespace retronomicon::lib::core{
 	    	 * @param x the x position
 	    	 * @param y the y position
 	    	 */
-	    	void set(int x, int y);
+	    	void set(float x, float y);
 
 	    	/**
 	    	 * @brief return the x position of the point
 	    	 * 
 	    	 * @return the x position of the point
 	    	 */
-	    	int getX() const; 
+	    	float getX() const; 
 
 	    	/**
 	    	 * @brief return the y position of the point
 	    	 * 
 	    	 * @return the y position of the point
 	    	 */
-	    	int getY() const;
+	    	float getY() const;
 
 	    	/**
 	    	 * @brief calculate the distance between this point and target point
@@ -53,7 +51,7 @@ namespace retronomicon::lib::core{
 	    	 */
 	    	float calculateDistance(Point* target);
 	    private:
-	    	int m_x; // x position
-	    	int m_y; // y position
+	    	float m_x; // x position
+	    	float m_y; // y position
     };
 } // namespace Retronomicon
