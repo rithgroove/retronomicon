@@ -19,7 +19,7 @@
 #include "retronomicon/lib/graphic/renderable/stateless_animated_sprite.h"
 #include "retronomicon/lib/graphic/animation/frame.h"
 #include "retronomicon/lib/graphic/animation/sequence.h"
-#include "retronomicon/lib/core/rect.h"
+#include "retronomicon/lib/math/rect.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
 
@@ -28,7 +28,7 @@
 using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::graphic::renderable;
 using namespace retronomicon::lib::graphic::animation;
-using namespace retronomicon::lib::core;
+using namespace retronomicon::lib::math;
 
 static void die(const char *fmt, ...)
 {

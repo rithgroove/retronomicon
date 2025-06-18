@@ -4,8 +4,9 @@
 
 #include "renderable.h"
 #include "retronomicon/lib/asset/raw_image.h"
-#include "retronomicon/lib/core/rect.h"
+#include "retronomicon/lib/math/rect.h"
 
+using namespace retronomicon::lib::math;
 using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::graphic::renderable;
 using namespace std;

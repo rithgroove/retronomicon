@@ -3,9 +3,9 @@
 #include <math.h>
 
 /**
- * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
+ * @brief The namespace for basic math libraries such as points, rectangle cirle, etc.
  */
-namespace retronomicon::lib::core{
+namespace retronomicon::lib::math{
 	/**
 	 * @brief A class that represent a single point
 	 */

@@ -3,9 +3,9 @@
 #include <string>
 #include <SDL.h>
 #include <math.h>
-#include "retronomicon/lib/core/rect.h"
+#include "retronomicon/lib/math/rect.h"
 
-using namespace retronomicon::lib::core;
+using namespace retronomicon::lib::math;
 using namespace std;
 /**
  * @brief The namespace for graphic utilities
@@ -73,8 +73,7 @@ namespace retronomicon::lib::graphic::animation{
 	    	 */
 	    	int getWidth() const; // get X position
 	    	
-	    	/**
-	    	 * @brief get height of this frame
+	    	/**	    	 * @brief get height of this frame
 	    	 * 
 	    	 * @return height
 	    	 */

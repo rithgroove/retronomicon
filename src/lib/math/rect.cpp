@@ -1,9 +1,9 @@
-#include "retronomicon/lib/core/rect.h"
+#include "retronomicon/lib/math/rect.h"
 
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
-namespace retronomicon::lib::core{
+namespace retronomicon::lib::math{
 
     /**
     * @brief constructor that accept 4 integer

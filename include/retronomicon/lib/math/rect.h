@@ -3,12 +3,12 @@
 #include <SDL.h>
 #include "point.h"
 
-using namespace retronomicon::lib::core;
+using namespace retronomicon::lib::math;
 
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
-namespace retronomicon::lib::core{
+namespace retronomicon::lib::math{
 	/**
 	 * @brief A class that represent a rectangle
 	 */

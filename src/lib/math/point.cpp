@@ -1,10 +1,10 @@
-#include "retronomicon/lib/core/point.h"
+#include "retronomicon/lib/math/point.h"
 // #include <cmath>
 
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
-namespace retronomicon::lib::core{
+namespace retronomicon::lib::math{
 
     /**
      * @brief constructor with 2 points 

@@ -4,7 +4,7 @@
 #include <queue>
 #include "sequence.h"
 
-using namespace retronomicon::lib::core;
+using namespace retronomicon::lib::math;
 using namespace retronomicon::lib::graphic::animation;
 
 /**
