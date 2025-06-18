@@ -65,11 +65,16 @@ namespace retronomicon::lib::graphic::animation{
                     if (m_repeat){
                         m_currentFrame = 0;
                     }else{
+                        m_currentFrame--;
                         break;
                     }
                 }
             }
         }
+        if (leftOver < 0.0f){
+            leftOver = 0.0f
+        }
+        return leftOver;
     }
 
     /**
