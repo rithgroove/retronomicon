@@ -55,7 +55,7 @@ namespace retronomicon::lib::graphic::animation{
 	    	 * 
 	    	 * @return left over delta time
 	    	 */
-            float update(float dt) {
+            float update(float dt);
 
 	    	/**
 	    	 * @brief a method to check if the animation is finished?

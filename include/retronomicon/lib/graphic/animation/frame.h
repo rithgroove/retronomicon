@@ -5,8 +5,8 @@
 #include <math.h>
 #include "retronomicon/lib/core/rect.h"
 
-using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::core;
+using namespace std;
 /**
  * @brief The namespace for graphic utilities
  */
@@ -67,6 +67,20 @@ namespace retronomicon::lib::graphic::animation{
 	    	 int getY() const; // get Y position
 
 	    	/**
+	    	 * @brief get the width  of this frame
+	    	 * 
+	    	 * @return width
+	    	 */
+	    	int getWidth() const; // get X position
+	    	
+	    	/**
+	    	 * @brief get height of this frame
+	    	 * 
+	    	 * @return height
+	    	 */
+	    	 int getHeight() const; // get Y position
+
+	    	/**
 	    	 * the rectangle representing the source rectangle of the sprite
 	    	 * 
 	    	 * @return the source rectangle
@@ -76,14 +90,14 @@ namespace retronomicon::lib::graphic::animation{
 	    	/**
 	    	 * @brief a method to reset spent duration (set m_spentDuration to 0)
 	    	 */
-	    	void reset()
+	    	void reset();
 
 	    	/**
 	    	 * @brief update the frame to the next one
 	    	 * 
 	    	 * @return left over delta time
 	    	 */
-            float update(float dt) {
+            float update(float dt);
 
 	    private:
 	    	Rect* m_rect;

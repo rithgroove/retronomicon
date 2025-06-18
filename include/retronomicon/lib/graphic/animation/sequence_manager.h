@@ -4,7 +4,6 @@
 #include <queue>
 #include "sequence.h"
 
-using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::core;
 using namespace retronomicon::lib::graphic::animation;
 
@@ -51,7 +50,7 @@ namespace retronomicon::lib::graphic::animation{
              * 
              * @return the current frame
              */
-            Frame* getCurrentFrame() const;
+            Frame& getCurrentFrame() const;
 
             /**
              * @brief get the current active sequence name
@@ -66,7 +65,7 @@ namespace retronomicon::lib::graphic::animation{
              * 
              * @return true if successfull, false if failed
              */
-            float update(float dt) {
+            float update(float dt);
 
             /**
              * @brief insert sequence to sequence Queue

@@ -55,6 +55,15 @@ namespace retronomicon::lib::graphic::animation{
     string SequenceManager::getCurrentStateName() const{
         return m_currentSequence->getName();
     }
+   
+    /**
+     * @brief get the current frome of the current active sequence
+     * 
+     * @return the current frame
+     */
+    Frame& SequenceManager::getCurrentFrame() const{
+        return m_currentSequence->getCurrentFrame();
+    }
 
     /**
      * @brief update function (might change in the future).

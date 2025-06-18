@@ -74,6 +74,24 @@ namespace retronomicon::lib::graphic::animation{
     }
 
     /**
+     * @brief get the width of this frame
+     * 
+     * @return width
+     */
+    int Frame::getWidth() const {
+        return m_rect->getWidth();
+    }
+
+    /**
+     * @brief get the height of this frame
+     * 
+     * @return height
+     */
+    int Frame::getHeight() const {
+        return m_rect->getHeight();
+    }
+
+    /**
      * the rectangle representing the source rectangle of the sprite
      * 
      * @return the source rectangle

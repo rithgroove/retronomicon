@@ -9,13 +9,14 @@
 #include "retronomicon/lib/graphic/animation/sequence_manager.h"
 #include "retronomicon/lib/asset/raw_image.h"
 
+using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::graphic::animation;
 
 namespace retronomicon::lib::core::component {
 
     class SpriteComponent : public Component {
         public:
-            SpriteComponent(const std::string& path, SDL_Renderer* renderer);
+            SpriteComponent(RawImage* rawImage, SDL_Renderer* renderer);
             ~SpriteComponent();
 
             void start() override;
@@ -23,12 +24,12 @@ namespace retronomicon::lib::core::component {
             void render() override;
 
             void playSequence(const std::string& name); // Optional helper
-
+            void setSequenceManager(SequenceManager* sequenceManager);
         private:
-            SDL_Texture* texture;
-            SDL_Renderer* renderer;
-            TransformComponent* transform;
-            SequenceManager sequenceManager; // Integrated animation controller
+            RawImage* m_image;
+            SDL_Renderer* m_renderer;
+            TransformComponent* m_transform;
+            SequenceManager* m_sequenceManager; // Integrated animation controller
     };
 
 } // namespace retronomicon
