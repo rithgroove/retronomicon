@@ -1,4 +1,5 @@
 #include "retronomicon/lib/core/component/sprite_component.h"
+#include "retronomicon/lib/core/game_object.h"
 
 namespace retronomicon::lib::core::component {
 
@@ -38,7 +39,7 @@ namespace retronomicon::lib::core::component {
 
         SDL_RendererFlip flip = SDL_FLIP_NONE ;
         SDL_Rect srcRect =  currentFrame.getRect()->generateSDLRect();
-        SDL_RenderCopyEx(m_renderer, m_image->getTexture(), &srcRect, &dstRect, 0.0, nullptr, flip)
+        SDL_RenderCopyEx(m_renderer, m_image->getTexture(), &srcRect, &dstRect, 0.0, nullptr, flip);
     }
 
     void SpriteComponent::playSequence(const string& name) {

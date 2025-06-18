@@ -32,7 +32,7 @@ namespace retronomicon::lib::graphic::animation{
      * @param sequence_order (a number to indicate which frame number this is)
      * @param name the name of this frame
      */
-    Frame::Frame(Point* point ,int width, int height,int sequence_order,const string &name){
+    Frame::Frame(Point* point ,int width, int height,int sequence_order,const string &name,float duration){
         m_rect = new Rect(point,width,height);
         m_sequence_order= sequence_order;
         m_name = name;
@@ -47,7 +47,7 @@ namespace retronomicon::lib::graphic::animation{
      * @param sequence_order (a number to indicate which frame number this is)
      * @param name the name of this frame
      */
-    Frame::Frame(Rect* rect,int sequence_order,const string &name){
+    Frame::Frame(Rect* rect,int sequence_order,const string &name,float duration){
         m_rect = rect;
         m_sequence_order= sequence_order;
         m_name = name;
@@ -103,7 +103,7 @@ namespace retronomicon::lib::graphic::animation{
     /**
      * @brief a method to reset spent duration (set m_spentDuration to 0)
      */
-    void Frame:reset(){
+    void Frame::reset(){
         m_spentDuration = 0.0f;
     }
 
@@ -112,7 +112,7 @@ namespace retronomicon::lib::graphic::animation{
      * 
      * @return left over delta time
      */
-    float update(float dt){
+    float Frame::update(float dt){
         m_spentDuration += dt;
         if (m_spentDuration > m_duration){
             float leftover =  m_spentDuration - m_duration; 

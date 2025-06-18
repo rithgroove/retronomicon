@@ -28,7 +28,7 @@ namespace retronomicon::lib::graphic::renderable{
      * @return true if successfull, false if failed
      */
     bool StatelessAnimatedSprite::update(){
-        m_sequence->update();
+        m_sequence->update(200.0f);
         return true;
     } 
     

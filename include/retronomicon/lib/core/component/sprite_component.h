@@ -10,6 +10,7 @@
 #include "retronomicon/lib/asset/raw_image.h"
 
 using namespace retronomicon::lib::asset;
+using namespace retronomicon::lib::core;
 using namespace retronomicon::lib::graphic::animation;
 
 namespace retronomicon::lib::core::component {
