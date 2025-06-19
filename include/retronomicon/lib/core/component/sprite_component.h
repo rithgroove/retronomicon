@@ -17,7 +17,7 @@ namespace retronomicon::lib::core::component {
 
     class SpriteComponent : public Component {
         public:
-            SpriteComponent(RawImage* rawImage, SDL_Renderer* renderer);
+            SpriteComponent(RawImage* rawImage, SDL_Renderer* renderer,SequenceManager* sequenceManager = nullptr);
             ~SpriteComponent();
 
             void start() override;

@@ -20,6 +20,9 @@
 #include "retronomicon/lib/graphic/animation/frame.h"
 #include "retronomicon/lib/graphic/animation/sequence.h"
 #include "retronomicon/lib/math/rect.h"
+#include "retronomicon/lib/core/game_object.h"
+#include "retronomicon/lib/core/component/transform_component.h"
+#include "retronomicon/lib/core/component/sprite_component.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
 
@@ -83,7 +86,13 @@ int main(int argc, char* argv[])
     frames.push_back(Frame(128,0,64,64,2,"miho-standby",200.0));
     frames.push_back(Frame(192,0,64,64,3,"miho-standby",200.0));
     frames.push_back(Frame(256,0,64,64,4,"miho-standby",200.0));
-    Sequence * seq = new Sequence (frames, 5, "miho-standby", true);
+    Sequence* seq = new Sequence (frames, 5, "miho-standby", true);
+    SequenceManager* seqMan = new SequenceManager(seq);
+
+    GameObject *obj1 = new GameObject();
+    TransformComponent* objTransform = obj1->addComponent<TransformComponent>(450,300);
+    SpriteComponent *obj1Sprite = obj1->addComponent<SpriteComponent>(miho, ren, seqMan);
+    obj1->start();
 
     Sprite* tempSprite2 = new StatelessAnimatedSprite(miho, new Rect(220,300,128,128),seq);
 
@@ -94,7 +103,16 @@ int main(int argc, char* argv[])
                               SCREEN_WIDTH/2, SCREEN_HEIGHT / 2 };
     SDL_Rect fillrect2= { 5, 280, 630, 190 };
 
+    Uint64 currentTime = SDL_GetPerformanceCounter();
+    Uint64 lastTime = 0;
+    double deltaTime = 0.0;
+
     while (!eQuit) {
+
+        lastTime = currentTime;
+        currentTime = SDL_GetPerformanceCounter();
+        deltaTime = static_cast<double>(currentTime - lastTime) / SDL_GetPerformanceFrequency();
+        deltaTime *= 1000;
         std::cout <<"\nmasuk while\n"<<std::endl;
 
         SDL_SetRenderDrawColor(ren, 78, 215, 241, 255);
@@ -120,6 +138,11 @@ int main(int argc, char* argv[])
 
         std::cout <<"\nrender miho\n"<<std::endl;
 
+
+        obj1->update(deltaTime);
+        std::cout <<"\nfinish update\n"<<std::endl;
+        obj1->render();
+        std::cout <<"\nfinish render\n"<<std::endl;
 
         tempSprite2->render(ren);
         window.present();
