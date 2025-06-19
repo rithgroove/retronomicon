@@ -15,8 +15,6 @@
 #include "retronomicon/lib/asset/asset_manager.h"
 #include "retronomicon/lib/asset/font.h"
 #include "retronomicon/lib/graphic/window.h"
-#include "retronomicon/lib/graphic/renderable/sprite.h"
-#include "retronomicon/lib/graphic/renderable/stateless_animated_sprite.h"
 #include "retronomicon/lib/graphic/animation/frame.h"
 #include "retronomicon/lib/graphic/animation/sequence.h"
 #include "retronomicon/lib/math/rect.h"
@@ -29,7 +27,6 @@
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 using namespace retronomicon::lib::asset;
-using namespace retronomicon::lib::graphic::renderable;
 using namespace retronomicon::lib::graphic::animation;
 using namespace retronomicon::lib::math;
 
@@ -68,7 +65,6 @@ int main(int argc, char* argv[])
     }else{
         cout << "bad" << endl;
     }
-    Sprite* tempSprite = new Sprite(test,new Rect(50,50,test->getWidth(),test->getHeight()));
 
     // load character
     RawImage* miho = temp->loadImage("./asset/sprite/miho-test.png", "miho");
@@ -90,11 +86,10 @@ int main(int argc, char* argv[])
     SequenceManager* seqMan = new SequenceManager(seq);
 
     GameObject *obj1 = new GameObject();
-    TransformComponent* objTransform = obj1->addComponent<TransformComponent>(450,300);
+    TransformComponent* objTransform = obj1->addComponent<TransformComponent>(450,300,0.0f,2.0f,2.0f);
     SpriteComponent *obj1Sprite = obj1->addComponent<SpriteComponent>(miho, ren, seqMan);
     obj1->start();
 
-    Sprite* tempSprite2 = new StatelessAnimatedSprite(miho, new Rect(220,300,128,128),seq);
 
     SDL_Color fgC1 = { 0xff,0xff,0xff }, bgC1 = {0x00,0x00,0xa0};       
     bool eQuit = false;
@@ -108,7 +103,6 @@ int main(int argc, char* argv[])
     double deltaTime = 0.0;
 
     while (!eQuit) {
-
         lastTime = currentTime;
         currentTime = SDL_GetPerformanceCounter();
         deltaTime = static_cast<double>(currentTime - lastTime) / SDL_GetPerformanceFrequency();
@@ -132,21 +126,13 @@ int main(int argc, char* argv[])
         std::cout <<"\ndone render text3\n"<<std::endl;
 
 
-        std::cout <<"\nrender bangunan\n"<<std::endl;
-        // tempSprite->flip();
-        tempSprite->render(ren);
-
-        std::cout <<"\nrender miho\n"<<std::endl;
-
 
         obj1->update(deltaTime);
         std::cout <<"\nfinish update\n"<<std::endl;
         obj1->render();
         std::cout <<"\nfinish render\n"<<std::endl;
 
-        tempSprite2->render(ren);
         window.present();
-        tempSprite2->update();
 
 
         SDL_Event wEvent;   
