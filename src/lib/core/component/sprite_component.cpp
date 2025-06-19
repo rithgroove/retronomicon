@@ -24,21 +24,28 @@ namespace retronomicon::lib::core::component {
     }
 
     void SpriteComponent::update(float dt) {
-        m_sequenceManager->update(dt);
+        if (m_sequenceManager){
+            m_sequenceManager->update(dt);
+        }
     }
 
     void SpriteComponent::render() {
-        const Frame& currentFrame = m_sequenceManager->getCurrentFrame();
-
         SDL_Rect dstRect;
         dstRect.x = static_cast<int>(m_transform->getX());
         dstRect.y = static_cast<int>(m_transform->getY());
-        dstRect.w = static_cast<int>(currentFrame.getWidth() * m_transform->getScaleX());
-        dstRect.h = static_cast<int>(currentFrame.getHeight() * m_transform->getScaleY());
-
         SDL_RendererFlip flip = SDL_FLIP_NONE ;
-        SDL_Rect srcRect =  currentFrame.getRect()->generateSDLRect();
-        SDL_RenderCopyEx(m_renderer, m_image->getTexture(), &srcRect, &dstRect, 0.0, nullptr, flip);
+        if (m_sequenceManager){
+            const Frame& currentFrame = m_sequenceManager->getCurrentFrame();
+            dstRect.w = static_cast<int>(currentFrame.getWidth() * m_transform->getScaleX());
+            dstRect.h = static_cast<int>(currentFrame.getHeight() * m_transform->getScaleY());
+
+            SDL_Rect srcRect =  currentFrame.getRect()->generateSDLRect();
+            SDL_RenderCopyEx(m_renderer, m_image->getTexture(), &srcRect, &dstRect, 0.0, nullptr, flip);            
+        }else{
+            dstRect.w = static_cast<int>(m_image->getWidth() * m_transform->getScaleX());
+            dstRect.h = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
+            SDL_RenderCopyEx(m_renderer, m_image->getTexture(), nullptr,  &dstRect, 0.0, nullptr, flip);   
+        }
     }
 
     void SpriteComponent::playSequence(const string& name) {

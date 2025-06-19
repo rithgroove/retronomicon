@@ -90,6 +90,11 @@ int main(int argc, char* argv[])
     SpriteComponent *obj1Sprite = obj1->addComponent<SpriteComponent>(miho, ren, seqMan);
     obj1->start();
 
+    GameObject *obj2 = new GameObject();
+    TransformComponent* obj2Transform = obj2->addComponent<TransformComponent>(50,50,0.0f,1.0f,1.0f);
+    SpriteComponent *obj2Sprite = obj2->addComponent<SpriteComponent>(test, ren);
+    obj2->start();
+
 
     SDL_Color fgC1 = { 0xff,0xff,0xff }, bgC1 = {0x00,0x00,0xa0};       
     bool eQuit = false;
@@ -128,8 +133,10 @@ int main(int argc, char* argv[])
 
 
         obj1->update(deltaTime);
+        obj2->update(deltaTime);
         std::cout <<"\nfinish update\n"<<std::endl;
         obj1->render();
+        obj2->render();
         std::cout <<"\nfinish render\n"<<std::endl;
 
         window.present();
