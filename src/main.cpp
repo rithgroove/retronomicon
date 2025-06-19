@@ -21,6 +21,7 @@
 #include "retronomicon/lib/core/game_object.h"
 #include "retronomicon/lib/core/component/transform_component.h"
 #include "retronomicon/lib/core/component/sprite_component.h"
+#include "retronomicon/lib/core/scene.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
 
@@ -85,12 +86,14 @@ int main(int argc, char* argv[])
     Sequence* seq = new Sequence (frames, 5, "miho-standby", true);
     SequenceManager* seqMan = new SequenceManager(seq);
 
-    GameObject *obj1 = new GameObject();
+    Scene* scene = new Scene("testing");
+
+    GameObject* obj1 = scene->createGameObject("Miho");
     TransformComponent* objTransform = obj1->addComponent<TransformComponent>(450,300,0.0f,2.0f,2.0f);
     SpriteComponent *obj1Sprite = obj1->addComponent<SpriteComponent>(miho, ren, seqMan);
     obj1->start();
 
-    GameObject *obj2 = new GameObject();
+    GameObject* obj2 = scene->createGameObject("Building");
     TransformComponent* obj2Transform = obj2->addComponent<TransformComponent>(50,50,0.0f,1.0f,1.0f);
     SpriteComponent *obj2Sprite = obj2->addComponent<SpriteComponent>(test, ren);
     obj2->start();
@@ -130,14 +133,8 @@ int main(int argc, char* argv[])
 
         std::cout <<"\ndone render text3\n"<<std::endl;
 
-
-
-        obj1->update(deltaTime);
-        obj2->update(deltaTime);
-        std::cout <<"\nfinish update\n"<<std::endl;
-        obj1->render();
-        obj2->render();
-        std::cout <<"\nfinish render\n"<<std::endl;
+        scene->update(deltaTime);
+        scene->render();
 
         window.present();
 

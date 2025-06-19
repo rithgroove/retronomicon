@@ -4,9 +4,10 @@
 #include <typeindex>
 #include <typeinfo>
 #include <memory>
-
+#include <string>
 #include "retronomicon/lib/core/component/component.h"
 
+using namespace std;
 using namespace retronomicon::lib::core::component;
 /**
  * @brief The namespace for core libraries such as game object and components
@@ -17,7 +18,7 @@ namespace retronomicon::lib::core{
             /**
              * @brief empty constructor 
              */
-            GameObject();
+            GameObject(const string& name);
 
             /**
              * @brief default destructor 
@@ -60,6 +61,7 @@ namespace retronomicon::lib::core{
 
         private:
             std::unordered_map<std::type_index, std::unique_ptr<Component>> components;
+            string m_name;
     };
 
     // ---------- Template definitions ----------

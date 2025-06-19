@@ -4,7 +4,9 @@
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
 namespace retronomicon::lib::core{
-    GameObject::GameObject() {}
+    GameObject::GameObject(const string& name) {
+        m_name = name;
+    }
 
     GameObject::~GameObject() {}
 
