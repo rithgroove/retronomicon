@@ -34,18 +34,33 @@ namespace retronomicon::lib::core::component {
         dstRect.x = static_cast<int>(m_transform->getX());
         dstRect.y = static_cast<int>(m_transform->getY());
         SDL_RendererFlip flip = SDL_FLIP_NONE ;
+
         if (m_sequenceManager){
             const Frame& currentFrame = m_sequenceManager->getCurrentFrame();
             dstRect.w = static_cast<int>(currentFrame.getWidth() * m_transform->getScaleX());
             dstRect.h = static_cast<int>(currentFrame.getHeight() * m_transform->getScaleY());
 
-            SDL_Rect srcRect =  currentFrame.getRect()->generateSDLRect();
-            SDL_RenderCopyEx(m_renderer, m_image->getTexture(), &srcRect, &dstRect, 0.0, nullptr, flip);            
+            SDL_Rect srcRect=  currentFrame.getRect()->generateSDLRect();
+
+            SDL_Point center;
+            center.x = static_cast<int>(dstRect.w * m_transform->getAnchorX());
+            center.y = static_cast<int>(dstRect.h * m_transform->getAnchorY());
+
+            SDL_RenderCopyEx(m_renderer, m_image->getTexture(), &srcRect, &dstRect, m_transform->getRotation(), &center, flip);            
+
         }else{
             dstRect.w = static_cast<int>(m_image->getWidth() * m_transform->getScaleX());
             dstRect.h = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
-            SDL_RenderCopyEx(m_renderer, m_image->getTexture(), nullptr,  &dstRect, 0.0, nullptr, flip);   
+
+            SDL_Point center;
+            center.x = static_cast<int>(dstRect.w * m_transform->getAnchorX());
+            center.y = static_cast<int>(dstRect.h * m_transform->getAnchorY());
+
+            SDL_RenderCopyEx(m_renderer, m_image->getTexture(), nullptr, &dstRect, m_transform->getRotation(), &center, flip);            
         }
+
+
+
     }
 
     void SpriteComponent::playSequence(const string& name) {

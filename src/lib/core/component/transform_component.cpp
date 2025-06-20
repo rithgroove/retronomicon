@@ -3,10 +3,16 @@
 namespace retronomicon::lib::core::component{
 
     TransformComponent::TransformComponent()
-        : x(0), y(0), rotation(0), scaleX(1.0f), scaleY(1.0f) {}
+        : x(0), y(0), rotation(0), scaleX(1.0f), scaleY(1.0f) {
+        m_anchorX = 0.5;
+        m_anchorY = 0.5;
+    }
 
     TransformComponent::TransformComponent(float x, float y, float rotation, float scaleX, float scaleY)
-        : x(x), y(y), rotation(rotation), scaleX(scaleX), scaleY(scaleY) {}
+        : x(x), y(y), rotation(rotation), scaleX(scaleX), scaleY(scaleY) {
+        m_anchorX = 0.5;
+        m_anchorY = 0.5;
+    }
 
     void TransformComponent::setPosition(float newX, float newY) {
         x = newX;
