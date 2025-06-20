@@ -11,6 +11,13 @@ namespace retronomicon::lib::core::component{
     void TransformComponent::setPosition(float newX, float newY) {
         x = newX;
         y = newY;
+        m_anchorX = 0.5;
+        m_anchorY = 0.5;
+    }
+
+    void TransformComponent::setAnchor(float anchorX,float anchorY){
+        m_anchorX = anchorX;
+        m_anchorY = anchorY;
     }
 
     void TransformComponent::setRotation(float angle) {
@@ -27,5 +34,7 @@ namespace retronomicon::lib::core::component{
     float TransformComponent::getRotation() const { return rotation; }
     float TransformComponent::getScaleX() const { return scaleX; }
     float TransformComponent::getScaleY() const { return scaleY; }
+    float TransformComponent::getAnchorX() const { return m_anchorX; }
+    float TransformComponent::getAnchorY() const { return m_anchorY; }
 
 } // namespace retronomicon

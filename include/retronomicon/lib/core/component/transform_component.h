@@ -50,6 +50,14 @@ namespace retronomicon::lib::core::component{
             void setScale(float scaleX, float scaleY);
 
             /**
+             * @brief a method to scale the anchor position (usefull for rotation)
+             * 
+             * @param anchorX the x position of the anchor (between 0.0 -1.0) 
+             * @param anchorT the y position of the anchor (between 0.0 -1.0) 
+             */
+            void setAnchor(float anchorX, float anchorY);
+
+            /**
              * @brief a method to get x
              * 
              * @return x value
@@ -83,6 +91,20 @@ namespace retronomicon::lib::core::component{
              * @return vertical scaling
              */
             float getScaleY() const;
+            
+            /**
+             * @brief a method to get horizontal scaling
+             * 
+             * @return horizontal scaling
+             */
+            float getAnchorX() const;
+
+            /**
+             * @brief a method to get vertical scaling
+             * 
+             * @return vertical scaling
+             */
+            float getAnchorY() const;
 
         public:
             float x;
@@ -90,6 +112,8 @@ namespace retronomicon::lib::core::component{
             float rotation;
             float scaleX;
             float scaleY;
+            float m_anchorX;
+            float m_anchorY;
     };
 
 } // namespace retronomicon
