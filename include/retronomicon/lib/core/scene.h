@@ -7,7 +7,7 @@
 #include "retronomicon/lib/core/system/system.h"
 
 using namespace std;
-using namespace retronomicon::lib:core::system;
+using namespace retronomicon::lib::core::system;
 namespace retronomicon::lib::core {
 
     class Scene {

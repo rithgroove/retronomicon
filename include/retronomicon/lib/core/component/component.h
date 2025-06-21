@@ -1,5 +1,5 @@
 #pragma once
-
+#include <SDL.h>
 /**
  * @brief The namespace for core components
  */

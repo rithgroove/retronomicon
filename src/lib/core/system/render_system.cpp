@@ -5,10 +5,10 @@ namespace retronomicon::lib::core::system{
         m_renderer = renderer;
     }
 
-    void RenderSystem::render(const vector<shared_ptr<GameObject>>& objects) override {
-        for (auto& obj : objects) {
+    void RenderSystem::render(const vector<GameObject*>& objects) override {
+        for (GameObject& obj : objects) {
             // render logic
-            obj.redner(m_renderer);
+            render.render(m_renderer);
         }
     }
 }

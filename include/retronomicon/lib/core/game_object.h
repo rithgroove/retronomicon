@@ -40,7 +40,7 @@ namespace retronomicon::lib::core{
             /**
              * @brief a method to render the component if any
              */
-            void render();
+            void render(SDL_Renderer* renderer);
 
 
             /**

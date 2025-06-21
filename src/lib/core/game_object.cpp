@@ -24,10 +24,10 @@ namespace retronomicon::lib::core{
         }
     }
 
-    void GameObject::render() {
+    void GameObject::render(SDL_Renderer* renderer) {
         //loop all components and call render
         for (auto& pair : components) {
-            pair.second->render();
+            pair.second->render(renderer);
         }
     }
 }
