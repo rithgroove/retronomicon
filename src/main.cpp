@@ -19,6 +19,7 @@
 #include "retronomicon/lib/graphic/animation/sequence.h"
 #include "retronomicon/lib/math/rect.h"
 #include "retronomicon/lib/core/game_object.h"
+#include "retronomicon/lib/core/system/render_system.h"
 #include "retronomicon/lib/core/component/transform_component.h"
 #include "retronomicon/lib/core/component/sprite_component.h"
 #include "retronomicon/lib/core/scene.h"
@@ -87,17 +88,19 @@ int main(int argc, char* argv[])
     SequenceManager* seqMan = new SequenceManager(seq);
 
     Scene* scene = new Scene("testing");
+    RenderSystem* render_system = new RenderSystem(ren);
+    scene->addSystem(render_system);
 
     GameObject* obj1 = scene->createGameObject("Miho");
     TransformComponent* objTransform = obj1->addComponent<TransformComponent>(450,300,0.0f,2.0f,2.0f);
-    SpriteComponent *obj1Sprite = obj1->addComponent<SpriteComponent>(miho, ren, seqMan);
+    SpriteComponent *obj1Sprite = obj1->addComponent<SpriteComponent>(miho, seqMan);
     objTransform->setRotation(45.0f);
     obj1->start();
 
     GameObject* obj2 = scene->createGameObject("Building");
     TransformComponent* obj2Transform = obj2->addComponent<TransformComponent>(50,50,0.0f,1.0f,1.0f);
     obj2Transform->setRotation(90.0f);
-    SpriteComponent *obj2Sprite = obj2->addComponent<SpriteComponent>(test, ren);
+    SpriteComponent *obj2Sprite = obj2->addComponent<SpriteComponent>(test);
     obj2->start();
 
 

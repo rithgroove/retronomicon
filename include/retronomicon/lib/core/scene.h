@@ -24,7 +24,7 @@ namespace retronomicon::lib::core {
 
         GameObject* createGameObject(const string& name);
         void removeGameObject(GameObject* object);
-
+        void addSystem(System* system);
 
     private:
         string m_name;

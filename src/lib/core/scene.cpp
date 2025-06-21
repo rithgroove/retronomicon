@@ -30,9 +30,6 @@ namespace retronomicon::lib::core {
         for (auto &system : m_systems){
             system->render(m_gameObjects);
         }
-        // for (auto& system : _systems) {
-        //     system->render(_gameObjects);
-        // }
     }
 
     void Scene::shutdown() {
@@ -54,5 +51,8 @@ namespace retronomicon::lib::core {
         // _gameObjects.erase(std::remove(_gameObjects.begin(), _gameObjects.end(), object), _gameObjects.end());
     }
 
+    void Scene::addSystem(System* system) {
+        m_systems.push_back(system);
+    }
 
 }
