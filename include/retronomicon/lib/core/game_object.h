@@ -60,7 +60,7 @@ namespace retronomicon::lib::core{
             T* getComponent();
 
         private:
-            std::unordered_map<std::type_index, std::unique_ptr<Component>> components;
+            unordered_map<type_index, unique_ptr<Component>> components;
             string m_name;
     };
 
@@ -68,11 +68,11 @@ namespace retronomicon::lib::core{
 
     template <typename T, typename... Args>
     T* GameObject::addComponent(Args&&... args) {
-        std::type_index typeId = std::type_index(typeid(T));
+        type_index typeId = type_index(typeid(T));
         if (components.count(typeId) == 0) {
-            T* rawPtr = new T(std::forward<Args>(args)...);
+            T* rawPtr = new T(forward<Args>(args)...);
             rawPtr->setOwner(this);
-            components[typeId] = std::unique_ptr<Component>(rawPtr);
+            components[typeId] = unique_ptr<Component>(rawPtr);
             return rawPtr;
         }
         return nullptr;
@@ -80,7 +80,7 @@ namespace retronomicon::lib::core{
 
     template <typename T>
     T* GameObject::getComponent() {
-        std::type_index typeId = std::type_index(typeid(T));
+        type_index typeId = type_index(typeid(T));
         auto it = components.find(typeId);
         if (it != components.end()) {
             return static_cast<T*>(it->second.get());

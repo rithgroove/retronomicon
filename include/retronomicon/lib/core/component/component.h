@@ -39,7 +39,7 @@ namespace retronomicon::lib::core{
                 /**
                  * @brief a method to render the component if any
                  */
-                virtual void render() {}
+                virtual void render(SDL_Renderer* renderer) {}
 
                 /**
                  * @brief a to set the owner of this component

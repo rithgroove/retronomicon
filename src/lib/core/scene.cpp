@@ -27,8 +27,9 @@ namespace retronomicon::lib::core {
     }
 
     void Scene::render() {
-        for (auto &gameobject : m_gameObjects){
-            gameobject->render();
+        for (auto &system : m_system){
+            m_system.render()
+
         }
         // for (auto& system : _systems) {
         //     system->render(_gameObjects);

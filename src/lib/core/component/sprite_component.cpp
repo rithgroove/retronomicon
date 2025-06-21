@@ -3,9 +3,8 @@
 
 namespace retronomicon::lib::core::component {
 
-    SpriteComponent::SpriteComponent(RawImage* image, SDL_Renderer* renderer,SequenceManager* sequenceManager){
+    SpriteComponent::SpriteComponent(RawImage* image, SequenceManager* sequenceManager){
         m_image = image;
-        m_renderer = renderer;
         m_sequenceManager = sequenceManager;
     }
 
@@ -29,7 +28,7 @@ namespace retronomicon::lib::core::component {
         }
     }
 
-    void SpriteComponent::render() {
+    void SpriteComponent::render(SDL_Renderer* renderer) {
         SDL_Rect dstRect;
         dstRect.x = static_cast<int>(m_transform->getX());
         dstRect.y = static_cast<int>(m_transform->getY());
@@ -46,7 +45,7 @@ namespace retronomicon::lib::core::component {
             center.x = static_cast<int>(dstRect.w * m_transform->getAnchorX());
             center.y = static_cast<int>(dstRect.h * m_transform->getAnchorY());
 
-            SDL_RenderCopyEx(m_renderer, m_image->getTexture(), &srcRect, &dstRect, m_transform->getRotation(), &center, flip);            
+            SDL_RenderCopyEx(renderer, m_image->getTexture(), &srcRect, &dstRect, m_transform->getRotation(), &center, flip);            
 
         }else{
             dstRect.w = static_cast<int>(m_image->getWidth() * m_transform->getScaleX());
@@ -56,7 +55,7 @@ namespace retronomicon::lib::core::component {
             center.x = static_cast<int>(dstRect.w * m_transform->getAnchorX());
             center.y = static_cast<int>(dstRect.h * m_transform->getAnchorY());
 
-            SDL_RenderCopyEx(m_renderer, m_image->getTexture(), nullptr, &dstRect, m_transform->getRotation(), &center, flip);            
+            SDL_RenderCopyEx(renderer, m_image->getTexture(), nullptr, &dstRect, m_transform->getRotation(), &center, flip);            
         }
 
 

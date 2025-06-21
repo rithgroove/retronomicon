@@ -4,7 +4,10 @@
 #include <memory>
 #include <vector>
 #include "game_object.h"
+#include "retronomicon/lib/core/system/system.h"
 
+using namespace std;
+using namespace retronomicon::lib:core::system;
 namespace retronomicon::lib::core {
 
     class Scene {
@@ -17,14 +20,15 @@ namespace retronomicon::lib::core {
         void render();
         void shutdown();
 
-        std::string getName() const;
+        string getName() const;
 
         GameObject* createGameObject(const string& name);
         void removeGameObject(GameObject* object);
 
 
     private:
-        std::string m_name;
-        std::vector<GameObject*> m_gameObjects;
+        string m_name;
+        vector<GameObject*> m_gameObjects;
+        vector<System*> m_systems;
     };
 }
