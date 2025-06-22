@@ -24,7 +24,7 @@ namespace retronomicon::lib::core::component{
      * 
      * @param animationClip the animation clip that we'll be adding to the manager
      */
-    bool AnimationComponent::addAnimationClip(AnimationClip* animationClip){
+    bool AnimationComponent::addClip(AnimationClip* animationClip){
         m_animationClips[animationClip->getName()] = animationClip;
     }
 
@@ -34,7 +34,7 @@ namespace retronomicon::lib::core::component{
      * @param name the name of the animation clip
      */
     void AnimationComponent::changeClip(const string& name){
-        m_currentAnimationClip = m_animationClips[name];
+        m_currentClip = m_animationClips[name];
     }
     
     /**
@@ -43,7 +43,7 @@ namespace retronomicon::lib::core::component{
      * @return the current clip
      */
     AnimationClip* AnimationComponent::getCurrentClip() const{
-        return m_currentAnimationClip;
+        return m_currentClip;
     }
 
     
@@ -53,7 +53,7 @@ namespace retronomicon::lib::core::component{
      * @return the current clip name
      */
     string AnimationComponent::getCurrentStateName() const{
-        return m_currentAnimationClip->getName();
+        return m_currentClip->getName();
     }
    
     /**
@@ -62,7 +62,7 @@ namespace retronomicon::lib::core::component{
      * @return the current frame
      */
     Frame& AnimationComponent::getCurrentFrame() const{
-        return m_currentAnimationClip->getCurrentFrame();
+        return m_currentClip->getCurrentFrame();
     }
 
     /**
@@ -76,13 +76,13 @@ namespace retronomicon::lib::core::component{
         // if current clip is not the default and is finished, change it
         // this will not change if the animation is manually controlled (move,run etc, because those are repeated)
         while (leftover > 0.0f){
-            leftover = m_currentAnimationClip->update(dt);
-            if (m_currentAnimationClip != m_defaultClip && m_currentAnimationClip->isFinished()){
+            leftover = m_currentClip->update(dt);
+            if (m_currentClip != m_defaultClip && m_currentClip->isFinished()){
                 if (m_animationClipsQueue.empty()){
-                    m_currentAnimationClip = m_defaultClip;
+                    m_currentClip = m_defaultClip;
                 }else{
                     m_animationClipsQueue.pop();
-                    m_currentAnimationClip = m_animationClipsQueue.front();
+                    m_currentClip = m_animationClipsQueue.front();
                 }
             }            
         }

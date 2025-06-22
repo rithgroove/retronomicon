@@ -5,7 +5,7 @@
 #include <string>
 #include "component.h"
 #include "transform_component.h"
-#include "retronomicon/lib/graphic/animation/sequence_manager.h"
+#include "animation_component.h"
 #include "retronomicon/lib/asset/raw_image.h"
 
 using namespace retronomicon::lib::asset;
@@ -16,7 +16,7 @@ namespace retronomicon::lib::core::component {
 
     class SpriteComponent : public Component {
         public:
-            SpriteComponent(RawImage* rawImage, SequenceManager* sequenceManager = nullptr);
+            SpriteComponent(RawImage* rawImage);
             ~SpriteComponent();
 
             void start() override;
@@ -24,11 +24,9 @@ namespace retronomicon::lib::core::component {
             void render(SDL_Renderer* renderer) override;
 
             void playSequence(const std::string& name); // Optional helper
-            void setSequenceManager(SequenceManager* sequenceManager);
         private:
             RawImage* m_image;
             TransformComponent* m_transform;
-            SequenceManager* m_sequenceManager; // Integrated animation controller
     };
 
 } // namespace retronomicon

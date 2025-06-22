@@ -51,7 +51,7 @@ namespace retronomicon::lib::core::component{
              * 
              * @return the current frame
              */
-            Frame& getCurrentClip() const;
+            Frame& getCurrentFrame() const;
 
             /**
              * @brief get the current active clip name
