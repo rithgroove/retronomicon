@@ -1,4 +1,4 @@
-#include "retronomicon/lib/graphic/animation/AnimationClip.h"
+#include "retronomicon/lib/graphic/animation/animation_clip.h"
 
 /**
  * @brief The namespace for graphic utilities

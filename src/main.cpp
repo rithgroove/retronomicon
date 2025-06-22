@@ -20,6 +20,7 @@
 #include "retronomicon/lib/math/rect.h"
 #include "retronomicon/lib/core/game_object.h"
 #include "retronomicon/lib/core/system/render_system.h"
+#include "retronomicon/lib/core/system/animation_system.h"
 #include "retronomicon/lib/core/component/transform_component.h"
 #include "retronomicon/lib/core/component/sprite_component.h"
 #include "retronomicon/lib/core/component/animation_component.h"
@@ -88,13 +89,13 @@ int main(int argc, char* argv[])
     AnimationClip* clip = new AnimationClip (frames, 5, "miho-standby", true);
 
     Scene* scene = new Scene("testing");
-    RenderSystem* render_system = new RenderSystem(ren);
-    scene->addSystem(render_system);
+    scene->addSystem(new RenderSystem(ren));
+    scene->addSystem(new AnimationSystem());
 
     GameObject* obj1 = scene->createGameObject("Miho");
     TransformComponent* objTransform = obj1->addComponent<TransformComponent>(450,300,0.0f,2.0f,2.0f);
-    SpriteComponent *obj1Sprite = obj1->addComponent<SpriteComponent>(miho, seqMan);
-    SpriteComponent *obj1Sequence = obj->addComponent<AnimationComponent>(clip);
+    SpriteComponent *obj1Sprite = obj1->addComponent<SpriteComponent>(miho);
+    AnimationComponent *obj1Sequence = obj1->addComponent<AnimationComponent>(clip);
     objTransform->setRotation(45.0f);
     obj1->start();
 

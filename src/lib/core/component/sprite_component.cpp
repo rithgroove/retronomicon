@@ -3,30 +3,26 @@
 
 namespace retronomicon::lib::core::component {
 
-    SpriteComponent::SpriteComponent(RawImage* image, SequenceManager* sequenceManager){
+    SpriteComponent::SpriteComponent(RawImage* image){
         m_image = image;
-        m_sequenceManager = sequenceManager;
     }
 
     SpriteComponent::~SpriteComponent() {
     }
 
-    void SpriteComponent::setSequenceManager(SequenceManager *sequenceManager){
-        m_sequenceManager = sequenceManager;
-    }
 
     void SpriteComponent::start() {
         m_transform = getOwner()->getComponent<TransformComponent>();
         if (!m_transform) {
             std::cerr << "SpriteComponent requires TransformComponent\n";
         }
+
+        m_animation = getOwner()->getComponent<AnimationComponent>();
     }
 
     void SpriteComponent::update(float dt) {
-        if (m_sequenceManager){
-            m_sequenceManager->update(dt);
-        }
     }
+
 
     void SpriteComponent::render(SDL_Renderer* renderer) {
         SDL_Rect dstRect;
@@ -34,8 +30,8 @@ namespace retronomicon::lib::core::component {
         dstRect.y = static_cast<int>(m_transform->getY());
         SDL_RendererFlip flip = SDL_FLIP_NONE ;
 
-        if (m_sequenceManager){
-            const Frame& currentFrame = m_sequenceManager->getCurrentFrame();
+        if (m_animation){
+            const Frame& currentFrame = m_animation->getCurrentFrame();
             dstRect.w = static_cast<int>(currentFrame.getWidth() * m_transform->getScaleX());
             dstRect.h = static_cast<int>(currentFrame.getHeight() * m_transform->getScaleY());
 
@@ -60,9 +56,5 @@ namespace retronomicon::lib::core::component {
 
 
 
-    }
-
-    void SpriteComponent::playSequence(const string& name) {
-        m_sequenceManager->changeSequence(name);
     }
 } // namespace retronomicon

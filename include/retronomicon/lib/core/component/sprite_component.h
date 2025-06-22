@@ -23,10 +23,10 @@ namespace retronomicon::lib::core::component {
             void update(float dt) override;
             void render(SDL_Renderer* renderer) override;
 
-            void playSequence(const std::string& name); // Optional helper
         private:
             RawImage* m_image;
             TransformComponent* m_transform;
+            AnimationComponent* m_animation;
     };
 
 } // namespace retronomicon
