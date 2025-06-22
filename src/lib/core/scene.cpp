@@ -18,8 +18,8 @@ namespace retronomicon::lib::core {
     }
 
     void Scene::update(float dt) {
-        for (auto &gameobject : m_gameObjects){
-            gameobject->update(dt);
+        for (auto &system : m_systems){
+            system->update(dt,m_gameObjects);
         }
         // for (auto& system : _systems) {
         //     system->update(dt, _gameObjects);
