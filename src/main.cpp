@@ -16,12 +16,13 @@
 #include "retronomicon/lib/asset/font.h"
 #include "retronomicon/lib/graphic/window.h"
 #include "retronomicon/lib/graphic/animation/frame.h"
-#include "retronomicon/lib/graphic/animation/sequence.h"
+#include "retronomicon/lib/graphic/animation/animation_clip.h"
 #include "retronomicon/lib/math/rect.h"
 #include "retronomicon/lib/core/game_object.h"
 #include "retronomicon/lib/core/system/render_system.h"
 #include "retronomicon/lib/core/component/transform_component.h"
 #include "retronomicon/lib/core/component/sprite_component.h"
+#include "retronomicon/lib/core/component/animation_component.h"
 #include "retronomicon/lib/core/scene.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
@@ -84,8 +85,7 @@ int main(int argc, char* argv[])
     frames.push_back(Frame(128,0,64,64,2,"miho-standby",200.0));
     frames.push_back(Frame(192,0,64,64,3,"miho-standby",200.0));
     frames.push_back(Frame(256,0,64,64,4,"miho-standby",200.0));
-    Sequence* seq = new Sequence (frames, 5, "miho-standby", true);
-    SequenceManager* seqMan = new SequenceManager(seq);
+    AnimationClip* clip = new AnimationClip (frames, 5, "miho-standby", true);
 
     Scene* scene = new Scene("testing");
     RenderSystem* render_system = new RenderSystem(ren);
@@ -94,6 +94,7 @@ int main(int argc, char* argv[])
     GameObject* obj1 = scene->createGameObject("Miho");
     TransformComponent* objTransform = obj1->addComponent<TransformComponent>(450,300,0.0f,2.0f,2.0f);
     SpriteComponent *obj1Sprite = obj1->addComponent<SpriteComponent>(miho, seqMan);
+    SpriteComponent *obj1Sequence = obj->addComponent<AnimationComponent>(clip);
     objTransform->setRotation(45.0f);
     obj1->start();
 
