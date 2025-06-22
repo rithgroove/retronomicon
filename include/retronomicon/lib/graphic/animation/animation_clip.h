@@ -12,10 +12,10 @@ using namespace std;
  */
 namespace retronomicon::lib::graphic::animation{
 	/**
-	 * @brief A class that represent an animation sequence.
+	 * @brief A class that represent an animation AnimationClip.
 	 * each frame will be represented by an instance of Frame class.
 	 */
-    class Sequence {
+    class AnimationClip {
 	    public:
 	    	/**
 	    	 * @brief the constructor
@@ -25,7 +25,7 @@ namespace retronomicon::lib::graphic::animation{
 	    	 * @param name the name of of this animation
 	    	 * @param repeat set true if this animation is repeated
 	    	 */
-	    	Sequence(vector<Frame> frames, int frameCount,const string &name , bool repeat);
+	    	AnimationClip(vector<Frame> frames, int frameCount,const string &name , bool repeat);
 
 	    	// ~Point(); // no need for destructor since all attributes are native
 
@@ -44,9 +44,9 @@ namespace retronomicon::lib::graphic::animation{
 	    	Frame& getCurrentFrame();
 
 	    	/**
-	    	 * @brief get the name of this sequence
+	    	 * @brief get the name of this AnimationClip
 	    	 * 
-	    	 * @return name of the sequence
+	    	 * @return name of the AnimationClip
 	    	 */
 	    	string getName() const;
 

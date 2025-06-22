@@ -1,4 +1,4 @@
-#include "retronomicon/lib/graphic/animation/sequence.h"
+#include "retronomicon/lib/graphic/animation/AnimationClip.h"
 
 /**
  * @brief The namespace for graphic utilities
@@ -13,7 +13,7 @@ namespace retronomicon::lib::graphic::animation{
      * @param name the name of of this animation
      * @param repeat set true if this animation is repeated
      */
-    Sequence::Sequence(vector<Frame> frames, int frameCount, const string &name , bool repeat){
+    AnimationClip::AnimationClip(vector<Frame> frames, int frameCount, const string &name , bool repeat){
     	m_frames = frames;
     	m_frameCount = frameCount;
         m_name = name;
@@ -26,7 +26,7 @@ namespace retronomicon::lib::graphic::animation{
      * 
      * @return the current frame number
      */
-    int Sequence::getCurrentFrameIndex(){
+    int AnimationClip::getCurrentFrameIndex(){
     	return m_currentFrame;
     }
 
@@ -35,16 +35,16 @@ namespace retronomicon::lib::graphic::animation{
      * 
      * @return the current frame
      */
-    Frame& Sequence::getCurrentFrame(){
+    Frame& AnimationClip::getCurrentFrame(){
     	return m_frames.at(m_currentFrame);
     }
     
     /**
-     * @brief get the name of this sequence
+     * @brief get the name of this AnimationClip
      * 
-     * @return name of the sequence
+     * @return name of the AnimationClip
      */
-    string Sequence::getName() const{
+    string AnimationClip::getName() const{
         return m_name;
     }
 
@@ -54,7 +54,7 @@ namespace retronomicon::lib::graphic::animation{
      * 
      * @return true if successful, false if failed.
      */
-    float Sequence::update(float dt){
+    float AnimationClip::update(float dt){
         float leftOver = dt;
         while (leftOver >0.0f){
             Frame curFrame = m_frames[m_currentFrame];
@@ -82,7 +82,7 @@ namespace retronomicon::lib::graphic::animation{
      * 
      * @return true if m_repeat is false, and is currently on the last frame
      */
-    bool Sequence::isFinished(){
+    bool AnimationClip::isFinished(){
         if (m_repeat && m_currentFrame >= m_frameCount){
             return true;
         }
