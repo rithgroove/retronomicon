@@ -1,0 +1,98 @@
+#include "retronomicon/lib/core/component/animation_component.h"
+
+/**
+ * @brief The namespace for graphic utilities
+ */
+namespace retronomicon::lib::core::component{
+
+    /**
+     * @brief the constructor
+     * 
+     * @param frames the std::vector respresentation of the frames
+     * @param frameCount the number of frame in this sequcne
+     * @param name the name of of this animation
+     * @param repeat set true if this animation is repeated
+     */
+    AnimationComponent::AnimationComponent(Sequence* defaultSequence){
+        m_defaultSequence = defaultSequence;
+        this->addSequence(defaultSequence);
+        this->changeSequence(defaultSequence->getName());
+    }
+
+    /**
+     *  @brief add a sequence to this state.
+     * 
+     * @param animationSequence the animation sequence that we'll be adding to the manager
+     */
+    bool AnimationComponent::addSequence(Sequence* animationSequence){
+        m_sequences[animationSequence->getName()] = animationSequence;
+    }
+
+    /**
+     * @brief change the current sequence.
+     * 
+     * @param name the name of the animation sequence
+     */
+    void AnimationComponent::changeSequence(const string& name){
+        m_currentSequence = m_sequences[name];
+    }
+    
+    /**
+     * @brief get the current active sequence
+     * 
+     * @return the current sequence
+     */
+    Sequence* AnimationComponent::getCurrentSequence() const{
+        return m_currentSequence;
+    }
+
+    
+    /**
+     * @brief get the current active sequence name
+     * 
+     * @return the current sequence name
+     */
+    string AnimationComponent::getCurrentStateName() const{
+        return m_currentSequence->getName();
+    }
+   
+    /**
+     * @brief get the current frome of the current active sequence
+     * 
+     * @return the current frame
+     */
+    Frame& AnimationComponent::getCurrentFrame() const{
+        return m_currentSequence->getCurrentFrame();
+    }
+
+    /**
+     * @brief update function (might change in the future).
+     * Potential update is to use time interval so we could do frame skipping
+     * 
+     * @return true if successfull, false if failed
+     */
+    void AnimationComponent::update(float dt){        
+        float leftover = dt;
+        // if current sequence is not the default and is finished, change it
+        // this will not change if the animation is manually controlled (move,run etc, because those are repeated)
+        while (leftover > 0.0f){
+            leftover = m_currentSequence->update(dt);
+            if (m_currentSequence != m_defaultSequence && m_currentSequence->isFinished()){
+                if (m_sequenceQueue.empty()){
+                    m_currentSequence = m_defaultSequence;
+                }else{
+                    m_sequenceQueue.pop();
+                    m_currentSequence = m_sequenceQueue.front();
+                }
+            }            
+        }
+    }
+
+
+    /**
+     * @brief insert sequence to sequence Queue
+     */
+    void AnimationComponent::queueSequence(Sequence* sequence){
+        m_sequenceQueue.push(sequence);
+    }
+}
