@@ -13,56 +13,56 @@ namespace retronomicon::lib::core::component{
      * @param name the name of of this animation
      * @param repeat set true if this animation is repeated
      */
-    AnimationComponent::AnimationComponent(Sequence* defaultSequence){
-        m_defaultSequence = defaultSequence;
-        this->addSequence(defaultSequence);
-        this->changeSequence(defaultSequence->getName());
+    AnimationComponent::AnimationComponent(AnimationClip* defaultClip){
+        m_defaultClip = defaultClip;
+        this->addClip(defaultClip);
+        this->changeClip(defaultClip->getName());
     }
 
     /**
-     *  @brief add a sequence to this state.
+     *  @brief add an animation clip to this component.
      * 
-     * @param animationSequence the animation sequence that we'll be adding to the manager
+     * @param animationClip the animation clip that we'll be adding to the manager
      */
-    bool AnimationComponent::addSequence(Sequence* animationSequence){
-        m_sequences[animationSequence->getName()] = animationSequence;
+    bool AnimationComponent::addAnimationClip(AnimationClip* animationClip){
+        m_animationClips[animationClip->getName()] = animationClip;
     }
 
     /**
-     * @brief change the current sequence.
+     * @brief change the current animation clip.
      * 
-     * @param name the name of the animation sequence
+     * @param name the name of the animation clip
      */
-    void AnimationComponent::changeSequence(const string& name){
-        m_currentSequence = m_sequences[name];
+    void AnimationComponent::changeClip(const string& name){
+        m_currentAnimationClip = m_animationClips[name];
     }
     
     /**
-     * @brief get the current active sequence
+     * @brief get the current active clip
      * 
-     * @return the current sequence
+     * @return the current clip
      */
-    Sequence* AnimationComponent::getCurrentSequence() const{
-        return m_currentSequence;
+    AnimationClip* AnimationComponent::getCurrentClip() const{
+        return m_currentAnimationClip;
     }
 
     
     /**
-     * @brief get the current active sequence name
+     * @brief get the current active clip name
      * 
-     * @return the current sequence name
+     * @return the current clip name
      */
     string AnimationComponent::getCurrentStateName() const{
-        return m_currentSequence->getName();
+        return m_currentAnimationClip->getName();
     }
    
     /**
-     * @brief get the current frome of the current active sequence
+     * @brief get the current frome of the current active clip
      * 
      * @return the current frame
      */
     Frame& AnimationComponent::getCurrentFrame() const{
-        return m_currentSequence->getCurrentFrame();
+        return m_currentAnimationClip->getCurrentFrame();
     }
 
     /**
@@ -73,16 +73,16 @@ namespace retronomicon::lib::core::component{
      */
     void AnimationComponent::update(float dt){        
         float leftover = dt;
-        // if current sequence is not the default and is finished, change it
+        // if current clip is not the default and is finished, change it
         // this will not change if the animation is manually controlled (move,run etc, because those are repeated)
         while (leftover > 0.0f){
-            leftover = m_currentSequence->update(dt);
-            if (m_currentSequence != m_defaultSequence && m_currentSequence->isFinished()){
-                if (m_sequenceQueue.empty()){
-                    m_currentSequence = m_defaultSequence;
+            leftover = m_currentAnimationClip->update(dt);
+            if (m_currentAnimationClip != m_defaultClip && m_currentAnimationClip->isFinished()){
+                if (m_animationClipsQueue.empty()){
+                    m_currentAnimationClip = m_defaultClip;
                 }else{
-                    m_sequenceQueue.pop();
-                    m_currentSequence = m_sequenceQueue.front();
+                    m_animationClipsQueue.pop();
+                    m_currentAnimationClip = m_animationClipsQueue.front();
                 }
             }            
         }
@@ -90,9 +90,9 @@ namespace retronomicon::lib::core::component{
 
 
     /**
-     * @brief insert sequence to sequence Queue
+     * @brief insert animation clip to the Queue
      */
-    void AnimationComponent::queueSequence(Sequence* sequence){
-        m_sequenceQueue.push(sequence);
+    void AnimationComponent::queueAnimationClip(AnimationClip* clip){
+        m_animationClipsQueue.push(clip);
     }
 }

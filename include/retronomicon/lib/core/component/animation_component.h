@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 #include <queue>
-#include "retronomicon/lib/graphic/animation/sequence.h"
+#include "retronomicon/lib/graphic/animation/animation_clip.h"
 #include "component.h"
 
 using namespace retronomicon::lib::math;
@@ -13,50 +13,50 @@ using namespace retronomicon::lib::graphic::animation;
  */
 namespace retronomicon::lib::core::component{
     /**
-     * @brief A class that represent a frame in the animation sequence (the source image from sprite sheet)
+     * @brief A class that represent a frame in the animation clip (the source image from sprite sheet)
      */
     class AnimationComponent : public Component {
         public:
             /**
-             * @brief Constructor. initiate with default animation sequence
+             * @brief Constructor. initiate with default animation clip
              * 
-             * @param defaultSequence the default animation sequence
+             * @param defaultClip the default animation clip
              */
-            AnimationComponent(Sequence* defaultSequence);
+            AnimationComponent(AnimationClip* defaultClip);
 
             /**
-             *  @brief add a sequence to this state.
+             *  @brief add a clip to this state.
              * 
-             * @param animationSequence the animation sequence that we'll be adding to the manager
+             * @param animationClip the animation clip that we'll be adding to the manager
              */
-            bool addSequence(Sequence* animationSequence);
+            bool addClip(AnimationClip* animationClip);
 
             /**
-             * @brief change the current sequence.
+             * @brief change the current clip.
              * 
-             * @param name the name of the animation sequence
+             * @param name the name of the animation clip
              */
-            void changeSequence(const string& name);
+            void changeClip(const string& name);
 
             /**
-             * @brief get the current active sequence
+             * @brief get the current active clip
              * 
-             * @return the current sequence
+             * @return the current clip
              */
-            Sequence* getCurrentSequence() const;
+            AnimationClip* getCurrentClip() const;
 
 
             /**
-             * @brief get the current frome of the current active sequence
+             * @brief get the current frome of the current active clip
              * 
              * @return the current frame
              */
-            Frame& getCurrentFrame() const;
+            Frame& getCurrentClip() const;
 
             /**
-             * @brief get the current active sequence name
+             * @brief get the current active clip name
              * 
-             * @return the current sequence name
+             * @return the current clip name
              */
             string getCurrentStateName() const;
 
@@ -69,13 +69,13 @@ namespace retronomicon::lib::core::component{
             void update(float dt) override;
 
             /**
-             * @brief insert sequence to sequence Queue
+             * @brief insert clip to clip Queue
              */
-            void queueSequence(Sequence* Sequence);
+            void queueAnimationClip(AnimationClip* clip);
         private:
-            unordered_map<string, Sequence*> m_sequences;
-            queue<Sequence*> m_sequenceQueue;
-            Sequence* m_currentSequence;
-            Sequence* m_defaultSequence;
+            unordered_map<string, AnimationClip*> m_animationClips;
+            queue<AnimationClip*> m_animationClipsQueue;
+            AnimationClip* m_currentClip;
+            AnimationClip* m_defaultClip;
     };
 }
