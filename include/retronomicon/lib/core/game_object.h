@@ -83,7 +83,7 @@ namespace retronomicon::lib::core{
         type_index typeId = type_index(typeid(T));
         auto it = components.find(typeId);
         if (it != components.end()) {
-            return static_cast<T*>(it->second.get());
+            return dynamic_cast<T*>(it->second.get());
         }
         return nullptr;
     }
