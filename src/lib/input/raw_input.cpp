@@ -22,7 +22,7 @@ namespace retronomicon::lib::input {
         // Keyboard state is updated automatically by SDL_GetKeyboardState
     }
 
-    const std::vector<SDL_Event>& RawInput::getEvents() const {
+    const vector<SDL_Event>& RawInput::getEvents() const {
         return events_;
     }
 
