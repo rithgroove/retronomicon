@@ -86,11 +86,11 @@ int main(int argc, char* argv[])
     Font * main_font = temp->loadFont("./asset/font/Code38-manaspace/manaspc.ttf","ManaSpace",16);
 
     vector<Frame>frames;
-    frames.push_back(Frame(0,0,64,64,0,"miho-standby",200.0));
-    frames.push_back(Frame(64,0,64,64,1,"miho-standby",200.0));
-    frames.push_back(Frame(128,0,64,64,2,"miho-standby",200.0));
-    frames.push_back(Frame(192,0,64,64,3,"miho-standby",200.0));
-    frames.push_back(Frame(256,0,64,64,4,"miho-standby",200.0));
+    frames.push_back(Frame(0,0,64,64,0,"miho-standby",250.0));
+    frames.push_back(Frame(64,0,64,64,1,"miho-standby",250.0));
+    frames.push_back(Frame(128,0,64,64,2,"miho-standby",250.0));
+    frames.push_back(Frame(192,0,64,64,3,"miho-standby",250.0));
+    frames.push_back(Frame(256,0,64,64,4,"miho-standby",250.0));
     AnimationClip* clip = new AnimationClip (frames, 5, "miho-standby", true);
 
     Scene* scene = new Scene("testing");
