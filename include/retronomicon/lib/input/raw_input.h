@@ -21,11 +21,11 @@ namespace retronomicon::lib::input {
             void clear(); // Clear stored events
 
         private:
-            vector<SDL_Event> events_;
-            const Uint8* keyboardState_;
-            int mouseX_;
-            int mouseY_;
-            Uint32 mouseButtons_;
+            vector<SDL_Event> m_events;
+            const Uint8* m_keyboardState;
+            int m_mouseX;
+            int m_mouseY;
+            Uint32 m_mouseButtons;
     };
 
 } // namespace retronomicon::lib::input

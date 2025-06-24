@@ -2,48 +2,49 @@
 
 namespace retronomicon::lib::input {
 
-    RawInput::RawInput()
-        : keyboardState_(SDL_GetKeyboardState(nullptr)),
-          mouseX_(0),
-          mouseY_(0),
-          mouseButtons_(0) {}
+    RawInput::RawInput(){
+        m_keyboardState = SDL_GetKeyboardState(nullptr);
+        m_mouseX = 0;
+        m_mouseY = 0;
+        m_mouseButtons = 0;
+    }
 
     void RawInput::poll() {
-        events_.clear();
+        m_events.clear();
 
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
-            events_.push_back(event);
+            m_events.push_back(event);
         }
 
         // Update mouse position and buttons
-        mouseButtons_ = SDL_GetMouseState(&mouseX_, &mouseY_);
+        m_mouseButtons = SDL_GetMouseState(&m_mouseX, &m_mouseY);
 
         // Keyboard state is updated automatically by SDL_GetKeyboardState
     }
 
     const vector<SDL_Event>& RawInput::getEvents() const {
-        return events_;
+        return m_events;
     }
 
     const Uint8* RawInput::getKeyboardState() const {
-        return keyboardState_;
+        return m_keyboardState;
     }
 
     int RawInput::getMouseX() const {
-        return mouseX_;
+        return m_mouseX;
     }
 
     int RawInput::getMouseY() const {
-        return mouseY_;
+        return m_mouseY;
     }
 
     Uint32 RawInput::getMouseButtons() const {
-        return mouseButtons_;
+        return m_mouseButtons;
     }
 
     void RawInput::clear() {
-        events_.clear();
+        m_events.clear();
     }
 
 } // namespace retronomicon::lib::input
