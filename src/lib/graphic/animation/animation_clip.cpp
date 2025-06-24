@@ -57,8 +57,8 @@ namespace retronomicon::lib::graphic::animation{
     float AnimationClip::update(float dt){
         float leftOver = dt;
         while (leftOver >0.0f){
-            Frame curFrame = m_frames[m_currentFrame];
-            leftOver = curFrame.update(leftOver);
+            Frame *curFrame = &m_frames[m_currentFrame];
+            leftOver = curFrame->update(leftOver);
             if (leftOver > 0.0f){
                 m_currentFrame++;
                 if (m_currentFrame >= m_frameCount){

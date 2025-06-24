@@ -1,5 +1,5 @@
 #include "retronomicon/lib/graphic/animation/frame.h"
-
+#include <iostream>
 /**
  * @brief The namespace for graphic utilities
  */
@@ -113,8 +113,12 @@ namespace retronomicon::lib::graphic::animation{
      * @return left over delta time
      */
     float Frame::update(float dt){
+        cout<<"\n"<<m_spentDuration<<endl;
         m_spentDuration += dt;
+        cout<<m_spentDuration<<"\n---------\n"<<endl;
+        
         if (m_spentDuration > m_duration){
+            cout<<"test"<<endl;
             float leftover =  m_spentDuration - m_duration; 
             this->reset();
             return leftover;

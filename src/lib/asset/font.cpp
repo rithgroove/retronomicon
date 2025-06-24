@@ -113,14 +113,7 @@ namespace retronomicon::lib::asset{
         // SDL_FillRect(surface, nullptr, brown);
         
         SDL_Rect textLocation = { horizontalPadding, verticalPadding, 0, 0 };
-        if (SDL_BlitSurface(textSurface, NULL, textBox, &textLocation) == 0){
-            printf("\nsuccess to blit surface");
-            fflush(stdout);
-        }else{
-            printf("\nfailed to blit surface");
-            fflush(stdout);
-        }
-
+        SDL_BlitSurface(textSurface, NULL, textBox, &textLocation);
         SDL_Texture* texture = SDL_CreateTextureFromSurface(m_renderer,textBox);
         SDL_FreeSurface(textSurface);
         SDL_FreeSurface(textBox);

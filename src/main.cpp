@@ -186,7 +186,7 @@ int main(int argc, char* argv[])
                     break;
                 default:
                     //SDL_Log("Window %d got unknown event %d\n", wEvent.window.windowID, wEvent.window.event);
-                    printf("default\n");
+                    // printf("default\n");
                     break;
             }
 
