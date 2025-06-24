@@ -26,7 +26,7 @@
 #include "retronomicon/lib/core/component/sprite_component.h"
 #include "retronomicon/lib/core/component/animation_component.h"
 #include "retronomicon/lib/core/scene.h"
-#include "retronomicon/lib/input/intput_state.h"
+#include "retronomicon/lib/input/input_state.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
 

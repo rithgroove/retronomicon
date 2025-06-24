@@ -7,6 +7,7 @@ using namespace std;
 namespace retronomicon::lib::input {
     class InputState {
         public:
+            InputState();
             void setAction(const string& name, bool active);
             void setAxis(const string& name, float value);
 

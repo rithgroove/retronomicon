@@ -2,6 +2,8 @@
 
 namespace retronomicon::lib::input {
 
+    InputState::InputState(){}
+    
     void InputState::setAction(const string& name, bool active) {
         actions_[name] = active;
     }
