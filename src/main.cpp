@@ -36,7 +36,7 @@ using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::graphic::animation;
 using namespace retronomicon::lib::math;
 
-InputState globalInputState;
+InputState *globalInputState = new InputState();
 
 static void die(const char *fmt, ...)
 {
