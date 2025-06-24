@@ -21,10 +21,12 @@
 #include "retronomicon/lib/core/game_object.h"
 #include "retronomicon/lib/core/system/render_system.h"
 #include "retronomicon/lib/core/system/animation_system.h"
+#include "retronomicon/lib/core/system/input_system.h"
 #include "retronomicon/lib/core/component/transform_component.h"
 #include "retronomicon/lib/core/component/sprite_component.h"
 #include "retronomicon/lib/core/component/animation_component.h"
 #include "retronomicon/lib/core/scene.h"
+#include "retronomicon/lib/input/intput_state.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
 
@@ -33,6 +35,8 @@
 using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::graphic::animation;
 using namespace retronomicon::lib::math;
+
+InputState globalInputState;
 
 static void die(const char *fmt, ...)
 {
@@ -91,6 +95,7 @@ int main(int argc, char* argv[])
     Scene* scene = new Scene("testing");
     scene->addSystem(new RenderSystem(ren));
     scene->addSystem(new AnimationSystem());
+    scene->addSystem( new InputSystem(globalInputState));
 
     GameObject* obj1 = scene->createGameObject("Miho");
     TransformComponent* objTransform = obj1->addComponent<TransformComponent>(450,300,0.0f,2.0f,2.0f);
