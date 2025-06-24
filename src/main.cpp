@@ -27,6 +27,7 @@
 #include "retronomicon/lib/core/component/animation_component.h"
 #include "retronomicon/lib/core/scene.h"
 #include "retronomicon/lib/input/input_state.h"
+#include "retronomicon/lib/input/raw_input.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
 
@@ -37,7 +38,7 @@ using namespace retronomicon::lib::graphic::animation;
 using namespace retronomicon::lib::math;
 
 InputState *globalInputState = new InputState();
-
+RawInput *rawInput = new RawInput();
 static void die(const char *fmt, ...)
 {
     va_list ap;
@@ -116,7 +117,7 @@ int main(int argc, char* argv[])
     std::cout <<"\nmain loop"<<std::endl;
     SDL_Rect fillRect = { SCREEN_WIDTH  / 4, SCREEN_HEIGHT / 4,
                               SCREEN_WIDTH/2, SCREEN_HEIGHT / 2 };
-    SDL_Rect fillrect2= { 5, 280, 630, 190 };
+    SDL_Rect fillrect2= { 5, 50, 630, 190 };
 
     Uint64 currentTime = SDL_GetPerformanceCounter();
     Uint64 lastTime = 0;
@@ -127,46 +128,52 @@ int main(int argc, char* argv[])
         currentTime = SDL_GetPerformanceCounter();
         deltaTime = static_cast<double>(currentTime - lastTime) / SDL_GetPerformanceFrequency();
         deltaTime *= 1000;
-        std::cout <<"\nmasuk while\n"<<std::endl;
 
         SDL_SetRenderDrawColor(ren, 78, 215, 241, 255);
         SDL_RenderClear(ren);
 
-        // Draw and animate
         SDL_SetRenderDrawColor(ren, 111, 230, 252, 255);
         SDL_RenderFillRect(ren, &fillRect);
-
-        std::cout <<"\nmasuk render text\n"<<std::endl;
-        SDL_Texture* texture = main_font->generateTexture( "Hello Dum dum! ",5,5,630,190,fgC1,bgC1);
-        std::cout <<"\ndone render text1\n"<<std::endl;
-        SDL_RenderCopy(ren,texture, NULL,&fillrect2);
-        std::cout <<"\ndone render text2\n"<<std::endl;
-        SDL_DestroyTexture(texture);
-
-        std::cout <<"\ndone render text3\n"<<std::endl;
 
         scene->update(deltaTime);
         scene->render();
 
+        // Draw and animate
+        SDL_Texture* texture = main_font->generateTexture( "Hello Dum dum! ",5,5,630,190,fgC1,bgC1);
+        SDL_RenderCopy(ren,texture, NULL,&fillrect2);
+        SDL_DestroyTexture(texture);
+
+
+
         window.present();
 
 
-        SDL_Event wEvent;   
 
-        while(SDL_PollEvent(&wEvent)) {
-            printf("masuk while2\n");
+        rawInput->poll();
+
+        const auto& events = rawInput->getEvents();
+        const Uint8* keys = rawInput->getKeyboardState();
+
+        if (keys[SDL_SCANCODE_ESCAPE]) {
+            // Quit or pause
+            eQuit = true; 
+            printf("escape\n");
             fflush(stdout);
-            switch (wEvent.type) {
+            break;
+        }
+
+        for (const SDL_Event& e : events) {
+            switch (e.type) {
                 case SDL_QUIT:
                     eQuit = true; 
                     printf("sdl quit\n");
                     fflush(stdout);
                     break;
-                case SDL_KEYDOWN:
-                    eQuit = true; 
-                    printf("sdl keydown\n");
-                    fflush(stdout);
-                    break;
+                // case SDL_KEYDOWN:
+                    // eQuit = true; 
+                    // printf("sdl keydown\n");
+                    // fflush(stdout);
+                    // break;
                 case SDL_MOUSEBUTTONDOWN:   
                     eQuit = true; 
                     printf("mouse down\n");
@@ -182,8 +189,30 @@ int main(int argc, char* argv[])
                     printf("default\n");
                     break;
             }
-        }
-        SDL_Delay(200); // Keep < 500 [ms]
+
+        }   
+
+        // while(SDL_PollEvent(&wEvent)) {
+        //     printf("masuk while2\n");
+        //     fflush(stdout);
+        //     switch (wEvent.type) {
+        //         case SDL_MOUSEBUTTONDOWN:   
+        //             eQuit = true; 
+        //             printf("mouse down\n");
+        //             fflush(stdout);
+        //             break;
+        //         case SDL_WINDOWEVENT_CLOSE: 
+        //             eQuit = true; 
+        //             printf("windows closed\n");
+        //             fflush(stdout);
+        //             break;
+        //         default:
+        //             //SDL_Log("Window %d got unknown event %d\n", wEvent.window.windowID, wEvent.window.event);
+        //             printf("default\n");
+        //             break;
+        //     }
+        // }
+        // SDL_Delay(200); // Keep < 500 [ms]
     }
     IMG_Quit();
     TTF_Quit();

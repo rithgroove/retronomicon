@@ -9,7 +9,6 @@ namespace retronomicon::lib::core::system{
 
     void InputSystem::update(float dt, vector<GameObject*>& objects) {
         for (GameObject* obj : objects) {
-            // render logic
             obj->update(dt);
 
 
