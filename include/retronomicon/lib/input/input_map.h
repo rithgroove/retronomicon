@@ -1,25 +1,32 @@
 #pragma once
+
 #include <unordered_map>
+#include <vector>
 #include <string>
 #include <SDL.h>
 
+#include "retronomicon/lib/input/input_state.h"
 using namespace std;
 namespace retronomicon::lib::input {
 
     class InputMap {
         public:
-            void bindKey(SDL_Scancode key, const string& actionName);
-            void bindAxis(const string& axisName, SDL_Scancode negative, SDL_Scancode positive);
+            InputMap();
+            void bindAction(SDL_Scancode key, const string& actionName);
+            void bindAxis(SDL_Scancode key, const string& axisName, float weight);
 
-            string getAction(SDL_Scancode key) const;
-            float getAxisValue(const string& axisName, const Uint8* keyboardState) const;
+            void fill(InputState* state, const Uint8* keyboardState) const;
 
-            const unordered_map<SDL_Scancode, string>& getKeyBindings() const;
-            const unordered_map<string, pair<SDL_Scancode, SDL_Scancode>>& getAxisBindings() const;
+            const unordered_map<SDL_Scancode, string>& getActionBindings() const;
+            const unordered_map<string, vector<pair<SDL_Scancode, float>>>& getAxisBindings() const;
 
         private:
-            unordered_map<SDL_Scancode, string> keyBindings_;
-            unordered_map<string, pair<SDL_Scancode, SDL_Scancode>> axisBindings_;
+            unordered_map<SDL_Scancode, string> m_actionBindings;
+            unordered_map<string, vector<pair<SDL_Scancode, float>>> m_axisBindings;
     };
 
+    template <typename T>
+    const T& clamp(const T& v, const T& lo, const T& hi) {
+        return (v < lo) ? lo : (hi < v) ? hi : v;
+    }
 } // namespace retronomicon::lib::input

@@ -27,6 +27,7 @@
 #include "retronomicon/lib/core/component/animation_component.h"
 #include "retronomicon/lib/core/scene.h"
 #include "retronomicon/lib/input/input_state.h"
+#include "retronomicon/lib/input/input_map.h"
 #include "retronomicon/lib/input/raw_input.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
@@ -38,6 +39,7 @@ using namespace retronomicon::lib::graphic::animation;
 using namespace retronomicon::lib::math;
 
 InputState *globalInputState = new InputState();
+
 RawInput *rawInput = new RawInput();
 static void die(const char *fmt, ...)
 {
@@ -50,6 +52,16 @@ static void die(const char *fmt, ...)
 
 int main(int argc, char* argv[])
 {
+
+    InputMap *inputMap = new InputMap();
+    inputMap->bindAction(SDL_SCANCODE_SPACE, "jump");
+    inputMap->bindAction(SDL_SCANCODE_RETURN, "interact");
+
+    inputMap->bindAxis(SDL_SCANCODE_A, "move_x", -1.0f);
+    inputMap->bindAxis(SDL_SCANCODE_D, "move_x", 1.0f);
+    inputMap->bindAxis(SDL_SCANCODE_W, "move_y", -1.0f);
+    inputMap->bindAxis(SDL_SCANCODE_S, "move_y", 1.0f);
+
     // Initialize SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         die("SDLInit Error: %s\n", SDL_GetError());
@@ -154,6 +166,16 @@ int main(int argc, char* argv[])
         const auto& events = rawInput->getEvents();
         const Uint8* keys = rawInput->getKeyboardState();
 
+        inputMap->fill(globalInputState, rawInput->getKeyboardState());
+
+        for (const auto& it : globalInputState->getActions()) {
+            std::cout << it.first << ": " << (it.second ? "pressed" : "released") << endl;
+        }
+
+        for (const auto& it : globalInputState->getAxes()) {
+            std::cout << it.first << ": " << it.second << endl;
+        }
+
         if (keys[SDL_SCANCODE_ESCAPE]) {
             // Quit or pause
             eQuit = true; 
@@ -192,27 +214,6 @@ int main(int argc, char* argv[])
 
         }   
 
-        // while(SDL_PollEvent(&wEvent)) {
-        //     printf("masuk while2\n");
-        //     fflush(stdout);
-        //     switch (wEvent.type) {
-        //         case SDL_MOUSEBUTTONDOWN:   
-        //             eQuit = true; 
-        //             printf("mouse down\n");
-        //             fflush(stdout);
-        //             break;
-        //         case SDL_WINDOWEVENT_CLOSE: 
-        //             eQuit = true; 
-        //             printf("windows closed\n");
-        //             fflush(stdout);
-        //             break;
-        //         default:
-        //             //SDL_Log("Window %d got unknown event %d\n", wEvent.window.windowID, wEvent.window.event);
-        //             printf("default\n");
-        //             break;
-        //     }
-        // }
-        // SDL_Delay(200); // Keep < 500 [ms]
     }
     IMG_Quit();
     TTF_Quit();
