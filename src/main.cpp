@@ -114,12 +114,12 @@ int main(int argc, char* argv[])
     TransformComponent* objTransform = obj1->addComponent<TransformComponent>(450,300,0.0f,2.0f,2.0f);
     SpriteComponent *obj1Sprite = obj1->addComponent<SpriteComponent>(miho);
     AnimationComponent *obj1Sequence = obj1->addComponent<AnimationComponent>(clip);
-    objTransform->setRotation(45.0f);
+    objTransform->setRotation(0.0f);
     obj1->start();
 
     GameObject* obj2 = scene->createGameObject("Building");
     TransformComponent* obj2Transform = obj2->addComponent<TransformComponent>(50,50,0.0f,1.0f,1.0f);
-    obj2Transform->setRotation(90.0f);
+    obj2Transform->setRotation(0.0f);
     SpriteComponent *obj2Sprite = obj2->addComponent<SpriteComponent>(test);
     obj2->start();
 
