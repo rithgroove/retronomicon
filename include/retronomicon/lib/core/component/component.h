@@ -5,7 +5,7 @@
  */
 namespace retronomicon::lib::core{
     // Forward declaration
-    class GameObject;
+    class Entity;
     
     namespace component{
         /**
@@ -46,17 +46,17 @@ namespace retronomicon::lib::core{
                  * 
                  * @param owner the game object that owns this.
                  */
-                void setOwner(GameObject* owner) { this->owner = owner; }
+                void setOwner(Entity* owner) { this->owner = owner; }
 
                 /**
                  * @brief a method to get the owner of this component
                  * 
                  * @return the game object that owns this component.
                  */
-                GameObject* getOwner() const { return owner; }
+                Entity* getOwner() const { return owner; }
 
             protected:
-                GameObject* owner = nullptr;
+                Entity* owner = nullptr;
         };
     }
 }

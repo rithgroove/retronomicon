@@ -18,29 +18,29 @@ namespace retronomicon::lib::core{
             /**
              * @brief empty constructor 
              */
-            Entity(const string& name);
+            Entity() = default;
 
             /**
              * @brief default destructor 
              */
-            ~Entity();
+            // ~Entity();
 
             /**
              * @brief start function (used to initialize stuff)
              */
-            void start();
+            virtual void start();
 
             /**
              * @brief method to update the component
              * 
              * @param dt time interval since last update
              */
-            void update(float dt);
+            virtual void update(float dt);
 
             /**
              * @brief a method to render the component if any
              */
-            void render(SDL_Renderer* renderer);
+            virtual void render(SDL_Renderer* renderer);
 
 
             /**
@@ -59,9 +59,8 @@ namespace retronomicon::lib::core{
             template <typename T>
             T* getComponent();
 
-        private:
-            unordered_map<type_index, unique_ptr<Component>> components;
-            string m_name;
+        protected:
+            unordered_map<type_index, unique_ptr<Component>> m_components;
     };
 
     // ---------- Template definitions ----------
@@ -69,10 +68,10 @@ namespace retronomicon::lib::core{
     template <typename T, typename... Args>
     T* Entity::addComponent(Args&&... args) {
         type_index typeId = type_index(typeid(T));
-        if (components.count(typeId) == 0) {
+        if (m_components.count(typeId) == 0) {
             T* rawPtr = new T(forward<Args>(args)...);
             rawPtr->setOwner(this);
-            components[typeId] = unique_ptr<Component>(rawPtr);
+            m_components[typeId] = unique_ptr<Component>(rawPtr);
             return rawPtr;
         }
         return nullptr;
@@ -81,8 +80,8 @@ namespace retronomicon::lib::core{
     template <typename T>
     T* Entity::getComponent() {
         type_index typeId = type_index(typeid(T));
-        auto it = components.find(typeId);
-        if (it != components.end()) {
+        auto it = m_components.find(typeId);
+        if (it != m_components.end()) {
             return dynamic_cast<T*>(it->second.get());
         }
         return nullptr;
