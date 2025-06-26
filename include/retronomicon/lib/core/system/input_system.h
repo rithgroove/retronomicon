@@ -15,13 +15,11 @@ namespace retronomicon::lib::core::system {
 
 class InputSystem : public System {
     public:
-        InputSystem(InputState* state);
+        InputSystem();
         void update(float dt, vector<GameObject*>& objects)  override;
 
     private:
         InputState* m_inputState;
-        RawInput *m_rawInput;
-        InputMap *m_inputMap;
     };
 
 } // namespace retronomicon::lib::core::system
