@@ -4,13 +4,14 @@
 #include <memory>
 #include <vector>
 #include "game_object.h"
+#include "retronomicon/lib/core/entity.h"
 #include "retronomicon/lib/core/system/system.h"
 
 using namespace std;
 using namespace retronomicon::lib::core::system;
 namespace retronomicon::lib::core {
 
-    class Scene {
+    class Scene : public Entity {
     public:
         Scene(const std::string& name);
         ~Scene();
