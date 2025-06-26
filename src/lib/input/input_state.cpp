@@ -43,7 +43,6 @@ namespace retronomicon::lib::input {
     void updateFromSDL(){
         m_rawInput->clear();
         m_rawInput->poll();
-
         const auto& events = m_rawInput->getEvents();
         const Uint8* keys = m_rawInput->getKeyboardState();
         m_inputMap->fill(this, keys);
