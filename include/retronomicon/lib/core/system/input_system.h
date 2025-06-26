@@ -20,6 +20,8 @@ class InputSystem : public System {
 
     private:
         InputState* m_inputState;
+        RawInput *m_rawInput;
+        InputMap *m_inputMap;
     };
 
 } // namespace retronomicon::lib::core::system
