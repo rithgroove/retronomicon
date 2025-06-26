@@ -16,7 +16,7 @@ namespace retronomicon::lib::input {
             float getAxisValue(const string& name) const;
 
             void clear();
-
+            void updateFromSDL();
             const unordered_map<string, bool>& getActions() const;
             const unordered_map<string, float>& getAxes() const;
 

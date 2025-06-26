@@ -40,4 +40,20 @@ namespace retronomicon::lib::input {
         return m_axes;
     }
 
+    void updateFromSDL(){
+        m_rawInput->clear();
+        m_rawInput->poll();
+
+        const auto& events = m_rawInput->getEvents();
+        const Uint8* keys = m_rawInput->getKeyboardState();
+        m_inputMap->fill(this, keys);
+
+        for (const auto& it : m_actions) {
+            std::cout << it.first << ": " << (it.second ? "pressed" : "released") << endl;
+        }
+
+        for (const auto& it : m_axes) {
+            std::cout << it.first << ": " << it.second << endl;
+        }
+    }
 } // namespace retronomicon::lib::input
