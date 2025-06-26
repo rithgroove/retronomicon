@@ -13,6 +13,7 @@ namespace retronomicon::lib::core {
 
     class Scene : public Entity {
     public:
+        
         Scene(const std::string& name);
         ~Scene();
 
