@@ -7,6 +7,7 @@
 
 // #include <SDL.h>
 #include <stdio.h>
+#include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,9 +27,6 @@
 #include "retronomicon/lib/core/component/sprite_component.h"
 #include "retronomicon/lib/core/component/animation_component.h"
 #include "retronomicon/lib/core/scene.h"
-#include "retronomicon/lib/input/input_state.h"
-#include "retronomicon/lib/input/input_map.h"
-#include "retronomicon/lib/input/raw_input.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
 
@@ -38,9 +36,7 @@ using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::graphic::animation;
 using namespace retronomicon::lib::math;
 
-InputState *globalInputState = new InputState();
 
-RawInput *rawInput = new RawInput();
 static void die(const char *fmt, ...)
 {
     va_list ap;
@@ -52,16 +48,6 @@ static void die(const char *fmt, ...)
 
 int main(int argc, char* argv[])
 {
-
-    InputMap *inputMap = new InputMap();
-    inputMap->bindAction(SDL_SCANCODE_SPACE, "jump");
-    inputMap->bindAction(SDL_SCANCODE_RETURN, "interact");
-
-    inputMap->bindAxis(SDL_SCANCODE_A, "move_x", -1.0f);
-    inputMap->bindAxis(SDL_SCANCODE_D, "move_x", 1.0f);
-    inputMap->bindAxis(SDL_SCANCODE_W, "move_y", -1.0f);
-    inputMap->bindAxis(SDL_SCANCODE_S, "move_y", 1.0f);
-
     // Initialize SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         die("SDLInit Error: %s\n", SDL_GetError());
@@ -106,9 +92,10 @@ int main(int argc, char* argv[])
     AnimationClip* clip = new AnimationClip (frames, 5, "miho-standby", true);
 
     Scene* scene = new Scene("testing");
-    scene->addSystem(new RenderSystem(ren));
+    InputSystem* input_system = new InputSystem();
+    scene->addSystem(input_system);
     scene->addSystem(new AnimationSystem());
-    scene->addSystem( new InputSystem(globalInputState));
+    scene->addSystem(new RenderSystem(ren));
 
     GameObject* obj1 = scene->createGameObject("Miho");
     TransformComponent* objTransform = obj1->addComponent<TransformComponent>(450,300,0.0f,2.0f,2.0f);
@@ -154,29 +141,9 @@ int main(int argc, char* argv[])
         SDL_Texture* texture = main_font->generateTexture( "Hello Dum dum! ",5,5,630,190,fgC1,bgC1);
         SDL_RenderCopy(ren,texture, NULL,&fillrect2);
         SDL_DestroyTexture(texture);
-
-
-
         window.present();
 
-
-
-        rawInput->poll();
-
-        const auto& events = rawInput->getEvents();
-        const Uint8* keys = rawInput->getKeyboardState();
-
-        inputMap->fill(globalInputState, rawInput->getKeyboardState());
-
-        for (const auto& it : globalInputState->getActions()) {
-            std::cout << it.first << ": " << (it.second ? "pressed" : "released") << endl;
-        }
-
-        for (const auto& it : globalInputState->getAxes()) {
-            std::cout << it.first << ": " << it.second << endl;
-        }
-
-        if (keys[SDL_SCANCODE_ESCAPE]) {
+        if (input_system->getInputStateForKey("quit")) {
             // Quit or pause
             eQuit = true; 
             printf("escape\n");
@@ -184,35 +151,7 @@ int main(int argc, char* argv[])
             break;
         }
 
-        for (const SDL_Event& e : events) {
-            switch (e.type) {
-                case SDL_QUIT:
-                    eQuit = true; 
-                    printf("sdl quit\n");
-                    fflush(stdout);
-                    break;
-                // case SDL_KEYDOWN:
-                    // eQuit = true; 
-                    // printf("sdl keydown\n");
-                    // fflush(stdout);
-                    // break;
-                case SDL_MOUSEBUTTONDOWN:   
-                    eQuit = true; 
-                    printf("mouse down\n");
-                    fflush(stdout);
-                    break;
-                case SDL_WINDOWEVENT_CLOSE: 
-                    eQuit = true; 
-                    printf("windows closed\n");
-                    fflush(stdout);
-                    break;
-                default:
-                    //SDL_Log("Window %d got unknown event %d\n", wEvent.window.windowID, wEvent.window.event);
-                    // printf("default\n");
-                    break;
-            }
-
-        }   
+       
 
     }
     IMG_Quit();

@@ -10,28 +10,28 @@ namespace retronomicon::lib::input {
         m_axisBindings[axisName].emplace_back(key, weight);
     }
 
-    void InputMap::fill(InputState* state, const Uint8* keyboardState) const {
-        // Clear old state
-        state->clear();
+    // void InputMap::fill(InputState* state, const Uint8* keyboardState) {
+    //     // Clear old state
+    //     state->clear();
 
-        // Set actions
-        for (const auto& [key, actionName] : m_actionBindings) {
-            bool isPressed = keyboardState[key];
-            state->setAction(actionName, isPressed);
-        }
+    //     // Set actions
+    //     for (const auto& it : m_actionBindings) {
+    //         bool isPressed = keyboardState[it.first];
+    //         state->setAction(it.second, isPressed);
+    //     }
 
-        // Set axes
-        for (const auto& [axisName, pairs] : m_axisBindings) {
-            float value = 0.0f;
-            for (const auto& [key, weight] : pairs) {
-                if (keyboardState[key]) {
-                    value += weight;
-                }
-            }
-            value = clamp(value, -1.0f, 1.0f);
-            state->setAxis(axisName, value);
-        }
-    }
+    //     // Set axes
+    //     for (const auto& it : m_axisBindings) {
+    //         float value = 0.0f;
+    //         for (const auto& it2 : it.second) {
+    //             if (keyboardState[it2.first]) {
+    //                 value += it2.second;
+    //             }
+    //         }
+    //         value = clamp(value, -1.0f, 1.0f);
+    //         state->setAxis(it.first, value);
+    //     }
+    // }
 
     const unordered_map<SDL_Scancode, string>& InputMap::getActionBindings() const {
         return m_actionBindings;

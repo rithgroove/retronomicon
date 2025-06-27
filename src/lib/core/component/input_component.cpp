@@ -25,4 +25,7 @@ namespace retronomicon::lib::core::component {
         for (auto& it : m_axes) it.second = 0.0f;
     }
 
+    void InputComponent::update(float dt) {
+    }
+
 } // namespace retronomicon::lib::core::component

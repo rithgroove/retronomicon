@@ -1,10 +1,10 @@
 #pragma once
 #include <unordered_map>
 #include <string>
-
+#include "component.h"
 namespace retronomicon::lib::core::component {
 
-    class InputComponent {
+    class InputComponent : public Component{
         public:
             // Accessors
             bool isActionActive(const std::string& name) const;
@@ -14,6 +14,7 @@ namespace retronomicon::lib::core::component {
             void setAction(const std::string& name, bool active);
             void setAxis(const std::string& name, float value);
             void clear();
+            void update(float dt) override;
 
         private:
             std::unordered_map<std::string, bool> m_actions;
