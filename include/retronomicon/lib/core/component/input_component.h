@@ -1,27 +1,23 @@
+// InputComponent.hpp
 #pragma once
-#include <unordered_map>
-#include <string>
 #include "component.h"
-namespace retronomicon::lib::core::component {
+#include "retronomicon/lib/input/input_state.h"   //  your global/hardware state wrapper
 
-    class InputComponent : public Component{
+/**
+ * Abstract base for all input‑intent components.
+ *  - Holds no concrete data.
+ *  - Defines the per‑frame life‑cycle contract.
+ */
+using namespace retronomicon::lib::input;
+namespace retronomicon::lib::core::component{
+    class InputComponent : public Component {
         public:
-            // Accessors
-            bool isActionActive(const std::string& name) const;
-            float getAxis(const std::string& name) const;
+            virtual ~InputComponent() = default;
 
-            // Modifiers
-            void setAction(const std::string& name, bool active);
-            void setAxis(const std::string& name, float value);
-            void clear();
-            void update(float dt) override;
+            /** Called once at frame start (reset transient flags). */
+            virtual void beginFrame() = 0;
 
-        private:
-            std::unordered_map<std::string, bool> m_actions;
-            std::unordered_map<std::string, float> m_axes;
-
-            // Grant friend access to systems or ECS if necessary
-            //friend class retronomicon::lib::core::system::InputSystem;
-    };
-
-} // namespace retronomicon::lib::core::component
+            /** Feed hardware‑level input for this frame. */
+            virtual void updateFromState(const InputState& state, float dt) = 0;
+    };    
+}
