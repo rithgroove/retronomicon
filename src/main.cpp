@@ -7,6 +7,7 @@
 
 // #include <SDL.h>
 #include <stdio.h>
+#include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
@@ -26,9 +27,6 @@
 #include "retronomicon/lib/core/component/sprite_component.h"
 #include "retronomicon/lib/core/component/animation_component.h"
 #include "retronomicon/lib/core/scene.h"
-#include "retronomicon/lib/input/input_state.h"
-#include "retronomicon/lib/input/input_map.h"
-#include "retronomicon/lib/input/raw_input.h"
 
 // #include "retronomicon.lib.asset.asset_manager.h"
 
@@ -38,7 +36,6 @@ using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::graphic::animation;
 using namespace retronomicon::lib::math;
 
-InputState *globalInputState = new InputState();
 
 static void die(const char *fmt, ...)
 {
@@ -95,7 +92,8 @@ int main(int argc, char* argv[])
     AnimationClip* clip = new AnimationClip (frames, 5, "miho-standby", true);
 
     Scene* scene = new Scene("testing");
-    scene->addSystem(new InputSystem(globalInputState));
+    InputSystem* input_system = new InputSystem();
+    scene->addSystem(input_system);
     scene->addSystem(new AnimationSystem());
     scene->addSystem(new RenderSystem(ren));
 
@@ -143,12 +141,9 @@ int main(int argc, char* argv[])
         SDL_Texture* texture = main_font->generateTexture( "Hello Dum dum! ",5,5,630,190,fgC1,bgC1);
         SDL_RenderCopy(ren,texture, NULL,&fillrect2);
         SDL_DestroyTexture(texture);
-
-
-
         window.present();
 
-        if (globalInputState.isActionActive("quit")) {
+        if (input_system->getInputStateForKey("quit")) {
             // Quit or pause
             eQuit = true; 
             printf("escape\n");

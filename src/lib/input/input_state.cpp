@@ -40,12 +40,32 @@ namespace retronomicon::lib::input {
         return m_axes;
     }
 
-    void updateFromSDL(){
+    void InputState::updateFromSDL(){
         m_rawInput->clear();
         m_rawInput->poll();
         const auto& events = m_rawInput->getEvents();
         const Uint8* keys = m_rawInput->getKeyboardState();
-        m_inputMap->fill(this, keys);
+        this->clear();
+
+
+        // Set actions
+        for (const auto& it : m_inputMap->getActionBindings()) {
+            bool isPressed = keys[it.first];
+            this->setAction(it.second, isPressed);
+        }
+
+        // Set axes
+        for (const auto& it : m_inputMap->getAxisBindings()) {
+            float value = 0.0f;
+            for (const auto& it2 : it.second) {
+                if (keys[it2.first]) {
+                    value += it2.second;
+                }
+            }
+            value = clamp(value, -1.0f, 1.0f);
+            this->setAxis(it.first, value);
+        }
+
 
         for (const auto& it : m_actions) {
             std::cout << it.first << ": " << (it.second ? "pressed" : "released") << endl;

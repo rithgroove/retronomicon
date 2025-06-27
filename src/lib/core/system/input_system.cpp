@@ -9,8 +9,8 @@ namespace retronomicon::lib::core::system{
         inputMap->bindAction(SDL_SCANCODE_SPACE, "jump");
         inputMap->bindAction(SDL_SCANCODE_RETURN, "interact");
         inputMap->bindAction(SDL_SCANCODE_ESCAPE,"quit");
-        inputMap->bindAction(SDL_WINDOWEVENT_CLOSE,"quit");
-        inputMap->bindAction(SDL_QUIT,"quit");
+        // inputMap->bindAction(SDL_WINDOWEVENT_CLOSE,"quit");
+        // inputMap->bindAction(SDL_QUIT,"quit");
 
 
         inputMap->bindAxis(SDL_SCANCODE_A, "move_x", -1.0f);
@@ -18,7 +18,7 @@ namespace retronomicon::lib::core::system{
         inputMap->bindAxis(SDL_SCANCODE_W, "move_y", -1.0f);
         inputMap->bindAxis(SDL_SCANCODE_S, "move_y", 1.0f);
 
-        m_inputState = m_inputState(rawInput,inputMap);
+        m_inputState = new InputState(rawInput,inputMap);
 
         // If m_gameObjects should be provided externally, consider refactoring the constructor
     }
@@ -30,9 +30,12 @@ namespace retronomicon::lib::core::system{
             if (!input) continue;
             input->update(dt);
         }
-
-
     }
+
+    bool InputSystem::getInputStateForKey(const string& key){
+        return  m_inputState->isActionActive(key);
+    }
+
 }
 
 

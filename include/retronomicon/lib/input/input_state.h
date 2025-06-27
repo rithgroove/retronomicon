@@ -1,11 +1,15 @@
 #pragma once
 #include <unordered_map>
+#include <stdio.h>
 #include <string>
 #include "raw_input.h"
 #include "input_map.h"
+#include <iostream>
 using namespace std;
 
 namespace retronomicon::lib::input {
+
+    class InputMap;
     class InputState {
         public:
             InputState(RawInput* rawInput, InputMap* inputMap);
@@ -27,4 +31,8 @@ namespace retronomicon::lib::input {
             InputMap* m_inputMap;
     };
 
+    template <typename T>
+    const T& clamp(const T& v, const T& lo, const T& hi) {
+        return (v < lo) ? lo : (hi < v) ? hi : v;
+    }
 } // namespace retronomicon::lib::input
