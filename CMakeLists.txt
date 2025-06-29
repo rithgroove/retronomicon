@@ -11,11 +11,23 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(external/SDL2)
 add_subdirectory(external/SDL2_ttf)
 add_subdirectory(external/SDL2_image)
+#add_subdirectory(external/lua-5.3.6)
 add_subdirectory(external/sol2)
 include_directories(external/SDL2/include)
 include_directories(external/SDL2_ttf/include)
 include_directories(external/SDL2_image/include)
+include_directories(external/lua-5.3.6/src)
 include_directories(external/sol2/include)
+
+
+file(GLOB LUA_SRC
+    external/lua-5.3.6/src/*.c
+)
+
+
+add_library(lua_static STATIC ${LUA_SRC})
+
+
 
 # Add header search path
 include_directories(include)
@@ -28,15 +40,19 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
     include/*.h
 )
 
+
+
 # Define executable
 add_executable(retronomicon ${SOURCES})
 #find_package(PNG REQUIRED)
 #include_directories(${PNG_INCLUDE_DIR})
 
+
 # Link SDL2 statically
 target_link_libraries(retronomicon SDL2)
 target_link_libraries(retronomicon SDL2_ttf)
 target_link_libraries(retronomicon SDL2_image)
+target_link_libraries(retronomicon lua_static)
 target_link_libraries(retronomicon sol2)
 #target_link_libraries(retronomicon ${PNG_LIBRARY})
 

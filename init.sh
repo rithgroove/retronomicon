@@ -31,6 +31,12 @@ cd ..
 #cd ./nlohmann/json
 #cd ../..
 
+curl -R -O https://www.lua.org/ftp/lua-5.3.6.tar.gz
+tar zxf lua-5.3.6.tar.gz
+cd lua-5.3.6
+cd ..
+
+
 
 
 
