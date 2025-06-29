@@ -28,7 +28,6 @@ echo cloning Sol2
 git git clone --recursive https://github.com/ThePhD/sol2
 cd ./sol2
 #checkou v3.2.3 (cannot pull branch because it's a tag)
-git checkout v2.3.0
 cd ..
 
 #echo cloning nlohmann/json
