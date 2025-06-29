@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <vector>
+#include <sol/sol.hpp>
+
 #include "retronomicon/lib/asset/raw_image.h"
 #include "retronomicon/lib/asset/asset_manager.h"
 #include "retronomicon/lib/asset/font.h"
@@ -48,6 +50,14 @@ static void die(const char *fmt, ...)
 
 int main(int argc, char* argv[])
 {
+
+    sol::state lua;
+    lua.open_libraries(sol::lib::base);
+
+    lua.script("print('Hello from Lua!')");
+    return 0;
+
+
     // Initialize SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         die("SDLInit Error: %s\n", SDL_GetError());
