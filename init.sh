@@ -19,10 +19,27 @@ git clone -b release-2.8.x git@github.com:libsdl-org/SDL_image.git SDL2_image
 cd ./SDL2_image
 cd ..
 
+echo cloning optional lib 
+git git clone https://github.com/TartanLlama/optional.git
+cd ./optional
+cd ..
+
+echo cloning Sol2
+git git clone --recursive https://github.com/ThePhD/sol2
+cd ./sol2
+#checkou v3.2.3 (cannot pull branch because it's a tag)
+cd ..
+
 #echo cloning nlohmann/json
 #git clone git@github.com:nlohmann/json.git nlohmann/json
 #cd ./nlohmann/json
 #cd ../..
+
+curl -R -O https://www.lua.org/ftp/lua-5.3.6.tar.gz
+tar zxf lua-5.3.6.tar.gz
+cd lua-5.3.6
+cd ..
+
 
 
 
