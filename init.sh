@@ -19,11 +19,16 @@ git clone -b release-2.8.x git@github.com:libsdl-org/SDL_image.git SDL2_image
 cd ./SDL2_image
 cd ..
 
+echo cloning optional lib 
+git git clone https://github.com/TartanLlama/optional.git
+cd ./optional
+cd ..
+
 echo cloning Sol2
 git git clone --recursive https://github.com/ThePhD/sol2
 cd ./sol2
 #checkou v3.2.3 (cannot pull branch because it's a tag)
-git checkout v3.2.3 
+git checkout v2.3.0
 cd ..
 
 #echo cloning nlohmann/json

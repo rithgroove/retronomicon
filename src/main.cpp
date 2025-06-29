@@ -55,7 +55,6 @@ int main(int argc, char* argv[])
     lua.open_libraries(sol::lib::base);
 
     lua.script("print('Hello from Lua!')");
-    return 0;
 
 
     // Initialize SDL
