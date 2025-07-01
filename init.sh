@@ -40,7 +40,7 @@ tar zxf lua-5.3.6.tar.gz
 cd lua-5.3.6
 cd ..
 
-
+sudo apt install python3-dev
 
 
 
