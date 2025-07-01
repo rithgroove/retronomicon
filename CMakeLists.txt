@@ -17,6 +17,8 @@ include_directories(external/optional/include)
 include_directories(external/sol2/include)
 include_directories(external)# or adjust path to match your sol2 structure
 
+find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+
 # Lua static library
 file(GLOB LUA_SRC
     external/lua-5.3.6/src/*.c
@@ -50,6 +52,7 @@ target_include_directories(retronomicon
 )
 
 
+target_include_directories(retronomicon PRIVATE ${Python3_INCLUDE_DIRS})
 
 # Link libraries
 target_link_libraries(retronomicon
@@ -58,6 +61,7 @@ target_link_libraries(retronomicon
 )
 target_link_libraries(retronomicon PRIVATE lua_static)
 
+target_link_libraries(retronomicon PRIVATE ${Python3_LIBRARIES})
 # Windows-specific: disable SDL's main() override
 if (WIN32)
     target_compile_definitions(retronomicon PRIVATE SDL_MAIN_HANDLED)

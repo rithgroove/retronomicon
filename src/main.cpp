@@ -13,6 +13,7 @@
 #include <string.h>
 #include <vector>
 #include <sol/sol.hpp>
+#include <Python.h>
 
 #include "retronomicon/lib/asset/raw_image.h"
 #include "retronomicon/lib/asset/asset_manager.h"
@@ -48,6 +49,15 @@ static void die(const char *fmt, ...)
     exit(-1);
 }
 
+void run_python_script() {
+    Py_Initialize();
+
+    // Run a simple script from string
+    PyRun_SimpleString("print(\"Hello from Python!\")");
+
+    Py_Finalize();
+}
+
 int main(int argc, char* argv[])
 {
 
@@ -55,7 +65,8 @@ int main(int argc, char* argv[])
     lua.open_libraries(sol::lib::base);
 
     lua.script("print('Hello from Lua!')");
-
+    run_python_script();
+    return 0;
 
     // Initialize SDL
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
