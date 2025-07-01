@@ -26,10 +26,15 @@ if (ENABLE_LUA)
         ${CMAKE_CURRENT_SOURCE_DIR}/external/lua-5.3.6/src/luac.c)
     add_library(lua_static STATIC ${LUA_SRC})
     target_include_directories(lua_static PUBLIC external/lua-5.3.6/src)
+    # target_sources(retronomicon PRIVATE src/scripting/LuaEngine.cpp)
+    # target_compile_definitions(retronomicon PRIVATE USE_LUA=1)
 endif()
 
 if (ENABLE_PYTHON)
     find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+    # add_subdirectory(external/pybind11)
+    # target_sources(retronomicon PRIVATE src/scripting/PythonEngine.cpp)
+    # target_compile_definitions(retronomicon PRIVATE USE_PYTHON=1)
 endif()
 
 
