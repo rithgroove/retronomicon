@@ -9,8 +9,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 
 # options
-option(ENABLE_LUA    "Build Lua scripting"    OFF)
-option(ENABLE_PYTHON "Build Python scripting" OFF)
+option(ENABLE_LUA    "Build Lua scripting"    ON)
+option(ENABLE_PYTHON "Build Python scripting" ON)
 
 
 # SDL2 and dependencies
@@ -28,6 +28,12 @@ if (ENABLE_LUA)
     target_include_directories(lua_static PUBLIC external/lua-5.3.6/src)
     # target_sources(retronomicon PRIVATE src/scripting/LuaEngine.cpp)
     # target_compile_definitions(retronomicon PRIVATE USE_LUA=1)
+endif()
+if (NOT ENABLE_LUA)
+    list(REMOVE_ITEM SOURCES
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/scripting/lua_script_engine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/retronomicon/lib/scripting/lua_script_engine.h
+    )
 endif()
 
 if (ENABLE_PYTHON)
@@ -59,11 +65,13 @@ if (ENABLE_LUA)
             external/sol2/sol   # Adjust if needed
     )
     target_link_libraries(retronomicon PRIVATE lua_static)
+    target_compile_definitions(retronomicon PRIVATE USE_LUA)
 endif()
 
 
 if (ENABLE_PYTHON)
     target_include_directories(retronomicon PRIVATE ${Python3_INCLUDE_DIRS})
+    target_compile_definitions(retronomicon PRIVATE USE_PYTHON)
 
     target_link_libraries(retronomicon PRIVATE ${Python3_LIBRARIES})
 endif()
