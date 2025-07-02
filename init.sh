@@ -1,3 +1,7 @@
+USE_PYTHON_SCRIPT = true
+USE_LUA_SCRIPT = true
+
+
 echo downloading libraries
 mkdir -p external
 cd ./external
@@ -19,30 +23,30 @@ git clone -b release-2.8.x git@github.com:libsdl-org/SDL_image.git SDL2_image
 cd ./SDL2_image
 cd ..
 
-echo cloning optional lib 
-git git clone https://github.com/TartanLlama/optional.git
-cd ./optional
-cd ..
+# echo cloning optional lib 
+# git git clone https://github.com/TartanLlama/optional.git
+# cd ./optional
+# cd ..
 
-echo cloning Sol2
-git git clone --recursive https://github.com/ThePhD/sol2
-cd ./sol2
-#checkou v3.2.3 (cannot pull branch because it's a tag)
-cd ..
+if [$USE_LUA_SCRIPT = true]
+	echo cloning Sol2
+	git git clone --recursive https://github.com/ThePhD/sol2
+	cd ./sol2
+	cd ..
 
+	curl -R -O https://www.lua.org/ftp/lua-5.3.6.tar.gz
+	tar zxf lua-5.3.6.tar.gz
+	cd lua-5.3.6
+	cd ..
+fi
 #echo cloning nlohmann/json
 #git clone git@github.com:nlohmann/json.git nlohmann/json
 #cd ./nlohmann/json
 #cd ../..
 
-curl -R -O https://www.lua.org/ftp/lua-5.3.6.tar.gz
-tar zxf lua-5.3.6.tar.gz
-cd lua-5.3.6
-cd ..
-
-sudo apt install python3-dev
-
-
+if [$USE_PYTHON_SCRIPT = true]
+	sudo apt install python3-dev
+fi
 
 
 # if you get sdl2 init error: no display detected, try installing these:
