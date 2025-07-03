@@ -6,43 +6,45 @@
 
 namespace retronomicon::lib::scripting{
 
-    PythonScriptEngine::PythonScriptEngine() : initialized_(false) {}
+    PythonScriptEngine::PythonScriptEngine() {
+        m_initialized = false;
+    }
 
     PythonScriptEngine::~PythonScriptEngine() {
         shutdown();
     }
 
     void PythonScriptEngine::initialize() {
-        if (!initialized_) {
+        if (!m_initialized) {
             Py_Initialize();
-            initialized_ = true;
-            std::cout << "[PythonScriptEngine] Initialized\n";
+            m_initialized = true;
+            cout << "[PythonScriptEngine] Initialized\n";
         }
     }
 
     void PythonScriptEngine::shutdown() {
-        if (initialized_) {
+        if (m_initialized) {
             Py_Finalize();
-            initialized_ = false;
-            std::cout << "[PythonScriptEngine] Shutdown\n";
+            m_initialized = false;
+            cout << "[PythonScriptEngine] Shutdown\n";
         }
     }
 
-    void PythonScriptEngine::loadScript(const std::string& path) {
-        if (!initialized_) initialize();
+    void PythonScriptEngine::loadScript(const string& path) {
+        if (!m_initialized) initialize();
 
         FILE* file = fopen(path.c_str(), "r");
         if (file) {
             PyRun_SimpleFile(file, path.c_str());
             fclose(file);
-            std::cout << "[PythonScriptEngine] Loaded: " << path << '\n';
+            cout << "[PythonScriptEngine] Loaded: " << path << '\n';
         } else {
-            std::cerr << "[PythonScriptEngine] Failed to open: " << path << '\n';
+            cerr << "[PythonScriptEngine] Failed to open: " << path << '\n';
         }
     }
 
-    void PythonScriptEngine::callFunction(const std::string& moduleName, const std::string& funcName, float dt) {
-        if (!initialized_) return;
+    void PythonScriptEngine::callFunction(const string& moduleName, const string& funcName, float dt) {
+        if (!m_initialized) return;
 
         PyObject* pName = PyUnicode_DecodeFSDefault(moduleName.c_str());
         PyObject* pModule = PyImport_Import(pName);
@@ -50,7 +52,7 @@ namespace retronomicon::lib::scripting{
 
         if (!pModule) {
             PyErr_Print();
-            std::cerr << "[PythonScriptEngine] Failed to import module: " << moduleName << '\n';
+            cerr << "[PythonScriptEngine] Failed to import module: " << moduleName << '\n';
             return;
         }
 
@@ -61,15 +63,15 @@ namespace retronomicon::lib::scripting{
             Py_DECREF(args);
 
             if (result) {
-                std::cout << "[PythonScriptEngine] " << funcName << " returned\n";
+                cout << "[PythonScriptEngine] " << funcName << " returned\n";
                 Py_DECREF(result);
             } else {
                 PyErr_Print();
-                std::cerr << "[PythonScriptEngine] Function call failed: " << funcName << '\n';
+                cerr << "[PythonScriptEngine] Function call failed: " << funcName << '\n';
             }
         } else {
             PyErr_Print();
-            std::cerr << "[PythonScriptEngine] Function not found or not callable: " << funcName << '\n';
+            cerr << "[PythonScriptEngine] Function not found or not callable: " << funcName << '\n';
         }
 
         Py_XDECREF(pFunc);

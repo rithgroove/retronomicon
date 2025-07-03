@@ -2,11 +2,13 @@
 #ifdef USE_PYTHON
 
 #include <string>
-#include "retronomicon/lib/scripting/script_engine.h"
+#include "retronomicon/lib/scripting/iscript_engine.h"
+
+using namespace std;
 
 namespace retronomicon::lib::scripting {
 
-    class PythonScriptEngine : public ScriptEngine {
+    class PythonScriptEngine : public IScriptEngine {
         public:
             PythonScriptEngine();
             ~PythonScriptEngine() override;
@@ -14,13 +16,9 @@ namespace retronomicon::lib::scripting {
             void initialize() override;
             void shutdown() override;
 
-            void loadScript(const std::string& path) override;
-            void callFunction(const std::string& module, const std::string& funcName, float dt) override;
-
+            void loadScript(const string& path) override;
+            void callFunction(const string& module, const string& funcName, float dt) override;
             void registerBindings() override; // Optional: for pybind11 or future extension
-
-        private:
-            bool initialized_;
     };
 
 } // namespace retronomicon::lib::scripting
