@@ -2,12 +2,12 @@
 
 #ifdef USE_LUA  // Compile only when Lua is enabled
     #include <sol/sol.hpp>
-    #include "script_engine.h"
+    #include "iscript_engine.h"
     using namespace std;
     using namespace sol;
     namespace retronomicon::lib::scripting {
 
-        class LuaScriptEngine : public ScriptEngine {
+        class LuaScriptEngine : public IScriptEngine {
             public:
                 LuaScriptEngine();
                 ~LuaScriptEngine() override;

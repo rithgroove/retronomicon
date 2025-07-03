@@ -2,13 +2,13 @@
 #ifdef USE_PYTHON
 
 #include <string>
-#include "retronomicon/lib/scripting/script_engine.h"
+#include "retronomicon/lib/scripting/iscript_engine.h"
 
 using namespace std;
 
 namespace retronomicon::lib::scripting {
 
-    class PythonScriptEngine : public ScriptEngine {
+    class PythonScriptEngine : public IScriptEngine {
         public:
             PythonScriptEngine();
             ~PythonScriptEngine() override;

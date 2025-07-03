@@ -23,6 +23,11 @@ git clone -b release-2.8.x git@github.com:libsdl-org/SDL_image.git SDL2_image
 cd ./SDL2_image
 cd ..
 
+# echo cloning entt 
+# git clone https://github.com/skypjack/entt.git entt
+# cd ./entt
+# cd ..
+
 # echo cloning optional lib 
 # git git clone https://github.com/TartanLlama/optional.git
 # cd ./optional

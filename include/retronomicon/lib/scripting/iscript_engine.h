@@ -4,9 +4,9 @@
 using namespace std;
 
 namespace retronomicon::lib::scripting {
-    class ScriptEngine {
+    class IScriptEngine {
         public:
-            virtual ~ScriptEngine() = default;
+            virtual ~IScriptEngine() = default;
 
             // Initialize the interpreter (e.g., Lua or Python)
             virtual void initialize() = 0;
