@@ -33,7 +33,7 @@ cd ..
 # cd ./optional
 # cd ..
 
-if [$USE_LUA_SCRIPT = true]
+if [$USE_LUA_SCRIPT == true];
 then 
 	echo cloning Sol2
 	git git clone --recursive https://github.com/ThePhD/sol2
