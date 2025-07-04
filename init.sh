@@ -1,5 +1,5 @@
-USE_PYTHON_SCRIPT = ${USE_PYTHON:-OFF}
-USE_LUA_SCRIPT = ${USE_LUA:-OFF}
+#USE_PYTHON_SCRIPT = ${USE_PYTHON:-OFF}
+#USE_LUA_SCRIPT = ${USE_LUA:-OFF}
 
 echo downloading libraries
 mkdir -p external
@@ -32,9 +32,9 @@ cd ..
 # cd ./optional
 # cd ..
 
-if [ "$USE_LUA_SCRIPT"  = "ON" ]; then 
+if [ ${USE_LUA}  = "ON" ]; then 
 	echo cloning Sol2
-	git git clone --recursive https://github.com/ThePhD/sol2
+	git clone --recursive https://github.com/ThePhD/sol2
 	cd ./sol2
 	cd ..
 
@@ -48,7 +48,7 @@ fi
 #cd ./nlohmann/json
 #cd ../..
 
-if [ "$USE_PYTHON_SCRIPT" = "ON" ]; then
+if [ ${USE_PYTHON} = "ON" ]; then
 	sudo apt install python3-dev
 fi
 

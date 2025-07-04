@@ -10,7 +10,7 @@ C/C++ game dev library for retro game emulator
 
 ## 2. run the init shell
 `
-	$ ./init.sh
+	$ USE_LUA=ON USE_PYTHON_ON ./init.sh
 `
 
 ## 3. run the build shell
