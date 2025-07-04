@@ -20,7 +20,7 @@ namespace retronomicon::lib::core::component {
             void set_spatial(bool spatial);
             bool is_spatial() const;
 
-            const char* get_type_name() const override;
+            // const char* get_type_name() const override;
 
         private:
             std::vector<std::string> play_queue_;

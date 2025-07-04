@@ -33,8 +33,8 @@ bool SoundEffectComponent::is_spatial() const {
     return spatial_;
 }
 
-const char* SoundEffectComponent::get_type_name() const {
-    return "SoundEffectComponent";
-}
+// const char* SoundEffectComponent::get_type_name() const {
+//     return "SoundEffectComponent";
+// }
 
 }
