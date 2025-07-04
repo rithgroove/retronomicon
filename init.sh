@@ -32,7 +32,7 @@ cd ..
 # cd ./optional
 # cd ..
 
-if [ "$USE_LUA_SCRIPT"  == "ON" ]; then 
+if [ "$USE_LUA_SCRIPT"  = "ON" ]; then 
 	echo cloning Sol2
 	git git clone --recursive https://github.com/ThePhD/sol2
 	cd ./sol2
@@ -48,7 +48,7 @@ fi
 #cd ./nlohmann/json
 #cd ../..
 
-if [ "$USE_PYTHON_SCRIPT" == "ON" ]; then
+if [ "$USE_PYTHON_SCRIPT" = "ON" ]; then
 	sudo apt install python3-dev
 fi
 
