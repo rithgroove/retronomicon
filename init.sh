@@ -50,7 +50,7 @@ fi
 #cd ./nlohmann/json
 #cd ../..
 
-if [$USE_PYTHON_SCRIPT = true]
+if [$USE_PYTHON_SCRIPT = true];
 then
 	sudo apt install python3-dev
 fi
