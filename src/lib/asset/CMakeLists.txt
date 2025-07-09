@@ -3,6 +3,12 @@ file(GLOB_RECURSE ASSET_SRC CONFIGURE_DEPENDS
 )
 
 add_library(asset OBJECT ${ASSET_SRC})
-target_include_directories(asset PUBLIC ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(
+    asset PUBLIC
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/external/SDL2/include
+    ${CMAKE_SOURCE_DIR}/external/SDL2_ttf
+    ${CMAKE_SOURCE_DIR}/external/SDL2_image/include
+)
 
 message("CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")

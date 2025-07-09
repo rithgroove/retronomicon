@@ -28,6 +28,12 @@ target_link_libraries(retronomicon
     PUBLIC SDL2 SDL2_ttf SDL2_image
 )
 
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/external/SDL2/include
+    ${CMAKE_SOURCE_DIR}/external/SDL2_ttf/include
+    ${CMAKE_SOURCE_DIR}/external/SDL2_image/include
+)
 # Define engine-wide compile definitions
 if (ENABLE_LUA)
     target_compile_definitions(retronomicon PUBLIC USE_LUA)
