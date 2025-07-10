@@ -1,12 +1,12 @@
 #pragma once
 
 #include <vector>
-#include "system.h"
 #include "retronomicon/lib/core/component/input_component.h"
 #include "retronomicon/lib/input/input_state.h"
 #include "retronomicon/lib/input/input_map.h"
 #include "retronomicon/lib/input/raw_input.h"
 #include "retronomicon/lib/core/game_object.h"
+#include "retronomicon/lib/core/system.h"
 
 using namespace std;
 using namespace retronomicon::lib::core::component;

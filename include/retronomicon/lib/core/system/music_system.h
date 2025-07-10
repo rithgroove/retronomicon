@@ -2,7 +2,9 @@
 #pragma once
 
 #include <string>
+#include "retronomicon/lib/core/system.h"
 
+using namespace retronomicon::lib::core;
 namespace retronomicon::lib::core::system {
 
 class MusicSystem {

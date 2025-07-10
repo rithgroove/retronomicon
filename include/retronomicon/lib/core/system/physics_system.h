@@ -1,6 +1,7 @@
 #pragma once
-#include "system.h"   // Your existing System interface
+#include "retronomicon/lib/core/system.h"
 
+using namespace retronomicon::lib::core;
 namespace retronomicon::lib::core::system {
 
     /**

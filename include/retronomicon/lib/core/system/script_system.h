@@ -5,6 +5,9 @@
 #include <string>
 
 #include "retronomicon/lib/core/component/script_component.h"   // ScriptComponent & ScriptLanguage
+#include "retronomicon/lib/core/system.h"
+
+using namespace retronomicon::lib::core;
 using namespace std;
 using namespace retronomicon::lib::core::component;
 namespace retronomicon::lib::core::system {

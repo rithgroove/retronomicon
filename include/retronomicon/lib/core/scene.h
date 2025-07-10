@@ -5,10 +5,9 @@
 #include <vector>
 #include "game_object.h"
 #include "retronomicon/lib/core/entity.h"
-#include "retronomicon/lib/core/system/system.h"
+#include "system.h"
 
 using namespace std;
-using namespace retronomicon::lib::core::system;
 namespace retronomicon::lib::core {
 
     class Scene : public Entity {
