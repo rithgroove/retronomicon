@@ -3,8 +3,9 @@
 #include <unordered_map>
 #include <queue>
 #include "retronomicon/lib/graphic/animation/animation_clip.h"
-#include "component.h"
+#include "retronomicon/lib/core/component.h"
 
+using namespace retronomicon::lib::core;
 using namespace retronomicon::lib::math;
 using namespace retronomicon::lib::graphic::animation;
 

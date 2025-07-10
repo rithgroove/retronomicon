@@ -5,10 +5,9 @@
 #include <typeinfo>
 #include <memory>
 #include <string>
-#include "retronomicon/lib/core/component/component.h"
+#include "component.h"
 
 using namespace std;
-using namespace retronomicon::lib::core::component;
 /**
  * @brief The namespace for core libraries such as game object and components
  */

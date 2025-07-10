@@ -1,8 +1,10 @@
 #pragma once
 
-#include "component.h"
 #include <vector>
 #include <string>
+#include "retronomicon/lib/core/component.h"
+
+using namespace retronomicon::lib::core;
 
 namespace retronomicon::lib::core::component {
 

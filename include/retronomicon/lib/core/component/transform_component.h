@@ -1,6 +1,8 @@
 #pragma once
 
-#include "component.h"
+#include "retronomicon/lib/core/component.h"
+
+using namespace retronomicon::lib::core;
 /**
  * @brief The namespace for core components
  */
