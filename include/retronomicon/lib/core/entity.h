@@ -64,26 +64,52 @@ namespace retronomicon::lib::core{
     };
 
     // ---------- Template definitions ----------
-
+     /**
+     * @brief The template for add component method
+     */
     template <typename T, typename... Args>
     T* Entity::addComponent(Args&&... args) {
+        // generate index based on class type
         type_index typeId = type_index(typeid(T));
+
+        // check if exist or not (count is a method that used by unordered_map and order)
         if (m_components.count(typeId) == 0) {
+
+            // create new instance of said component (forwarding the arguments)
             T* rawPtr = new T(forward<Args>(args)...);
+
+            // set the owner of the components to this entity
             rawPtr->setOwner(this);
+
+            // save to our map (use unique_ptr so it automatically cleaned if it removed from the map)
             m_components[typeId] = unique_ptr<Component>(rawPtr);
+
+            //return the component
             return rawPtr;
         }
+
+        //return null if exists
         return nullptr;
     }
 
+     /**
+     * @brief The template for get component method
+     */
     template <typename T>
     T* Entity::getComponent() {
+        // generate index based on class type
         type_index typeId = type_index(typeid(T));
+
+        // find the unique_ptr containing the component
         auto it = m_components.find(typeId);
+
+        // check if we found the component
         if (it != m_components.end()) {
+            // return the down casted components (because we use unique_ptr)
             return dynamic_cast<T*>(it->second.get());
         }
+
+        //return null if not exist
         return nullptr;
     }
 }
