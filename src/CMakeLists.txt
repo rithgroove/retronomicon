@@ -16,6 +16,11 @@ target_sources(retronomicon
         $<TARGET_OBJECTS:core>
         $<TARGET_OBJECTS:input>
         $<TARGET_OBJECTS:scripting>
+        $<TARGET_OBJECTS:asset>
+        $<TARGET_OBJECTS:audio>
+        $<TARGET_OBJECTS:graphic>
+        $<TARGET_OBJECTS:input>
+        $<TARGET_OBJECTS:math>
 )
 
 # Global engine include path
