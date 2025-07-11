@@ -1,9 +1,10 @@
-#include "retronomicon/lib/graphic/animation/animation_clip.h"
+#include "retronomicon/lib/animation/animation_clip.h"
+#include <algorithm>  // for std::max
 
 /**
  * @brief The namespace for graphic utilities
  */
-namespace retronomicon::lib::graphic::animation{
+namespace retronomicon::lib::animation{
 
     /**
      * @brief the constructor
@@ -14,8 +15,8 @@ namespace retronomicon::lib::graphic::animation{
      * @param repeat set true if this animation is repeated
      */
     AnimationClip::AnimationClip(vector<Frame> frames, int frameCount, const string &name , bool repeat){
-    	m_frames = frames;
-    	m_frameCount = frameCount;
+        m_frames = frames;
+        m_frameCount = frameCount;
         m_name = name;
         m_repeat = repeat;
         m_currentFrame = 0;

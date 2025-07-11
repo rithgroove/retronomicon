@@ -17,7 +17,7 @@ namespace retronomicon::lib::animation{
      * @param name the name of this frame
      */    
     AnimationFrame::AnimationFrame(int x, int y, int width, int height, float duration)
-    : m_rect(x, y, width, height), // fill up m_rect
+    : m_rect((float)x, (float)y, (float)width, (float)height), // fill up m_rect
       m_duration(duration), //fill_up m_duration
       m_elapsedTime(0.0f) {} //set m_elapsedtime to 0
 
@@ -31,11 +31,11 @@ namespace retronomicon::lib::animation{
      * @param name the name of this frame
      */
     AnimationFrame::AnimationFrame(const Point& point, int width, int height, float duration)
-    : m_rect(point, width, height), // fill up m_rect
+    : m_rect(point, (float)width, (float)height), // fill up m_rect
       m_duration(duration), //fill_up m_duration
       m_elapsedTime(0.0f) {} //set m_elapsedtime to 0
 
-    /**
+    /*
      * @brief basic constructor
      * 
      * @param rect the source rectangle of this frame

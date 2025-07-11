@@ -30,8 +30,8 @@ namespace retronomicon::lib::animation{
 	    	 * @param height the height of the current frame from the spritesheet
 	    	 * @param duration in milisecond
 	    	 */
-	    	AnimationFrame(retronomicon::lib::math::Point* point,int width, int height, float duration);
-
+		    AnimationFrame(const retronomicon::lib::math::Point& point, int width, int height, float duration);
+	    
 	    	/**
 	    	 * @brief basic constructor
 	    	 * 
@@ -40,8 +40,9 @@ namespace retronomicon::lib::animation{
 	    	 * @param name the name of this frame
 	    	 * @param duration in milisecond
 	    	 */
-	    	AnimationFrame(retronomicon::lib::math::Rect* rect, float duration); //constructor with 2 points (still considering wether we should use int or float or double)
-	    	// ~Point(); // no need for destructor since all attributes are native
+    		AnimationFrame(const retronomicon::lib::math::Rect& rect, float duration);
+
+   	    	// ~Point(); // no need for destructor since all attributes are native
 
 	    	/**
 	    	 * @brief get the x position of this frame

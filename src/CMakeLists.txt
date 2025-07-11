@@ -1,4 +1,5 @@
 # Collect engine modules
+add_subdirectory(lib/animation)
 add_subdirectory(lib/asset)
 add_subdirectory(lib/audio)
 add_subdirectory(lib/core)
@@ -13,6 +14,7 @@ add_library(retronomicon)
 # Add object sources from each subsystem
 target_sources(retronomicon
     PRIVATE
+        $<TARGET_OBJECTS:animation>
         $<TARGET_OBJECTS:core>
         $<TARGET_OBJECTS:input>
         $<TARGET_OBJECTS:scripting>
