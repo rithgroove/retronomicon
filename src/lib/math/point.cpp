@@ -7,6 +7,11 @@
 namespace retronomicon::lib::math{
 
     /**
+     *  @brief default constructor with x=0 and y =0
+     */
+    Point::Point() : m_x(0.0f), m_y(0.0f) {}
+
+    /**
      * @brief constructor with 2 points 
      * 
      * @param x the x position
@@ -14,36 +19,7 @@ namespace retronomicon::lib::math{
      */
     Point::Point(float x, float y){
         set(x,y);
-    }
-
-    /**
-     * @brief a function to change the position of the points
-     * 
-     * @param x the x position
-     * @param y the y position
-     */
-    void Point::set(float x,float y){
-        m_x = x;
-        m_y = y;
-    }
-
-    /**
-     * @brief return the x position of the point
-     * 
-     * @return the x position of the point
-     */
-    float Point::getX() const {
-        return m_x;
-    }
-
-    /**
-     * @brief return the y position of the point
-     * 
-     * @return the y position of the point
-     */
-    float Point::getY() const {
-        return m_y;
-    }
+    } 
 
     /**
      * @brief calculate the distance between this point and target point
@@ -51,9 +27,25 @@ namespace retronomicon::lib::math{
      * @param target the target point
      * @return the distance in float
      */
-    float Point::calculateDistance(Point* target){
-        float distance_x = abs((m_x - target->getX()));
-        float distance_y = abs((m_y - target->getY()));
-        return sqrt((distance_x*distance_x) + (distance_y*distance_y));
+    float Point::calculateDistance(const Point& target) const {
+        float dx = m_x - target.getX();
+        float dy = m_y - target.getY();
+        return std::sqrt(dx * dx + dy * dy);
+    }
+
+    bool Point::operator==(const Point& other) const {
+        return m_x == other.m_x && m_y == other.m_y;
+    }
+
+    bool Point::operator!=(const Point& other) const {
+        return !(*this == other);
+    }
+
+    Point Point::operator+(const Point& other) const {
+        return Point(m_x + other.m_x, m_y + other.m_y);
+    }
+
+    Point Point::operator-(const Point& other) const {
+        return Point(m_x - other.m_x, m_y - other.m_y);
     }
 }

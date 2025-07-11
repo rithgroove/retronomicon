@@ -1,6 +1,6 @@
 #pragma once
 
-#include <math.h>
+#include <cmath.h>
 
 /**
  * @brief The namespace for basic math libraries such as points, rectangle cirle, etc.
@@ -11,6 +11,11 @@ namespace retronomicon::lib::math{
 	 */
     class Point {
 	    public:
+	    	/**
+	    	 *  @brief default constructor with x=0 and y =0
+	    	 */
+	    	Point();
+	    	
 	    	/**
 	    	 * @brief constructor with 2 points 	    	 
 	    	 * 
@@ -27,21 +32,21 @@ namespace retronomicon::lib::math{
 	    	 * @param x the x position
 	    	 * @param y the y position
 	    	 */
-	    	void set(float x, float y);
+			void set(float x, float y) { m_x = x; m_y = y; }
 
 	    	/**
 	    	 * @brief return the x position of the point
 	    	 * 
 	    	 * @return the x position of the point
 	    	 */
-	    	float getX() const; 
+	    	float getX() const { return m_x; }
 
 	    	/**
 	    	 * @brief return the y position of the point
 	    	 * 
 	    	 * @return the y position of the point
 	    	 */
-	    	float getY() const;
+	    	float getY() const { return m_y; }
 
 	    	/**
 	    	 * @brief calculate the distance between this point and target point
@@ -49,7 +54,13 @@ namespace retronomicon::lib::math{
 	    	 * @param target the target point
 	    	 * @return the distance in float
 	    	 */
-	    	float calculateDistance(Point* target);
+	    	float calculateDistance(const Point& target) const;
+
+	    	// operator overloadS
+	    	bool operator==(const Point& other) const;
+			bool operator!=(const Point& other) const;
+			Point operator+(const Point& other) const;
+			Point operator-(const Point& other) const;
 	    private:
 	    	float m_x; // x position
 	    	float m_y; // y position
