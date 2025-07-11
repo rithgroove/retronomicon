@@ -49,34 +49,34 @@ namespace retronomicon::lib::animation{
 	    	 * 
 	    	 * @return x position
 	    	 */
-	    	int getX() const; // get X position
+	    	int getX() const {return m_rect.getX();} // get X position
 	    	
 	    	/**
 	    	 * @brief get the y position of this frame
 	    	 * 
 	    	 * @return y position
 	    	 */
-	    	 int getY() const; // get Y position
+	    	 int getY() const {return m_rect.getY();} // get Y position
 
 	    	/**
 	    	 * @brief get the width  of this frame
 	    	 * 
 	    	 * @return width
 	    	 */
-	    	int getWidth() const; // get X position
+	    	int getWidth() const {return m_rect.getWidth();} // get X position
 	    	
 	    	/**	    	 * @brief get height of this frame
 	    	 * 
 	    	 * @return height
 	    	 */
-	    	 int getHeight() const; // get Y position
+	    	 int getHeight() const {return m_rect.getHeight();} // get Y position
 
 	    	/**
 	    	 * the rectangle representing the source rectangle of the sprite
 	    	 * 
 	    	 * @return the source rectangle
 	    	 */
-	    	retronomicon::lib::math::Rect* getRect() const;
+	    	retronomicon::lib::math::Rect getRect() const {return m_rect;}
 
 	    	/**
 	    	 * @brief a method to reset spent duration (set m_spentDuration to 0)

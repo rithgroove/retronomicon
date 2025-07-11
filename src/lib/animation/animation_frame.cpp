@@ -46,51 +46,6 @@ namespace retronomicon::lib::animation{
     : m_rect(rect), // fill_up m_rect
       m_duration(duration), // fill_up m_duration
       m_elapsedTime(0.0f) {} //set m_elapstedtime to 0
-    
-    /**
-     * @brief get the x position of this frame
-     * 
-     * @return x position
-     */
-    int AnimationFrame::getX() const {
-        return m_rect.getX();
-    }
-
-    /**
-     * @brief get the y position of this frame
-     * 
-     * @return y position
-     */
-    int AnimationFrame::getY() const {
-        return m_rect.getY();
-    }
-
-    /**
-     * @brief get the width of this frame
-     * 
-     * @return width
-     */
-    int AnimationFrame::getWidth() const {
-        return m_rect.getWidth();
-    }
-
-    /**
-     * @brief get the height of this frame
-     * 
-     * @return height
-     */
-    int AnimationFrame::getHeight() const {
-        return m_rect.getHeight();
-    }
-
-    /**
-     * the rectangle representing the source rectangle of the sprite
-     * 
-     * @return the source rectangle
-     */
-    const Rect& AnimationFrame::getRect() const {
-        return m_rect;
-    }
 
 
     /**

@@ -3,7 +3,6 @@
 #include <SDL.h>
 #include "point.h"
 
-using namespace retronomicon::lib::math;
 
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
@@ -14,6 +13,12 @@ namespace retronomicon::lib::math{
 	 */
     class Rect {
 	    public:
+
+	        /**
+	    	* @brief Default constructor
+	    	*/
+	        Rect();
+
 	    	/**
 	    	* @brief constructor that accept 4 floating value
 	    	* also create anchor on top left. Point(0,0)
@@ -33,8 +38,7 @@ namespace retronomicon::lib::math{
 	    	* @param width the width this rectangle
 	    	* @param height the height this rectangle
 	    	*/
-	    	Rect(Point* position, float width, float height); 
-
+	        Rect(const Point& position, float width, float height);
 
 	    	/**
 	    	* @brief constructor with the position of this rectangle
@@ -45,8 +49,7 @@ namespace retronomicon::lib::math{
 	    	* @param width the width this rectangle
 	    	* @param height the height this rectangle
 	    	*/
-	    	Rect(Point* position, Point* anchor, float width, float height); 
-
+	        Rect(const Point& position, const Point& anchor, float width, float height);
 
 	    	// ~Rect(); // to do : dev 
 
@@ -56,7 +59,7 @@ namespace retronomicon::lib::math{
 	    	* @param width the new width for this rectangle
 	    	* @param height the new height for this rectangle
 	    	*/
-	    	void setSize(float width, float height);
+			void setSize(float width, float height) { m_width = width; m_height = height; }
 
 	       /**
 	    	* @brief a method to change the position of the rectangle
@@ -64,69 +67,68 @@ namespace retronomicon::lib::math{
 	    	* @param x the new x position for this rectangle
 	    	* @param y the new y position for this rectangle
 	    	*/
-	    	void setPosition(float x, float y);
+			void setPosition(float x, float y) { m_position.set(x, y); }
 
 	    	/**
 	    	 * @brief a method to change the position of the rectangle
 	    	 * 
 	    	 * @param position the new position in Point class
 	    	 */
-	    	void setPosition(Point* position);
+			void setPosition(const Point& position) { m_position = position; }
 
 	    	/**
 	    	 * @brief a method to get the position of the rectangle
 	    	 * 
 	    	 * @return the position in point format
 	    	 */
-	    	Point* getPosition() const; 
+			Point getPosition() const { return m_position; }
 
 	    	/**
 	    	 * @brief a method to get the anchor position of the rectangle
 	    	 * 
 	    	 * @return the anchor position in point format
 	    	 */
-	    	Point* getAnchor() const;
+			Point getAnchor() const { return m_anchor; }
 
 	    	/**
 	    	 * @brief a method to get the width of rectangle
 	    	 * 
 	    	 * @return the width of the rectangle
 	    	 */
-	    	float getWidth() const;
+			float getWidth() const { return m_width; }
 
 	    	/**
 	    	 * @brief a method to get the height of rectangle
 	    	 * 
 	    	 * @return the height of the rectangle
 	    	 */
-	    	float getHeight() const;
+			float getHeight() const { return m_height; }
 
 	    	/**
 	    	 * @brief a method to get the x position of this rectangle
 	    	 * 
 	    	 * @return the x position of the rectangle
 	    	 */
-	    	float getX() const;
+			float getX() const { return m_position.getX(); }
 
 	    	/**
 	    	 * @brief a method to get the y position of this rectangle
 	    	 * 
 	    	 * @return the y position of the rectangle
 	    	 */
-	    	float getY() const;
-
+			float getY() const { return m_position.getY(); }
 
 	    	/**
 	    	 * @brief a method to get SDL_Rect representation of this rectangle.
 	    	 * Useful for rendering textures.
 	    	 * 
 	    	 * @return the SDL_Rect
-	    	 */
-	    	SDL_Rect generateSDLRect();
+	    	 */        
+	    	SDL_Rect generateSDLRect() const;
 
 	    private:
-	    	Point* m_anchor;
-	    	Point* m_position;
+	    	Point m_anchor;
+	    	Point m_position;
 	    	float m_width;
 	    	float m_height;
     };

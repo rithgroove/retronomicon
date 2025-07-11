@@ -14,7 +14,7 @@ namespace retronomicon::lib::animation{
      * @param repeat set true if this animation is repeated
      */
     AnimationClip::AnimationClip(const std::vector<AnimationFrame>& frames,
-                                 std::string name,
+                                 std::string& name,
                                  bool repeat)
         : m_frames(frames),
           m_name(std::move(name)),
@@ -23,50 +23,31 @@ namespace retronomicon::lib::animation{
     {}
 
     /**
-     * @brief get the current frame index
-     * 
-     * @return the current frame number
-     */
-    size_t AnimationClip::getCurrentFrameIndex() const {
-        return m_currentFrame;
-    }
-
-    /**
-     * @brief get the current frame
-     * 
-     * @return the current frame
-     */
-    const AnimationFrame& AnimationClip::getCurrentFrame() const {
-        return m_frames.at(m_currentFrame);
-    }
-
-    /**
      * @brief update the frame to the next one
      * 
      * @return true if successful, false if failed.
      */
-    float AnimationClip::update(float dt) {
-        float leftover = dt;
-        const size_t frameCount = m_frames.size();
-
-        while (leftover > 0.0f) {
-            auto& curFrame = m_frames[m_currentFrame];
-            leftover = curFrame.update(leftover);
-
-            if (leftover > 0.0f) {
+    float AnimationClip::update(float dt){
+        float leftOver = dt;
+        while (leftOver >0.0f){
+            AnimationFrame *curFrame = &m_frames[m_currentFrame];
+            leftOver = curFrame->update(leftOver);
+            if (leftOver > 0.0f){
                 m_currentFrame++;
-                if (m_currentFrame >= frameCount) {
-                    if (m_repeat) {
+                if (m_currentFrame >= getFrameCount()){
+                    if (m_repeat){
                         m_currentFrame = 0;
-                    } else {
-                        m_currentFrame = frameCount - 1;
+                    }else{
+                        m_currentFrame--;
                         break;
                     }
                 }
             }
         }
-
-        return std::max(0.0f, leftover);
+        if (leftOver < 0.0f){
+            leftOver = 0.0f;
+        }
+        return leftOver;
     }
 
     /**
@@ -74,10 +55,11 @@ namespace retronomicon::lib::animation{
      * 
      * @return true if m_repeat is false, and is currently on the last frame
      */
-    bool AnimationClip::isFinished() const {
-        // Finished if not looping and on (or past) the last frame
-        return !m_repeat && (m_currentFrame + 1 >= m_frames.size());
+    bool AnimationClip::isFinished() const{
+        if (m_repeat && m_currentFrame >= getFrameCount()){
+            return true;
+        }
+        return false;
     }
-
 
 }

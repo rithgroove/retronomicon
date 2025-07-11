@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cmath.h>
+#include <cmath>
 
 /**
  * @brief The namespace for basic math libraries such as points, rectangle cirle, etc.
@@ -15,7 +15,7 @@ namespace retronomicon::lib::math{
 	    	 *  @brief default constructor with x=0 and y =0
 	    	 */
 	    	Point();
-	    	
+
 	    	/**
 	    	 * @brief constructor with 2 points 	    	 
 	    	 * 

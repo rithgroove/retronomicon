@@ -21,23 +21,9 @@ namespace retronomicon::lib::animation{
 	    	 * @param name the name of of this animation
 	    	 * @param repeat set true if this animation is repeated
 	    	 */
-    		AnimationClip(const std::vector<AnimationFrame>& frames, std::string name,bool repeat);
+    		AnimationClip(const std::vector<AnimationFrame>& frames, std::string& name,bool repeat);
 
 	    	// ~Point(); // no need for destructor since all attributes are native
-
-	    	/**
-	    	 * @brief get the current frame index
-	    	 * 
-	    	 * @return the current frame number
-	    	 */
-		    size_t getCurrentFrameIndex() const;
-
-	    	/**
-	    	 * @brief get the current frame
-	    	 * 
-	    	 * @return the current frame
-	    	 */
-    		const AnimationFrame& getCurrentFrame() const;
 
 
 	    	/**
@@ -59,7 +45,15 @@ namespace retronomicon::lib::animation{
 	    	 * 
 	    	 * @return name of the AnimationClip
 	    	 */    
-    		const std::string& name() const { return m_name; }
+	        const std::string& getName() const { return m_name; }
+	        size_t getCurrentFrameIndex() const { return static_cast<size_t>(m_currentFrame); }
+	        const AnimationFrame& getCurrentFrame() const { return m_frames[m_currentFrame]; }
+	        bool isRepeating() const { return m_repeat; }
+	        int getFrameCount() const {return static_cast<int>(m_frames.size());}
+
+	        // Setters
+	        void setCurrentFrame(int frame) { m_currentFrame = frame; }
+	        void setRepeat(bool repeat) { m_repeat = repeat;} 
 
 
 	    private:
