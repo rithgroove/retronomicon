@@ -48,19 +48,19 @@ namespace retronomicon::lib::math{
     Rect::Rect(const Point& position, const Point& anchor, float width, float height)
         : m_position(position), m_anchor(anchor), m_width(width), m_height(height) {}
 
-    /**
-     * @brief a method to get SDL_Rect representation of this rectangle.
-     * Useful for rendering textures.
-     * 
-     * @return the SDL_Rect
-     */    
-    SDL_Rect Rect::generateSDLRect() const {
-        return {
-            static_cast<int>(getX()),
-            static_cast<int>(getY()),
-            static_cast<int>(getWidth()),
-            static_cast<int>(getHeight())
-        };
-    }
+    // /**
+    //  * @brief a method to get SDL_Rect representation of this rectangle.
+    //  * Useful for rendering textures.
+    //  * 
+    //  * @return the SDL_Rect
+    //  */    
+    // SDL_Rect Rect::generateSDLRect() const {
+    //     return {
+    //         static_cast<int>(getX()),
+    //         static_cast<int>(getY()),
+    //         static_cast<int>(getWidth()),
+    //         static_cast<int>(getHeight())
+    //     };
+    // }
 
 }
