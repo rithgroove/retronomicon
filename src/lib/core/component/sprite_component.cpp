@@ -31,17 +31,17 @@ namespace retronomicon::lib::core::component {
         SDL_RendererFlip flip = SDL_FLIP_NONE ;
 
         if (m_animation){
-            const Frame& currentFrame = m_animation->getCurrentFrame();
+            const AnimationFrame& currentFrame = m_animation->getCurrentFrame();
             dstRect.w = static_cast<int>(currentFrame.getWidth() * m_transform->getScaleX());
             dstRect.h = static_cast<int>(currentFrame.getHeight() * m_transform->getScaleY());
 
-            SDL_Rect srcRect=  currentFrame.getRect()->generateSDLRect();
+            // SDL_Rect srcRect=  currentFrame.getRect()->generateSDLRect();
 
-            SDL_Point center;
-            center.x = static_cast<int>(dstRect.w * m_transform->getAnchorX());
-            center.y = static_cast<int>(dstRect.h * m_transform->getAnchorY());
+            // SDL_Point center;
+            // center.x = static_cast<int>(dstRect.w * m_transform->getAnchorX());
+            // center.y = static_cast<int>(dstRect.h * m_transform->getAnchorY());
 
-            SDL_RenderCopyEx(renderer, m_image->getTexture(), &srcRect, &dstRect, m_transform->getRotation(), &center, flip);            
+            // SDL_RenderCopyEx(renderer, m_image->getTexture(), &srcRect, &dstRect, m_transform->getRotation(), &center, flip);            
 
         }else{
             dstRect.w = static_cast<int>(m_image->getWidth() * m_transform->getScaleX());

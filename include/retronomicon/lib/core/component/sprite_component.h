@@ -5,14 +5,14 @@
 #include <string>
 
 #include "transform_component.h"
-#include "animation_component.h"
+#include "retronomicon/lib/animation/animation_component.h"
 #include "retronomicon/lib/asset/raw_image.h"
 #include "retronomicon/lib/core/component.h"
 
 using namespace retronomicon::lib::core;
 using namespace retronomicon::lib::asset;
 using namespace retronomicon::lib::core;
-using namespace retronomicon::lib::graphic::animation;
+using namespace retronomicon::lib::animation;
 
 namespace retronomicon::lib::core::component {
 
