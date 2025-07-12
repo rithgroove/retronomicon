@@ -2,9 +2,9 @@ file(GLOB_RECURSE GRAPHIC_SRC CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
 )
 
-add_library(graphic OBJECT ${GRAPHIC_SRC})
+add_library(retronomicon-graphic OBJECT ${GRAPHIC_SRC})
 target_include_directories(
-    graphic PUBLIC
+    retronomicon-graphic PUBLIC
     ${RETRO_DIR}/include
     ${RETRO_DIR}/external/SDL2/include
     ${RETRO_DIR}/external/SDL2_ttf/include

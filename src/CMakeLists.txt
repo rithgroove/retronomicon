@@ -22,7 +22,7 @@ target_sources(retronomicon
         $<TARGET_OBJECTS:scripting>
         $<TARGET_OBJECTS:asset>
         $<TARGET_OBJECTS:audio>
-        $<TARGET_OBJECTS:graphic>
+        $<TARGET_OBJECTS:retronomicon-graphic>
         $<TARGET_OBJECTS:input>
         $<TARGET_OBJECTS:retronomicon-math>
 )

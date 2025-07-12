@@ -1,6 +1,6 @@
-#include "retronomicon/lib/core/system/input_system.h"
-
-namespace retronomicon::lib::core::system{
+#include "retronomicon/lib/input/input_system.h"
+#include "retronomicon/lib/input/input_component.h"
+namespace retronomicon::lib::input{
     InputSystem::InputSystem() // Temp init to avoid reference error
     {
         RawInput* rawInput = new RawInput();

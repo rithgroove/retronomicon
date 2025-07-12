@@ -1,16 +1,15 @@
 // InputComponent.hpp
 #pragma once
-#include "retronomicon/lib/input/input_state.h"   //  your global/hardware state wrapper
+
+#include "input_state.h"   //  your global/hardware state wrapper
 #include "retronomicon/lib/core/component.h"
 
-using namespace retronomicon::lib::core;
 /**
  * Abstract base for all input‑intent components.
  *  - Holds no concrete data.
  *  - Defines the per‑frame life‑cycle contract.
  */
-using namespace retronomicon::lib::input;
-namespace retronomicon::lib::core::component{
+namespace retronomicon::lib::input{
     class InputComponent : public Component {
         public:
             virtual ~InputComponent() = default;
