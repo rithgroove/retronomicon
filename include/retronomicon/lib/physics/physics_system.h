@@ -1,8 +1,6 @@
-#pragma once
 #include "retronomicon/lib/core/system.h"
 
-using namespace retronomicon::lib::core;
-namespace retronomicon::lib::core::system {
+namespace retronomicon::lib::physics {
 
     /**
      * Pure‑interface (abstract) physics system.
@@ -10,7 +8,7 @@ namespace retronomicon::lib::core::system {
      * `update()` is fixed here so concrete systems only have to
      * implement the two core steps: integration + collision‑resolution.
      */
-    class PhysicsSystem : public System
+    class PhysicsSystem : public retronomicon::lib::core::System
     {
     public:
         virtual ~PhysicsSystem() = default;

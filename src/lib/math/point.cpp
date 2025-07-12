@@ -1,5 +1,6 @@
 #include "retronomicon/lib/math/point.h"
 // #include <cmath>
+#include "vec2.h"
 
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
@@ -67,5 +68,14 @@ namespace retronomicon::lib::math{
      */
     Point Point::operator-(const Point& other) const {
         return Point(m_x - other.m_x, m_y - other.m_y);
+    }
+
+    /**
+     * Convert point to Vec2
+     * 
+     * @return the vec2 representation of current point
+     */
+    Vec2 Point::toVec2() const {
+        return Vec2{x, y};
     }
 }

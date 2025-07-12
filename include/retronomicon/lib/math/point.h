@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include "vec2.h"
 
 /**
  * @brief The namespace for basic math libraries such as points, rectangle cirle, etc.
@@ -11,6 +12,8 @@ namespace retronomicon::lib::math{
 	 */
     class Point {
 	    public:
+	    	/***************************** Constructor *****************************/
+
 	    	/**
 	    	 *  @brief default constructor with x=0 and y =0
 	    	 */
@@ -26,6 +29,8 @@ namespace retronomicon::lib::math{
 	    	
 	    	// ~Point(); // no need for custom destructor (yet) since all attributes are native 
 
+	    	/***************************** Setter *****************************/
+
 	    	/**
 	    	 * @brief a function to change the position of the points
 	    	 * 
@@ -34,6 +39,8 @@ namespace retronomicon::lib::math{
 	    	 */
 			void set(float x, float y) { m_x = x; m_y = y; }
 
+
+	    	/***************************** Getter *****************************/
 	    	/**
 	    	 * @brief return the x position of the point
 	    	 * 
@@ -48,15 +55,9 @@ namespace retronomicon::lib::math{
 	    	 */
 	    	float getY() const { return m_y; }
 
-	    	/**
-	    	 * @brief calculate the distance between this point and target point
-	    	 * 
-	    	 * @param target the target point
-	    	 * @return the distance in float
-	    	 */
-	    	float calculateDistance(const Point& target) const;
+	    	/***************************** Operator Overload *****************************/
 
-    	    /**
+	    	/**
 		     * @brief overloading operator ==
 		     * 
 		     * @param other another point
@@ -83,6 +84,24 @@ namespace retronomicon::lib::math{
 		     * @param other another point
 		     */
 			Point operator-(const Point& other) const;
+
+
+	    	/***************************** Other Function *****************************/
+
+	    	/**
+	    	 * @brief calculate the distance between this point and target point
+	    	 * 
+	    	 * @param target the target point
+	    	 * @return the distance in float
+	    	 */
+	    	float calculateDistance(const Point& target) const;
+
+		    /**
+		     * Convert point to Vec2
+		     * 
+		     * @return the vec2 representation of current point
+		     */
+    	    Vec2 toVec2() const;
 	    private:
 	    	float m_x; // x position
 	    	float m_y; // y position
