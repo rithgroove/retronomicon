@@ -1,3 +1,5 @@
+message(STATUS "==== Processing ${CMAKE_CURRENT_LIST_FILE} ====")
+
 # Collect engine modules
 add_subdirectory(lib/animation)
 add_subdirectory(lib/asset)
@@ -27,7 +29,7 @@ target_sources(retronomicon
 
 # Global engine include path
 target_include_directories(retronomicon
-    PUBLIC ${CMAKE_SOURCE_DIR}/include
+    PUBLIC ${RETRO_DIR}/include
 )
 
 # Link external dependencies
@@ -36,8 +38,8 @@ target_link_libraries(retronomicon
 )
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/external/SDL2/include
-    ${CMAKE_SOURCE_DIR}/external/SDL2_ttf/include
-    ${CMAKE_SOURCE_DIR}/external/SDL2_image/include
+    ${RETRO_DIR}/include
+    ${RETRO_DIR}/external/SDL2/include
+    ${RETRO_DIR}/external/SDL2_ttf/include
+    ${RETRO_DIR}/external/SDL2_image/include
 )

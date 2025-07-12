@@ -24,6 +24,7 @@ namespace retronomicon::lib::animation{
              * @param defaultClip the default animation clip in shared pointer
              */
             explicit AnimationComponent(std::shared_ptr<AnimationClip> defaultClip);
+            virtual ~AnimationComponent(); 
 
             // --- Clip Management ---
 

@@ -5,10 +5,8 @@ file(GLOB_RECURSE GRAPHIC_SRC CONFIGURE_DEPENDS
 add_library(graphic OBJECT ${GRAPHIC_SRC})
 target_include_directories(
     graphic PUBLIC
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/external/SDL2/include
-    ${CMAKE_SOURCE_DIR}/external/SDL2_ttf/include
-    ${CMAKE_SOURCE_DIR}/external/SDL2_image/include
+    ${RETRO_DIR}/include
+    ${RETRO_DIR}/external/SDL2/include
+    ${RETRO_DIR}/external/SDL2_ttf/include
+    ${RETRO_DIR}/external/SDL2_image/include
 )
-
-message("CMAKE_SOURCE_DIR = ${RETRO_INCLUDE_DIR}")

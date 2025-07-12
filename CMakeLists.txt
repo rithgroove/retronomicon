@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(RETRO_DIR ${CMAKE_CURRENT_SOURCE_DIR} CACHE PATH "Retronomicon include path")
 set(RETRO_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include CACHE PATH "Retronomicon include path")
 
 # Engine feature flags
@@ -25,10 +26,10 @@ add_subdirectory(src)
 
 # Public include paths
 include_directories(
-    ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/external/SDL2/include
-    ${CMAKE_SOURCE_DIR}/external/SDL2_ttf/include
-    ${CMAKE_SOURCE_DIR}/external/SDL2_image/include
+    ${RETRO_INCLUDE_DIR}/include
+    ${RETRO_INCLUDE_DIR}/external/SDL2/include
+    ${RETRO_INCLUDE_DIR}/external/SDL2_ttf/include
+    ${RETRO_INCLUDE_DIR}/external/SDL2_image/include
 )
 
 # Optional: Message info

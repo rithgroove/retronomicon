@@ -3,6 +3,5 @@ file(GLOB_RECURSE AUDIO_SRC CONFIGURE_DEPENDS
 )
 
 add_library(audio OBJECT ${AUDIO_SRC})
-target_include_directories(audio PUBLIC ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(audio PUBLIC ${RETRO_DIR}/include)
 
-message("CMAKE_SOURCE_DIR = ${RETRO_INCLUDE_DIR}")

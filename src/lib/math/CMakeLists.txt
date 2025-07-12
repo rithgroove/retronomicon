@@ -5,7 +5,7 @@ file(GLOB_RECURSE MATH_SRC CONFIGURE_DEPENDS
 add_library(retronomicon-math STATIC ${MATH_SRC})
 target_include_directories(
     retronomicon-math PUBLIC
-    ${CMAKE_SOURCE_DIR}/include
+    ${RETRO_DIR}/include
 )
 
-message("CMAKE_SOURCE_DIR = ${RETRO_INCLUDE_DIR}")
+message("CMAKE_SOURCE_DIR = ${RETRO_DIR}")
