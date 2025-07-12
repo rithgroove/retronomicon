@@ -8,7 +8,10 @@ namespace retronomicon::lib::core::system{
     void RenderSystem::render(vector<GameObject*>& objects) {
         for (GameObject* obj : objects) {
             // render logic
-            obj->render(m_renderer);
+            auto sprite = obj->getComponent<SpriteComponent>();
+            if (!sprite) continue;
+            sprite->render(m_renderer);
         }
+
     }
 }

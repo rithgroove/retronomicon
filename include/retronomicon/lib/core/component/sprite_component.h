@@ -8,6 +8,7 @@
 #include "retronomicon/lib/animation/animation_component.h"
 #include "retronomicon/lib/asset/raw_image.h"
 #include "retronomicon/lib/core/component.h"
+#include "retronomicon/lib/core/renderable.h"
 
 using namespace retronomicon::lib::core;
 using namespace retronomicon::lib::asset;
@@ -16,7 +17,7 @@ using namespace retronomicon::lib::animation;
 
 namespace retronomicon::lib::core::component {
 
-    class SpriteComponent : public Component {
+    class SpriteComponent : public Component, public Renderable {
         public:
             SpriteComponent(RawImage* rawImage);
             ~SpriteComponent();

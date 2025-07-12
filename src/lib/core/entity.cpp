@@ -11,18 +11,5 @@ namespace retronomicon::lib::core{
             pair.second->start();
         }
     }
-
-    void Entity::update(float dt) {
-        //loop all components and call update        
-        for (auto& pair : m_components) {
-            pair.second->update(dt);
-        }
-    }
-
-    void Entity::render(SDL_Renderer* renderer) {
-        //loop all components and call render
-        for (auto& pair : m_components) {
-            pair.second->render(renderer);
-        }
-    }
+    
 }

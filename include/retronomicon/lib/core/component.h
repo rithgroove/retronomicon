@@ -1,5 +1,5 @@
 #pragma once
-#include <SDL.h>
+// #include <SDL.h>
 /**
  * @brief The namespace for core components
  */
@@ -33,12 +33,6 @@ namespace retronomicon::lib::core{
              * @param dt time interval since last update
              */
             virtual void update(float dt) {}
-
-            /**
-             * @brief a method to render the component if any
-             */
-            virtual void render(SDL_Renderer* renderer) {}
-
             /**
              * @brief a to set the owner of this component
              * 

@@ -24,19 +24,6 @@ namespace retronomicon::lib::core{
              */
             void start() override;
 
-            /**
-             * @brief method to update the component
-             * 
-             * @param dt time interval since last update
-             */
-            void update(float dt) override;
-
-            /**
-             * @brief a method to render the component if any
-             */
-            void render(SDL_Renderer* renderer) override;
-
-
             const string& getName() const;
             void setName(const string& newName);
 

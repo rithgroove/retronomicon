@@ -30,19 +30,6 @@ namespace retronomicon::lib::core{
             virtual void start();
 
             /**
-             * @brief method to update the component
-             * 
-             * @param dt time interval since last update
-             */
-            virtual void update(float dt);
-
-            /**
-             * @brief a method to render the component if any
-             */
-            virtual void render(SDL_Renderer* renderer);
-
-
-            /**
              * @brief a method to add components. this will use templates
              * 
              * @param args the component 
