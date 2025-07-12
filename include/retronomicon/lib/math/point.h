@@ -56,10 +56,32 @@ namespace retronomicon::lib::math{
 	    	 */
 	    	float calculateDistance(const Point& target) const;
 
-	    	// operator overloadS
+    	    /**
+		     * @brief overloading operator ==
+		     * 
+		     * @param other another point
+		     */
 	    	bool operator==(const Point& other) const;
+
+    	    /**
+		     * @brief overloading operator !=
+		     * 
+		     * @param other another point
+		     */
 			bool operator!=(const Point& other) const;
+
+    	    /**
+		     * @brief overloading operator +
+		     * 
+		     * @param other another point
+		     */
 			Point operator+(const Point& other) const;
+
+    	    /**
+		     * @brief overloading operator -
+		     * 
+		     * @param other another point
+		     */
 			Point operator-(const Point& other) const;
 	    private:
 	    	float m_x; // x position

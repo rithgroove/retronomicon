@@ -118,14 +118,6 @@ namespace retronomicon::lib::math{
 	    	 */
 			float getY() const { return m_position.getY(); }
 
-	    	// /**
-	    	//  * @brief a method to get SDL_Rect representation of this rectangle.
-	    	//  * Useful for rendering textures.
-	    	//  * 
-	    	//  * @return the SDL_Rect
-	    	//  */        
-	    	// SDL_Rect generateSDLRect() const;
-
 	    private:
 	    	Point m_anchor;
 	    	Point m_position;

@@ -18,12 +18,11 @@ target_sources(retronomicon
     PRIVATE
         $<TARGET_OBJECTS:retronomicon-animation>
         $<TARGET_OBJECTS:core>
-        $<TARGET_OBJECTS:input>
+        $<TARGET_OBJECTS:retronomicon-input>
         $<TARGET_OBJECTS:scripting>
         $<TARGET_OBJECTS:asset>
         $<TARGET_OBJECTS:audio>
         $<TARGET_OBJECTS:retronomicon-graphic>
-        $<TARGET_OBJECTS:input>
         $<TARGET_OBJECTS:retronomicon-math>
 )
 

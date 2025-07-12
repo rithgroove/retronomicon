@@ -33,18 +33,38 @@ namespace retronomicon::lib::math{
         return std::sqrt(dx * dx + dy * dy);
     }
 
+    /**
+     * @brief overloading operator == 
+     * 
+     * @param other another point
+     */
     bool Point::operator==(const Point& other) const {
         return m_x == other.m_x && m_y == other.m_y;
     }
 
+    /**
+     * @brief overloading operator != 
+     * 
+     * @param other another point
+     */
     bool Point::operator!=(const Point& other) const {
         return !(*this == other);
     }
 
+    /**
+     * @brief overloading operator + 
+     * 
+     * @param other another point
+     */
     Point Point::operator+(const Point& other) const {
         return Point(m_x + other.m_x, m_y + other.m_y);
     }
 
+    /**
+     * @brief overloading operator - 
+     * 
+     * @param other another point
+     */
     Point Point::operator-(const Point& other) const {
         return Point(m_x - other.m_x, m_y - other.m_y);
     }
