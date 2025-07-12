@@ -1,6 +1,7 @@
 #pragma once
 
-#include <cmath>
+#include <string>
+#include <ostream>
 #include "vec2.h"
 
 /**
@@ -27,6 +28,11 @@ namespace retronomicon::lib::math{
 	    	 */
 	    	Point(float x, float y);
 	    	
+
+	    	Point(Vec2& vector);
+
+	    	/***************************** Destructor *****************************/
+
 	    	// ~Point(); // no need for custom destructor (yet) since all attributes are native 
 
 	    	/***************************** Setter *****************************/
@@ -41,6 +47,7 @@ namespace retronomicon::lib::math{
 
 
 	    	/***************************** Getter *****************************/
+
 	    	/**
 	    	 * @brief return the x position of the point
 	    	 * 
@@ -54,6 +61,15 @@ namespace retronomicon::lib::math{
 	    	 * @return the y position of the point
 	    	 */
 	    	float getY() const { return m_y; }
+
+	    	/***************************** To String *****************************/
+
+	    	/**
+	    	 * @brief a method to help people debug this object
+	    	 * 
+	    	 * @return Brief summary of this object in string
+	    	 */
+	    	std::string to_string() const;
 
 	    	/***************************** Operator Overload *****************************/
 
@@ -85,6 +101,12 @@ namespace retronomicon::lib::math{
 		     */
 			Point operator-(const Point& other) const;
 
+			/**
+			 * @brief overloading operator << to call to_string()
+			 */
+			friend std::ostream& operator<<(std::ostream& os, const Point& p) {
+		        return os << p.to_string();
+		    }
 
 	    	/***************************** Other Function *****************************/
 

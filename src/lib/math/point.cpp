@@ -1,5 +1,5 @@
 #include "retronomicon/lib/math/point.h"
-// #include <cmath>
+#include <cmath>
 #include "vec2.h"
 
 /**
@@ -7,6 +7,7 @@
  */
 namespace retronomicon::lib::math{
 
+    /***************************** Constructor *****************************/
     /**
      *  @brief default constructor with x=0 and y =0
      */
@@ -18,21 +19,20 @@ namespace retronomicon::lib::math{
      * @param x the x position
      * @param y the y position
      */
-    Point::Point(float x, float y){
-        set(x,y);
-    } 
+    Point::Point(float x, float y) : m_x(x), m_y(y){}
 
     /**
-     * @brief calculate the distance between this point and target point
+     * @brief constructor with 2 points 
      * 
-     * @param target the target point
-     * @return the distance in float
+     * @param vector the Vec2 we wanted to convert to Point
      */
-    float Point::calculateDistance(const Point& target) const {
-        float dx = m_x - target.getX();
-        float dy = m_y - target.getY();
-        return std::sqrt(dx * dx + dy * dy);
-    }
+    Point::Point(Vec2& vector): m_x(vector.x),m_y(vector.y){}
+
+    /***************************** Destructor *****************************/
+
+    // Point:~Point() = default; //put it here in case needed
+
+    /***************************** Operator Overload *****************************/
 
     /**
      * @brief overloading operator == 
@@ -68,6 +68,36 @@ namespace retronomicon::lib::math{
      */
     Point Point::operator-(const Point& other) const {
         return Point(m_x - other.m_x, m_y - other.m_y);
+    }
+
+    /***************************** To String *****************************/
+    
+    /**
+     * @brief a method to help people debug this object
+     * 
+     * @return Brief summary of this object in string
+     */
+    std::string to_string() const{
+        std::ostringstream oss;
+        oss << "[Point]\n";
+        oss << "values:\n";
+        oss << "x = "<< m_x <<"\n";
+        oss << "y = "<< m_y <<"\n";
+        return oss.str();
+    }
+
+    /***************************** Other Function *****************************/
+
+    /**
+     * @brief calculate the distance between this point and target point
+     * 
+     * @param target the target point
+     * @return the distance in float
+     */
+    float Point::calculateDistance(const Point& target) const {
+        float dx = m_x - target.getX();
+        float dy = m_y - target.getY();
+        return std::sqrt(dx * dx + dy * dy);
     }
 
     /**
