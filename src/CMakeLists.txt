@@ -22,7 +22,7 @@ target_sources(retronomicon
         $<TARGET_OBJECTS:audio>
         $<TARGET_OBJECTS:graphic>
         $<TARGET_OBJECTS:input>
-        $<TARGET_OBJECTS:math>
+        $<TARGET_OBJECTS:retronomicon-math>
 )
 
 # Global engine include path
@@ -41,11 +41,3 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/external/SDL2_ttf/include
     ${CMAKE_SOURCE_DIR}/external/SDL2_image/include
 )
-# Define engine-wide compile definitions
-if (ENABLE_LUA)
-    target_compile_definitions(retronomicon PUBLIC USE_LUA)
-endif()
-
-if (ENABLE_PYTHON)
-    target_compile_definitions(retronomicon PUBLIC USE_PYTHON)
-endif()

@@ -2,9 +2,9 @@ file(GLOB_RECURSE MATH_SRC CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
 )
 
-add_library(math OBJECT ${MATH_SRC})
+add_library(retronomicon-math STATIC ${MATH_SRC})
 target_include_directories(
-    math PUBLIC
+    retronomicon-math PUBLIC
     ${CMAKE_SOURCE_DIR}/include
 )
 
