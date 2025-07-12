@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL.h>
 #include "retronomicon/lib/core/system.h"
 
 using namespace retronomicon::lib::core;
