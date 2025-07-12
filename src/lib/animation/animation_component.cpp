@@ -18,14 +18,14 @@ namespace retronomicon::lib::animation {
         addClip(defaultClip);
         changeClip(defaultClip->getName());
     }
-
+    AnimationComponent::~AnimationComponent() = default;  
     /**
      *  @brief add an animation clip to this component.
      * 
      * @param animationClip the animation clip that we'll be adding to the manager
      */
     bool AnimationComponent::addClip(std::shared_ptr<AnimationClip> clip) {
-        const std::string& name = clip->name();
+        const std::string& name = clip->getName();
         if (m_animationClips.count(name)) return false;
         m_animationClips[name] = std::move(clip);
         return true;
