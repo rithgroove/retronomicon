@@ -11,9 +11,12 @@ namespace retronomicon::lib::math {
      */
     class Vec2 {
         public:
-            float x, y;
+            /***************************** Attribute *****************************/
 
-            // Constructors
+            float x, y; // because Vec2 values changes a lot we put it in public
+
+            /***************************** Constructor *****************************/
+
             /**
              * @brief default constructor (0,0)
              */
