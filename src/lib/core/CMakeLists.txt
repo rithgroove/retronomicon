@@ -14,4 +14,4 @@ target_include_directories(
     ${CMAKE_SOURCE_DIR}/external/SDL2_image/include
 )
 
-message("CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
+message("CMAKE_SOURCE_DIR = ${RETRO_INCLUDE_DIR}")
