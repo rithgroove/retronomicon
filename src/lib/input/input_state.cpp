@@ -1,45 +1,32 @@
 #include "retronomicon/lib/input/input_state.h"
 
+/**
+ * @brief This namespace is for handling input
+ */
 namespace retronomicon::lib::input {
 
+    /***************************** Constructor *****************************/
+
+    /**
+     *  @brief constructor of Input State
+     * 
+     * @param rawInput the rawInput class
+     * @param inputMap key mapping from SDL to what the game understand
+     */
     InputState::InputState(RawInput * rawInput,InputMap* inputMap){
         m_rawInput = rawInput;
         m_inputMap = inputMap;
     }
+
+    /***************************** Destructor *****************************/
+
+    // InputState:~InputState() = default;
     
-    void InputState::setAction(const string& name, bool active) {
-        if (!m_actions[name]){ // if already true, do not turn it into false 
-            m_actions[name] = active;
-        }
-    }
+    /***************************** Main Methods *****************************/
 
-    void InputState::setAxis(const string& name, float value) {
-        m_axes[name] = value;
-    }
-
-    bool InputState::isActionActive(const string& name) const {
-        auto it = m_actions.find(name);
-        return it != m_actions.end() && it->second;
-    }
-
-    float InputState::getAxisValue(const string& name) const {
-        auto it = m_axes.find(name);
-        return it != m_axes.end() ? it->second : 0.0f;
-    }
-
-    void InputState::clear() {
-        for (auto& data : m_actions) data.second = false;
-        for (auto& data : m_axes) data.second = 0.0f;
-    }
-
-    const unordered_map<string, bool>& InputState::getActions() const {
-        return m_actions;
-    }
-
-    const unordered_map<string, float>& InputState::getAxes() const {
-        return m_axes;
-    }
-
+    /**
+     * @brief a method to update from SDL Event Pool
+     */
     void InputState::updateFromSDL(){
         m_rawInput->clear();
         m_rawInput->poll();
