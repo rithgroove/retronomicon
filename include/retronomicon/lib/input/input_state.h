@@ -101,6 +101,25 @@ namespace retronomicon::lib::input {
                 for (auto& data : m_axes) data.second = 0.0f;
             }
 
+
+            /***************************** Operator Overload *****************************/
+
+            /**
+             * @brief overloading operator << to call to_string()
+             */
+            friend std::ostream& operator<<(std::ostream& os, const InputState& obj) {
+                return os << obj.to_string();
+            }
+
+            /***************************** To String *****************************/
+
+            /**
+             * @brief a method to help people debug this object
+             * 
+             * @return Brief summary of this object in string
+             */
+            std::string to_string() const;
+
             /***************************** Main Method *****************************/
 
             /**

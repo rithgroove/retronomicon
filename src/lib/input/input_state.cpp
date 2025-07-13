@@ -1,4 +1,5 @@
 #include "retronomicon/lib/input/input_state.h"
+#include <sstream>
 
 /**
  * @brief This namespace is for handling input
@@ -22,6 +23,27 @@ namespace retronomicon::lib::input {
 
     // InputState:~InputState() = default;
     
+    /***************************** To String *****************************/
+    
+    /**
+     * @brief a method to help people debug this object
+     * 
+     * @return Brief summary of this object in string
+     */
+    std::string InputState::to_string() const{
+        std::ostringstream oss;
+        oss << "[Input State]\n";
+        oss << "axis:\n";
+        for (const auto& it : m_axes) {
+            oss << " - "<< it.first << " = " << it.second <<"\n";
+        }
+        oss << "actions:\n";
+        for (const auto& it : m_actions) {
+            oss << " - "<< it.first << " = " << it.second <<"\n";
+        }
+        return oss.str();
+    }
+
     /***************************** Main Methods *****************************/
 
     /**
