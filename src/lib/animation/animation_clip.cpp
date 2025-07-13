@@ -1,6 +1,6 @@
 #include "retronomicon/lib/animation/animation_clip.h"
 #include <algorithm>  // for std::max
-
+#include <sstream>
 /**
  * @brief The namespace for graphic utilities
  */
@@ -42,6 +42,23 @@ namespace retronomicon::lib::animation{
             return true;
         }
         return false;
+    }
+
+    /***************************** To String *****************************/
+    
+    /**
+     * @brief a method to help people debug this object
+     * 
+     * @return Brief summary of this object in string
+     */
+    std::string AnimationClip::to_string() const{
+        std::ostringstream oss;
+        oss << "[AnimationClip]\n";
+        oss << "values:\n";
+        oss << "- name          = " << m_name <<"\n";
+        oss << "- repeat        = " << m_repeat <<"\n";
+        oss << "- current_frame = " << m_currentFrame << "/" << getFrameCount() <<"\n";
+        return oss.str();
     }
 
     /***************************** Main Methods *****************************/

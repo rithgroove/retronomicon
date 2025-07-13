@@ -91,6 +91,24 @@ namespace retronomicon::lib::animation{
 	    	 */    
             bool isFinished() const;
 
+	    	/***************************** Operator Overload *****************************/
+
+            /**
+             * @brief overloading operator << to call to_string()
+             */
+            friend std::ostream& operator<<(std::ostream& os, const AnimationClip& obj) {
+                return os << obj.to_string();
+            }
+
+	    	/***************************** To String *****************************/
+
+	    	/**
+	    	 * @brief a method to help people debug this object
+	    	 * 
+	    	 * @return Brief summary of this object in string
+	    	 */
+	    	std::string to_string() const;
+
 		    /***************************** Main Methods *****************************/
 
 	    	/**
