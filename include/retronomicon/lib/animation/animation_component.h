@@ -87,6 +87,24 @@ namespace retronomicon::lib::animation{
              */
             bool hasClip(const std::string& name) const  {return m_animationClips.count(name) > 0;}
 
+            /***************************** Operator Overload *****************************/
+
+            /**
+             * @brief overloading operator << to call to_string()
+             */
+            friend std::ostream& operator<<(std::ostream& os, const AnimationComponent& obj) {
+                return os << obj.to_string();
+            }
+
+            /***************************** To String *****************************/
+
+            /**
+             * @brief a method to help people debug this object
+             * 
+             * @return Brief summary of this object in string
+             */
+            std::string to_string() const;
+
             /***************************** Main Methods *****************************/
 
             // --- Clip Management ---

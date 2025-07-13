@@ -1,6 +1,6 @@
-
 #include "retronomicon/lib/animation/animation_component.h"
 
+#include <sstream>
 /**
  * @brief The namespace for graphic utilities
  */
@@ -29,6 +29,28 @@ namespace retronomicon::lib::animation {
      */
     AnimationComponent::~AnimationComponent() = default;  
 
+
+    /***************************** To String *****************************/
+    
+    /**
+     * @brief a method to help people debug this object
+     * 
+     * @return Brief summary of this object in string
+     */
+    std::string AnimationComponent::to_string() const{
+        std::ostringstream oss;
+        oss << "[AnimationComponent]\n";
+        oss << "values:\n";
+        oss << "- default_clip = " << m_defaultClip->getName() <<"\n";
+        oss << "- current_clip = " << m_currentClip->getName() <<"\n";
+        oss << "- is_paused = " << m_paused <<"\n";
+        oss << "- clip list:\n";
+        for (const auto& pair : m_animationClips) {
+            // Access the key using pair.first and the value using pair.second
+            oss << "  - "<< pair.first << "\n";
+        }
+        return oss.str();
+    }
 
     /***************************** Main Methods *****************************/
 
