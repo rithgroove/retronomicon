@@ -24,6 +24,9 @@ namespace retronomicon::lib::animation {
 
     /***************************** Destructor *****************************/
 
+    /**
+     * @brief default destructor
+     */
     AnimationComponent::~AnimationComponent() = default;  
 
 

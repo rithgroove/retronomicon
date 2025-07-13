@@ -1,19 +1,32 @@
 #pragma once
-
+/**
+ * @brief The namespace for animation utilities
+ */
 namespace retronomicon::lib::animation {
-
+    // Forward Declaration
     class AnimationComponent;
 
+    /**
+     * @brief The abstract class for animation listener
+     */
     class AnimationListener {
-    public:
-        virtual ~AnimationListener() = default;
+        public:
+            /***************************** Destructor *****************************/
 
-        /**
-         * @brief Called when an animation clip finishes playing.
-         * 
-         * @param sender Pointer to the animation component that finished
-         */
-        virtual void onAnimationFinished(AnimationComponent* sender) = 0;
+            /**
+             * @brief default destructor
+             */
+            virtual ~AnimationListener() = default;
+
+            /***************************** Virtual Methods *****************************/
+
+            /**
+             * @brief Called when an animation clip finishes playing.
+             * 
+             * @param sender Pointer to the animation component that finished
+             * might change later
+             */
+            virtual void onAnimationFinished(AnimationComponent* sender) = 0;
     };
 
 }

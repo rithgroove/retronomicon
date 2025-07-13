@@ -3,7 +3,7 @@
 #include "retronomicon/lib/math/rect.h"
 
 /**
- * @brief The namespace for graphic utilities
+ * @brief The namespace for animation utilities
  */
 namespace retronomicon::lib::animation{
 	/**
