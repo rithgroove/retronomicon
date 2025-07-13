@@ -50,13 +50,6 @@ namespace retronomicon::lib::asset {
             SDL_Texture* getTexture() const;
 
             /**
-             * @brief Get the name/key of the image asset
-             *
-             * @return name string
-             */
-            std::string getName() const;
-
-            /**
              * @brief Return a textual description of the image asset
              *
              * @return debug string with name and path
@@ -64,7 +57,6 @@ namespace retronomicon::lib::asset {
             std::string to_string() const override;
 
         private:
-            std::string m_name;
             SDL_Texture* m_texture = nullptr;  // The texture created from the image file
             int m_width = 0;                   // Width of the image
             int m_height = 0;                  // Height of the image

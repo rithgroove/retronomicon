@@ -15,9 +15,14 @@ class Asset {
         std::string getPath(){
             return m_path;
         }
+        
+        std::string getName(){
+            return m_name;
+        }
 
     protected:
 
         std::string m_path;
+        std::string m_name;
     };
 }

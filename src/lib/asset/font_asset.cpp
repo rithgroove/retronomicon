@@ -18,8 +18,9 @@ namespace retronomicon::lib::asset {
                          const std::string& name,
                          int fontSize,
                          SDL_Renderer* renderer)
-        : m_name(name), m_fontSize(fontSize), m_renderer(renderer)
+        : m_fontSize(fontSize), m_renderer(renderer)
     {
+        m_name = m_name;
         m_path = filePath;
 
         m_font = TTF_OpenFont(filePath.c_str(), fontSize);
@@ -55,15 +56,6 @@ namespace retronomicon::lib::asset {
      */
     TTF_Font* FontAsset::getRawFont() const {
         return m_font;
-    }
-
-    /**
-     * @brief Get the font name
-     *
-     * @return name string
-     */
-    std::string FontAsset::getName() const {
-        return m_name;
     }
 
     /**

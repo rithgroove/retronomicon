@@ -22,6 +22,11 @@ git clone -b release-2.8.x git@github.com:libsdl-org/SDL_image.git SDL2_image
 cd ./SDL2_image
 cd ..
 
+echo cloning SDL2_mixer
+git clone -b release-2.8.1 https://github.com/libsdl-org/SDL_mixer.git SDL2_mixer
+cd ./SDL2_mixer
+cd ..
+
 # echo cloning entt 
 # git clone https://github.com/skypjack/entt.git entt
 # cd ./entt

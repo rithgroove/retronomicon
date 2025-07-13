@@ -10,7 +10,7 @@ namespace retronomicon::lib::asset {
      */
     class TextAsset : public Asset {
         public:
-            explicit TextAsset(const std::string& path);
+            explicit TextAsset(const std::string& path,const std::string& name);
             ~TextAsset() override = default;
 
             /**

@@ -12,7 +12,7 @@ namespace retronomicon::lib::asset {
      */
     class BinaryAsset : public Asset {
     public:
-        explicit BinaryAsset(const std::string& path);
+        explicit BinaryAsset(const std::string& path, const std::string& name);
         ~BinaryAsset() override = default;
 
         /**

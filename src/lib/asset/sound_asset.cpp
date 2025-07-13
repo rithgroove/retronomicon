@@ -3,10 +3,11 @@
 
 namespace retronomicon::lib::asset {
 
-SoundAsset::SoundAsset(const std::string& path)
+SoundAsset::SoundAsset(const std::string& path,const std::string& name)
     : m_chunk(nullptr)
-{
+ {
     m_path = path;
+    m_name = name;
 
     m_chunk = Mix_LoadWAV(path.c_str());
     if (!m_chunk) {

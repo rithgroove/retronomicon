@@ -3,7 +3,7 @@
 
 namespace retronomicon::lib::core::component {
 
-    SpriteComponent::SpriteComponent(RawImage* image){
+    SpriteComponent::SpriteComponent(ImageAsset* image){
         m_image = image;
     }
 

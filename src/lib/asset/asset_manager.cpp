@@ -1,197 +1,150 @@
 #include "retronomicon/lib/asset/asset_manager.h"
+#include <iostream>
+#include <fstream>
 
-/**
- * @brief This namespace is for handling asset loading 
- */
-namespace retronomicon::lib::asset{
-	/**
-	 * @brief Constructor using renderer
-	 * 
-	 * @param renderer a renderer that will be passed to any object loaded by this asset manager.
-	 */
-    AssetManager::AssetManager(SDL_Renderer* renderer){
-    	m_renderer = renderer; //set renderer
+namespace retronomicon::lib::asset {
+
+AssetManager::AssetManager(SDL_Renderer* renderer) : m_renderer(renderer) {}
+
+AssetManager::~AssetManager() {
+    clearAll();
+}
+
+void AssetManager::clearAll() {
+    m_images.clear();
+    m_fonts.clear();
+    m_music.clear();
+    m_sounds.clear();
+    m_texts.clear();
+    m_binaries.clear();
+}
+
+void AssetManager::logLoad(const std::string& type, const std::string& name, const std::string& path) {
+    std::cout << "[AssetManager] Loaded " << type << " [" << name << "] from " << path << std::endl;
+}
+
+std::shared_ptr<ImageAsset> AssetManager::loadImage(const std::string& path, const std::string& name, bool forceReload) {
+    auto it = m_images.find(name);
+    if (it != m_images.end() && !forceReload) {
+        return it->second;
     }
-	
-	/**
-	 * @brief The destructor of the object, used to destroy maps using unsorted_map.clear() function
-	 */
-    AssetManager::~AssetManager(){
-    	m_imageMap.clear(); //clear image map
-    	m_fontMap.clear(); //clear font map
+    auto image = std::make_shared<ImageAsset>(path, name, m_renderer);
+    m_images[name] = image;
+    logLoad("Image", name, path);
+    return image;
+}
+
+std::shared_ptr<ImageAsset> AssetManager::getImage(const std::string& name) {
+    auto it = m_images.find(name);
+    if (it != m_images.end()) return it->second;
+    throw std::runtime_error("Image not found: " + name);
+}
+
+bool AssetManager::removeImage(const std::string& name) {
+    return m_images.erase(name) > 0;
+}
+
+std::shared_ptr<FontAsset> AssetManager::loadFont(const std::string& path, const std::string& name, int size, bool forceReload) {
+    std::string key = fontKey(name, size);
+    auto it = m_fonts.find(key);
+    if (it != m_fonts.end() && !forceReload) {
+        return it->second;
     }
-	
-    /**
-     * @brief A method to load image from drive and put it in local map (m_imageMap) 
-     * caveats:
-     * - Currently only accept PNG.
-     * - will return nullptr if not found 
-     * - will return nullptr if name exist but have different filepath
-     * - will load the image from drive if not exist
-     * - if exists in cache will use the one preloaded before
-     * 
-     * @param imagePath the path to the image
-     * @param name the name or key for the image so we can request it again in the future
-     * @param forceReplace set true if you want to load the image from the drive again
-     * @return the image
-     */
-	RawImage* AssetManager::loadImage(const string& imagePath,const string& name, bool forceReplace){
-		//declare
-    	RawImage* image = nullptr;
+    auto font = std::make_shared<FontAsset>(path, name, size, m_renderer);
+    m_fonts[key] = font;
+    logLoad("Font", key, path);
+    return font;
+}
 
-    	//get from cache first
-	    try{
-	    	image = this->getImage(name);
-	    	if (imagePath.compare(image->getPath()) != 0 && !forceReplace){
-	    		return nullptr;
-	    	}
-	    } catch (const exception& error) {
-	        cerr << "Error: " << error.what() << endl; 
-	    }
+std::shared_ptr<FontAsset> AssetManager::getFont(const std::string& name, int size) {
+    std::string key = fontKey(name, size);
+    auto it = m_fonts.find(key);
+    if (it != m_fonts.end()) return it->second;
+    throw std::runtime_error("Font not found: " + key);
+}
 
-	    //return if exist in cache
-	    if (image){
-	    	if (!forceReplace){
-	    		this->removeImage(name);
-	    	}else{
-	    		return image;
-	    	}
-	    }
+bool AssetManager::removeFont(const std::string& name, int size) {
+    return m_fonts.erase(fontKey(name, size)) > 0;
+}
 
-	    // if not exists in cache, try load from drive
-    	try {
-	  		image = new RawImage(imagePath,name,m_renderer); //try to create image
-	  		m_imageMap[name] = image;	    		
-    		cout <<"Load " << name << " from memory" <<endl;
-    	}catch (const exception& error) {
-	        cerr << "Error: " << error.what() << endl; 
-	    } 
+std::shared_ptr<MusicAsset> AssetManager::loadMusic(const std::string& path, const std::string& name, bool forceReload) {
+    auto it = m_music.find(name);
+    if (it != m_music.end() && !forceReload) return it->second;
+    auto music = std::make_shared<MusicAsset>(path, name);
+    m_music[name] = music;
+    logLoad("Music", name, path);
+    return music;
+}
 
-	    // return the result
-	  	return image;
-  	}
+std::shared_ptr<MusicAsset> AssetManager::getMusic(const std::string& name) {
+    auto it = m_music.find(name);
+    if (it != m_music.end()) return it->second;
+    throw std::runtime_error("Music not found: " + name);
+}
 
-    /**
-     * @brief  A method to get the loaded image
-     *
-     * @param name the name/key for the image
-     * @return the instance of RawImage that represent the image
-     */
-	RawImage* AssetManager::getImage(const string& name){
+bool AssetManager::removeMusic(const std::string& name) {
+    return m_music.erase(name) > 0;
+}
 
-    	cout << "debug 1 = "<<name << endl;
-    	auto it = m_imageMap.find(name);
-        if (it != m_imageMap.end()) {
-            return it->second;
-        } else {
-			throw std::runtime_error("Image not found for key: " + name);
-        }
-    }
-    
-    /**
-     * @brief A method to remove the loaded image from memory
-     *
-     * @param name the name/key for the image
-     * @return return true if success, return false if failed
-     */
-    bool AssetManager::removeImage(const string& name){
-    	RawImage* image =this->getImage(name);
-    	if (image){
-    		m_imageMap.erase(image->getName());
-       	}else{
-	        cerr << "Error: File with name:  " << name << " not found in memory "<< endl;
-    		return false;
-    	}
-    	return true;
+std::shared_ptr<SoundAsset> AssetManager::loadSound(const std::string& path, const std::string& name, bool forceReload) {
+    auto it = m_sounds.find(name);
+    if (it != m_sounds.end() && !forceReload) return it->second;
+    auto sound = std::make_shared<SoundAsset>(path, name);
+    m_sounds[name] = sound;
+    logLoad("Sound", name, path);
+    return sound;
+}
 
-    }
-	
-    /**
-     * @brief A method to load font from drive and put it in local map (m_fontMap)
-     * caveats:
-     * - Currently only accept TTF.
-     * - each size needs to be initiated differently (so Arial 16 and Arial 18 will be initiated as 2 different font)
-     * - will return nullptr if not found 
-     * - will return nullptr if name exist but have different filepath
-     * - will load the front from drive if not exist
-     * - if exists in cache will use the one preloaded before
-     * 
-     * @param imagePath the path to the font
-     * @param name the name or key for the font so we can request it again in the future
-     * @param size the size for the font so we can request it again in the future
-     * @param forceReplace set true if you want to load the image from the drive again
-     * @return return true if success, return false if failed
-     */
-    Font * AssetManager::loadFont(const string& fontPath,const string& name, int size, bool forceReplace){
-    	//setup keys
-	    string tempName = name + "-" + to_string(size);
-		Font *font = nullptr;
+std::shared_ptr<SoundAsset> AssetManager::getSound(const std::string& name) {
+    auto it = m_sounds.find(name);
+    if (it != m_sounds.end()) return it->second;
+    throw std::runtime_error("Sound not found: " + name);
+}
 
-		// load from existing
-	    try{
-	    	font = this->getFont(name,size);
-	    	if (fontPath.compare(font->getPath()) != 0 && !forceReplace){
-	    		return nullptr;
-	    	}
-	    } catch (const exception& error) {
-	        cerr << "Error: " << error.what() << endl;
-	    } 
+bool AssetManager::removeSound(const std::string& name) {
+    return m_sounds.erase(name) > 0;
+}
 
-	    // if not empty return font
-	    if (font){
-	    	if (!forceReplace){
-	    		this->removeFont(name,size);
-	    	}else{
-		    	return font;
-	    	}
-	    }
+std::shared_ptr<TextAsset> AssetManager::loadText(const std::string& path, const std::string& name, bool forceReload) {
+    auto it = m_texts.find(name);
+    if (it != m_texts.end() && !forceReload) return it->second;
+    auto text = std::make_shared<TextAsset>(path, name);
+    m_texts[name] = text;
+    logLoad("Text", name, path);
+    return text;
+}
 
-	    // load from memory
-	    try{
-		    font = new Font(fontPath, tempName,size,m_renderer); 
-	  		m_fontMap[tempName] = font;
-    		cout <<"Load " << name << " from memory" <<endl;
-	    } catch (const exception& error) {
-	        cerr << "Error: " << error.what() << endl;
-	    }
-  		return font;
-  	}
+std::shared_ptr<TextAsset> AssetManager::getText(const std::string& name) {
+    auto it = m_texts.find(name);
+    if (it != m_texts.end()) return it->second;
+    throw std::runtime_error("Text not found: " + name);
+}
 
-    /**
-     * @brief A method to get the font from memory
-     *
-     * @param name the name/key for the font
-     * @param size the size of the font
-     */
-	Font* AssetManager::getFont(const string& name, int size){
+bool AssetManager::removeText(const std::string& name) {
+    return m_texts.erase(name) > 0;
+}
 
-    	string tempName = name + "-" + to_string(size);
-    	cout << "debug 1 = "<< tempName << endl;
-    	auto it = m_fontMap.find(tempName);
-        if (it != m_fontMap.end()) {
-            return it->second;
-        } else {
-			throw std::runtime_error("Image not found for key: " + tempName);
-        }
-    }
+std::shared_ptr<BinaryAsset> AssetManager::loadBinary(const std::string& path, const std::string& name, bool forceReload) {
+    auto it = m_binaries.find(name);
+    if (it != m_binaries.end() && !forceReload) return it->second;
+    auto binary = std::make_shared<BinaryAsset>(path, name);
+    m_binaries[name] = binary;
+    logLoad("Binary", name, path);
+    return binary;
+}
 
-    /**
-     * @brief A method to remove the loaded font from memory
-     *
-     * @param name the name/key for the font
-     * @param size the size of the font
-     * @return return true if success, return false if failed
-     */
-    bool AssetManager::removeFont(const string& name, int size){
-    	string tempName = name + "-" + to_string(size);
-    	RawImage* image =this->getImage(tempName);
-    	if (image){
-    		m_imageMap.erase(image->getName());
-    	}else{
-	        cerr << "Error: File with name:  " << name << " not found in memory "<< endl;
-    		return false;
-    	}
-    	return true;
+std::shared_ptr<BinaryAsset> AssetManager::getBinary(const std::string& name) {
+    auto it = m_binaries.find(name);
+    if (it != m_binaries.end()) return it->second;
+    throw std::runtime_error("Binary not found: " + name);
+}
 
-    }
-} // namespace Retronomicon
+bool AssetManager::removeBinary(const std::string& name) {
+    return m_binaries.erase(name) > 0;
+}
+
+std::string AssetManager::fontKey(const std::string& name, int size) const {
+    return name + "-" + std::to_string(size);
+}
+
+} // namespace retronomicon::lib::asset

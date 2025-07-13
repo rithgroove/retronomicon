@@ -5,8 +5,9 @@
 
 namespace retronomicon::lib::asset {
 
-BinaryAsset::BinaryAsset(const std::string& path) {
+BinaryAsset::BinaryAsset(const std::string& path,const std::string& name) {
     m_path = path;
+    m_name = name;
 
     std::ifstream file(path, std::ios::binary);
     if (!file) {

@@ -15,9 +15,9 @@ namespace retronomicon::lib::asset {
     ImageAsset::ImageAsset(const std::string& imagePath,
                            const std::string& name,
                            SDL_Renderer* renderer)
-        : m_name(name)
     {
         m_path = imagePath;
+        m_name = name;
 
         // Load image to memory for CPU use
         SDL_Surface* surface = IMG_Load(imagePath.c_str());
@@ -76,15 +76,6 @@ namespace retronomicon::lib::asset {
      */
     int ImageAsset::getHeight() const {
         return m_height;
-    }
-
-    /**
-     * @brief Get the name of the image 
-     * 
-     * @return the name of the image
-     */
-    std::string ImageAsset::getName() const {
-        return m_name;
     }
 
     /**

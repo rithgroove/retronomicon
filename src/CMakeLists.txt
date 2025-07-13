@@ -35,7 +35,7 @@ target_include_directories(retronomicon
 
 # Link external dependencies
 target_link_libraries(retronomicon
-    PUBLIC SDL2 SDL2_ttf SDL2_image
+    PUBLIC SDL2 SDL2_ttf SDL2_image SDL2_mixer
 )
 
 include_directories(
@@ -43,4 +43,5 @@ include_directories(
     ${RETRO_DIR}/external/SDL2/include
     ${RETRO_DIR}/external/SDL2_ttf/include
     ${RETRO_DIR}/external/SDL2_image/include
+    ${RETRO_DIR}/external/SDL2_mixer/include
 )

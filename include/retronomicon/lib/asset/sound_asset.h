@@ -12,7 +12,7 @@ namespace retronomicon::lib::asset {
      */
     class SoundAsset : public Asset {
         public:
-            explicit SoundAsset(const std::string& path);
+            explicit SoundAsset(const std::string& path,const std::string& name);
             ~SoundAsset() override;
 
             /**

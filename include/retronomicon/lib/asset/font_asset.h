@@ -46,13 +46,6 @@ public:
     TTF_Font* getRawFont() const;
 
     /**
-     * @brief Get the name/key of the font
-     *
-     * @return name string
-     */
-    std::string getName() const;
-
-    /**
      * @brief Get the font size in points
      *
      * @return font size
@@ -86,7 +79,6 @@ public:
 
 private:
     SDL_Renderer* m_renderer = nullptr;
-    std::string m_name;       // friendly name
     int m_fontSize = 0;       // size in pt
     TTF_Font* m_font = nullptr;  // SDL_ttf loaded font
 };

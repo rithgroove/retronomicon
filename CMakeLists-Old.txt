@@ -17,6 +17,7 @@ option(ENABLE_PYTHON "Build Python scripting" ON)
 add_subdirectory(external/SDL2)
 add_subdirectory(external/SDL2_ttf)
 add_subdirectory(external/SDL2_image)
+add_subdirectory(external/SDL2_mixer)
 
 if (ENABLE_LUA)
     include_directories(external/sol2/include)
@@ -80,7 +81,7 @@ endif()
 # Link libraries
 target_link_libraries(retronomicon
     PRIVATE
-        SDL2 SDL2_ttf SDL2_image
+        SDL2 SDL2_ttf SDL2_image SDL2_mixer
 )
 # Windows-specific: disable SDL's main() override
 if (WIN32)

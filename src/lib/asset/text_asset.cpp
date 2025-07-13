@@ -5,9 +5,9 @@
 
 namespace retronomicon::lib::asset {
 
-TextAsset::TextAsset(const std::string& path) {
+TextAsset::TextAsset(const std::string& path,const std::string& name){
     m_path = path;
-
+    m_name = name;
     std::ifstream file(path);
     if (!file) {
         throw std::runtime_error("Failed to load text file: " + path);

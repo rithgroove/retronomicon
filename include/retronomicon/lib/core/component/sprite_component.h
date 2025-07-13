@@ -6,7 +6,7 @@
 
 #include "transform_component.h"
 #include "retronomicon/lib/animation/animation_component.h"
-#include "retronomicon/lib/asset/raw_image.h"
+#include "retronomicon/lib/asset/image_asset.h"
 #include "retronomicon/lib/core/component.h"
 #include "retronomicon/lib/core/renderable.h"
 
@@ -19,7 +19,7 @@ namespace retronomicon::lib::core::component {
 
     class SpriteComponent : public Component, public Renderable {
         public:
-            SpriteComponent(RawImage* rawImage);
+            SpriteComponent(ImageAsset* imageAsset);
             ~SpriteComponent();
 
             void start() override;
@@ -27,7 +27,7 @@ namespace retronomicon::lib::core::component {
             void render(SDL_Renderer* renderer) override;
 
         private:
-            RawImage* m_image;
+            ImageAsset* m_image;
             TransformComponent* m_transform;
             AnimationComponent* m_animation;
     };

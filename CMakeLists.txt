@@ -20,6 +20,7 @@ option(ENABLE_PYTHON "Enable Python scripting" ON)
 add_subdirectory(external/SDL2)
 add_subdirectory(external/SDL2_ttf)
 add_subdirectory(external/SDL2_image)
+add_subdirectory(external/SDL2_mixer)
 
 # Engine source (will add retronomicon library)
 add_subdirectory(src)
@@ -30,6 +31,7 @@ include_directories(
     ${RETRO_INCLUDE_DIR}/external/SDL2/include
     ${RETRO_INCLUDE_DIR}/external/SDL2_ttf/include
     ${RETRO_INCLUDE_DIR}/external/SDL2_image/include
+    ${RETRO_INCLUDE_DIR}/external/SDL2_mixer/include
 )
 
 # Optional: Message info

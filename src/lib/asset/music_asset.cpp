@@ -3,10 +3,12 @@
 
 namespace retronomicon::lib::asset {
 
-    MusicAsset::MusicAsset(const std::string& path)
+    MusicAsset::MusicAsset(const std::string& path,
+                         const std::string& name)
         : m_music(nullptr)
     {
         m_path = path;
+        m_name = name; 
 
         m_music = Mix_LoadMUS(path.c_str());
         if (!m_music) {
