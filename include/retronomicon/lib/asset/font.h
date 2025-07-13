@@ -3,86 +3,92 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <string>
-#include <iostream>
+#include "retronomicon/lib/asset/asset.h"
 
-using namespace std;
+namespace retronomicon::lib::asset {
+
 /**
- * @brief This namespace is for handling asset loading 
+ * @brief A class that represents a loaded font from storage to memory.
+ *        Provides functionality to render text as textures.
  */
-namespace retronomicon::lib::asset{
+class FontAsset : public Asset {
+public:
     /**
-     * @brief A class that represent a loaded font from storage to memory
-     */    
-	class Font {
-		public:
-			/**
-			 * @brief a constructor for the font class
-			 * 
-			 * @param filePath path to the file
-			 * @param the name given to this font
-			 * @param fontSize the size of the font
-			 * @param renderer the renderer used to generate texture 
-			 */
-		    Font(string filePath, string name, int fontSize,SDL_Renderer* renderer); 
+     * @brief Constructor for the font asset
+     *
+     * @param filePath path to the TTF file
+     * @param name the given name for this font
+     * @param fontSize the size (in pt) of the font
+     * @param renderer SDL_Renderer for texture generation
+     */
+    FontAsset(const std::string& filePath,
+              const std::string& name,
+              int fontSize,
+              SDL_Renderer* renderer);
 
-		    /**
-		     * Destructor: destroy the font (TTF_Font);
-		     */
-		    ~Font();
+    /**
+     * @brief Destructor: destroys the TTF_Font and releases resources
+     */
+    ~FontAsset() override;
 
-		    /**
-		     * @brief a method to get the raw font
-		     * 
-		     * @return TTF_Font the raw font
-		     */
-		    TTF_Font* getRawFont() const; 
-		    
-		    /**
-		     * @brief a method to check if font is initialized 
-		     * 
-		     * @return true if initialized
-		     */
-            bool isInitialized() const; 
+    /**
+     * @brief Returns whether the font was successfully loaded
+     *
+     * @return true if font is valid
+     */
+    bool isInitialized() const;
 
-            /**
-             * @brief a method to get the given name to this font
-             * 
-             * @return the name in string format
-             */
-            string getName() ; 
-            
-            /**
-             * @brief a method to get the file path of this font
-             * 
-             * @return the filepath in string format
-             */
-            string getPath() ;
+    /**
+     * @brief Get the raw TTF_Font pointer
+     *
+     * @return pointer to TTF_Font
+     */
+    TTF_Font* getRawFont() const;
 
-            /**
-             * @brief a method to get the font size of this font
-             * 
-             * @return the font size
-             */
-            int getFontSize(); 
+    /**
+     * @brief Get the name/key of the font
+     *
+     * @return name string
+     */
+    std::string getName() const;
 
-            /**
-             * @brief a method to generate texture so we could put it in renderer
-             * 
-             * @param text the text we wanted to render
-             * @param horizontalPadding the horizontal padding for this text
-             * @param verticalPadding for this text
-             * @param width of the texture
-             * @param height of the texture
-             * @param foreground color 
-             * @param background color (drop shadow) // not used at current moment
-             * @return SDL_Texture the texture where the text is rendered
-             */
-            SDL_Texture* generateTexture(const string text, int horizontalPadding, int verticalPadding,int width, int height,SDL_Color fgC, SDL_Color bgC);
-		private:
-			SDL_Renderer* m_renderer;
-            string m_fontPath; // path to file
-            string m_name; // name of file
-            int m_fontSize; // font size
-		    TTF_Font* m_font; // the loaded font
-	};
+    /**
+     * @brief Get the font size in points
+     *
+     * @return font size
+     */
+    int getFontSize() const;
+
+    /**
+     * @brief Generate a rendered texture from text
+     *
+     * @param text the string to render
+     * @param horizontalPadding pixels of horizontal margin
+     * @param verticalPadding pixels of vertical margin
+     * @param width target texture width
+     * @param height target texture height
+     * @param fgC foreground color (text)
+     * @param bgC background color (drop shadow - not used)
+     * @return SDL_Texture containing the rendered text
+     */
+    SDL_Texture* generateTexture(const std::string& text,
+                                 int horizontalPadding,
+                                 int verticalPadding,
+                                 int width,
+                                 int height,
+                                 SDL_Color fgC,
+                                 SDL_Color bgC);
+
+    /**
+     * @brief Return a debug description of this font asset
+     */
+    std::string to_string() const override;
+
+private:
+    SDL_Renderer* m_renderer = nullptr;
+    std::string m_name;       // friendly name
+    int m_fontSize = 0;       // size in pt
+    TTF_Font* m_font = nullptr;  // SDL_ttf loaded font
+};
+
 }
