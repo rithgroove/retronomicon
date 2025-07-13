@@ -128,6 +128,7 @@ namespace retronomicon::lib::math{
 			float getY() const { return m_position.getY(); }
 
 	    private:
+            /***************************** Attribute *****************************/            
 	    	Point m_anchor;
 	    	Point m_position;
 	    	float m_width;

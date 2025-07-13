@@ -38,7 +38,7 @@ namespace retronomicon::lib::animation{
         return false;
     }
 
-    /***************************** Other Methods *****************************/
+    /***************************** Main Methods *****************************/
 
     /**
      * @brief update the frame to the next one

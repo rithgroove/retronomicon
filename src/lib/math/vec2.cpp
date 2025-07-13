@@ -112,7 +112,7 @@ namespace retronomicon::lib::math {
         return oss.str();
     }
 
-    /***************************** Other Methods *****************************/
+    /***************************** Main Methods *****************************/
 
     /**
      * @brief a method to calculate the length of this vector

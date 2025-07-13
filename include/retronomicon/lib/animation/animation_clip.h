@@ -14,7 +14,6 @@ namespace retronomicon::lib::animation{
 	 */
     class AnimationClip {
 	    public:
-
 		    /***************************** Constructor *****************************/
 
 	    	/**
@@ -92,7 +91,7 @@ namespace retronomicon::lib::animation{
 	    	 */    
             bool isFinished() const;
 
-	    	/***************************** Other Methods *****************************/
+		    /***************************** Main Methods *****************************/
 
 	    	/**
 	    	 * @brief update the frame to the next one
@@ -102,6 +101,7 @@ namespace retronomicon::lib::animation{
             float update(float dt);
 
 	    private:
+            /***************************** Attribute *****************************/
 	    	std::vector<AnimationFrame> m_frames;
 	    	std::string m_name;
 	    	bool m_repeat		= false;

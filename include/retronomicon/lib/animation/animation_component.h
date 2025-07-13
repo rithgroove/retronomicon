@@ -18,13 +18,73 @@ namespace retronomicon::lib::animation{
      */
     class AnimationComponent : public retronomicon::lib::core::Component {
         public:
+            /***************************** Constructor *****************************/
+
             /**
              * @brief Constructor. initiate with default animation clip
              * 
              * @param defaultClip the default animation clip in shared pointer
              */
             explicit AnimationComponent(std::shared_ptr<AnimationClip> defaultClip);
+
+            /***************************** Destructor *****************************/
+
             virtual ~AnimationComponent(); 
+
+            /***************************** Setter *****************************/
+
+            /**
+             * @brief a method to set listener when this component finished it's animation queue
+             * 
+             * @param listener the animation listeneer class
+             */
+            inline void setListener(AnimationListener* listener) { m_listener = listener; }
+
+            /***************************** Getter *****************************/
+
+            /**
+             * @brief method to get current clip
+             * 
+             * @return current animation clip
+             */
+            inline std::shared_ptr<AnimationClip> getCurrentClip() const { return m_currentClip; }
+
+            /**
+             * @brief method to get current animation frame
+             * 
+             * @return current animation frame
+             */
+            inline const AnimationFrame& getCurrentFrame() const { return m_currentClip->getCurrentFrame(); }
+
+            /**
+             * @brief method to get current animation state name
+             * 
+             * @return current animation state name
+             */
+            inline const std::string& getCurrentStateName() const { return m_currentClip->getName(); }
+
+            /**
+             * @brief method to get current animation listener
+             * 
+             * @return current animation listener
+             */
+            inline AnimationListener* getListener() const { return m_listener; }
+
+            /***************************** Utility *****************************/
+
+            /**
+             * @brief check is current animation is animating
+             */
+            bool isPlaying() const{ return !m_paused;}
+
+            /**
+             * @brief a method to check if this component have a specific animation clip
+             * 
+             * @param name of the clip
+             */
+            bool hasClip(const std::string& name) const  {return m_animationClips.count(name) > 0;}
+
+            /***************************** Main Methods *****************************/
 
             // --- Clip Management ---
 
@@ -60,36 +120,24 @@ namespace retronomicon::lib::animation{
             void clearQueuedClips();
 
             /**
-             * @brief a method to check if this component have a specific animation clip
-             * 
-             * @param name of the clip
-             */
-            bool hasClip(const std::string& name) const ;
-            
-            /**
              * @brief reset animation to default animation
              */
-            void reset();
-
+            void reset(){ m_currentClip = m_defaultClip;}
 
             // --- Playback Control ---
             /**
              * @brief pause animation
              */
-            void pause();
+            void pause(){ m_paused = true; }
 
             /**
              * @brief resume pause animation
              */
-            void resume();
-
-            /**
-             * @brief check is current animation is animating
-             */
-            bool isPlaying() const;
+            void resume() { m_paused = false; }         
 
 
-            // --- Core Update ---
+            /***************************** Override Methods *****************************/
+
             /**
              * @brief update function (might change in the future).
              * Potential update is to use time interval so we could do frame skipping
@@ -98,14 +146,8 @@ namespace retronomicon::lib::animation{
              */
             void update(float dt) override;
 
-
-            // Inline Getters and Setter
-            inline std::shared_ptr<AnimationClip> getCurrentClip() const { return m_currentClip; }
-            inline const AnimationFrame& getCurrentFrame() const { return m_currentClip->getCurrentFrame(); }
-            inline const std::string& getCurrentStateName() const { return m_currentClip->getName(); }
-            inline void setListener(AnimationListener* listener) { m_listener = listener; }
-            inline AnimationListener* getListener() const { return m_listener; }
         private:
+            /***************************** Attribute *****************************/
             std::unordered_map<std::string, std::shared_ptr<AnimationClip>> m_animationClips;
             std::queue<std::shared_ptr<AnimationClip>> m_animationClipsQueue;
             std::shared_ptr<AnimationClip> m_currentClip;

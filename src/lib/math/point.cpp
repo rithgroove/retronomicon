@@ -86,7 +86,7 @@ namespace retronomicon::lib::math{
         return oss.str();
     }
 
-    /***************************** Other Methods *****************************/
+    /***************************** Main Methods *****************************/
 
     /**
      * @brief calculate the distance between this point and target point
@@ -100,6 +100,8 @@ namespace retronomicon::lib::math{
         return std::sqrt(dx * dx + dy * dy);
     }
 
+    /***************************** Other Methods *****************************/
+    
     /**
      * Convert point to Vec2
      * 

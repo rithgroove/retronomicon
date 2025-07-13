@@ -12,7 +12,6 @@ namespace retronomicon::lib::math {
     class Vec2 {
         public:
             /***************************** Attribute *****************************/
-
             float x, y; // because Vec2 values changes a lot we put it in public
 
             /***************************** Constructor *****************************/
@@ -112,7 +111,7 @@ namespace retronomicon::lib::math {
              */
             std::string to_string() const;
 
-            /***************************** Other Methods *****************************/
+            /***************************** Main Methods *****************************/
 
             /**
              * @brief a method to calculate the length of this vector

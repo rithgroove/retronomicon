@@ -5,6 +5,8 @@
  * @brief The namespace for graphic utilities
  */
 namespace retronomicon::lib::animation {
+    /***************************** Constructor *****************************/
+
     /**
      * @brief the constructor
      * 
@@ -18,7 +20,14 @@ namespace retronomicon::lib::animation {
         addClip(defaultClip);
         changeClip(defaultClip->getName());
     }
+
+    /***************************** Destructor *****************************/
+
     AnimationComponent::~AnimationComponent() = default;  
+
+
+    /***************************** Main Methods *****************************/
+
     /**
      *  @brief add an animation clip to this component.
      * 
@@ -51,14 +60,7 @@ namespace retronomicon::lib::animation {
             m_currentClip = it->second;
         }
     }
-    /**
-     * @brief a method to check if this component have a specific animation clip
-     * 
-     * @param name of the clip
-     */
-    bool AnimationComponent::hasClip(const std::string& name) const {
-        return m_animationClips.count(name) > 0;
-    }
+
     /**
      * @brief insert animation clip to the Queue
      */
@@ -75,32 +77,8 @@ namespace retronomicon::lib::animation {
             m_animationClipsQueue.pop();
         }
     }
-    
-    /**
-     * @brief reset animation to default animation
-     */
-    void AnimationComponent::reset(){
-        m_currentClip = m_defaultClip;
-    }
-    /**
-     * @brief pause animation
-     */
-    void AnimationComponent::pause() {
-        m_paused = true;
-    }
-     /**
-     * @brief resume pause animation
-     */
-    void AnimationComponent::resume() {
-        m_paused = false;
-    }
 
-    /**
-     * @brief check is current animation is animating
-     */
-    bool AnimationComponent::isPlaying() const {
-        return !m_paused;
-    }
+    /***************************** Override Methods *****************************/
 
     /**
      * @brief update function (might change in the future).

@@ -108,7 +108,7 @@ namespace retronomicon::lib::math{
 		        return os << p.to_string();
 		    }
 
-	    	/***************************** Other Methods *****************************/
+	    	/***************************** Main Methods *****************************/
 
 	    	/**
 	    	 * @brief calculate the distance between this point and target point
@@ -118,6 +118,8 @@ namespace retronomicon::lib::math{
 	    	 */
 	    	float calculateDistance(const Point& target) const;
 
+	    	/***************************** Other Methods *****************************/
+
 		    /**
 		     * Convert point to Vec2
 		     * 
@@ -125,6 +127,7 @@ namespace retronomicon::lib::math{
 		     */
     	    Vec2 toVec2() const;
 	    private:
+            /***************************** Attribute *****************************/
 	    	float m_x; // x position
 	    	float m_y; // y position
     };
