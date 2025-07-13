@@ -1,9 +1,9 @@
-#include "retronomicon/lib/animation/physics_system.h"
-#include "retronomicon/lib/animation/physics_component.h"
+#include "retronomicon/lib/physics/physics_system.h"
+#include "retronomicon/lib/physics/physics_component.h"
 namespace retronomicon::lib::physics{
-    AnimationSystem::PhysicsSystem() {}
+    PhysicsSystem::PhysicsSystem() {}
 
-    void AnimationSystem::update(float dt, vector<retronomicon::lib::core::GameObject*>& objects) {
+    void PhysicsSystem::update(float dt, vector<retronomicon::lib::core::GameObject*>& objects) {
         for (GameObject* obj : objects) {
             // render logic
             auto physicsComponent = obj->getComponent<PhysicsComponent>();

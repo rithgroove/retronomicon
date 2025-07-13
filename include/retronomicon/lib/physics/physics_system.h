@@ -1,4 +1,5 @@
 #include "retronomicon/lib/core/system.h"
+#include "retronomicon/lib/math/vec2.h"
 
 namespace retronomicon::lib::physics {
 
@@ -10,21 +11,21 @@ namespace retronomicon::lib::physics {
      */
     class PhysicsSystem : public retronomicon::lib::core::System
     {
-    public:
-        virtual ~PhysicsSystem() = default;
+        public:
+            PhysicsSystem();
 
-        // System ---------------------------------------------------------------
-        void update(float dt) final override
-        {
-            integrate(dt);
-            resolveCollisions();
-        }
+            // System ---------------------------------------------------------------
+            void update(float dt, vector<retronomicon::lib::core::GameObject*>& objects) override;
+            // {
+            //     integrate(dt);
+            //     resolveCollisions();
+            // }
 
-    protected:
-        /** Advance each body’s position/velocity by dt. */
-        virtual void integrate(float dt)            = 0;
-        /** Detect & resolve contacts for this frame.  */
-        virtual void resolveCollisions()            = 0;
+        protected:
+            /** Advance each body’s position/velocity by dt. */
+            virtual void integrate(float dt)            = 0;
+            /** Detect & resolve contacts for this frame.  */
+            virtual void resolveCollisions()            = 0;
     };
 
 } // namespace retronomicon::lib::core::system
