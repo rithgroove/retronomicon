@@ -108,7 +108,7 @@ namespace retronomicon::lib::math{
 		        return os << p.to_string();
 		    }
 
-	    	/***************************** Other Function *****************************/
+	    	/***************************** Other Methods *****************************/
 
 	    	/**
 	    	 * @brief calculate the distance between this point and target point

@@ -71,22 +71,22 @@ namespace retronomicon::lib::math{
     }
 
     /***************************** To String *****************************/
-    
+
     /**
      * @brief a method to help people debug this object
      * 
      * @return Brief summary of this object in string
      */
-    std::string to_string() const{
+    std::string Point::to_string() const{
         std::ostringstream oss;
         oss << "[Point]\n";
         oss << "values:\n";
-        oss << "x = "<< m_x <<"\n";
-        oss << "y = "<< m_y <<"\n";
+        oss << "- x = "<< m_x <<"\n";
+        oss << "- y = "<< m_y <<"\n";
         return oss.str();
     }
 
-    /***************************** Other Function *****************************/
+    /***************************** Other Methods *****************************/
 
     /**
      * @brief calculate the distance between this point and target point
