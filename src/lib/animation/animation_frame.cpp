@@ -1,4 +1,6 @@
 #include "retronomicon/lib/animation/animation_frame.h"
+#include <sstream>
+
 /**
  * @brief The namespace for graphic utilities
  */
@@ -52,6 +54,25 @@ namespace retronomicon::lib::animation{
     /***************************** Destructor *****************************/
 
       // AnimationFrame::~AnimationFrame() = default;
+
+    /***************************** To String *****************************/
+    
+    /**
+     * @brief a method to help people debug this object
+     * 
+     * @return Brief summary of this object in string
+     */
+    std::string AnimationFrame::to_string() const{
+        std::ostringstream oss;
+        oss << "[AnimationFrame]\n";
+        oss << "values:\n";
+        oss << "- position = ("<< m_rect.getX() << "," << m_rect.getY() << ")\n";
+        oss << "- anchor   = ("<< m_rect.getAnchor().getX() << "," << m_rect.getAnchor().getY() << ")\n";
+        oss << "- width    = " << m_rect.getWidth() << "\n";
+        oss << "- height   = " << m_rect.getHeight() << "\n";
+        oss << "- progress = " << m_elapsedTime << "/" << m_duration << "\n";
+        return oss.str();
+    }
 
     /***************************** Main Method *****************************/
 

@@ -62,15 +62,6 @@ namespace retronomicon::lib::math{
 	    	 */
 	    	float getY() const { return m_y; }
 
-	    	/***************************** To String *****************************/
-
-	    	/**
-	    	 * @brief a method to help people debug this object
-	    	 * 
-	    	 * @return Brief summary of this object in string
-	    	 */
-	    	std::string to_string() const;
-
 	    	/***************************** Operator Overload *****************************/
 
 	    	/**
@@ -104,9 +95,18 @@ namespace retronomicon::lib::math{
 			/**
 			 * @brief overloading operator << to call to_string()
 			 */
-			friend std::ostream& operator<<(std::ostream& os, const Point& p) {
-		        return os << p.to_string();
+			friend std::ostream& operator<<(std::ostream& os, const Point& obj) {
+		        return os << obj.to_string();
 		    }
+
+	    	/***************************** To String *****************************/
+
+	    	/**
+	    	 * @brief a method to help people debug this object
+	    	 * 
+	    	 * @return Brief summary of this object in string
+	    	 */
+	    	std::string to_string() const;
 
 	    	/***************************** Main Methods *****************************/
 
