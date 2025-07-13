@@ -1,6 +1,8 @@
 #include "retronomicon/lib/animation/animation_system.h"
 #include "retronomicon/lib/animation/animation_component.h"
 
+#include <sstream>
+
 /**
  * @brief The namespace for animation utilities
  */
@@ -16,6 +18,18 @@ namespace retronomicon::lib::animation{
 
     // AnimationSystem::~AnimationSystem() = default;
 
+    /***************************** To String *****************************/
+    
+    /**
+     * @brief a method to help people debug this object
+     * 
+     * @return Brief summary of this object in string
+     */
+    std::string AnimationSystem::to_string() const{
+        std::ostringstream oss;
+        oss << "[AnimationSystem]\n";
+        return oss.str();
+    }
     /***************************** Override Method *****************************/
     
     /**

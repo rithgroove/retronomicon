@@ -23,6 +23,24 @@ namespace retronomicon::lib::animation{
 
             // ~AnimationSystem(); //default destructor
 
+            /***************************** Operator Overload *****************************/
+
+            /**
+             * @brief overloading operator << to call to_string()
+             */
+            friend std::ostream& operator<<(std::ostream& os, const AnimationSystem& obj) {
+                return os << obj.to_string();
+            }
+
+            /***************************** To String *****************************/
+
+            /**
+             * @brief a method to help people debug this object
+             * 
+             * @return Brief summary of this object in string
+             */
+            virtual std::string to_string() const;
+            
             /***************************** Override Method *****************************/
 
             /**
