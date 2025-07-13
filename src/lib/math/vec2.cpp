@@ -106,8 +106,8 @@ namespace retronomicon::lib::math {
         std::ostringstream oss;
         oss << "[Vector]\n";
         oss << "values:\n";
-        oss << "- x = "<< x <<"\n";
-        oss << "- y = "<< y <<"\n";
+        oss << "- x      = "<< x <<"\n";
+        oss << "- y      = "<< y <<"\n";
         oss << "- length = "<< length() <<"\n";
         return oss.str();
     }

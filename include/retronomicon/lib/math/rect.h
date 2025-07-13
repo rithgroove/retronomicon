@@ -127,6 +127,25 @@ namespace retronomicon::lib::math{
 	    	 */
 			float getY() const { return m_position.getY(); }
 
+
+	    	/***************************** To String *****************************/
+
+	    	/**
+	    	 * @brief a method to help people debug this object
+	    	 * 
+	    	 * @return Brief summary of this object in string
+	    	 */
+	    	std::string to_string() const;
+
+	    	/***************************** Operator Overload *****************************/
+
+            /**
+             * @brief overloading operator << to call to_string()
+             */
+            friend std::ostream& operator<<(std::ostream& os, const Rect& rect) {
+                return os << rect.to_string();
+            }
+            
 	    private:
             /***************************** Attribute *****************************/            
 	    	Point m_anchor;
