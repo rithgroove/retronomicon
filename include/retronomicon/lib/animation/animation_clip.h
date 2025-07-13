@@ -14,6 +14,9 @@ namespace retronomicon::lib::animation{
 	 */
     class AnimationClip {
 	    public:
+
+		    /***************************** Constructor *****************************/
+
 	    	/**
 	    	 * @brief the constructor
 	    	 * 
@@ -23,15 +26,64 @@ namespace retronomicon::lib::animation{
 	    	 */
     		AnimationClip(const std::vector<AnimationFrame>& frames, std::string& name,bool repeat);
 
-	    	// ~Point(); // no need for destructor since all attributes are native
+		    /***************************** Destructor *****************************/
 
+	    	// ~AnimationClip(); // using default destructor
+
+	    	/***************************** Setter *****************************/
 
 	    	/**
-	    	 * @brief update the frame to the next one
+	    	 * @brief set current frame number
 	    	 * 
-	    	 * @return left over delta time
+	    	 * @param frame the new frame index
 	    	 */
-            float update(float dt);
+	        void setCurrentFrame(int frame) { m_currentFrame = frame; }
+
+	    	/**
+	    	 * @brief set this clip to repeat or not
+	    	 * 
+	    	 * @param repeat boolean true = repeat, false = one time
+	    	 */
+	        void setRepeat(bool repeat) { m_repeat = repeat;} 
+
+	    	/***************************** Getter *****************************/
+
+			/**
+	    	 * @brief getter of the name of this AnimationClip
+	    	 * 
+	    	 * @return name of the AnimationClip
+	    	 */    
+	        const std::string& getName() const { return m_name; }
+
+			/**
+	    	 * @brief getter of the current frame index
+	    	 * 
+	    	 * @return the current frame index
+	    	 */    
+	        size_t getCurrentFrameIndex() const { return static_cast<size_t>(m_currentFrame); }
+
+			/**
+	    	 * @brief getter of the current frame
+	    	 * 
+	    	 * @return the current frame in AnimationFrame class
+	    	 */    
+	        const AnimationFrame& getCurrentFrame() const { return m_frames[m_currentFrame]; }
+
+			/**
+	    	 * @brief get the number of frame in this clip
+	    	 * 
+	    	 * @return the number of frame
+	    	 */    
+	        int getFrameCount() const {return static_cast<int>(m_frames.size());}
+
+	    	/***************************** Utility *****************************/
+
+	        /**
+	    	 * @brief utility to check if it's repeating or not
+	    	 * 
+	    	 * @return the current frame in AnimationFrame class
+	    	 */    
+	        bool isRepeating() const { return m_repeat; }
 
 	    	/**
 	    	 * @brief a method to check if the animation is finished?
@@ -40,21 +92,14 @@ namespace retronomicon::lib::animation{
 	    	 */    
             bool isFinished() const;
 
-			/**
-	    	 * @brief geter of the name of this AnimationClip
+	    	/***************************** Other Methods *****************************/
+
+	    	/**
+	    	 * @brief update the frame to the next one
 	    	 * 
-	    	 * @return name of the AnimationClip
-	    	 */    
-	        const std::string& getName() const { return m_name; }
-	        size_t getCurrentFrameIndex() const { return static_cast<size_t>(m_currentFrame); }
-	        const AnimationFrame& getCurrentFrame() const { return m_frames[m_currentFrame]; }
-	        bool isRepeating() const { return m_repeat; }
-	        int getFrameCount() const {return static_cast<int>(m_frames.size());}
-
-	        // Setters
-	        void setCurrentFrame(int frame) { m_currentFrame = frame; }
-	        void setRepeat(bool repeat) { m_repeat = repeat;} 
-
+	    	 * @return left over delta time
+	    	 */
+            float update(float dt);
 
 	    private:
 	    	std::vector<AnimationFrame> m_frames;

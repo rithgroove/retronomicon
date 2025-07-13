@@ -6,6 +6,8 @@
  */
 namespace retronomicon::lib::animation{
 
+    /***************************** Constructor *****************************/
+
     /**
      * @brief the constructor
      * 
@@ -21,6 +23,22 @@ namespace retronomicon::lib::animation{
           m_repeat(repeat),
           m_currentFrame(0)
     {}
+
+    /***************************** Utility *****************************/
+
+    /**
+     * @brief a method to check if the animation is finished?
+     * 
+     * @return true if m_repeat is false, and is currently on the last frame
+     */
+    bool AnimationClip::isFinished() const{
+        if (m_repeat && m_currentFrame >= getFrameCount()){
+            return true;
+        }
+        return false;
+    }
+
+    /***************************** Other Methods *****************************/
 
     /**
      * @brief update the frame to the next one
@@ -49,17 +67,4 @@ namespace retronomicon::lib::animation{
         }
         return leftOver;
     }
-
-    /**
-     * @brief a method to check if the animation is finished?
-     * 
-     * @return true if m_repeat is false, and is currently on the last frame
-     */
-    bool AnimationClip::isFinished() const{
-        if (m_repeat && m_currentFrame >= getFrameCount()){
-            return true;
-        }
-        return false;
-    }
-
 }
