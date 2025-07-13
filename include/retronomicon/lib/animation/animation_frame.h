@@ -11,6 +11,8 @@ namespace retronomicon::lib::animation{
 	 */
     class AnimationFrame {
 	    public:
+		    /***************************** Constructor *****************************/
+
 	    	/**
 	    	 * @brief basic constructor
 	    	 * 
@@ -36,13 +38,16 @@ namespace retronomicon::lib::animation{
 	    	 * @brief basic constructor
 	    	 * 
 	    	 * @param rect the source rectangle of this frame
-	    	 * @param sequence_order (a number to indicate which frame number this is)
-	    	 * @param name the name of this frame
 	    	 * @param duration in milisecond
 	    	 */
     		AnimationFrame(const retronomicon::lib::math::Rect& rect, float duration);
 
+		    /***************************** Destructor *****************************/
+
    	    	// ~Point(); // no need for destructor since all attributes are native
+
+
+		    /***************************** Getter *****************************/
 
 	    	/**
 	    	 * @brief get the x position of this frame
@@ -78,10 +83,15 @@ namespace retronomicon::lib::animation{
 	    	 */
 	    	retronomicon::lib::math::Rect getRect() const {return m_rect;}
 
+
+		    /***************************** Utility *****************************/
+
 	    	/**
 	    	 * @brief a method to reset spent duration (set m_spentDuration to 0)
 	    	 */
-	    	void reset();
+	    	void reset(){ m_elapsedTime = 0.0f; }
+
+		    /***************************** Main Method *****************************/
 
 	    	/**
 	    	 * @brief update the frame to the next one
@@ -91,6 +101,7 @@ namespace retronomicon::lib::animation{
             float update(float dt);
 
 	    private:
+		    /***************************** Attribute *****************************/
 	    	retronomicon::lib::math::Rect m_rect; //the rectangle
 	    	float m_duration; // duration for this frame in ms
 	    	float m_elapsedTime; //how many of the duration is spent currently

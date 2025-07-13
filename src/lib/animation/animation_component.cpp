@@ -5,6 +5,7 @@
  * @brief The namespace for graphic utilities
  */
 namespace retronomicon::lib::animation {
+    
     /***************************** Constructor *****************************/
 
     /**
