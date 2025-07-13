@@ -1,5 +1,9 @@
 #include "retronomicon/lib/input/input_system.h"
 #include "retronomicon/lib/input/input_component.h"
+
+/**
+ * @brief This namespace is for handling input
+ */
 namespace retronomicon::lib::input{
     InputSystem::InputSystem() // Temp init to avoid reference error
     {
