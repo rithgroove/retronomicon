@@ -27,7 +27,7 @@ namespace retronomicon::lib::animation{
      */
     std::string AnimationSystem::to_string() const{
         std::ostringstream oss;
-        oss << "[AnimationSystem]\n";
+        oss << "[Animation System]\n";
         return oss.str();
     }
     /***************************** Override Method *****************************/

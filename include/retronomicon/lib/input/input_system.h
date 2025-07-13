@@ -5,8 +5,13 @@
 #include "retronomicon/lib/core/game_object.h"
 #include "retronomicon/lib/core/system.h"
 
+/**
+ * @brief This namespace is for handling input
+ */
 namespace retronomicon::lib::input {
-
+    /**
+     * @brief A system that handles input. fill up input state from sdl and pass it to all input components
+     */
     class InputSystem : public retronomicon::lib::core::System {
         public:
             /***************************** Constructor *****************************/
@@ -16,13 +21,19 @@ namespace retronomicon::lib::input {
              */
             InputSystem();
 
-
             /***************************** Destructor *****************************/
 
             // ~InputSystem(); //default destructor
 
+            /***************************** Operator Overload *****************************/
 
-
+            /**
+             * @brief overloading operator << to call to_string()
+             */
+            friend std::ostream& operator<<(std::ostream& os, const InputSystem& obj) {
+                return os << obj.to_string();
+            }
+            
             /***************************** Getter *****************************/
             /**
              * @brief get state for specific key
@@ -34,6 +45,14 @@ namespace retronomicon::lib::input {
                 return  m_inputState->isActionActive(key);
             }
 
+            /***************************** To String *****************************/
+
+            /**
+             * @brief a method to help people debug this object
+             * 
+             * @return Brief summary of this object in string
+             */
+            virtual std::string to_string() const;
 
             /***************************** Override Method *****************************/
 
@@ -45,6 +64,7 @@ namespace retronomicon::lib::input {
              */
             void update(float dt, vector<retronomicon::lib::core::GameObject*>& objects)  override;
         private:
+            /***************************** Attribute *****************************/
             InputState* m_inputState;
     };
 

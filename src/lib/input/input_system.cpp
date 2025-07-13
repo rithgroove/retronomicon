@@ -1,3 +1,6 @@
+
+#include <sstream>
+
 #include "retronomicon/lib/input/input_system.h"
 #include "retronomicon/lib/input/input_component.h"
 
@@ -37,6 +40,20 @@ namespace retronomicon::lib::input{
     /***************************** Destructor *****************************/
 
     // InputSystem::~InputSystem(); //default destructor
+
+
+    /***************************** To String *****************************/
+    
+    /**
+     * @brief a method to help people debug this object
+     * 
+     * @return Brief summary of this object in string
+     */
+    std::string InputSystem::to_string() const{
+        std::ostringstream oss;
+        oss << "[Input System]\n";
+        return oss.str();
+    }
 
     /***************************** Override Method *****************************/
 
