@@ -2,11 +2,11 @@
 namespace retronomicon::lib::input {
     InputMap::InputMap(){}
 
-    void InputMap::bindAction(SDL_Scancode key, const string& actionName) {
+    void InputMap::bindAction(SDL_Scancode key, const std::string& actionName) {
         m_actionBindings[key] = actionName;
     }
 
-    void InputMap::bindAxis(SDL_Scancode key, const string& axisName, float weight) {
+    void InputMap::bindAxis(SDL_Scancode key, const std::string& axisName, float weight) {
         m_axisBindings[axisName].emplace_back(key, weight);
     }
 
@@ -33,11 +33,11 @@ namespace retronomicon::lib::input {
     //     }
     // }
 
-    const unordered_map<SDL_Scancode, string>& InputMap::getActionBindings() const {
+    const std::unordered_map<SDL_Scancode, std::string>& InputMap::getActionBindings() const {
         return m_actionBindings;
     }
 
-    const unordered_map<string, vector<pair<SDL_Scancode, float>>>& InputMap::getAxisBindings() const {
+    const std::unordered_map<std::string, std::vector<std::pair<SDL_Scancode, float>>>& InputMap::getAxisBindings() const {
         return m_axisBindings;
     }
 

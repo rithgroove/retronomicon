@@ -1,6 +1,6 @@
 #include "retronomicon/lib/math/point.h"
 #include <cmath>
-#include "vec2.h"
+#include <sstream>
 
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
@@ -108,6 +108,6 @@ namespace retronomicon::lib::math{
      * @return the vec2 representation of current point
      */
     Vec2 Point::toVec2() const {
-        return Vec2{x, y};
+        return Vec2{m_x, m_y};
     }
 }

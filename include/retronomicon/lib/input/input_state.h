@@ -5,7 +5,6 @@
 #include "raw_input.h"
 #include "input_map.h"
 #include <iostream>
-using namespace std;
 
 /**
  * @brief This namespace is for handling input
@@ -42,7 +41,7 @@ namespace retronomicon::lib::input {
              * 
              * @param active boolean where if a certain input is triggered = true, if not =false
              */
-            void setAction(const string& name, bool active){
+            void setAction(const std::string& name, bool active){
                 // if already true, do not turn it into false 
                 if (!m_actions[name]){ 
                     m_actions[name] = active;
@@ -54,7 +53,7 @@ namespace retronomicon::lib::input {
              * 
              * @param value of an axis (float to handle a joystick)
              */
-            void setAxis(const string& name, float value) { m_axes[name] = value;}
+            void setAxis(const std::string& name, float value) { m_axes[name] = value;}
 
             /***************************** Getter *****************************/
 
@@ -63,7 +62,7 @@ namespace retronomicon::lib::input {
              * 
              * @param the name of the axis
              */
-            float getAxisValue(const string& name) const {
+            float getAxisValue(const std::string& name) const {
                 auto it = m_axes.find(name);
                 return it != m_axes.end() ? it->second : 0.0f;
             }
@@ -71,14 +70,14 @@ namespace retronomicon::lib::input {
             /**
              * @brief a method to get all actions 
              */
-            const unordered_map<string, bool>& InputState::getActions() const {
+            const std::unordered_map<std::string, bool>& getActions() const {
                 return m_actions;
             }
 
             /**
              * @brief a method to get all axis value 
              */
-            const unordered_map<string, float>& InputState::getAxes() const {
+            const std::unordered_map<std::string, float>& getAxes() const {
                 return m_axes;
             }
 
@@ -89,7 +88,7 @@ namespace retronomicon::lib::input {
              * 
              * @param name of the action
              */
-            bool isActionActive(const string& name) const{
+            bool isActionActive(const std::string& name) const{
                 auto it = m_actions.find(name);
                 return it != m_actions.end() && it->second;
             }
@@ -111,8 +110,9 @@ namespace retronomicon::lib::input {
 
 
         private:
-            unordered_map<string, bool> m_actions;
-            unordered_map<string, float> m_axes;
+            /***************************** Attribute *****************************/
+            std::unordered_map<std::string, bool> m_actions;
+            std::unordered_map<std::string, float> m_axes;
             RawInput* m_rawInput;
             InputMap* m_inputMap;
     };

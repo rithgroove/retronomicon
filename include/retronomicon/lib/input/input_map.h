@@ -6,24 +6,26 @@
 #include <SDL.h>
 // #include "input_state.h"
 
-using namespace std;
+/**
+ * @brief This namespace is for handling input
+ */
 namespace retronomicon::lib::input {
     // class InputState;
 
     class InputMap {
         public:
             InputMap();
-            void bindAction(SDL_Scancode key, const string& actionName);
-            void bindAxis(SDL_Scancode key, const string& axisName, float weight);
+            void bindAction(SDL_Scancode key, const std::string& actionName);
+            void bindAxis(SDL_Scancode key, const std::string& axisName, float weight);
 
             // void fill(InputState* state, const Uint8* keyboardState);
 
-            const unordered_map<SDL_Scancode, string>& getActionBindings() const;
-            const unordered_map<string, vector<pair<SDL_Scancode, float>>>& getAxisBindings() const;
+            const std::unordered_map<SDL_Scancode, std::string>& getActionBindings() const;
+            const std::unordered_map<std::string, std::vector<std::pair<SDL_Scancode, float>>>& getAxisBindings() const;
 
         private:
-            unordered_map<SDL_Scancode, string> m_actionBindings;
-            unordered_map<string, vector<pair<SDL_Scancode, float>>> m_axisBindings;
+            std::unordered_map<SDL_Scancode, std::string> m_actionBindings;
+            std::unordered_map<std::string, std::vector<std::pair<SDL_Scancode, float>>> m_axisBindings;
     };
 
 } // namespace retronomicon::lib::input
