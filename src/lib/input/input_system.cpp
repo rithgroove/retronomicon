@@ -5,6 +5,12 @@
  * @brief This namespace is for handling input
  */
 namespace retronomicon::lib::input{
+
+    /***************************** Constructor *****************************/
+
+    /**
+     * @brief default constructor
+     */
     InputSystem::InputSystem() // Temp init to avoid reference error
     {
         RawInput* rawInput = new RawInput();
@@ -27,6 +33,19 @@ namespace retronomicon::lib::input{
         // If m_gameObjects should be provided externally, consider refactoring the constructor
     }
 
+
+    /***************************** Destructor *****************************/
+
+    // InputSystem::~InputSystem(); //default destructor
+
+    /***************************** Override Method *****************************/
+
+    /**
+     * @brief method to update all component
+     * 
+     * @param dt time interval since last update
+     * @param objects the game objects (might change to Entity Later)
+     */
     void InputSystem::update(float dt, vector<GameObject*>& objects) {
         m_inputState->updateFromSDL();
         for (auto& obj :objects){
@@ -36,9 +55,6 @@ namespace retronomicon::lib::input{
         }
     }
 
-    bool InputSystem::getInputStateForKey(const string& key){
-        return  m_inputState->isActionActive(key);
-    }
 
 }
 
