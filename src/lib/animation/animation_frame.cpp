@@ -48,8 +48,13 @@ namespace retronomicon::lib::animation{
       m_duration(duration), // fill_up m_duration
       m_elapsedTime(0.0f) {} //set m_elapstedtime to 0
 
+
+    /***************************** Destructor *****************************/
+
+      // AnimationFrame::~AnimationFrame() = default;
+
     /***************************** Main Method *****************************/
-      
+
     /**
      * @brief check how many time spent on this frame
      * 

@@ -24,6 +24,12 @@ namespace retronomicon::lib::animation{
           m_currentFrame(0)
     {}
 
+    
+    /***************************** Destructor *****************************/
+
+      // AnimationClip::~AnimationClip() = default;
+
+
     /***************************** Utility *****************************/
 
     /**
