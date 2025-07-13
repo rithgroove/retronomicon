@@ -5,6 +5,8 @@
  */
 namespace retronomicon::lib::math{
     
+    /***************************** Constructor *****************************/
+
     /**
     * @brief Default constructor all value is 0.0
     */
@@ -48,5 +50,9 @@ namespace retronomicon::lib::math{
     Rect::Rect(const Point& position, const Point& anchor, float width, float height)
         : m_position(position), m_anchor(anchor), m_width(width), m_height(height) {}
 
+
+    /***************************** Destructor *****************************/
+
+    // Rect:~Rect() = default; //put it here in case needed
 
 }

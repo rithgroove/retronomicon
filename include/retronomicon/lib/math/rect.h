@@ -13,6 +13,7 @@ namespace retronomicon::lib::math{
 	 */
     class Rect {
 	    public:
+	    	/***************************** Constructor *****************************/
 
 	        /**
 	    	* @brief Default constructor
@@ -51,9 +52,14 @@ namespace retronomicon::lib::math{
 	    	*/
 	        Rect(const Point& position, const Point& anchor, float width, float height);
 
-	    	// ~Rect(); // to do : dev 
 
-	       /**
+	    	/***************************** Destructor *****************************/
+	    	
+	    	// ~Rect(); // not implemented yet
+
+	    	/***************************** Setter *****************************/
+
+ 	       /**
 	    	* @brief a method to change the size of the rectangle
 	    	* 
 	    	* @param width the new width for this rectangle
@@ -75,6 +81,9 @@ namespace retronomicon::lib::math{
 	    	 * @param position the new position in Point class
 	    	 */
 			void setPosition(const Point& position) { m_position = position; }
+
+
+	    	/***************************** Getter *****************************/
 
 	    	/**
 	    	 * @brief a method to get the position of the rectangle
