@@ -7,7 +7,7 @@
 #include "image_asset.h"
 #include "font_asset.h"
 #include "music_asset.h"
-#include "sound_asset.h"
+#include "sound_effect_asset.h"
 #include "text_asset.h"
 #include "binary_asset.h"
 
@@ -36,8 +36,8 @@ public:
     bool removeMusic(const std::string& name);
 
     // Sound Asset
-    std::shared_ptr<SoundAsset> loadSound(const std::string& path, const std::string& name, bool forceReload = false);
-    std::shared_ptr<SoundAsset> getSound(const std::string& name);
+    std::shared_ptr<SoundEffectAsset> loadSound(const std::string& path, const std::string& name, bool forceReload = false);
+    std::shared_ptr<SoundEffectAsset> getSound(const std::string& name);
     bool removeSound(const std::string& name);
 
     // Text Asset
@@ -56,7 +56,7 @@ private:
     std::unordered_map<std::string, std::shared_ptr<ImageAsset>> m_images;
     std::unordered_map<std::string, std::shared_ptr<FontAsset>> m_fonts;
     std::unordered_map<std::string, std::shared_ptr<MusicAsset>> m_music;
-    std::unordered_map<std::string, std::shared_ptr<SoundAsset>> m_sounds;
+    std::unordered_map<std::string, std::shared_ptr<SoundEffectAsset>> m_sounds;
     std::unordered_map<std::string, std::shared_ptr<TextAsset>> m_texts;
     std::unordered_map<std::string, std::shared_ptr<BinaryAsset>> m_binaries;
 

@@ -86,16 +86,16 @@ bool AssetManager::removeMusic(const std::string& name) {
     return m_music.erase(name) > 0;
 }
 
-std::shared_ptr<SoundAsset> AssetManager::loadSound(const std::string& path, const std::string& name, bool forceReload) {
+std::shared_ptr<SoundEffectAsset> AssetManager::loadSound(const std::string& path, const std::string& name, bool forceReload) {
     auto it = m_sounds.find(name);
     if (it != m_sounds.end() && !forceReload) return it->second;
-    auto sound = std::make_shared<SoundAsset>(path, name);
+    auto sound = std::make_shared<SoundEffectAsset>(path, name);
     m_sounds[name] = sound;
     logLoad("Sound", name, path);
     return sound;
 }
 
-std::shared_ptr<SoundAsset> AssetManager::getSound(const std::string& name) {
+std::shared_ptr<SoundEffectAsset> AssetManager::getSound(const std::string& name) {
     auto it = m_sounds.find(name);
     if (it != m_sounds.end()) return it->second;
     throw std::runtime_error("Sound not found: " + name);

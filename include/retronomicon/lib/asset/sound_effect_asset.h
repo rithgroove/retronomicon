@@ -10,10 +10,10 @@ namespace retronomicon::lib::asset {
      * @brief Represents a short sound effect asset (WAV, OGG, etc.).
      *        Managed using SDL_mixer's Mix_Chunk.
      */
-    class SoundAsset : public Asset {
+    class SoundEffectAsset : public Asset {
         public:
-            explicit SoundAsset(const std::string& path,const std::string& name);
-            ~SoundAsset() override;
+            explicit SoundEffectAsset(const std::string& path,const std::string& name);
+            ~SoundEffectAsset() override;
 
             /**
              * @brief Get the raw Mix_Chunk pointer

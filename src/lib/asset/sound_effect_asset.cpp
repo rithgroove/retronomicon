@@ -1,9 +1,9 @@
-#include "retronomicon/lib/asset/sound_asset.h"
+#include "retronomicon/lib/asset/sound_effect_asset.h"
 #include <stdexcept>
 
 namespace retronomicon::lib::asset {
 
-SoundAsset::SoundAsset(const std::string& path,const std::string& name)
+SoundEffectAsset::SoundEffectAsset(const std::string& path,const std::string& name)
     : m_chunk(nullptr)
  {
     m_path = path;
@@ -16,19 +16,19 @@ SoundAsset::SoundAsset(const std::string& path,const std::string& name)
     }
 }
 
-SoundAsset::~SoundAsset() {
+SoundEffectAsset::~SoundEffectAsset() {
     if (m_chunk) {
         Mix_FreeChunk(m_chunk);
         m_chunk = nullptr;
     }
 }
 
-Mix_Chunk* SoundAsset::getRawSound() const {
+Mix_Chunk* SoundEffectAsset::getRawSound() const {
     return m_chunk;
 }
 
-std::string SoundAsset::to_string() const {
-    return "[SoundAsset] " + m_path;
+std::string SoundEffectAsset::to_string() const {
+    return "[SoundEffectAsset] " + m_path;
 }
 
 }
