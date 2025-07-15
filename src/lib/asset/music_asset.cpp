@@ -32,4 +32,9 @@ namespace retronomicon::lib::asset {
         return "[MusicAsset] " + m_path;
     }
 
+    bool MusicAsset::isValid() const {
+        return m_music != nullptr;
+    }
+
+
 }

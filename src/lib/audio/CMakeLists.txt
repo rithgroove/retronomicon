@@ -3,5 +3,12 @@ file(GLOB_RECURSE AUDIO_SRC CONFIGURE_DEPENDS
 )
 
 add_library(audio OBJECT ${AUDIO_SRC})
-target_include_directories(audio PUBLIC ${RETRO_DIR}/include)
 
+target_include_directories(
+    audio PUBLIC
+    ${RETRO_DIR}/include
+    ${RETRO_DIR}/external/SDL2/include
+    ${RETRO_DIR}/external/SDL2_ttf
+    ${RETRO_DIR}/external/SDL2_image/include
+    ${RETRO_DIR}/external/SDL2_mixer/include
+)

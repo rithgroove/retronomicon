@@ -24,7 +24,7 @@ namespace retronomicon::lib::asset {
              * @brief Textual representation of this asset (for debugging / editor)
              */
             std::string to_string() const override;
-
+            bool isValid() const;
         private:
             Mix_Music* m_music;
     };
