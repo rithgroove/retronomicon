@@ -1,48 +1,31 @@
 #include "retronomicon/lib/audio/audio_wrapper.h"
-#include <iostream>
 
 namespace retronomicon::lib::audio {
 
-bool AudioWrapper::initialized_ = false;
+    bool AudioWrapper::init() {
+        if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0) {
+            std::cerr << "SDL audio init failed: " << SDL_GetError() << std::endl;
+            return false;
+        }
 
-void AudioWrapper::init() {
-    if (!initialized_) {
-        std::cout << "[AudioWrapper] Initialized.\n";
-        // TODO: backend init (e.g., Mix_OpenAudio)
-        initialized_ = true;
+        int flags = MIX_INIT_OGG; // Only OGG if all others disabled
+        if ((Mix_Init(flags) & flags) != flags) {
+            std::cerr << "SDL_mixer init failed: " << Mix_GetError() << std::endl;
+            return false;
+        }
+
+        if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+            std::cerr << "SDL_mixer open failed: " << Mix_GetError() << std::endl;
+            return false;
+        }
+
+        return true;
     }
-}
 
-void AudioWrapper::shutdown() {
-    if (initialized_) {
-        std::cout << "[AudioWrapper] Shutdown.\n";
-        // TODO: backend cleanup (e.g., Mix_CloseAudio)
-        initialized_ = false;
+    void AudioWrapper::shutdown() {
+        Mix_CloseAudio();
+        Mix_Quit();
+        SDL_QuitSubSystem(SDL_INIT_AUDIO);
     }
-}
-
-void AudioWrapper::play_music(const std::string& track_id, bool loop) {
-    std::cout << "[AudioWrapper] Playing music: " << track_id
-              << (loop ? " (loop)" : "") << "\n";
-    // TODO: backend music play
-}
-
-void AudioWrapper::stop_music() {
-    std::cout << "[AudioWrapper] Stopping music.\n";
-    // TODO: backend music stop
-}
-
-void AudioWrapper::fade_music_to(const std::string& track_id, float duration) {
-    std::cout << "[AudioWrapper] Fading to music: " << track_id
-              << " over " << duration << " seconds\n";
-    // TODO: backend fade logic
-}
-
-void AudioWrapper::play_sfx(const std::string& sound_id, float volume, std::optional<float> position) {
-    std::cout << "[AudioWrapper] Playing SFX: " << sound_id
-              << " (vol=" << volume << ")"
-              << (position ? " [spatial]" : "") << "\n";
-    // TODO: backend sfx play (positional if available)
-}
 
 }

@@ -1,39 +1,36 @@
 #include "retronomicon/lib/audio/sound_effect_component.h"
-#include <iostream>
 
 namespace retronomicon::lib::audio {
 
-    SoundEffectComponent::SoundEffectComponent(const std::string& path, bool loop)
-        : m_path(path), m_loop(loop)
-    {
-        m_sound = Mix_LoadWAV(m_path.c_str());
-        if (!m_sound) {
-            std::cerr << "Failed to load sound effect: " << m_path
-                      << "\nReason: " << Mix_GetError() << std::endl;
-        }
+    SoundEffectComponent::SoundEffectComponent(retronomicon::lib::asset::SoundEffectAsset* asset, int loopCount)
+        : m_asset(asset), m_loopCount(loopCount), m_playRequested(false) {}
+
+    void SoundEffectComponent::setAsset(retronomicon::lib::asset::SoundEffectAsset* asset) {
+        m_asset = asset;
     }
 
-    SoundEffectComponent::~SoundEffectComponent() {
-        if (m_sound) {
-            Mix_FreeChunk(m_sound);
-            m_sound = nullptr;
-        }
+    retronomicon::lib::asset::SoundEffectAsset* SoundEffectComponent::getAsset() const {
+        return m_asset;
     }
 
-    Mix_Chunk* SoundEffectComponent::getSound() const {
-        return m_sound;
+    void SoundEffectComponent::setLoopCount(int loopCount) {
+        m_loopCount = loopCount;
     }
 
-    const std::string& SoundEffectComponent::getPath() const {
-        return m_path;
+    int SoundEffectComponent::getLoopCount() const {
+        return m_loopCount;
     }
 
-    bool SoundEffectComponent::shouldLoop() const {
-        return m_loop;
+    void SoundEffectComponent::play() {
+        m_playRequested = true;
     }
 
-    bool SoundEffectComponent::isValid() const {
-        return m_sound != nullptr;
+    bool SoundEffectComponent::isPlayRequested() const {
+        return m_playRequested;
+    }
+
+    void SoundEffectComponent::resetPlayRequest() {
+        m_playRequested = false;
     }
 
 }

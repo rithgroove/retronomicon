@@ -2,44 +2,35 @@
 
 namespace retronomicon::lib::audio {
 
-    MusicComponent::MusicComponent(const std::string& filepath, float volume, bool loop)
-        : m_filePath(filepath), m_volume(volume), m_loop(loop) {}
+    MusicComponent::MusicComponent(retronomicon::lib::asset::MusicAsset* asset, int loopCount)
+        : m_asset(asset), m_loopCount(loopCount), m_playRequested(false) {}
 
-    void MusicComponent::setFilePath(const std::string& path) {
-        m_filePath = path;
+    void MusicComponent::setAsset(retronomicon::lib::asset::MusicAsset* asset) {
+        m_asset = asset;
+    }
+
+    retronomicon::lib::asset::MusicAsset* MusicComponent::getAsset() const {
+        return m_asset;
+    }
+
+    void MusicComponent::setLoopCount(int loopCount) {
+        m_loopCount = loopCount;
+    }
+
+    int MusicComponent::getLoopCount() const {
+        return m_loopCount;
     }
 
     void MusicComponent::play() {
-        m_playing = true;
+        m_playRequested = true;
     }
 
-    void MusicComponent::stop() {
-        m_playing = false;
+    bool MusicComponent::isPlayRequested() const {
+        return m_playRequested;
     }
 
-    bool MusicComponent::isPlaying() const {
-        return m_playing;
+    void MusicComponent::resetPlayRequest() {
+        m_playRequested = false;
     }
 
-
-    void MusicComponent::setVolume(float vol) {
-        m_volume = vol;
-    }
-
-    void MusicComponent::setLoop(bool loop) {
-        m_loop = loop;
-    }
-
-    const std::string& MusicComponent::getFilePath() const {
-        return m_filePath;
-    }
-
-    float MusicComponent::getVolume() const {
-        return m_volume;
-    }
-
-    bool MusicComponent::isLooping() const {
-        return m_loop;
-    }
-
-} // namespace retronomicon::lib::audio
+}

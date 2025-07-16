@@ -1,54 +1,57 @@
 #pragma once
 
-#include <string>
-#include <SDL_mixer.h>
-
 #include "retronomicon/lib/core/component.h"
+#include "retronomicon/lib/asset/sound_effect_asset.h"
 
 namespace retronomicon::lib::audio {
 
     /**
-     * @brief A component that represents a sound effect in the game world.
+     * @brief Component representing a sound effect to be triggered by the audio system.
      */
     class SoundEffectComponent : public retronomicon::lib::core::Component {
     public:
-        /**
-         * @brief Constructor
-         * 
-         * @param path Path to the sound file.
-         * @param loop Whether the sound should loop when played.
-         */
-        SoundEffectComponent(const std::string& path, bool loop = false);
+        SoundEffectComponent() = default;
+        explicit SoundEffectComponent(retronomicon::lib::asset::SoundEffectAsset* asset, int loopCount = 0);
 
         /**
-         * @brief Destructor
+         * @brief Set the sound asset to be played.
          */
-        ~SoundEffectComponent();
+        void setAsset(retronomicon::lib::asset::SoundEffectAsset* asset);
 
         /**
-         * @brief Get the sound effect object
+         * @brief Get the sound asset currently attached.
          */
-        Mix_Chunk* getSound() const;
+        retronomicon::lib::asset::SoundEffectAsset* getAsset() const;
 
         /**
-         * @brief Get the path of the loaded sound file.
+         * @brief Set how many times the sound should loop.
          */
-        const std::string& getPath() const;
+        void setLoopCount(int loopCount);
 
         /**
-         * @brief Should this sound loop?
+         * @brief Get the loop count.
          */
-        bool shouldLoop() const;
+        int getLoopCount() const;
 
         /**
-         * @brief Is the sound asset valid (i.e., successfully loaded)?
+         * @brief Mark the sound effect to be played on the next update.
          */
-        bool isValid() const;
+        void play();
+
+        /**
+         * @brief Check if play was requested.
+         */
+        bool isPlayRequested() const;
+
+        /**
+         * @brief Clear play request flag.
+         */
+        void resetPlayRequest();
 
     private:
-        std::string m_path;
-        Mix_Chunk* m_sound = nullptr;
-        bool m_loop = false;
+        retronomicon::lib::asset::SoundEffectAsset* m_asset = nullptr;
+        int m_loopCount = 0;
+        bool m_playRequested = false;
     };
 
 } // namespace retronomicon::lib::audio

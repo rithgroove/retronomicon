@@ -1,32 +1,57 @@
 #pragma once
 
-#include <string>
 #include "retronomicon/lib/core/component.h"
+#include "retronomicon/lib/asset/music_asset.h"
 
 namespace retronomicon::lib::audio {
 
+    /**
+     * @brief Component representing a music track to be played by the audio system.
+     */
     class MusicComponent : public retronomicon::lib::core::Component {
     public:
-        MusicComponent(const std::string& filepath, float volume = 1.0f, bool loop = false);
+        MusicComponent() = default;
+        explicit MusicComponent(retronomicon::lib::asset::MusicAsset* asset, int loopCount = 0);
 
-        // Setters
-        void setFilePath(const std::string& path);
-        void setVolume(float vol);
-        void setLoop(bool loop);
+        /**
+         * @brief Set the music asset to be played.
+         */
+        void setAsset(retronomicon::lib::asset::MusicAsset* asset);
 
-        // Getters
-        const std::string& getFilePath() const;
-        float getVolume() const;
-        bool isLooping() const;
+        /**
+         * @brief Get the currently assigned music asset.
+         */
+        retronomicon::lib::asset::MusicAsset* getAsset() const;
 
+        /**
+         * @brief Set how many times the music should loop.
+         */
+        void setLoopCount(int loopCount);
+
+        /**
+         * @brief Get the loop count.
+         */
+        int getLoopCount() const;
+
+        /**
+         * @brief Mark the music to be played on next update cycle.
+         */
         void play();
-        void stop();
-        bool isPlaying() const;
+
+        /**
+         * @brief Check if play was requested.
+         */
+        bool isPlayRequested() const;
+
+        /**
+         * @brief Clear play request.
+         */
+        void resetPlayRequest();
+
     private:
-        std::string m_filePath;
-        float m_volume = 1.0f;
-        bool m_loop = false;
-        bool m_playing = false;
+        retronomicon::lib::asset::MusicAsset* m_asset = nullptr;
+        int m_loopCount = 0;
+        bool m_playRequested = false;
     };
 
 } // namespace retronomicon::lib::audio

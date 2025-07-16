@@ -1,30 +1,34 @@
 #include "retronomicon/lib/audio/music_asset_player.h"
-#include <iostream>
 
 namespace retronomicon::lib::audio {
-
-    MusicAssetPlayer::MusicAssetPlayer() {}
 
     MusicAssetPlayer::~MusicAssetPlayer() {
         stop();
     }
 
-    void MusicAssetPlayer::load(MusicAsset* musicAsset) {
-        m_musicAsset = musicAsset;
+    void MusicAssetPlayer::play(retronomicon::lib::asset::MusicAsset* asset, int loopCount) {
+        if (!asset || !asset->isValid()) return;
+
+        // Stop previous music if any
+        stop();
+
+        if (Mix_PlayMusic(asset->getRawMusic(), loopCount) == -1) {
+            // SDL_Log("Failed to play music: %s", Mix_GetError());
+            return;
+        }
+
+        m_currentAsset = asset;
     }
 
-    void MusicAssetPlayer::play(int loopCount) {
-        if (m_musicAsset && m_musicAsset->isValid()) {
-            if (Mix_PlayMusic(m_musicAsset->getRawMusic(), loopCount) == -1) {
-                std::cerr << "Failed to play music: " << Mix_GetError() << std::endl;
-            }
-        } else {
-            std::cerr << "MusicAsset not valid or not loaded." << std::endl;
+    void MusicAssetPlayer::stop() {
+        if (Mix_PlayingMusic()) {
+            Mix_HaltMusic();
         }
+        m_currentAsset = nullptr;
     }
 
     void MusicAssetPlayer::pause() {
-        if (Mix_PlayingMusic()) {
+        if (Mix_PlayingMusic() && !Mix_PausedMusic()) {
             Mix_PauseMusic();
         }
     }
@@ -35,18 +39,16 @@ namespace retronomicon::lib::audio {
         }
     }
 
-    void MusicAssetPlayer::stop() {
-        if (Mix_PlayingMusic()) {
-            Mix_HaltMusic();
-        }
-    }
-
     bool MusicAssetPlayer::isPlaying() const {
-        return Mix_PlayingMusic() != 0;
+        return Mix_PlayingMusic() && !Mix_PausedMusic();
     }
 
     bool MusicAssetPlayer::isPaused() const {
-        return Mix_PausedMusic() != 0;
+        return Mix_PausedMusic();
     }
 
-}
+    retronomicon::lib::asset::MusicAsset* MusicAssetPlayer::getCurrentAsset() const {
+        return m_currentAsset;
+    }
+
+} // namesp

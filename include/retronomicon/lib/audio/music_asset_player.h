@@ -1,35 +1,30 @@
 #pragma once
 
-#include "retronomicon/lib/asset/music_asset.h"
 #include <SDL_mixer.h>
+#include "retronomicon/lib/asset/music_asset.h"
 
 namespace retronomicon::lib::audio {
-    using retronomicon::lib::asset::MusicAsset;
+
     /**
-     * @brief A simple music playback controller for MusicAsset.
+     * @brief A class responsible for playing MusicAsset objects using SDL_mixer.
      */
     class MusicAssetPlayer {
     public:
-        /**
-         * @brief Construct a new MusicAssetPlayer.
-         */
-        MusicAssetPlayer();
-
-        /**
-         * @brief Destructor — stops and frees music.
-         */
+        MusicAssetPlayer() = default;
         ~MusicAssetPlayer();
 
         /**
-         * @brief Load a music asset and prepare for playback.
+         * @brief Load and play a MusicAsset.
+         * 
+         * @param asset The music asset to play.
+         * @param loopCount Number of times to loop. -1 for infinite looping.
          */
-        void load(MusicAsset* musicAsset);
+        void play(retronomicon::lib::asset::MusicAsset* asset, int loopCount = -1);
 
         /**
-         * @brief Play the loaded music asset.
-         * @param loopCount Number of times to loop (-1 for infinite).
+         * @brief Stop currently playing music.
          */
-        void play(int loopCount = -1);
+        void stop();
 
         /**
          * @brief Pause the currently playing music.
@@ -37,27 +32,27 @@ namespace retronomicon::lib::audio {
         void pause();
 
         /**
-         * @brief Resume the paused music.
+         * @brief Resume paused music.
          */
         void resume();
 
         /**
-         * @brief Stop the music playback.
-         */
-        void stop();
-
-        /**
-         * @brief Check if any music is currently playing.
+         * @brief Check if music is playing.
          */
         bool isPlaying() const;
 
         /**
-         * @brief Check if music is currently paused.
+         * @brief Check if music is paused.
          */
         bool isPaused() const;
 
+        /**
+         * @brief Get the currently active asset.
+         */
+        retronomicon::lib::asset::MusicAsset* getCurrentAsset() const;
+
     private:
-        MusicAsset* m_musicAsset = nullptr;
+        retronomicon::lib::asset::MusicAsset* m_currentAsset = nullptr;
     };
 
 } // namespace retronomicon::lib::audio
