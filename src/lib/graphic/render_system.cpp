@@ -1,7 +1,7 @@
-#include "retronomicon/lib/core/system/render_system.h"
-#include "retronomicon/lib/core/component/sprite_component.h"
+#include "retronomicon/lib/graphic/render_system.h"
+#include "retronomicon/lib/graphic/sprite_component.h"
 
-namespace retronomicon::lib::core::system{
+namespace retronomicon::lib::grahic{
     using retronomicon::lib::core::component::SpriteComponent;
     RenderSystem::RenderSystem( SDL_Renderer* renderer) {
         m_renderer = renderer;

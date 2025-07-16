@@ -1,35 +1,34 @@
 #pragma once
 
-#include <SDL_image.h>
-#include <iostream>
+#include <SDL.h>
 #include <string>
 
-#include "transform_component.h"
-#include "retronomicon/lib/animation/animation_component.h"
-#include "retronomicon/lib/asset/image_asset.h"
 #include "retronomicon/lib/core/component.h"
 #include "retronomicon/lib/core/renderable.h"
+#include "retronomicon/lib/asset/image_asset.h"
 
-using namespace retronomicon::lib::core;
-using namespace retronomicon::lib::asset;
-using namespace retronomicon::lib::core;
-using namespace retronomicon::lib::animation;
+// Forward declarations to avoid unnecessary includes
+namespace retronomicon::lib::core { class TransformComponent; }
+namespace retronomicon::lib::animation { class AnimationComponent; }
 
-namespace retronomicon::lib::core::component {
+namespace retronomicon::lib::graphic {
 
-    class SpriteComponent : public Component, public Renderable {
-        public:
-            SpriteComponent(ImageAsset* imageAsset);
-            ~SpriteComponent();
+    /**
+     * @brief A drawable sprite that optionally supports animation.
+     */
+    class SpriteComponent : public core::Component, public core::Renderable {
+    public:
+        explicit SpriteComponent(asset::ImageAsset* imageAsset);
+        ~SpriteComponent() override = default;
 
-            void start() override;
-            void update(float dt) override;
-            void render(SDL_Renderer* renderer) override;
+        void start() override;
+        void update(float dt) override;
+        void render(SDL_Renderer* renderer) override;
 
-        private:
-            ImageAsset* m_image;
-            TransformComponent* m_transform;
-            AnimationComponent* m_animation;
+    private:
+        asset::ImageAsset* m_image = nullptr;
+        core::TransformComponent* m_transform = nullptr;
+        animation::AnimationComponent* m_animation = nullptr;
     };
 
-} // namespace retronomicon
+} // namespace retronomicon::lib::graphic

@@ -2,13 +2,12 @@
 #include <SDL.h>
 #include "retronomicon/lib/core/system.h"
 
-using namespace retronomicon::lib::core;
-namespace retronomicon::lib::core::system{
-    class RenderSystem : public System {
+namespace retronomicon::lib::graphic{
+    class RenderSystem : public retronomicon::lib::core::System {
         public:
             RenderSystem( SDL_Renderer* renderer);
 
-            void render(vector<GameObject*>& objects) override;
+            void render(vector<retronomicon::lib::core::GameObject*>& objects) override;
 
         private:
             SDL_Renderer* m_renderer;
