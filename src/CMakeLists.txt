@@ -18,9 +18,9 @@ add_library(retronomicon)
 target_sources(retronomicon
     PRIVATE
         $<TARGET_OBJECTS:retronomicon-animation>
-        $<TARGET_OBJECTS:core>
+        $<TARGET_OBJECTS:retronomicon-core>
         $<TARGET_OBJECTS:retronomicon-input>
-        $<TARGET_OBJECTS:scripting>
+        $<TARGET_OBJECTS:retronomicon-scripting>
         $<TARGET_OBJECTS:retronomicon-asset>
         $<TARGET_OBJECTS:retronomicon-audio>
         $<TARGET_OBJECTS:retronomicon-graphic>
