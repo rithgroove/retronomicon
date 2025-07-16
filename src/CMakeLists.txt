@@ -22,7 +22,7 @@ target_sources(retronomicon
         $<TARGET_OBJECTS:retronomicon-input>
         $<TARGET_OBJECTS:scripting>
         $<TARGET_OBJECTS:retronomicon-asset>
-        $<TARGET_OBJECTS:audio>
+        $<TARGET_OBJECTS:retronomicon-audio>
         $<TARGET_OBJECTS:retronomicon-graphic>
         $<TARGET_OBJECTS:retronomicon-math>
         $<TARGET_OBJECTS:retronomicon-physics>

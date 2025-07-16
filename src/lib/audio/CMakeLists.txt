@@ -2,10 +2,10 @@ file(GLOB_RECURSE AUDIO_SRC CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
 )
 
-add_library(audio OBJECT ${AUDIO_SRC})
+add_library(retronomicon-audio OBJECT ${AUDIO_SRC})
 
 target_include_directories(
-    audio PUBLIC
+    retronomicon-audio PUBLIC
     ${RETRO_DIR}/include
     ${RETRO_DIR}/external/SDL2/include
     ${RETRO_DIR}/external/SDL2_ttf
