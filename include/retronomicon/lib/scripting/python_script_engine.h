@@ -3,22 +3,25 @@
 
 #include <string>
 #include "retronomicon/lib/scripting/iscript_engine.h"
-
-using namespace std;
+#include "retronomicon/lib/scripting/script_language.h"
 
 namespace retronomicon::lib::scripting {
 
     class PythonScriptEngine : public IScriptEngine {
-        public:
-            PythonScriptEngine();
-            ~PythonScriptEngine() override;
+    public:
+        PythonScriptEngine();
+        ~PythonScriptEngine() override;
 
-            void initialize() override;
-            void shutdown() override;
+        void initialize() override;
+        void shutdown() override;
 
-            void loadScript(const string& path) override;
-            void callFunction(const string& module, const string& funcName, float dt) override;
-            void registerBindings() override; // Optional: for pybind11 or future extension
+        void loadScript(const std::string& path) override;
+        void callFunction(const std::string& module,
+                          const std::string& funcName,
+                          float dt) override;
+
+        void registerBindings() override;
+        ScriptLanguage getLanguage() const override;
     };
 
 } // namespace retronomicon::lib::scripting

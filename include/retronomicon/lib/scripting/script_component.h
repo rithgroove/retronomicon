@@ -3,35 +3,35 @@
 #include "iscript_component.h"
 #include <string>
 #include <unordered_map>
-using namespace std;
 
 namespace retronomicon::lib::scripting {
 
     class ScriptComponent : public IScriptComponent {
     public:
         ScriptComponent();
-        ScriptComponent(string path, ScriptLanguage lang);
+        ScriptComponent(const std::string& path, ScriptLanguage lang);
 
         void onStart() override;
         void onUpdate(float deltaTime) override;
-        void onEvent(const string& eventName) override;
+        void onEvent(const std::string& eventName) override;
 
-        string getScriptPath() const override;
+        std::string getScriptPath() const override;
         ScriptLanguage getLanguage() const override;
 
-        void setEntryFunction(string func);
-        const string& getEntryFunction() const;
+        void setEntryFunction(const std::string& func);
+        const std::string& getEntryFunction() const;
 
         bool isEnabled() const;
         void setEnabled(bool value);
 
-        unordered_map<string, string>& getMetadata();
+        const std::unordered_map<std::string, std::string>& getMetadata() const;
+        void setMetadata(const std::string& key, const std::string& value);
 
     private:
-        string scriptPath;
+        std::string scriptPath;
         ScriptLanguage language;
-        string entryFunction;
-        unordered_map<string, string> metadata;
+        std::string entryFunction;
+        std::unordered_map<std::string, std::string> metadata;
         bool enabled;
     };
 

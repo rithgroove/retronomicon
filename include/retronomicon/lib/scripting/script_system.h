@@ -1,45 +1,86 @@
-#pragma once
+#include "retronomicon/lib/scripting/script_system.h"
+#include "retronomicon/lib/scripting/iscript_engine.h"
 
-#include <unordered_map>
-#include <memory>
-#include <string>
-
-#include "retronomicon/lib/core/component/script_component.h"   // ScriptComponent & ScriptLanguage
-#include "retronomicon/lib/core/system.h"
-
-using namespace retronomicon::lib::core;
-using namespace std;
-using namespace retronomicon::lib::core::component;
 namespace retronomicon::lib::scripting {
 
-    class IScriptEngine;            // forward declaration
+    ScriptSystem::ScriptSystem() = default;
 
-    /**
-     * ScriptSystem
-     * ------------
-     * Iterates over every entity that carries a ScriptComponent
-     * and dispatches lifecycle calls to the appropriate IScriptEngine
-     * implementation (Lua, Python, etc.).
-     */
-    class ScriptSystem {
-        public:
-            explicit ScriptSystem();
+    /* ---------------------------------------------------------- */
 
-            /** Register a language‑specific engine (call at bootstrap). */
-            void registerEngine(ScriptLanguage lang,
-                                shared_ptr<IScriptEngine> engine);
+    void ScriptSystem::registerEngine(
+        retronomicon::lib::core::component::ScriptLanguage lang,
+        std::shared_ptr<IScriptEngine> engine
+    ) {
+        engines_[lang] = std::move(engine);
+    }
 
-            /** One‑shot initialization (call after scene/world load). */
-            void start();
+    /* ---------------------------------------------------------- */
 
-            /** Per‑frame update (fixed or variable delta). */
-            void update(float deltaTime);
+    void ScriptSystem::start() {
+        // Example ECS logic if registry is set:
+        /*
+        if (!registry_) return;
 
-            /** Broadcast a named event to all active scripts. */
-            void broadcastEvent(const string& eventName);
+        auto view = registry_->view<ScriptComponent>();
+        for (auto entity : view) {
+            auto& comp = view.get<ScriptComponent>(entity);
+            if (!comp.isEnabled()) continue;
 
-        private:
-            unordered_map<ScriptLanguage, shared_ptr<IScriptEngine>> engines_;
-    };
+            auto it = engines_.find(comp.getLanguage());
+            if (it != engines_.end() && it->second) {
+                it->second->runStart(entity, comp);
+            }
+        }
+        */
+    }
+
+    /* ---------------------------------------------------------- */
+
+    void ScriptSystem::update(float deltaTime) {
+        // Example ECS logic if registry is set:
+        /*
+        if (!registry_) return;
+
+        auto view = registry_->view<ScriptComponent>();
+        for (auto entity : view) {
+            auto& comp = view.get<ScriptComponent>(entity);
+            if (!comp.isEnabled()) continue;
+
+            auto it = engines_.find(comp.getLanguage());
+            if (it != engines_.end() && it->second) {
+                it->second->runUpdate(entity, comp, deltaTime);
+            }
+        }
+        */
+    }
+
+    /* ---------------------------------------------------------- */
+
+    void ScriptSystem::broadcastEvent(const std::string& eventName) {
+        // Example ECS logic if registry is set:
+        /*
+        if (!registry_) return;
+
+        auto view = registry_->view<ScriptComponent>();
+        for (auto entity : view) {
+            auto& comp = view.get<ScriptComponent>(entity);
+            if (!comp.isEnabled()) continue;
+
+            auto it = engines_.find(comp.getLanguage());
+            if (it != engines_.end() && it->second) {
+                it->second->runEvent(entity, comp, eventName);
+            }
+        }
+        */
+    }
+
+    /* ---------------------------------------------------------- */
+
+    // Optional registry injection if you're using entt
+    /*
+    void ScriptSystem::setRegistry(entt::registry* registry) {
+        registry_ = registry;
+    }
+    */
 
 } // namespace retronomicon::lib::scripting

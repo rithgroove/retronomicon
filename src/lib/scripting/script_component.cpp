@@ -1,26 +1,31 @@
-#include "retronomicon/lib/core/component/script_component.h"
+#include "retronomicon/lib/scripting/script_component.h"
 
-namespace retronomicon::lib::core::component {
+namespace retronomicon::lib::scripting {
 
     ScriptComponent::ScriptComponent()
-        : language(ScriptLanguage::None), entryFunction("on_update"), enabled(true) {}
+        : language(ScriptLanguage::None),
+          entryFunction("on_update"),
+          enabled(true) {}
 
-    ScriptComponent::ScriptComponent(string path, ScriptLanguage lang)
-        : scriptPath(move(path)), language(lang), entryFunction("on_update"), enabled(true) {}
+    ScriptComponent::ScriptComponent(const std::string& path, ScriptLanguage lang)
+        : scriptPath(path),
+          language(lang),
+          entryFunction("on_update"),
+          enabled(true) {}
 
     void ScriptComponent::onStart() {
-        // Optional logic
+        // Optional script-related logic to be triggered at component start
     }
 
     void ScriptComponent::onUpdate(float /*deltaTime*/) {
-        // Optional logic
+        // Optional per-frame script logic stub
     }
 
-    void ScriptComponent::onEvent(const string& /*eventName*/) {
-        // Optional logic
+    void ScriptComponent::onEvent(const std::string& /*eventName*/) {
+        // Optional event dispatch hook
     }
 
-    string ScriptComponent::getScriptPath() const {
+    std::string ScriptComponent::getScriptPath() const {
         return scriptPath;
     }
 
@@ -28,11 +33,11 @@ namespace retronomicon::lib::core::component {
         return language;
     }
 
-    void ScriptComponent::setEntryFunction(string func) {
-        entryFunction = move(func);
+    void ScriptComponent::setEntryFunction(const std::string& func) {
+        entryFunction = func;
     }
 
-    const string& ScriptComponent::getEntryFunction() const {
+    const std::string& ScriptComponent::getEntryFunction() const {
         return entryFunction;
     }
 
@@ -44,8 +49,12 @@ namespace retronomicon::lib::core::component {
         enabled = value;
     }
 
-    unordered_map<string, string>& ScriptComponent::getMetadata() {
+    const std::unordered_map<std::string, std::string>& ScriptComponent::getMetadata() const {
         return metadata;
+    }
+
+    void ScriptComponent::setMetadata(const std::string& key, const std::string& value) {
+        metadata[key] = value;
     }
 
 } // namespace retronomicon::lib::scripting

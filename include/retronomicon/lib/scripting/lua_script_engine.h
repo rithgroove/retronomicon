@@ -1,30 +1,34 @@
 #pragma once
 
-#ifdef USE_LUA  // Compile only when Lua is enabled
-    #include <sol/sol.hpp>
-    #include "iscript_engine.h"
-    using namespace std;
-    using namespace sol;
-    namespace retronomicon::lib::scripting {
+#ifdef USE_LUA
 
-        class LuaScriptEngine : public IScriptEngine {
-            public:
-                LuaScriptEngine();
-                ~LuaScriptEngine() override;
+#include <sol/sol.hpp>
+#include "iscript_engine.h"
+#include "script_language.h" // Just in case ScriptLanguage is elsewhere
 
-                void initialize() override;
-                void shutdown() override;
+namespace retronomicon::lib::scripting {
 
-                void loadScript(const string& path) override;
-                void callFunction(const string& module,
-                                  const string& funcName,
-                                  float dt) override;
+    class LuaScriptEngine : public IScriptEngine {
+    public:
+        LuaScriptEngine();
+        ~LuaScriptEngine() override;
 
-                void registerBindings() override;   // Expose C++ API to Lua
+        void initialize() override;
+        void shutdown() override;
 
-            private:
-                state m_lua;
-        };
+        void loadScript(const std::string& path) override;
+        void callFunction(const std::string& module,
+                          const std::string& funcName,
+                          float dt) override;
 
-    } // namespace retronomicon::lib::scripting
+        void registerBindings() override;
+
+        ScriptLanguage getLanguage() const override;
+
+    private:
+        sol::state m_lua;
+    };
+
+} // namespace retronomicon::lib::scripting
+
 #endif // USE_LUA

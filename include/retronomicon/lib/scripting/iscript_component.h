@@ -1,14 +1,8 @@
 #pragma once
 
 #include <string>
-using namespace std;
+#include "script_language.h"
 namespace retronomicon::lib::scripting {
-
-    enum class ScriptLanguage {
-        None,
-        Lua,
-        Python
-    };
 
     class IScriptComponent {
         public:
@@ -16,7 +10,7 @@ namespace retronomicon::lib::scripting {
 
             virtual void onStart() {}
             virtual void onUpdate(float deltaTime) {}
-            virtual void onEvent(const string& eventName) {}
+            virtual void onEvent(const std::string& eventName) {}
 
             virtual string getScriptPath() const = 0;
             virtual ScriptLanguage getLanguage() const = 0;

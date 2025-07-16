@@ -4,11 +4,9 @@
 #include <Python.h>
 #include <iostream>
 
-namespace retronomicon::lib::scripting{
+namespace retronomicon::lib::scripting {
 
-    PythonScriptEngine::PythonScriptEngine() {
-        m_initialized = false;
-    }
+    PythonScriptEngine::PythonScriptEngine() = default;
 
     PythonScriptEngine::~PythonScriptEngine() {
         shutdown();
@@ -18,7 +16,7 @@ namespace retronomicon::lib::scripting{
         if (!m_initialized) {
             Py_Initialize();
             m_initialized = true;
-            cout << "[PythonScriptEngine] Initialized\n";
+            std::cout << "[PythonScriptEngine] Initialized\n";
         }
     }
 
@@ -26,24 +24,26 @@ namespace retronomicon::lib::scripting{
         if (m_initialized) {
             Py_Finalize();
             m_initialized = false;
-            cout << "[PythonScriptEngine] Shutdown\n";
+            std::cout << "[PythonScriptEngine] Shutdown\n";
         }
     }
 
-    void PythonScriptEngine::loadScript(const string& path) {
+    void PythonScriptEngine::loadScript(const std::string& path) {
         if (!m_initialized) initialize();
 
         FILE* file = fopen(path.c_str(), "r");
         if (file) {
             PyRun_SimpleFile(file, path.c_str());
             fclose(file);
-            cout << "[PythonScriptEngine] Loaded: " << path << '\n';
+            std::cout << "[PythonScriptEngine] Loaded: " << path << '\n';
         } else {
-            cerr << "[PythonScriptEngine] Failed to open: " << path << '\n';
+            std::cerr << "[PythonScriptEngine] Failed to open: " << path << '\n';
         }
     }
 
-    void PythonScriptEngine::callFunction(const string& moduleName, const string& funcName, float dt) {
+    void PythonScriptEngine::callFunction(const std::string& moduleName,
+                                          const std::string& funcName,
+                                          float dt) {
         if (!m_initialized) return;
 
         PyObject* pName = PyUnicode_DecodeFSDefault(moduleName.c_str());
@@ -52,7 +52,7 @@ namespace retronomicon::lib::scripting{
 
         if (!pModule) {
             PyErr_Print();
-            cerr << "[PythonScriptEngine] Failed to import module: " << moduleName << '\n';
+            std::cerr << "[PythonScriptEngine] Failed to import module: " << moduleName << '\n';
             return;
         }
 
@@ -63,15 +63,15 @@ namespace retronomicon::lib::scripting{
             Py_DECREF(args);
 
             if (result) {
-                cout << "[PythonScriptEngine] " << funcName << " returned\n";
+                std::cout << "[PythonScriptEngine] " << funcName << " executed\n";
                 Py_DECREF(result);
             } else {
                 PyErr_Print();
-                cerr << "[PythonScriptEngine] Function call failed: " << funcName << '\n';
+                std::cerr << "[PythonScriptEngine] Function call failed: " << funcName << '\n';
             }
         } else {
             PyErr_Print();
-            cerr << "[PythonScriptEngine] Function not found or not callable: " << funcName << '\n';
+            std::cerr << "[PythonScriptEngine] Function not found or not callable: " << funcName << '\n';
         }
 
         Py_XDECREF(pFunc);
@@ -79,8 +79,13 @@ namespace retronomicon::lib::scripting{
     }
 
     void PythonScriptEngine::registerBindings() {
-        // You can implement pybind11 bindings here if needed
+        // Optional: expose C++ types/functions to Python using pybind11
     }
-}
+
+    ScriptLanguage PythonScriptEngine::getLanguage() const {
+        return ScriptLanguage::Python;
+    }
+
+} // namespace retronomicon::lib::scripting
 
 #endif // USE_PYTHON
