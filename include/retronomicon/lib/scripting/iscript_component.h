@@ -2,7 +2,7 @@
 
 #include <string>
 using namespace std;
-namespace retronomicon::lib::core::component {
+namespace retronomicon::lib::scripting {
 
     enum class ScriptLanguage {
         None,

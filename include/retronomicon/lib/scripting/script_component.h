@@ -5,7 +5,7 @@
 #include <unordered_map>
 using namespace std;
 
-namespace retronomicon::lib::core::component {
+namespace retronomicon::lib::scripting {
 
     class ScriptComponent : public IScriptComponent {
     public:

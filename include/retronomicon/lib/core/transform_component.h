@@ -6,7 +6,7 @@ using namespace retronomicon::lib::core;
 /**
  * @brief The namespace for core components
  */
-namespace retronomicon::lib::core::component{
+namespace retronomicon::lib::core{
     /**
      * @brief The components that defines the position of an gameobject
      */

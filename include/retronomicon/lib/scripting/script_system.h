@@ -10,7 +10,7 @@
 using namespace retronomicon::lib::core;
 using namespace std;
 using namespace retronomicon::lib::core::component;
-namespace retronomicon::lib::core::system {
+namespace retronomicon::lib::scripting {
 
     class IScriptEngine;            // forward declaration
 
