@@ -1,12 +1,12 @@
 #include "retronomicon/lib/graphic/sprite_component.h"
+#include "retronomicon/lib/graphic/internal/sdl_utils.h"
 #include "retronomicon/lib/core/game_object.h" // Note: game_object is usually in core
-#include "retronomicon/lib/core/component/transform_component.h"
+#include "retronomicon/lib/core/transform_component.h"
 #include "retronomicon/lib/animation/animation_component.h"
-
 #include <iostream>
 
 namespace retronomicon::lib::graphic {
-
+    using  retronomicon::lib::graphic::internal::toSDLRect;
     SpriteComponent::SpriteComponent(asset::ImageAsset* image)
         : m_image(image) {}
 
@@ -42,7 +42,7 @@ namespace retronomicon::lib::graphic {
             dstRect.w = static_cast<int>(currentFrame.getWidth() * m_transform->getScaleX());
             dstRect.h = static_cast<int>(currentFrame.getHeight() * m_transform->getScaleY());
 
-            SDL_Rect srcRect = currentFrame.getRect().generateSDLRect();
+            SDL_Rect srcRect = toSDLRect(currentFrame.getRect());
 
             SDL_RenderCopyEx(
                 renderer,

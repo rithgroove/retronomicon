@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL2/SDL_rect.h>
+#include <SDL_rect.h>
 #include "retronomicon/lib/math/rect.h"
 
 namespace retronomicon::lib::graphic::internal {

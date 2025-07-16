@@ -1,9 +1,11 @@
-#include "retronomicon/lib/core/system/script_system.h"
+#include "retronomicon/lib/scripting/script_system.h"
 #include "retronomicon/lib/scripting/iscript_engine.h"   // defines IScriptEngine
 
-namespace retronomicon::lib::core::system {
-
-    ScriptSystem::ScriptSystem(){}
+#include <memory>
+namespace retronomicon::lib::scripting{
+    using std::shared_ptr;
+    using std::string;
+    // ScriptSystem::ScriptSystem(){}
 
     /* ---------------------------------------------------------- */
 

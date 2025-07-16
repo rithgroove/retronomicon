@@ -12,7 +12,7 @@ namespace retronomicon::lib::scripting {
             virtual void onUpdate(float deltaTime) {}
             virtual void onEvent(const std::string& eventName) {}
 
-            virtual string getScriptPath() const = 0;
+            virtual std::string getScriptPath() const = 0;
             virtual ScriptLanguage getLanguage() const = 0;
     };
 

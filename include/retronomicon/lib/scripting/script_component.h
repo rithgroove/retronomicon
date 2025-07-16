@@ -15,7 +15,7 @@ namespace retronomicon::lib::scripting {
         void onUpdate(float deltaTime) override;
         void onEvent(const std::string& eventName) override;
 
-        std::string getScriptPath() const override;
+        std::string getScriptPath() const;
         ScriptLanguage getLanguage() const override;
 
         void setEntryFunction(const std::string& func);

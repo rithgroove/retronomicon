@@ -1,86 +1,47 @@
-#include "retronomicon/lib/scripting/script_system.h"
-#include "retronomicon/lib/scripting/iscript_engine.h"
+#pragma once
 
+#include <unordered_map>
+#include <memory>
+#include <string>
+
+#include "retronomicon/lib/scripting/script_component.h"
+#include "retronomicon/lib/scripting/script_language.h"
 namespace retronomicon::lib::scripting {
 
-    ScriptSystem::ScriptSystem() = default;
+    class IScriptEngine;
 
-    /* ---------------------------------------------------------- */
+    /**
+     * ScriptSystem
+     * ------------
+     * Iterates over every entity that carries a ScriptComponent
+     * and dispatches lifecycle calls to the appropriate IScriptEngine
+     * implementation (Lua, Python, etc.).
+     */
+    class ScriptSystem {
+    public:
+        ScriptSystem() = default;
 
-    void ScriptSystem::registerEngine(
-        retronomicon::lib::core::component::ScriptLanguage lang,
-        std::shared_ptr<IScriptEngine> engine
-    ) {
-        engines_[lang] = std::move(engine);
-    }
+        /** Register a language‑specific engine (call at bootstrap). */
+        void registerEngine(retronomicon::lib::scripting::ScriptLanguage lang,
+                            std::shared_ptr<IScriptEngine> engine);
 
-    /* ---------------------------------------------------------- */
+        /** One‑shot initialization (call after scene/world load). */
+        void start();
 
-    void ScriptSystem::start() {
-        // Example ECS logic if registry is set:
-        /*
-        if (!registry_) return;
+        /** Per‑frame update (fixed or variable delta). */
+        void update(float deltaTime);
 
-        auto view = registry_->view<ScriptComponent>();
-        for (auto entity : view) {
-            auto& comp = view.get<ScriptComponent>(entity);
-            if (!comp.isEnabled()) continue;
+        /** Broadcast a named event to all active scripts. */
+        void broadcastEvent(const std::string& eventName);
 
-            auto it = engines_.find(comp.getLanguage());
-            if (it != engines_.end() && it->second) {
-                it->second->runStart(entity, comp);
-            }
-        }
-        */
-    }
+        /** (Optional) Provide access to ECS registry, if needed later. */
+        // void setRegistry(entt::registry* registry);  // Uncomment when integrating ECS
 
-    /* ---------------------------------------------------------- */
+    private:
+        std::unordered_map<retronomicon::lib::scripting::ScriptLanguage,
+                           std::shared_ptr<IScriptEngine>> engines_;
 
-    void ScriptSystem::update(float deltaTime) {
-        // Example ECS logic if registry is set:
-        /*
-        if (!registry_) return;
-
-        auto view = registry_->view<ScriptComponent>();
-        for (auto entity : view) {
-            auto& comp = view.get<ScriptComponent>(entity);
-            if (!comp.isEnabled()) continue;
-
-            auto it = engines_.find(comp.getLanguage());
-            if (it != engines_.end() && it->second) {
-                it->second->runUpdate(entity, comp, deltaTime);
-            }
-        }
-        */
-    }
-
-    /* ---------------------------------------------------------- */
-
-    void ScriptSystem::broadcastEvent(const std::string& eventName) {
-        // Example ECS logic if registry is set:
-        /*
-        if (!registry_) return;
-
-        auto view = registry_->view<ScriptComponent>();
-        for (auto entity : view) {
-            auto& comp = view.get<ScriptComponent>(entity);
-            if (!comp.isEnabled()) continue;
-
-            auto it = engines_.find(comp.getLanguage());
-            if (it != engines_.end() && it->second) {
-                it->second->runEvent(entity, comp, eventName);
-            }
-        }
-        */
-    }
-
-    /* ---------------------------------------------------------- */
-
-    // Optional registry injection if you're using entt
-    /*
-    void ScriptSystem::setRegistry(entt::registry* registry) {
-        registry_ = registry;
-    }
-    */
+        // entt::registry* registry_ = nullptr; // Optional ECS registry hook
+    };
 
 } // namespace retronomicon::lib::scripting
