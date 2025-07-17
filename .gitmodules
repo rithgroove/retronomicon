@@ -10,3 +10,6 @@
 [submodule "external/SDL2_mixer"]
 	path = external/SDL2_mixer
 	url = https://github.com/libsdl-org/SDL_mixer.git
+[submodule "external/catch2"]
+	path = external/catch2
+	url = https://github.com/catchorg/catch2.git
