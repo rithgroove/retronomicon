@@ -35,7 +35,7 @@ build/
 build-aarch64/
 CMakeFiles/
 
-external/
+/external/*
 !/external/SDL2
 !/external/SDL2_ttf
 !/external/SDL2_image
