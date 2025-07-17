@@ -40,5 +40,6 @@ CMakeFiles/
 !/external/SDL2_ttf
 !/external/SDL2_image
 !/external/SDL2_mixer
+!/external/libavif
 
 documentation/
