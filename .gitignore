@@ -41,5 +41,6 @@ CMakeFiles/
 !/external/SDL2_image
 !/external/SDL2_mixer
 !/external/libavif
+!/external/catch2
 
 documentation/
