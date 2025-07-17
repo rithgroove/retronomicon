@@ -5,6 +5,27 @@ echo downloading libraries
 mkdir -p external
 cd ./external
 
+cd external/SDL2
+git checkout tags/release-2.24.2
+cd ../..
+
+# SDL2_ttf
+cd external/SDL2_ttf
+git checkout tags/release-2.24.0
+cd ../..
+
+# SDL2_image
+cd external/SDL2_image
+git checkout tags/release-2.8.0
+cd ../..
+
+# SDL2_mixer
+cd external/SDL2_mixer
+git checkout tags/release-2.8.1
+cd ../..
+
+
+
 echo cloning SDL2
 
 # echo cloning entt 
