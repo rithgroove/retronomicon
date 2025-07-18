@@ -6,9 +6,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Output folders
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build/lib)
 set(RETRO_DIR ${CMAKE_CURRENT_SOURCE_DIR} CACHE PATH "Retronomicon include path")
 set(RETRO_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include CACHE PATH "Retronomicon include path")
 
@@ -33,6 +33,7 @@ set(SDL2MIXER_FLUIDSYNTH OFF CACHE BOOL "" FORCE)
 # use STB vorbis
 set(SDL2MIXER_VORBIS STB CACHE BOOL "" FORCE)
 add_subdirectory(external/SDL2_mixer)
+add_subdirectory(external/catch2)
 
 # Engine source (will add retronomicon library)
 add_subdirectory(src)
@@ -44,7 +45,11 @@ include_directories(
     ${RETRO_INCLUDE_DIR}/external/SDL2_ttf/include
     ${RETRO_INCLUDE_DIR}/external/SDL2_image/include
     ${RETRO_INCLUDE_DIR}/external/SDL2_mixer/include
+    ${RETRO_INCLUDE_DIR}/external/catch2/src/catch2
 )
+
+add_subdirectory(tests)
+
 
 # Optional: Message info
 message(STATUS "Building retronomicon as a library ✅")
