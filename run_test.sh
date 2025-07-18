@@ -1,4 +1,17 @@
+#!/bin/bash
+
+# Exit on any error
+set -e
+
+# Clean build folder
+rm -rf build
 mkdir build && cd build
+
+# Configure CMake
 cmake ..
-make tests
-./tests
+
+# Build the test executable
+make engine_tests
+
+# Run it
+./build/bin/engine_tests

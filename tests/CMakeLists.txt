@@ -6,7 +6,7 @@ add_executable(engine_tests ${TEST_SOURCES})
 
 target_link_libraries(engine_tests
     PRIVATE
-        retronomicon-lib
+        retronomicon
         Catch2::Catch2WithMain
 )
 
