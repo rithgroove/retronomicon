@@ -45,7 +45,7 @@ include_directories(
     ${RETRO_INCLUDE_DIR}/external/SDL2_ttf/include
     ${RETRO_INCLUDE_DIR}/external/SDL2_image/include
     ${RETRO_INCLUDE_DIR}/external/SDL2_mixer/include
-    ${RETRO_INCLUDE_DIR}/external/catch2/src/catch2
+    ${RETRO_INCLUDE_DIR}/external/catch2/src
 )
 
 add_subdirectory(tests)

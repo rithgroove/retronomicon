@@ -10,7 +10,15 @@ target_link_libraries(engine_tests
         Catch2::Catch2WithMain
 )
 
-target_include_directories(engine_tests PRIVATE ${CMAKE_SOURCE_DIR}/src)
+target_include_directories(engine_tests
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_SOURCE_DIR}/external/catch2/src
+        ${CMAKE_SOURCE_DIR}/external/SDL2/include
+        ${CMAKE_SOURCE_DIR}/external/SDL2_ttf/include
+        ${CMAKE_SOURCE_DIR}/external/SDL2_image/include
+        ${CMAKE_SOURCE_DIR}/external/SDL2_mixer/include
+)
 
 include(Catch)
 catch_discover_tests(engine_tests)

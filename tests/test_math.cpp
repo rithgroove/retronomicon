@@ -1,4 +1,4 @@
-#include <catch_test_macros.hpp>
+#include <catch2/catch_test_macros.hpp>
 #include "retronomicon/lib/math/point.h"
 
 TEST_CASE("Point addition works", "[math]") {
@@ -8,6 +8,6 @@ TEST_CASE("Point addition works", "[math]") {
     Point p2{3, 4};
     Point result = p1 + p2;
 
-    REQUIRE(result.x == 4);
-    REQUIRE(result.y == 6);
+    REQUIRE(result.getX() == 4);
+    REQUIRE(result.get() == 6);
 }
