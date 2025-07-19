@@ -14,4 +14,4 @@ cmake ..
 make engine_tests
 
 # Run it
-./build/bin/engine_tests
+./build/bin/engine_tests  --reporter console --success --durations yes

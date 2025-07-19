@@ -22,3 +22,8 @@ target_include_directories(engine_tests
 
 include(Catch)
 catch_discover_tests(engine_tests)
+
+add_custom_command(TARGET engine_tests POST_BUILD
+    COMMAND engine_tests
+    COMMENT "🔍 Running unit tests after build..."
+)
