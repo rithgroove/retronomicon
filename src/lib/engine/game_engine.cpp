@@ -69,8 +69,8 @@ namespace retronomicon::lib::engine {
             if (event.type == SDL_QUIT)
                 m_running = false;
 
-            if (m_activeScene)
-                m_activeScene->handleInput(event);
+            // if (m_activeScene)
+            //     m_activeScene->handleInput(event);
         }
     }
 
@@ -80,8 +80,8 @@ namespace retronomicon::lib::engine {
      * @param dt, the delta time since last update
      */
     void GameEngine::update(float dt) {
-        if (m_activeScene)
-            m_activeScene->update(dt);
+        // if (m_activeScene)
+        //     m_activeScene->update(dt);
     }
 
     /**
@@ -91,8 +91,8 @@ namespace retronomicon::lib::engine {
         // clear
         m_window->clear();
 
-        if (m_activeScene)
-            m_activeScene->render(m_window.getRenderer());
+        // if (m_activeScene)
+            // m_activeScene->render(m_window.getRenderer());
 
         m_window->present();
     }

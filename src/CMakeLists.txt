@@ -6,6 +6,7 @@ add_subdirectory(lib/asset)
 add_subdirectory(lib/audio)
 add_subdirectory(lib/core)
 add_subdirectory(lib/graphic)
+add_subdirectory(lib/engine)
 add_subdirectory(lib/input)
 add_subdirectory(lib/math)
 add_subdirectory(lib/scripting)
@@ -24,6 +25,7 @@ target_sources(retronomicon
         $<TARGET_OBJECTS:retronomicon-asset>
         $<TARGET_OBJECTS:retronomicon-audio>
         $<TARGET_OBJECTS:retronomicon-graphic>
+        $<TARGET_OBJECTS:retronomicon-engine>
         $<TARGET_OBJECTS:retronomicon-math>
         $<TARGET_OBJECTS:retronomicon-physics>
 )

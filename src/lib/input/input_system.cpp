@@ -63,7 +63,7 @@ namespace retronomicon::lib::input{
      * @param dt time interval since last update
      * @param objects the game objects (might change to Entity Later)
      */
-    void InputSystem::update(float dt, vector<GameObject*>& objects) {
+    void InputSystem::update(float dt, vector<Entity*>& objects) {
         m_inputState->updateFromSDL();
         for (auto& obj :objects){
             auto input = obj->getComponent<InputComponent>();

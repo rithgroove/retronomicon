@@ -2,6 +2,7 @@
 #include "retronomicon/lib/graphic/internal/sdl_utils.h"
 #include "retronomicon/lib/core/transform_component.h"
 #include "retronomicon/lib/animation/animation_component.h"
+#include "retronomicon/lib/core/entity.h"
 #include <iostream>
 
 namespace retronomicon::lib::graphic {

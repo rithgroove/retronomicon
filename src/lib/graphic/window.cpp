@@ -32,7 +32,7 @@ namespace retronomicon::lib::graphic{
     /**
      * @brief a method to clear the screen
      */
-    void Window::clear() {{
+    void Window::clear() {
         SDL_SetRenderDrawColor(m_renderer, m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
         SDL_RenderClear(m_renderer);
     }
