@@ -27,7 +27,7 @@ namespace retronomicon::lib::core{
             /**
              * @brief start function (used to initialize stuff)
              */
-            virtual void start();
+            void start();
 
             /**
              * @brief a method to add components. this will use templates

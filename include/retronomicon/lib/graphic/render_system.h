@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "retronomicon/lib/core/system.h"
-#include "retronomicon/lib/core/game_object.h"
 
 namespace retronomicon::lib::graphic {
 
@@ -12,7 +11,7 @@ namespace retronomicon::lib::graphic {
     public:
         explicit RenderSystem(SDL_Renderer* renderer);
 
-        void render(std::vector<core::GameObject*>& objects) override;
+        void render(std::vector<core::Entity*>& objects) override;
 
     private:
         SDL_Renderer* m_renderer;

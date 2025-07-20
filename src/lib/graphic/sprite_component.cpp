@@ -1,6 +1,5 @@
 #include "retronomicon/lib/graphic/sprite_component.h"
 #include "retronomicon/lib/graphic/internal/sdl_utils.h"
-#include "retronomicon/lib/core/game_object.h" // Note: game_object is usually in core
 #include "retronomicon/lib/core/transform_component.h"
 #include "retronomicon/lib/animation/animation_component.h"
 #include <iostream>

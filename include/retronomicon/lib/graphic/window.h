@@ -78,7 +78,7 @@ namespace retronomicon::lib::graphic{
              * 
              * @return true if in fullscreen mode, false otherwise
              */
-            boolean isFullScreen() const{return m_fullscreen;}
+            bool isFullScreen() const{return m_fullscreen;}
 
             /***************************** Main Method *****************************/
 

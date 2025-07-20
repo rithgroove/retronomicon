@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "retronomicon/lib/input/input_state.h"
-#include "retronomicon/lib/core/game_object.h"
+#include "retronomicon/lib/core/entity.h"
 #include "retronomicon/lib/core/system.h"
 
 /**
@@ -62,7 +62,7 @@ namespace retronomicon::lib::input {
              * @param dt time interval since last update
              * @param objects the game objects (might change to Entity Later)
              */
-            void update(float dt, vector<retronomicon::lib::core::GameObject*>& objects)  override;
+            void update(float dt, vector<retronomicon::lib::core::Entity*>& objects)  override;
         private:
             /***************************** Attribute *****************************/
             InputState* m_inputState;

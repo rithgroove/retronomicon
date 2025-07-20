@@ -3,7 +3,6 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include "game_object.h"
 #include "retronomicon/lib/core/entity.h"
 #include "system.h"
 
@@ -23,13 +22,13 @@ namespace retronomicon::lib::core {
 
         string getName() const;
 
-        GameObject* createGameObject(const string& name);
-        void removeGameObject(GameObject* object);
+        Entity* createGameObject(const string& name);
+        void removeGameObject(Entity* object);
         void addSystem(System* system);
 
     private:
         string m_name;
-        vector<GameObject*> m_gameObjects;
+        vector<Entity*> m_gameObjects;
         vector<System*> m_systems;
     };
 }

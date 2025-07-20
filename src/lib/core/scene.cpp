@@ -41,13 +41,13 @@ namespace retronomicon::lib::core {
         return m_name;
     }
 
-    GameObject* Scene::createGameObject(const string& name) {
-        GameObject* obj = new GameObject(name);
+    Entity* Scene::createGameObject(const string& name) {
+        Entity* obj = new Entity();
         m_gameObjects.push_back(obj);
         return obj;
     }
 
-    void Scene::removeGameObject(GameObject* object) {
+    void Scene::removeGameObject(Entity* object) {
         // _gameObjects.erase(std::remove(_gameObjects.begin(), _gameObjects.end(), object), _gameObjects.end());
     }
 

@@ -1,5 +1,5 @@
 #include "retronomicon/lib/audio/audio_system.h"
-#include "retronomicon/lib/core/game_object.h"
+#include "retronomicon/lib/core/entity.h"
 
 namespace retronomicon::lib::audio {
 
@@ -12,7 +12,7 @@ namespace retronomicon::lib::audio {
         AudioWrapper::shutdown();
     }
 
-    void AudioSystem::update(float dt, std::vector<retronomicon::lib::core::GameObject*>& objects) {
+    void AudioSystem::update(float dt, std::vector<retronomicon::lib::core::Entity*>& objects) {
         for (auto* obj : objects) {
             // Check and process music component
             if (auto* music = obj->getComponent<MusicComponent>()) {

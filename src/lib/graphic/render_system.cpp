@@ -3,13 +3,13 @@
 
 namespace retronomicon::lib::graphic {
 
-    using retronomicon::lib::core::GameObject;
+    using retronomicon::lib::core::Entity;
 
     RenderSystem::RenderSystem(SDL_Renderer* renderer)
         : m_renderer(renderer) {}
 
-    void RenderSystem::render(std::vector<GameObject*>& objects) {
-        for (GameObject* obj : objects) {
+    void RenderSystem::render(std::vector<Entity*>& objects) {
+        for (Entity* obj : objects) {
             auto sprite = obj->getComponent<SpriteComponent>();
             if (!sprite) continue;
             sprite->render(m_renderer);

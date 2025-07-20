@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "retronomicon/lib/core/scene.h"
 #include "retronomicon/lib/graphic/window.h"
 
