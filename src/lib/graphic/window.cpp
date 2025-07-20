@@ -1,5 +1,5 @@
 #include "retronomicon/lib/graphic/window.h"
-
+#include <stdexcept>
 /**
  * @brief The namespace for graphic classes
  */
@@ -25,9 +25,8 @@ namespace retronomicon::lib::graphic{
     }
 
     void Window::initialize(const std::string& title, int width, int height, bool fullscreen) {
-        if (SDL_Init(SDL_INIT_VIDEO) < 0) { //wait why is this here???
-            std::cerr << "SDL could not initialize: " << SDL_GetError() << std::endl;
-            return;
+        if (SDL_Init(SDL_INIT_VIDEO) < 0) { 
+            throw std::runtime_error("[Window.initialize] Failed to initialize SDL_INIT_VIDEO");
         }
 
         Uint32 windowFlags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
@@ -40,20 +39,18 @@ namespace retronomicon::lib::graphic{
                                     SDL_WINDOWPOS_CENTERED,
                                     width, height, SDL_WINDOW_FOREIGN);
         if (!m_window) {
-            std::cerr << "Window could not be created: " << SDL_GetError() << std::endl;
-            return;
+            throw std::runtime_error("[Window.initialize] Failed to create SDL_WINDOW");
         }
 
         m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
         if (!m_renderer) {
-            std::cerr << "Renderer could not be created: " << SDL_GetError() << std::endl;
-            return;
+            throw std::runtime_error("[Window.initialize] Failed to create SDL_RENDERER");
         }
     }
 
     void Window::cleanup() {
         if (m_renderer) {
-            // SDL_DestroyRenderer(m_renderer);
+            SDL_DestroyRenderer(m_renderer);
             m_renderer = nullptr;
         }
 

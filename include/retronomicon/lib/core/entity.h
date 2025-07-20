@@ -45,8 +45,12 @@ namespace retronomicon::lib::core{
             template <typename T>
             T* getComponent();
 
+            void setName(const string& newName);
+            const string& getName() const;
+            
         protected:
             unordered_map<type_index, unique_ptr<Component>> m_components;
+            string m_name;
     };
 
     // ---------- Template definitions ----------
