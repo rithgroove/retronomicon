@@ -4,29 +4,47 @@
 #include <SDL2/SDL.h>
 #include "retronomicon/lib/core/scene.h"
 
+/**
+ * @brief The namespace for the core features of retronomicon
+ */
 namespace retronomicon::lib::core {
+    /**
+     * @brief Game Engine class (the main class that you need to run)
+     */
+    class GameEngine {
+        public:
 
-class GameEngine {
-public:
-    GameEngine();
-    ~GameEngine();
+            /***************************** Constructor *****************************/
 
-    bool init(const char* title, int width, int height);
-    void run();
-    void shutdown();
+            /**
+             * @brief default constructor
+             */
+            GameEngine();
 
-    void setScene(std::shared_ptr<Scene> newScene);
+            /***************************** Destructor *****************************/
+            
+            /**
+             * @brief default destructor
+             */
+            ~GameEngine();
 
-private:
-    SDL_Window* m_window = nullptr;
-    SDL_Renderer* m_renderer = nullptr;
-    bool m_running = false;
+            /***************************** Main Methods *****************************/
+            bool init(const char* title, int width, int height);
+            void run();
+            void shutdown();
 
-    std::shared_ptr<Scene> m_activeScene;
+            void setScene(std::shared_ptr<Scene> newScene);
 
-    void handleEvents();
-    void update(float dt);
-    void render();
-};
+        private:
+            SDL_Window* m_window = nullptr;
+            SDL_Renderer* m_renderer = nullptr;
+            bool m_running = false;
+
+            std::shared_ptr<Scene> m_activeScene;
+
+            void handleEvents();
+            void update(float dt);
+            void render();
+    };
 
 } // namespace retronomicon::lib::core

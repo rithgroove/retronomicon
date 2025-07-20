@@ -29,6 +29,11 @@ namespace retronomicon::lib::math{
 	    	Point(float x, float y);
 	    	
 
+	    	/**
+	    	 * @brief constructor with vec2
+	    	 * 
+	    	 * @param vector the 2D vector we want to convert to point
+	    	 */
 	    	Point(Vec2& vector);
 
 	    	/***************************** Destructor *****************************/

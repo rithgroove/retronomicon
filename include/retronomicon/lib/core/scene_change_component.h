@@ -9,12 +9,12 @@ namespace retronomicon::lib::core::component {
      * 
      * When `triggered` becomes true, the scene transition system can act on it.
      */
-    struct ChangeSceneComponent {
+    struct SceneChangeComponent {
         std::string next_scene;
         bool triggered = false;
 
-        ChangeSceneComponent() = default;
-        ChangeSceneComponent(const std::string& scene)
+        SceneChangeComponent() = default;
+        SceneChangeComponent(const std::string& scene)
             : next_scene(scene), triggered(false) {}
     };
 
