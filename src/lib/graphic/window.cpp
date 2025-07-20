@@ -4,6 +4,8 @@
  * @brief The namespace for graphic classes
  */
 namespace retronomicon::lib::graphic{
+
+    /***************************** Constructor *****************************/
     /**
      * @brief the constructor for our windows
      * 
@@ -17,6 +19,7 @@ namespace retronomicon::lib::graphic{
         initialize(title, width, height, fullscreen);
     }
 
+    /***************************** Destructor *****************************/
     /**
      * @brief the destructor for the windows
      */
@@ -24,6 +27,49 @@ namespace retronomicon::lib::graphic{
         cleanup();
     }
 
+    /***************************** Main Method *****************************/
+
+    /**
+     * @brief a method to clear the screen
+     */
+    void Window::clear() {{
+        SDL_SetRenderDrawColor(m_renderer, m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
+        SDL_RenderClear(m_renderer);
+    }
+
+    /**
+     * @brief a method to present all rendered image
+     */
+    void Window::present() {
+        SDL_RenderPresent(m_renderer);
+    }
+
+    /**
+     * @brief a method to toggle full screen (not tested)
+     */
+    void Window::toggleFullscreen() {
+        m_fullscreen = !m_fullscreen;
+        SDL_SetWindowFullscreen(m_window, m_fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+    }
+
+    /**
+     * @brief a method to handle screen resize (not tested)
+     */
+    void Window::handleResize(int newWidth, int newHeight) {
+        m_width = newWidth;
+        m_height = newHeight;
+        // Optional: adjust render scale or UI here
+    }
+
+    /***************************** Private Main Method *****************************/
+    /**
+     * @brief the method to initialize SDL, SDL_Window, and SDL_Renderer
+     * 
+     * @param title the name of the window
+     * @param width the width of the window
+     * @param height the height of the window
+     * @param fullscreen  boolean representing fullscreen
+     */
     void Window::initialize(const std::string& title, int width, int height, bool fullscreen) {
         if (SDL_Init(SDL_INIT_VIDEO) < 0) { 
             throw std::runtime_error("[Window.initialize] Failed to initialize SDL_INIT_VIDEO");
@@ -48,6 +94,9 @@ namespace retronomicon::lib::graphic{
         }
     }
 
+    /**
+     * @brief the method to destroy sdl objects. called by destructor
+     */
     void Window::cleanup() {
         if (m_renderer) {
             SDL_DestroyRenderer(m_renderer);
@@ -59,63 +108,6 @@ namespace retronomicon::lib::graphic{
             m_window = nullptr;
         }
 
-        // SDL_Quit();
+        SDL_Quit();
     }
-
-    void Window::clear() {{
-        SDL_SetRenderDrawColor(m_renderer, m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
-        SDL_RenderClear(m_renderer);
-    }
-
-    void Window::present() {
-        SDL_RenderPresent(m_renderer);
-    }
-
-    void Window::toggleFullscreen() {
-        m_fullscreen = !m_fullscreen;
-        SDL_SetWindowFullscreen(m_window, m_fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
-    }
-
-    void Window::handleResize(int newWidth, int newHeight) {
-        m_width = newWidth;
-        m_height = newHeight;
-        // Optional: adjust render scale or UI here
-    }
-    
-    /**
-     * @brief the method to get the window width
-     * 
-     * @return the window width
-     */
-    int Window::getWidth() const {
-        return m_width;
-    }
-
-    /**
-     * @brief the method to get the window height
-     * 
-     * @return the window height
-     */
-    int Window::getHeight() const {
-        return m_height;
-    }
-
-    /**
-     * @brief the method to get the renderer
-     * 
-     * @return the SDL_Renderer
-     */
-    SDL_Renderer* Window::getRenderer() const {
-        return m_renderer;
-    }
-
-    /**
-     * @brief the method to get the SDL_Window
-     * 
-     * @return the SDL_Window
-     */
-    SDL_Window* Window::getRawWindow() const {
-        return m_window;
-    }
-
 }

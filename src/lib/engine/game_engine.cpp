@@ -26,8 +26,6 @@ namespace retronomicon::lib::engine {
     bool GameEngine::init(const char* title, int width, int height) {
         try{
             m_window = new Window(title,width,height);
-            // SDL init handled inside retronomicon Window
-            m_window->initialize();
             m_running = true;
         }catch (const std::runtime_error &e){
             std::cerr << "Failure to init game engine: " << e.what() << std::endl;
