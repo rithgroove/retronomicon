@@ -22,17 +22,36 @@ namespace retronomicon::lib::core {
             GameEngine();
 
             /***************************** Destructor *****************************/
-            
+
             /**
              * @brief default destructor
              */
             ~GameEngine();
 
             /***************************** Main Methods *****************************/
+
+            /**
+             * @brief method to init all necessary components
+             * @params title title of the game
+             * @params width the window width 
+             * @params height the window height
+             */
             bool init(const char* title, int width, int height);
+
+            /**
+             * @brief method to start mainloop
+             */
             void run();
+
+            /**
+             * @brief method to start mainloop
+             */
             void shutdown();
 
+
+            /**
+             * @brief set active scene
+             */
             void setScene(std::shared_ptr<Scene> newScene);
 
         private:
