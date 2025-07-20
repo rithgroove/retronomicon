@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "retronomicon/lib/core/system.h"
-#include "retronomicon/lib/core/game_object.h"
+#include "retronomicon/lib/core/entity.h"
 /**
  * @brief The namespace for animation utilities
  */
@@ -49,6 +49,6 @@ namespace retronomicon::lib::animation{
              * @param dt time interval since last update
              * @param objects the game objects (might change to Entity Later)
              */
-            void update(float dt, vector<retronomicon::lib::core::GameObject*>& objects)  override;
+            void update(float dt, vector<retronomicon::lib::core::Entity*>& entities)  override;
     };
 }

@@ -3,7 +3,7 @@
  * @brief The namespace for core system
  */
 #include <vector>
-#include "game_object.h"
+#include "entity.h"
 
 using namespace std;
 using namespace retronomicon::lib::core;
@@ -12,7 +12,7 @@ namespace retronomicon::lib::core{
     public:
         virtual ~System() = default;
 
-        virtual void update(float dt, vector<GameObject*>& objects) {}
-        virtual void render(vector<GameObject*>& objects) {}
+        virtual void update(float dt, vector<Entity*>& objects) {}
+        virtual void render(vector<Entity*>& objects) {}
     };
 }

@@ -36,10 +36,10 @@ namespace retronomicon::lib::animation{
      * @brief method to update all component
      * 
      * @param dt time interval since last update
-     * @param objects the game objects (might change to Entity Later)
+     * @param entities the game objects (entity) (might change to Entity Later)
      */
-    void AnimationSystem::update(float dt, vector<retronomicon::lib::core::GameObject*>& objects) {
-        for (GameObject* obj : objects) {
+    void AnimationSystem::update(float dt, vector<retronomicon::lib::core::Entity*>& entities) {
+        for (Entity* obj : entities) {
             // render logic
             auto animation = obj->getComponent<AnimationComponent>();
             if (!animation) continue;
