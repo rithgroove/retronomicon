@@ -62,8 +62,8 @@ namespace retronomicon::lib::graphic{
         // SDL_Quit();
     }
 
-    void Window::clear() {
-        SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255); // Black background
+    void Window::clear() {{
+        SDL_SetRenderDrawColor(m_renderer, m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
         SDL_RenderClear(m_renderer);
     }
 

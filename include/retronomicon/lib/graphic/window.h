@@ -28,7 +28,8 @@ namespace retronomicon::lib::graphic{
              */
             ~Window();
 
-
+            void setClearColor(const SDL_Color& color) { m_clearColor = color; }
+            
             void clear();
             void present();
             void toggleFullscreen();
@@ -71,5 +72,6 @@ namespace retronomicon::lib::graphic{
             int m_width = 0;
             int m_height = 0;
             bool m_fullscreen = false;
+            SDL_Color m_clearColor { 0, 0, 0, 255 }; 
     };
 }
