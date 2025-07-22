@@ -16,6 +16,20 @@ namespace retronomicon::lib::engine {
     // GameEngine::~GameEngine() = default;
 
     /***************************** Main Methods *****************************/
+    
+    /**
+     * @brief changes scene using scene manager (with reset/initialization logic)
+     * @param name the scene name to switch to
+     */
+    void GameEngine::changeScene(const std::string& name) {
+        auto nextScene = m_sceneManager.changeScene(name);
+        if (nextScene) {
+            setScene(nextScene);
+        } else {
+            // Log or handle error: unknown scene name
+            SDL_Log("Failed to change scene: %s", name.c_str());
+        }
+    }
 
     /**
      * @brief method to init all necessary components
@@ -37,6 +51,7 @@ namespace retronomicon::lib::engine {
         }
         return true;
     }
+
 
     /**
      * @brief method to start mainloop

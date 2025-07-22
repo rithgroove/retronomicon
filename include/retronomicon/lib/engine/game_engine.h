@@ -39,6 +39,11 @@ namespace retronomicon::lib::engine {
             }
 
             /***************************** Main Methods *****************************/
+            /**
+             * @brief changes scene using scene manager (with reset/initialization logic)
+             * @param name the scene name to switch to
+             */
+            void changeScene(const std::string& name);
 
             /**
              * @brief method to init all necessary components
