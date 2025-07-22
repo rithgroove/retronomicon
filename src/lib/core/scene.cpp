@@ -13,9 +13,9 @@ namespace retronomicon::lib::core {
 
     void Scene::init() {
         if (m_isInitialized) return;
-        for (auto& system : m_systems) {
-            system->init(this);
-        }
+        // for (auto& system : m_systems) {
+        //     system->init(this);
+        // }
         m_isInitialized = true;
         m_requiresReset = false;
     }
@@ -33,9 +33,9 @@ namespace retronomicon::lib::core {
     }
 
     void Scene::shutdown() {
-        for (auto& system : m_systems) {
-            system->shutdown(this);
-        }
+        // for (auto& system : m_systems) {
+        //     system->shutdown(this);
+        // }
 
         for (auto* obj : m_gameObjects) {
             delete obj;  // future: switch to smart pointers

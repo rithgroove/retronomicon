@@ -45,6 +45,14 @@ namespace retronomicon::lib::core{
             template <typename T>
             T* getComponent();
 
+            /**
+             * @brief Check if the entity has a component of type T
+             * 
+             * @return true if the component exists
+             */
+            template <typename T>
+            bool hasComponent() const;
+
             void setName(const string& name){m_name = name;}
             const string& getName() const{return m_name;}
             
@@ -102,4 +110,11 @@ namespace retronomicon::lib::core{
         //return null if not exist
         return nullptr;
     }
+
+    template <typename T>
+    bool Entity::hasComponent() const {
+        type_index typeId = type_index(typeid(T));
+        return m_components.count(typeId) > 0;
+    }
+
 }

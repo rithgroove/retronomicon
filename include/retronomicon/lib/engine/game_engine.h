@@ -3,7 +3,7 @@
 #include <memory>
 #include <SDL.h>
 #include "retronomicon/lib/core/scene.h"
-#include "retronomicon/lib/core/sceneManager.h"
+#include "retronomicon/lib/core/scene_manager.h"
 #include "retronomicon/lib/graphic/window.h"
 
 /**
