@@ -26,6 +26,8 @@ namespace retronomicon::lib::core {
     std::shared_ptr<Scene> SceneManager::getScene(const std::string& name) const {
         auto it = m_scenes.find(name);
         if (it != m_scenes.end()) {
+            Scene* scene = it->second;
+            scene->init();
             return it->second;
         }
         return nullptr;

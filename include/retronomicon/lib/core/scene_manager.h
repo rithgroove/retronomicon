@@ -11,9 +11,9 @@ namespace retronomicon::lib::core {
     class SceneManager {
     public:
         // Factory methods
-        static std::shared_ptr<Scene> createSplashScene();
-        static std::shared_ptr<Scene> createMenuScene();
-        static std::shared_ptr<Scene> createLevelScene(const std::string& levelName);
+        // static std::shared_ptr<Scene> createSplashScene();
+        // static std::shared_ptr<Scene> createMenuScene();
+        // static std::shared_ptr<Scene> createLevelScene(const std::string& levelName);
 
         // Optional registry (future-proofing)
         void registerScene(const std::string& name, std::shared_ptr<Scene> scene);

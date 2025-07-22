@@ -3,6 +3,7 @@
 #include <memory>
 #include <SDL.h>
 #include "retronomicon/lib/core/scene.h"
+#include "retronomicon/lib/core/sceneManager.h"
 #include "retronomicon/lib/graphic/window.h"
 
 /**
@@ -59,13 +60,14 @@ namespace retronomicon::lib::engine {
             retronomicon::lib::graphic::Window * m_window = nullptr; 
             bool m_running = false; 
             std::shared_ptr<Scene> m_activeScene;
-
+            retronomicon::lib::core::SceneManager m_sceneManager;
             /***************************** Main Private Methods *****************************/
 
             /**
              * @brief method to pool event before updating
              */
             void handleEvents();
+
 
             /**
              * @brief method to pool event before updating
