@@ -38,6 +38,16 @@ namespace retronomicon::lib::engine {
                 m_activeScene = std::move(newScene);
             }
 
+
+            void registerScene(std::string &name , std::shared_ptr<Scene> newScene) {
+                m_sceneManager.registerScene(name,newScene);
+            }
+
+            /***************************** Getter *****************************/
+            SDL_Renderer* getRenderer(){
+                return m_window->getRenderer();
+            }
+
             /***************************** Main Methods *****************************/
             /**
              * @brief changes scene using scene manager (with reset/initialization logic)
