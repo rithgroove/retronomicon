@@ -64,8 +64,6 @@ namespace retronomicon::lib::core {
         }
     }
 
-    void Scene::addSystem(System* system) {
-        m_systems.push_back(system);
+    void Scene::addSystem(std::unique_ptr<System> system) {
     }
-
 }

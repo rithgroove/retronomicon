@@ -39,7 +39,7 @@ namespace retronomicon::lib::engine {
             }
 
 
-            void registerScene(std::string &name , std::shared_ptr<Scene> newScene) {
+            void registerScene(const std::string &name , std::shared_ptr<Scene> newScene) {
                 m_sceneManager.registerScene(name,newScene);
             }
 

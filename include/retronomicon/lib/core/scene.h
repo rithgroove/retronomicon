@@ -6,12 +6,10 @@
 #include "retronomicon/lib/core/entity.h"
 #include "system.h"
 
-using namespace std;
 namespace retronomicon::lib::core {
 
     class Scene : public Entity {
     public:
-        
         Scene(const std::string& name);
         virtual ~Scene();
 
@@ -21,25 +19,28 @@ namespace retronomicon::lib::core {
         virtual void shutdown();
         virtual void reset();
 
-        bool isInitialized(){return m_isInitialized;}
-        bool requiresReset(){return m_requiresReset;}
-        bool isActive(){return m_isActive;}
-        void setInitialized(bool value){m_isInitialized = value;}
-        void setRequiresReset(bool value){m_requiresReset=value;}
-        void setActive(bool value){m_isActive = value;}
+        bool isInitialized() const { return m_isInitialized; }
+        bool requiresReset() const { return m_requiresReset; }
+        bool isActive() const { return m_isActive; }
 
-        string getName() const;
+        void setInitialized(bool value) { m_isInitialized = value; }
+        void setRequiresReset(bool value) { m_requiresReset = value; }
+        void setActive(bool value) { m_isActive = value; }
 
-        Entity* createGameObject(const string& name);
+        std::string getName() const;
+
+        Entity* createGameObject(const std::string& name);
         void removeGameObject(Entity* object);
-        void addSystem(System* system);
+        void addSystem(std::unique_ptr<System> system);
 
     private:
-        string m_name;
-        bool m_isInitialized;
-        bool m_requiresReset;
-        bool m_isActive;
-        vector<Entity*> m_gameObjects;
-        vector<System*> m_systems;
+        std::string m_name;
+        bool m_isInitialized = false;
+        bool m_requiresReset = false;
+        bool m_isActive = false;
+
+        std::vector<Entity*> m_gameObjects;
+        std::vector<std::unique_ptr<System>> m_systems;
     };
+
 }
