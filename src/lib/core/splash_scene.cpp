@@ -23,6 +23,7 @@ void SplashScene::init() {
 void SplashScene::setOnFinish(std::function<void(const std::string&)> callback) {
     m_onFinish = std::move(callback);
 }
+
 void SplashScene::update(float dt) {
     handleInput();
     m_timer += dt;
@@ -31,7 +32,9 @@ void SplashScene::update(float dt) {
 
         // Change scene to "Menu" if callback is set
         if (m_onFinish) {
-            m_onFinish("Menu");
+            for (auto& system : m_systems) {
+                system->update(dt, m_gameObjects);
+            }            
         } else {
             std::cerr << "[SplashScene] No scene change callback set!" << std::endl;
         }
@@ -50,6 +53,7 @@ void SplashScene::render() {
     SDL_RenderClear(m_renderer);
 
     if (m_logoTexture) {
+        std::cout<<"hmm"<<std::endl;
         int w, h;
         SDL_QueryTexture(m_logoTexture, nullptr, nullptr, &w, &h);
         SDL_Rect dst = { 320 - w / 2, 240 - h / 2, w, h };
