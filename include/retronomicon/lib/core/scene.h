@@ -29,7 +29,7 @@ namespace retronomicon::lib::core {
         inline const std::string& getName() const { return m_name; }
         inline bool isInitialized() const { return m_isInitialized; }
         inline bool isActive() const { return m_isActive; }
-        inline bool requiresReset() const { return m_requiresReset; }
+        inline bool requiresReset() const { return m_requiresReset; }A
 
         inline void setInitialized(bool value) { m_isInitialized = value; }
         inline void setActive(bool value) { m_isActive = value; }
