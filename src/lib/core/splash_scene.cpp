@@ -1,8 +1,10 @@
-#include "retronomicon-platformer/scene/splash_scene.h"
+#include "retronomicon/lib/core/splash_scene.h"
 #include <SDL_image.h>
 #include <SDL_events.h>
+#include <iostream> // for debug if needed
 
-namespace retronomicon::platformer::scene {
+
+namespace retronomicon::lib::core {
 
 SplashScene::SplashScene(SDL_Renderer* renderer)
     : Scene("Splash"), m_renderer(renderer) {}
@@ -18,19 +20,29 @@ void SplashScene::init() {
     setInitialized(true);
     setActive(true);
 }
+void SplashScene::setOnFinish(std::function<void(const std::string&)> callback) {
+    m_onFinish = std::move(callback);
+}
+void SplashScene::update(float dt) {
+    handleInput();
+    m_timer += dt;
+    if (m_timer >= m_duration || m_finished) {
+        m_finished = true;
+
+        // Change scene to "Menu" if callback is set
+        if (m_onFinish) {
+            m_onFinish("Menu");
+        } else {
+            std::cerr << "[SplashScene] No scene change callback set!" << std::endl;
+        }
+    }
+}
+
 
 void SplashScene::shutdown() {
     unloadAssets();
     setInitialized(false);
     setActive(false);
-}
-
-void SplashScene::update(float dt) {
-    handleInput();
-    m_timer += dt;
-    if (m_timer >= m_duration) {
-        m_finished = true;
-    }
 }
 
 void SplashScene::render() {
@@ -63,7 +75,7 @@ void SplashScene::handleInput() {
 }
 
 void SplashScene::loadAssets() {
-    SDL_Surface* surface = IMG_Load("assets/splash_logo.png");
+    SDL_Surface* surface = IMG_Load("asset/image/retronomicon_logo.png");
     if (!surface) return;
 
     m_logoTexture = SDL_CreateTextureFromSurface(m_renderer, surface);

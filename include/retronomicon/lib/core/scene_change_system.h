@@ -5,11 +5,11 @@
 #include "retronomicon/lib/core/scene_change_component.h"
 #include <vector>
 
-namespace retronomicon::lib::core::system {
+namespace retronomicon::lib::core {
 
     using retronomicon::lib::core::Entity;
     using retronomicon::lib::engine::GameEngine;
-    using retronomicon::lib::core::component::SceneChangeComponent;
+    using retronomicon::lib::core::SceneChangeComponent;
 
     class SceneChangeSystem : public System {
     public:

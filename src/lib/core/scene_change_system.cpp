@@ -1,6 +1,6 @@
 #include "retronomicon/lib/core/scene_change_system.h"
 
-namespace retronomicon::lib::core::system {
+namespace retronomicon::lib::core {
 
     void SceneChangeSystem::update(float, std::vector<Entity*>& entities) {
         for (Entity* entity : entities) {

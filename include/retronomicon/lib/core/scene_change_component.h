@@ -2,14 +2,15 @@
 
 #include <string>
 
-namespace retronomicon::lib::core::component {
+#include "component.h"
+namespace retronomicon::lib::core {
 
     /**
      * @brief A component that marks an entity to request a scene transition.
      * 
      * When `triggered` becomes true, the scene transition system can act on it.
      */
-    struct SceneChangeComponent {
+    struct SceneChangeComponent : public Component {
         std::string next_scene;
         bool triggered = false;
 

@@ -1,5 +1,5 @@
-#include "retronomicon/lib/scenes/menu_scene.h"
-#include "retronomicon/lib/core/component/scene_change_component.h"
+#include "retronomicon/lib/core/menu_scene.h"
+#include "retronomicon/lib/core/scene_change_component.h"
 #include "retronomicon/lib/graphic/window.h"
 #include <SDL.h>
 
@@ -24,9 +24,9 @@ namespace retronomicon::lib::core {
 
     void MenuScene::render() {
         // Optional: just change background color to make it obvious we're in MenuScene
-        auto window = Window::get();
-        SDL_SetRenderDrawColor(window->getRenderer(), 0, 0, 100, 255); // Dark Blue
-        SDL_RenderClear(window->getRenderer());
+        // auto window = Window::get();
+        // SDL_SetRenderDrawColor(window->getRenderer(), 0, 0, 100, 255); // Dark Blue
+        // SDL_RenderClear(window->getRenderer());
 
         // TODO: Draw menu items with a future UI system
     }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "retronomicon/lib/core/scene.h"
+#include "scene.h"
 
 namespace retronomicon::lib::core {
 

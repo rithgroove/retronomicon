@@ -13,12 +13,20 @@ namespace retronomicon::lib::core {
     public:
         
         Scene(const std::string& name);
-        ~Scene();
+        virtual ~Scene();
 
-        void init();
-        void update(float dt);
-        void render();
-        void shutdown();
+        virtual void init();
+        virtual void update(float dt);
+        virtual void render();
+        virtual void shutdown();
+        virtual void reset();
+
+        bool isInitialized(){return m_isInitialized;}
+        bool requiresReset(){return m_requiresReset;}
+        bool isActive(){return m_isActive;}
+        void setInitialized(bool value){m_isInitialized = value;}
+        void setRequiresReset(bool value){m_requiresReset=value;}
+        void setActive(bool value){m_isActive = value;}
 
         string getName() const;
 
@@ -28,6 +36,9 @@ namespace retronomicon::lib::core {
 
     private:
         string m_name;
+        bool m_isInitialized;
+        bool m_requiresReset;
+        bool m_isActive;
         vector<Entity*> m_gameObjects;
         vector<System*> m_systems;
     };
