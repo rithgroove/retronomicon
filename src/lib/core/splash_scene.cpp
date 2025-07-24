@@ -81,19 +81,4 @@ void SplashScene::setImage(SDL_Texture* texture){
     m_logoTexture = texture;
 }
 
-void SplashScene::loadAssets() {
-    SDL_Surface* surface = IMG_Load("asset/image/retronomicon_logo.png");
-    if (!surface) return;
-
-    m_logoTexture = SDL_CreateTextureFromSurface(m_renderer, surface);
-    SDL_FreeSurface(surface);
-}
-
-void SplashScene::unloadAssets() {
-    if (m_logoTexture) {
-        SDL_DestroyTexture(m_logoTexture);
-        m_logoTexture = nullptr;
-    }
-}
-
 } // namespace retronomicon::platformer::scene
