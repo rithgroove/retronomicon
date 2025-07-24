@@ -33,7 +33,7 @@ namespace retronomicon::lib::core {
         void removeGameObject(Entity* object);
         void addSystem(std::unique_ptr<System> system);
 
-    private:
+    protected:
         std::string m_name;
         bool m_isInitialized = false;
         bool m_requiresReset = false;

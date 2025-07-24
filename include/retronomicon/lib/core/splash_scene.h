@@ -22,6 +22,8 @@ namespace retronomicon::lib::core {
         // New: Set the callback to change scene
         void setOnFinish(std::function<void(const std::string&)> callback);
 
+        void setImage(SDL_Texture* texture);
+
     private:
         SDL_Renderer* m_renderer;
         SDL_Texture* m_logoTexture = nullptr;

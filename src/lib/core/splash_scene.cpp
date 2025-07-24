@@ -16,7 +16,7 @@ SplashScene::~SplashScene() {
 void SplashScene::init() {
     m_timer = 0.0f;
     m_finished = false;
-    loadAssets();
+    // loadAssets();
     setInitialized(true);
     setActive(true);
 }
@@ -43,7 +43,7 @@ void SplashScene::update(float dt) {
 
 
 void SplashScene::shutdown() {
-    unloadAssets();
+    // unloadAssets();
     setInitialized(false);
     setActive(false);
 }
@@ -53,7 +53,6 @@ void SplashScene::render() {
     SDL_RenderClear(m_renderer);
 
     if (m_logoTexture) {
-        std::cout<<"hmm"<<std::endl;
         int w, h;
         SDL_QueryTexture(m_logoTexture, nullptr, nullptr, &w, &h);
         SDL_Rect dst = { 320 - w / 2, 240 - h / 2, w, h };
@@ -76,6 +75,10 @@ void SplashScene::handleInput() {
             m_finished = true;
         }
     }
+}
+
+void SplashScene::setImage(SDL_Texture* texture){
+    m_logoTexture = texture;
 }
 
 void SplashScene::loadAssets() {
