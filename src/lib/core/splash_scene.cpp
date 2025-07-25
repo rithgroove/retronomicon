@@ -2,6 +2,7 @@
 #include <SDL_image.h>
 #include <SDL_events.h>
 #include <iostream> // for debug if needed
+#include "retronomicon/lib/core/scene_change_component.h"
 
 
 namespace retronomicon::lib::core {
@@ -10,7 +11,7 @@ SplashScene::SplashScene(SDL_Renderer* renderer)
     : Scene("Splash"), m_renderer(renderer) {}
 
 SplashScene::~SplashScene() {
-    unloadAssets();
+    // unloadAssets();
 }
 
 void SplashScene::init() {
@@ -30,15 +31,16 @@ void SplashScene::update(float dt) {
     if (m_timer >= m_duration || m_finished) {
         m_finished = true;
 
+        this->getComponent<SceneChangeComponent>()->triggered = true;
         // Change scene to "Menu" if callback is set
-        if (m_onFinish) {
-            for (auto& system : m_systems) {
-                system->update(dt, m_gameObjects);
-            }            
-        } else {
-            std::cerr << "[SplashScene] No scene change callback set!" << std::endl;
-        }
     }
+
+    // std::cout<<"masuk ga?"<< m_timer<<std::endl;
+    for (auto& system : m_systems) {
+        // std::cout<<"masuk kok"<<std::endl;
+        system->update(dt, m_gameObjects);
+    }            
+
 }
 
 

@@ -29,7 +29,7 @@ namespace retronomicon::lib::core {
         SDL_Texture* m_logoTexture = nullptr;
 
         float m_timer = 0.0f;
-        float m_duration = 10.0f;
+        float m_duration = 3.0f;
         bool m_finished = false;
 
         std::function<void(const std::string&)> m_onFinish;
