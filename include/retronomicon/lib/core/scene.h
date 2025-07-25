@@ -28,9 +28,6 @@ namespace retronomicon::lib::core {
         void setActive(bool value) { m_isActive = value; }
 
         std::string getName() const;
-
-        Entity* createGameObject(const std::string& name);
-        void removeGameObject(Entity* object);
         void addSystem(std::unique_ptr<System> system);
 
     protected:
@@ -39,7 +36,6 @@ namespace retronomicon::lib::core {
         bool m_requiresReset = false;
         bool m_isActive = false;
 
-        std::vector<Entity*> m_gameObjects;
         std::vector<std::unique_ptr<System>> m_systems;
     };
 

@@ -4,6 +4,7 @@
 #include <typeindex>
 #include <typeinfo>
 #include <memory>
+#include <vector>
 #include <string>
 #include "component.h"
 
@@ -38,6 +39,13 @@ namespace retronomicon::lib::core{
             T* addComponent(Args&&... args);
 
             /**
+             * @brief a method 
+             * 
+             * @param args the component 
+             */
+            void addEntities(unique_ptr<Entity> entity);
+
+            /**
              * @brief a method to return a components with a specific types
              * 
              * @return the component 
@@ -53,10 +61,15 @@ namespace retronomicon::lib::core{
             template <typename T>
             bool hasComponent() const;
 
+            void update(float dt);
             void setName(const string& name){m_name = name;}
             const string& getName() const{return m_name;}
+
+            Entity* createGameObject(const std::string& name);
+            void removeGameObject(Entity* object);
             
         protected:
+            std::vector<Entity*> m_gameObjects;
             unordered_map<type_index, unique_ptr<Component>> m_components;
             string m_name;
     };

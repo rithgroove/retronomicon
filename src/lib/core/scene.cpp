@@ -50,19 +50,6 @@ namespace retronomicon::lib::core {
         init();
     }
 
-    Entity* Scene::createGameObject(const std::string& name) {
-        Entity* obj = new Entity(); // optional: set name if Entity supports it
-        m_gameObjects.push_back(obj);
-        return obj;
-    }
-
-    void Scene::removeGameObject(Entity* object) {
-        auto it = std::remove(m_gameObjects.begin(), m_gameObjects.end(), object);
-        if (it != m_gameObjects.end()) {
-            delete *it;
-            m_gameObjects.erase(it, m_gameObjects.end());
-        }
-    }
 
     void Scene::addSystem(std::unique_ptr<System> system) {
         m_systems.push_back(std::move(system));
