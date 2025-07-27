@@ -38,7 +38,7 @@ void SplashScene::update(float dt) {
     // std::cout<<"masuk ga?"<< m_timer<<std::endl;
     for (auto& system : m_systems) {
         // std::cout<<"masuk kok"<<std::endl;
-        system->update(dt, m_gameObjects);
+        system->update(dt, this);
     }            
 
 }

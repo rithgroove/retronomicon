@@ -22,7 +22,7 @@ namespace retronomicon::lib::core {
 
     void Scene::update(float dt) {
         for (auto& system : m_systems) {
-            system->update(dt, m_gameObjects);
+            system->update(dt, this);
         }
     }
 

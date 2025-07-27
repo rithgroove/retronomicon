@@ -12,7 +12,7 @@ namespace retronomicon::lib::core{
     public:
         virtual ~System() = default;
 
-        virtual void update(float dt, vector<Entity*>& objects) {}
+        virtual void update(float dt, Entity* objects) {}
         virtual void render(vector<Entity*>& objects) {}
     };
 }
