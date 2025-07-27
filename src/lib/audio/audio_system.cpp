@@ -12,23 +12,25 @@ namespace retronomicon::lib::audio {
         AudioWrapper::shutdown();
     }
 
-    void AudioSystem::update(float dt, std::vector<retronomicon::lib::core::Entity*>& objects) {
-        for (auto* obj : objects) {
-            // Check and process music component
-            if (auto* music = obj->getComponent<MusicComponent>()) {
-                if (music->isPlayRequested()) {
-                    m_musicPlayer.play(music->getAsset(), music->getLoopCount());
-                    music->resetPlayRequest();
-                }
-            }
+    void AudioSystem::update(float dt, retronomicon::lib::core::Entity* entity) {
 
-            // Check and process sound effect component
-            if (auto* sfx = obj->getComponent<SoundEffectComponent>()) {
-                if (sfx->isPlayRequested()) {
-                    m_soundEffectPlayer.play(sfx->getAsset(), sfx->getLoopCount());
-                    sfx->resetPlayRequest();
-                }
+        if (auto* music = entity->getComponent<MusicComponent>()) {
+            if (music->isPlayRequested()) {
+                m_musicPlayer.play(music->getAsset(), music->getLoopCount());
+                animmusication->update(dt);
             }
+        }
+        // Check and process sound effect component
+        if (auto* sfx = entity->getComponent<SoundEffectComponent>()) {
+            if (sfx->isPlayRequested()) {
+                m_soundEffectPlayer.play(sfx->getAsset(), sfx->getLoopCount());
+                sfx->resetPlayRequest();
+            }
+        }
+
+        for (Entity* obj : entity->m_childEntities) {
+            // render logic
+             this->update(dt,obj);
         }
     }
 

@@ -25,7 +25,7 @@ namespace retronomicon::lib::audio {
          * @param dt delta time (unused)
          * @param objects list of game objects in the scene
          */
-        void update(float dt, std::vector<retronomicon::lib::core::Entity*>& objects) override;
+        void update(float dt, retronomicon::lib::core::Entity* objects) override;
 
         void clear();
 

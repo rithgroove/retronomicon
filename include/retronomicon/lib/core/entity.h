@@ -69,7 +69,8 @@ namespace retronomicon::lib::core{
             void removeGameObject(Entity* object);
             
         protected:
-            std::vector<Entity*> m_gameObjects;
+            std::vector<Entity*> m_childEntities;
+            Entity* m_parentEntity;
             unordered_map<type_index, unique_ptr<Component>> m_components;
             string m_name;
     };
