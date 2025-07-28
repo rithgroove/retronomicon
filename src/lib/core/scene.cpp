@@ -28,7 +28,7 @@ namespace retronomicon::lib::core {
 
     void Scene::render() {
         for (auto& system : m_systems) {
-            system->render(m_gameObjects);
+            system->render(this);
         }
     }
 
@@ -37,11 +37,11 @@ namespace retronomicon::lib::core {
         //     system->shutdown(this);
         // }
 
-        for (auto* obj : m_gameObjects) {
+        for (auto* obj : m_childEntities) {
             delete obj;  // future: switch to smart pointers
         }
 
-        m_gameObjects.clear();
+        m_childEntities.clear();
         m_isInitialized = false;
     }
 

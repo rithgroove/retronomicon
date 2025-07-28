@@ -16,7 +16,7 @@ namespace retronomicon::lib::core {
         SceneChangeSystem(GameEngine* engine)
             : m_engine(engine) {}
 
-        void update(float deltaTime, std::vector<Entity*>& objects) override;
+        void update(float deltaTime, Entity* objects) override;
 
     private:
         GameEngine* m_engine;

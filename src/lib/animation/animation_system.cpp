@@ -38,7 +38,7 @@ namespace retronomicon::lib::animation{
      * @param dt time interval since last update
      * @param entity the parent entity, will call this method recursively
      */
-    void update(float dt, retronomicon::lib::core::Entity* entity){
+    void AnimationSystem::update(float dt, retronomicon::lib::core::Entity* entity){
         auto animation = entity->getComponent<AnimationComponent>();
         if (animation){
             animation->update(dt);

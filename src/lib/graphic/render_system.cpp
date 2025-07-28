@@ -8,11 +8,14 @@ namespace retronomicon::lib::graphic {
     RenderSystem::RenderSystem(SDL_Renderer* renderer)
         : m_renderer(renderer) {}
 
-    void RenderSystem::render(std::vector<Entity*>& objects) {
-        for (Entity* obj : objects) {
-            auto sprite = obj->getComponent<SpriteComponent>();
-            if (!sprite) continue;
+    void RenderSystem::render(Entity* entity) {
+        auto sprite = entity->getComponent<SpriteComponent>();
+        if (sprite){
             sprite->render(m_renderer);
+        }
+
+        for (Entity* obj : entity->m_childEntities) {
+            this->render(obj);
         }
     }
 

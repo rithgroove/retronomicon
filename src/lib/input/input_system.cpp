@@ -63,7 +63,7 @@ namespace retronomicon::lib::input{
      * @param dt time interval since last update
      * @param objects the game objects (might change to Entity Later)
      */
-    void InputSystem::update(float dt, vector<Entity*>& entity) {
+    void InputSystem::update(float dt, Entity* entity) {
         if (!m_isUpdating){
             // so this line of code triggered once
             m_inputState->updateFromSDL();

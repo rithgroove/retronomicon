@@ -2,15 +2,14 @@
 
 namespace retronomicon::lib::core {
 
-    void SceneChangeSystem::update(float, std::vector<Entity*>& entities) {
-        for (Entity* entity : entities) {
-            if (entity->hasComponent<SceneChangeComponent>()) {                
-                auto* sceneChange = entity->getComponent<SceneChangeComponent>();
-                if (sceneChange->triggered){
-                    m_engine->changeScene(sceneChange->next_scene);
-                }
-                break; // optional: change once per frame
-            }
+    void SceneChangeSystem::update(float dt,Entity* entity) {
+        auto* sceneChange = entity->getComponent<SceneChangeComponent>();
+        if (sceneChange->triggered){
+            m_engine->changeScene(sceneChange->next_scene);
+        }
+
+        for (Entity* entity : entity->m_childEntities) {
+            this->update(dt, entity);
         }
     }
 

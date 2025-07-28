@@ -11,7 +11,7 @@ namespace retronomicon::lib::graphic {
     public:
         explicit RenderSystem(SDL_Renderer* renderer);
 
-        void render(std::vector<core::Entity*>& objects) override;
+        void render(core::Entity* entity) override;
 
     private:
         SDL_Renderer* m_renderer;

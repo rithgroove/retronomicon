@@ -15,15 +15,15 @@ namespace retronomicon::lib::core{
     
     Entity* Entity::createGameObject(const std::string& name) {
         Entity* obj = new Entity(); // optional: set name if Entity supports it
-        m_gameObjects.push_back(obj);
+        m_childEntities.push_back(obj);
         return obj;
     }
 
     void Entity::removeGameObject(Entity* object) {
-        auto it = std::remove(m_gameObjects.begin(), m_gameObjects.end(), object);
-        if (it != m_gameObjects.end()) {
+        auto it = std::remove(m_childEntities.begin(), m_childEntities.end(), object);
+        if (it != m_childEntities.end()) {
             delete *it;
-            m_gameObjects.erase(it, m_gameObjects.end());
+            m_childEntities.erase(it, m_childEntities.end());
         }
     }
 }
