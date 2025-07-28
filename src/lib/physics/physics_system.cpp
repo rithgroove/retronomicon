@@ -3,12 +3,15 @@
 namespace retronomicon::lib::physics{
     PhysicsSystem::PhysicsSystem() {}
 
-    void PhysicsSystem::update(float dt, vector<retronomicon::lib::core::Entity*>& objects) {
-        for (Entity* obj : objects) {
-            // render logic
-            auto physicsComponent = obj->getComponent<PhysicsComponent>();
-            if (!physicsComponent) continue;
+    void PhysicsSystem::update(float dt, retronomicon::lib::core::Entity* entity) {
+        auto physicsComponent = entity->getComponent<PhysicsComponent>();
+        if (physicsComponent){
             physicsComponent->update(dt);
+        }
+
+        for (Entity* obj : entity->m_childEntities) {
+            // render logic
+             this->update(dt,obj);
         }
     }
 }

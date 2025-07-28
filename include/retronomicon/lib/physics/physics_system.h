@@ -15,7 +15,7 @@ namespace retronomicon::lib::physics {
             PhysicsSystem();
 
             // System ---------------------------------------------------------------
-            void update(float dt, vector<retronomicon::lib::core::Entity*>& objects) override;
+            void update(float dt, retronomicon::lib::core::Entity* objects) override;
             // {
             //     integrate(dt);
             //     resolveCollisions();
