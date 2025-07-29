@@ -22,3 +22,25 @@ TEST_CASE("Point substraction works", "[math]") {
     REQUIRE(result.getX() == 2);
     REQUIRE(result.getY() == 2);
 }
+
+TEST_CASE("Calculate Distance works", "[math]") {
+    using namespace retronomicon::lib::math;
+
+    Point p1{0, 6};
+    Point p2{0, 4};
+    float result = p1.calculateDistance(p2);
+
+    REQUIRE(result == 2.0);
+
+    Point p3{6, 6};
+    Point p4{9, 10};
+    result = p3.calculateDistance(p4);
+
+    REQUIRE(result == 5.0);
+
+    Point p5{7, 0};
+    Point p6{5, 0};
+    result = p5.calculateDistance(p6);
+
+    REQUIRE(result == 2.0);
+}
