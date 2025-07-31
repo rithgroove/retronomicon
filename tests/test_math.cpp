@@ -44,3 +44,16 @@ TEST_CASE("Calculate Distance works", "[math]") {
 
     REQUIRE(result == 2.0);
 }
+
+
+
+TEST_CASE("Point to Vector convertion works", "[math]") {
+    using namespace retronomicon::lib::math;
+
+    Point p1{5, 6};
+
+    Vec2 v1 = p1.toVec2();
+
+    REQUIRE(v1.x == 5);
+    REQUIRE(v1.y == 6);
+}
