@@ -57,3 +57,15 @@ TEST_CASE("Point to Vector convertion works", "[math]") {
     REQUIRE(v1.x == 5);
     REQUIRE(v1.y == 6);
 }
+
+
+TEST_CASE("Vector addition works", "[math]") {
+    using namespace retronomicon::lib::math;
+
+    Vec2 v1{2, 3};
+    Vec2 v2{4, 5};
+    Vec2 v3 = v1+v2;
+
+    REQUIRE(v3.x == 6);
+    REQUIRE(v3.y == 8);
+}
