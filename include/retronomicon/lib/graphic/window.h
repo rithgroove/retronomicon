@@ -41,6 +41,16 @@ namespace retronomicon::lib::graphic{
              */
             void setClearColor(const SDL_Color& color) { m_clearColor = color; }
 
+            /**
+             * @brief set the window height
+             * 
+             * @param width
+             * @param height
+             */
+            static void setSize(int width, int height){
+                m_width = width;
+                m_height = height;
+            }
             /***************************** Getter *****************************/
             
             /**
@@ -48,14 +58,14 @@ namespace retronomicon::lib::graphic{
              * 
              * @return the window width
              */
-            int getWidth() const{return m_width;}
+            static int getWidth() const{return m_width;}
 
             /**
              * @brief the method to get the window height
              * 
              * @return the window height
              */
-            int getHeight() const{return m_height;}
+            static int getHeight() const{return m_height;}
 
             /**
              * @brief the method to get the renderer
@@ -106,8 +116,8 @@ namespace retronomicon::lib::graphic{
             /***************************** Attributes *****************************/
             SDL_Window* m_window = nullptr;
             SDL_Renderer* m_renderer = nullptr;
-            int m_width = 0;
-            int m_height = 0;
+            static int m_width = 0;
+            static int m_height = 0;
             bool m_fullscreen = false;
             SDL_Color m_clearColor { 0, 0, 0, 255 }; 
 
