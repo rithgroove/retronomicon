@@ -69,3 +69,14 @@ TEST_CASE("Vector addition works", "[math]") {
     REQUIRE(v3.x == 6);
     REQUIRE(v3.y == 8);
 }
+
+TEST_CASE("Vector substraction works", "[math]") {
+    using namespace retronomicon::lib::math;
+
+    Vec2 v1{2, 3};
+    Vec2 v2{4, 5};
+    Vec2 v3 = v2-v1;
+
+    REQUIRE(v3.x == 2);
+    REQUIRE(v3.y == 2);
+}
