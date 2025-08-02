@@ -3,9 +3,11 @@
 #include <SDL_events.h>
 #include <iostream> // for debug if needed
 #include "retronomicon/lib/core/scene_change_component.h"
+#include "retronomicon/lib/graphic/window.h"
 
 
 namespace retronomicon::lib::core {
+using retronomicon::lib::graphic::Window;
 
 SplashScene::SplashScene(SDL_Renderer* renderer)
     : Scene("Splash"), m_renderer(renderer) {}
@@ -57,7 +59,7 @@ void SplashScene::render() {
     if (m_logoTexture) {
         int w, h;
         SDL_QueryTexture(m_logoTexture, nullptr, nullptr, &w, &h);
-        SDL_Rect dst = { 320 - w / 2, 240 - h / 2, w, h };
+        SDL_Rect dst = { (Window::getWidth() - w) / 2, (Window::getHeight() - h) / 2, w, h };
         SDL_RenderCopy(m_renderer, m_logoTexture, nullptr, &dst);
     }
 

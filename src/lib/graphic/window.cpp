@@ -4,7 +4,8 @@
  * @brief The namespace for graphic classes
  */
 namespace retronomicon::lib::graphic{
-
+    int retronomicon::lib::graphic::Window::m_width = 0;
+    int retronomicon::lib::graphic::Window::m_height = 0;
     /***************************** Constructor *****************************/
     /**
      * @brief the constructor for our windows
@@ -15,7 +16,8 @@ namespace retronomicon::lib::graphic{
      * @param fullscreen  boolean representing fullscreen
      */
     Window::Window(const std::string& title, int width, int height, bool fullscreen)
-        : m_width(width), m_height(height), m_fullscreen(fullscreen) {
+        : m_fullscreen(fullscreen) {
+        this->setSize(width,height);
         initialize(title, width, height, fullscreen);
     }
 
