@@ -1,6 +1,6 @@
-#include "retronomicon/lib/core/scene_manager.h"
+#include "retronomicon/lib/scene/scene_manager.h"
 
-namespace retronomicon::lib::core {
+namespace retronomicon::lib::scene {
 
     void SceneManager::registerScene(const std::string& name, std::shared_ptr<Scene> scene) {
         m_scenes[name] = scene;

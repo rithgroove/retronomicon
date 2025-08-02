@@ -10,6 +10,7 @@ add_subdirectory(lib/engine)
 add_subdirectory(lib/input)
 add_subdirectory(lib/math)
 add_subdirectory(lib/scripting)
+add_subdirectory(lib/scene)
 add_subdirectory(lib/physics)
 
 # Define the main retronomicon engine library
@@ -28,6 +29,7 @@ target_sources(retronomicon
         $<TARGET_OBJECTS:retronomicon-engine>
         $<TARGET_OBJECTS:retronomicon-math>
         $<TARGET_OBJECTS:retronomicon-physics>
+        $<TARGET_OBJECTS:retronomicon-scene>
 )
 
 # Global engine include path

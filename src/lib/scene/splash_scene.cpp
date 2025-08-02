@@ -1,12 +1,12 @@
-#include "retronomicon/lib/core/splash_scene.h"
+#include "retronomicon/lib/scene/splash_scene.h"
 #include <SDL_image.h>
 #include <SDL_events.h>
 #include <iostream> // for debug if needed
-#include "retronomicon/lib/core/scene_change_component.h"
+#include "retronomicon/lib/scene/scene_change_component.h"
 #include "retronomicon/lib/graphic/window.h"
 
 
-namespace retronomicon::lib::core {
+namespace retronomicon::lib::scene {
 using retronomicon::lib::graphic::Window;
 
 SplashScene::SplashScene(SDL_Renderer* renderer)

@@ -2,16 +2,16 @@
 
 #include "retronomicon/lib/core/system.h"
 #include "retronomicon/lib/engine/game_engine.h"
-#include "retronomicon/lib/core/scene_change_component.h"
+#include "retronomicon/lib/scene/scene_change_component.h"
 #include <vector>
 
-namespace retronomicon::lib::core {
+namespace retronomicon::lib::scene {
 
     using retronomicon::lib::core::Entity;
     using retronomicon::lib::engine::GameEngine;
-    using retronomicon::lib::core::SceneChangeComponent;
+    using retronomicon::lib::scene::SceneChangeComponent;
 
-    class SceneChangeSystem : public System {
+    class SceneChangeSystem : public retronomicon::lib::core::System {
     public:
         SceneChangeSystem(GameEngine* engine)
             : m_engine(engine) {}

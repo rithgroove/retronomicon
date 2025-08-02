@@ -1,6 +1,6 @@
-#include "retronomicon/lib/core/scene_change_system.h"
+#include "retronomicon/lib/scene/scene_change_system.h"
 
-namespace retronomicon::lib::core {
+namespace retronomicon::lib::scene {
 
     void SceneChangeSystem::update(float dt,Entity* entity) {
         auto* sceneChange = entity->getComponent<SceneChangeComponent>();

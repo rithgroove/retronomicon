@@ -6,7 +6,7 @@
 
 #include "retronomicon/lib/core/scene.h"
 
-namespace retronomicon::lib::core {
+namespace retronomicon::lib::scene {
 
     class SceneManager {
     public:

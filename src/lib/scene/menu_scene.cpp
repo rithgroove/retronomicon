@@ -1,9 +1,9 @@
-#include "retronomicon/lib/core/menu_scene.h"
-#include "retronomicon/lib/core/scene_change_component.h"
+#include "retronomicon/lib/scene/menu_scene.h"
+#include "retronomicon/lib/scene/scene_change_component.h"
 #include "retronomicon/lib/graphic/window.h"
 #include <SDL.h>
 
-namespace retronomicon::lib::core {
+namespace retronomicon::lib::scene {
 
     MenuScene::MenuScene()
         : Scene("menu_scene") {}

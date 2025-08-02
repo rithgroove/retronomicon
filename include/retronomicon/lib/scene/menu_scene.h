@@ -1,10 +1,10 @@
 #pragma once
 
-#include "scene.h"
+#include "retronomicon/lib/core/scene.h"
 
-namespace retronomicon::lib::core {
+namespace retronomicon::lib::scene {
 
-    class MenuScene : public Scene {
+    class MenuScene : public retronomicon::lib::core::Scene {
     public:
         MenuScene();
 

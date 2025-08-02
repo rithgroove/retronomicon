@@ -5,7 +5,7 @@
 #include <functional>
 #include "retronomicon/lib/core/scene.h"
 
-namespace retronomicon::lib::core {
+namespace retronomicon::lib::scene {
 
     class SplashScene : public retronomicon::lib::core::Scene {
     public:
