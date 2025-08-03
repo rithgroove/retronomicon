@@ -21,6 +21,10 @@ namespace retronomicon::lib::core{
             Entity() = default;
 
             /**
+             * @brief empty constructor 
+             */
+            Entity(std::string &name);
+            /**
              * @brief default destructor 
              */
             // ~Entity();

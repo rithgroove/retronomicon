@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <string>
+#include <memory>
 
 #include "retronomicon/lib/core/component.h"
 #include "retronomicon/lib/core/renderable.h"
@@ -18,7 +19,7 @@ namespace retronomicon::lib::graphic {
      */
     class SpriteComponent : public core::Component, public core::Renderable {
     public:
-        explicit SpriteComponent(asset::ImageAsset* imageAsset);
+        explicit SpriteComponent(std::shared_ptr<asset::ImageAsset> imageAsset);
         ~SpriteComponent() override = default;
 
         void start() override;
@@ -26,7 +27,7 @@ namespace retronomicon::lib::graphic {
         void render(SDL_Renderer* renderer) override;
 
     private:
-        asset::ImageAsset* m_image = nullptr;
+        std::shared_ptr<asset::ImageAsset> m_image = nullptr;
         core::TransformComponent* m_transform = nullptr;
         animation::AnimationComponent* m_animation = nullptr;
     };

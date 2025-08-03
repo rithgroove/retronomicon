@@ -1,6 +1,5 @@
 #include "retronomicon/lib/core/scene.h"
 #include <algorithm> // for std::remove
-
 namespace retronomicon::lib::core {
 
     Scene::Scene(const std::string& name)

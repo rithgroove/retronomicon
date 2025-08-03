@@ -6,6 +6,8 @@
  */
 namespace retronomicon::lib::core{
 
+    Entity::Entity(std::string &name):m_name(name){}
+    
     void Entity::start() {
         //loop all components and call start
         for (auto& pair : m_components) {

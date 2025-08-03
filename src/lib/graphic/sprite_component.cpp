@@ -7,7 +7,7 @@
 
 namespace retronomicon::lib::graphic {
     using  retronomicon::lib::graphic::internal::toSDLRect;
-    SpriteComponent::SpriteComponent(asset::ImageAsset* image)
+    SpriteComponent::SpriteComponent(std::shared_ptr<asset::ImageAsset> image)
         : m_image(image) {}
 
     void SpriteComponent::start() {
