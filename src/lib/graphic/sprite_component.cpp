@@ -41,6 +41,8 @@ namespace retronomicon::lib::graphic {
             const auto& currentFrame = m_animation->getCurrentFrame();
             dstRect.w = static_cast<int>(currentFrame.getWidth() * m_transform->getScaleX());
             dstRect.h = static_cast<int>(currentFrame.getHeight() * m_transform->getScaleY());
+            dstRect.x -= ((currentFrame.getWidth() * m_transform->getScaleX())/2);
+            dstRect.y -= ((currentFrame.getHeight() * m_transform->getScaleY())/2);
 
             SDL_Rect srcRect = toSDLRect(currentFrame.getRect());
 
@@ -57,6 +59,8 @@ namespace retronomicon::lib::graphic {
         } else {
             dstRect.w = static_cast<int>(m_image->getWidth() * m_transform->getScaleX());
             dstRect.h = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
+            dstRect.x -= ((m_image->getWidth() * m_transform->getScaleX())/2);
+            dstRect.y -= ((m_image->getHeight() * m_transform->getScaleY())/2);
 
             SDL_RenderCopyEx(
                 renderer,
