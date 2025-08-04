@@ -67,6 +67,8 @@ namespace retronomicon::lib::core{
 
             void update(float dt);
             void setName(const string& name){m_name = name;}
+            std::vector<Component*> getComponents();
+
             const string& getName() const{return m_name;}
 
             Entity* createGameObject(const std::string& name);

@@ -1,6 +1,6 @@
 #include "retronomicon/lib/core/entity.h"
 #include <algorithm> // for std::remove
-
+#include <vector>
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
@@ -27,5 +27,13 @@ namespace retronomicon::lib::core{
             delete *it;
             m_childEntities.erase(it, m_childEntities.end());
         }
+    }
+
+    std::vector<Component*> Entity::getComponents() {
+        std::vector<Component*> components;
+        for (auto& [type, ptr] : m_components) {
+            components.push_back(ptr.get());
+        }
+        return components;
     }
 }
