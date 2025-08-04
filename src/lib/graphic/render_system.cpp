@@ -9,11 +9,11 @@ namespace retronomicon::lib::graphic {
         : m_renderer(renderer) {}
 
     void RenderSystem::render(Entity* entity) {
-        auto sprite = entity->getComponent<SpriteComponent>();
-        if (sprite){
-            sprite->render(m_renderer);
+        for (auto& component : entity->getComponents()) {
+            if (auto renderable = dynamic_cast<Renderable*>(component.get())) {
+                renderable->render(m_renderer);
+            }
         }
-
         for (Entity* obj : entity->m_childEntities) {
             this->render(obj);
         }

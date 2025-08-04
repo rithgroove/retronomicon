@@ -12,6 +12,7 @@ add_subdirectory(lib/math)
 add_subdirectory(lib/scripting)
 add_subdirectory(lib/scene)
 add_subdirectory(lib/physics)
+add_subdirectory(lib/ui)
 
 # Define the main retronomicon engine library
 add_library(retronomicon)
@@ -30,6 +31,7 @@ target_sources(retronomicon
         $<TARGET_OBJECTS:retronomicon-math>
         $<TARGET_OBJECTS:retronomicon-physics>
         $<TARGET_OBJECTS:retronomicon-scene>
+        $<TARGET_OBJECTS:retronomicon-ui>
 )
 
 # Global engine include path
