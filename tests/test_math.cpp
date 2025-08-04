@@ -68,6 +68,11 @@ TEST_CASE("Vector addition works", "[math]") {
 
     REQUIRE(v3.x == 6);
     REQUIRE(v3.y == 8);
+
+    v2 += v1;
+
+    REQUIRE(v3.x == 6);
+    REQUIRE(v3.y == 8);
 }
 
 TEST_CASE("Vector substraction works", "[math]") {
@@ -79,4 +84,9 @@ TEST_CASE("Vector substraction works", "[math]") {
 
     REQUIRE(v3.x == 2);
     REQUIRE(v3.y == 2);
+
+    v2 -= v1;
+
+    REQUIRE(v2.x == 2);
+    REQUIRE(v2.y == 2);
 }
