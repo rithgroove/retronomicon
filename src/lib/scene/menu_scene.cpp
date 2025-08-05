@@ -67,7 +67,7 @@ namespace retronomicon::lib::scene {
 
         // Add transform component
         auto* transform = panel->addComponent<TransformComponent>(
-            windowWidth / 2.0f, windowHeight / 2.0f, 0.0f, 1.0f, 1.0f);
+            windowWidth / 2.0f, windowHeight - 200, 0.0f, 1.0f, 1.0f);
         transform->setAnchor(0.5f, 0.5f); // Center
 
         // Add NineSlicePanelComponent

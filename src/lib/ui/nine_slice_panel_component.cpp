@@ -43,10 +43,11 @@ void NineSlicePanelComponent::render(SDL_Renderer* renderer) {
 
     if (owner) {
         if (auto transform = owner->getComponent<retronomicon::lib::core::TransformComponent>()) {
-            x = transform->x;
-            y = transform->y;
+            x = transform->getX() - (m_width * transform->getAnchorX());
+            y = transform->getY() - (m_height * transform->getAnchorY());
         }
     }
+
 
     int texW = m_imageAsset->getWidth();
     int texH = m_imageAsset->getHeight();
