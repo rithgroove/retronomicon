@@ -90,3 +90,35 @@ TEST_CASE("Vector substraction works", "[math]") {
     REQUIRE(v2.x == 2);
     REQUIRE(v2.y == 2);
 }
+
+
+TEST_CASE("Vector scalar multiplication works", "[math]") {
+    using namespace retronomicon::lib::math;
+
+    Vec2 v1{2, 4};
+    Vec2 v2 = v1 *2;
+
+    REQUIRE(v2.x == 4);
+    REQUIRE(v2.y == 8);
+
+    v1 *= 2;
+
+    REQUIRE(v1.x == 4);
+    REQUIRE(v1.y == 8);
+}
+
+
+TEST_CASE("Vector scalar division works", "[math]") {
+    using namespace retronomicon::lib::math;
+
+    Vec2 v1{2, 4};
+    Vec2 v2 = v1 /2;
+
+    REQUIRE(v2.x == 1);
+    REQUIRE(v2.y == 2);
+
+    v1 /= 2;
+
+    REQUIRE(v1.x == 1);
+    REQUIRE(v1.y == 2);
+}
