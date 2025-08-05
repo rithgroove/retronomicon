@@ -5,9 +5,11 @@
 #include "retronomicon/lib/graphic/sprite_component.h"
 #include <SDL.h>
 #include <iostream>
+#include "retronomicon/lib/ui/nine_slice_panel_component.h"
 
 namespace retronomicon::lib::scene {
     using retronomicon::lib::core::TransformComponent;
+    using retronomicon::lib::ui::NineSlicePanelComponent;
     using retronomicon::lib::graphic::SpriteComponent;
     using retronomicon::lib::graphic::Window;
     MenuScene::MenuScene()
@@ -43,28 +45,42 @@ namespace retronomicon::lib::scene {
             backgroundTransform->setAnchor(0.5f,0.5f);
             SpriteComponent *backgroundSprite = background->addComponent<SpriteComponent>(m_backgroundImage);
             background->start();
-            this->m_childEntities.push_back(background);
+            this->m_childEntities.insert(this->m_childEntities.begin(), background); 
+            // this->m_childEntities.push_back(background);
         }
         // You could load UI, background, menu music here later
     }
 
-    // void MenuScene::update(float dt) {
-    //     m_timer += dt;
+    void MenuScene::createMenu(std::shared_ptr<ImageAsset> nineSliceImage) {
+        std::cout << "Creating 9-slice menu panel" << std::endl;
 
-    //     // Just auto-proceed after 3 seconds for now (like pressing Start)
-    //     // if (m_timer > 3.0f && !hasComponent<SceneChangeComponent>()) {
-    //     //     addComponent<SceneChangeComponent>("level_1_1_scene");
-    //     // }
-    // }
+        int windowWidth = Window::getWidth();
+        int windowHeight = Window::getHeight();
 
-    // void MenuScene::render() {
-    //     // Optional: just change background color to make it obvious we're in MenuScene
-    //     // auto window = Window::get();
-    //     // SDL_SetRenderDrawColor(window->getRenderer(), 0, 0, 100, 255); // Dark Blue
-    //     // SDL_RenderClear(window->getRenderer());
+        // Create entity for panel
+        Entity* panel = new Entity();
+        panel->setName("menu_panel");
 
-    //     // TODO: Draw menu items with a future UI system
-    // }
+        // Panel size (customize later)
+        int panelWidth = 300;
+        int panelHeight = 200;
+
+        // Add transform component
+        auto* transform = panel->addComponent<TransformComponent>(
+            windowWidth / 2.0f, windowHeight / 2.0f, 0.0f, 1.0f, 1.0f);
+        transform->setAnchor(0.5f, 0.5f); // Center
+
+        // Add NineSlicePanelComponent
+        auto* nineSlice = panel->addComponent<NineSlicePanelComponent>();
+        nineSlice->setImageAsset(nineSliceImage);
+        nineSlice->setSlices(16, 16, 16, 16); // default slice sizes, adjust as needed
+        nineSlice->setSize(panelWidth, panelHeight);
+
+        // Start and add to scene
+        panel->start();
+        m_childEntities.push_back(panel);
+    }
+
 
     void MenuScene::shutdown() {
         // Clean up menu-related assets if needed later
