@@ -122,3 +122,11 @@ TEST_CASE("Vector scalar division works", "[math]") {
     REQUIRE(v1.x == 1);
     REQUIRE(v1.y == 2);
 }
+
+
+TEST_CASE("Vector length works", "[math]") {
+    using namespace retronomicon::lib::math;
+
+    Vec2 v1{3, 4};
+    REQUIRE(v1.length() == 5);
+}
