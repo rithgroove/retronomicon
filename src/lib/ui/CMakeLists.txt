@@ -7,7 +7,7 @@ target_include_directories(
     retronomicon-ui PUBLIC
     ${RETRO_DIR}/include
     ${RETRO_DIR}/external/SDL2/include
-    ${RETRO_DIR}/external/SDL2_ttf/include
+    ${RETRO_DIR}/external/SDL2_ttf
     ${RETRO_DIR}/external/SDL2_image/include
 )
 

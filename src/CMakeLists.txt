@@ -47,7 +47,7 @@ target_link_libraries(retronomicon
 include_directories(
     ${RETRO_DIR}/include
     ${RETRO_DIR}/external/SDL2/include
-    ${RETRO_DIR}/external/SDL2_ttf/include
+    ${RETRO_DIR}/external/SDL2_ttf
     ${RETRO_DIR}/external/SDL2_image/include
     ${RETRO_DIR}/external/SDL2_mixer/include
 )
