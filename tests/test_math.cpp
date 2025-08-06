@@ -1,5 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 #include "retronomicon/lib/math/point.h"
+#include <cmath>
 
 TEST_CASE("Point addition works", "[math]") {
     using namespace retronomicon::lib::math;
@@ -129,4 +130,17 @@ TEST_CASE("Vector length works", "[math]") {
 
     Vec2 v1{3, 4};
     REQUIRE(v1.length() == 5);
+}
+
+bool almostEqual(float a, float b, float epsilon = 1e-5f) {
+    return std::fabs(a - b) < epsilon;
+}
+
+TEST_CASE("Vector normalization works", "[math]") {
+    using namespace retronomicon::lib::math;
+
+    Vec2 v1{3, 4};
+    Vec2 v2 = v1.normalized();
+    REQUIRE(almostEqual(v2.x,0.6));
+    REQUIRE(almostEqual(v2.y,0.8));
 }
