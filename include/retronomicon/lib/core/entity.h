@@ -23,7 +23,7 @@ namespace retronomicon::lib::core{
             /**
              * @brief empty constructor 
              */
-            Entity(std::string &name);
+            Entity(const std::string &name);
             /**
              * @brief default destructor 
              */

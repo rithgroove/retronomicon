@@ -4,6 +4,7 @@
 
 #include "retronomicon/lib/core/component.h"
 namespace retronomicon::lib::scene {
+    using retronomicon::lib::core::Component;
 
     /**
      * @brief A component that marks an entity to request a scene transition.

@@ -1,25 +1,28 @@
+#include <SDL.h>
+#include <iostream>
+
 #include "retronomicon/lib/scene/menu_scene.h"
 #include "retronomicon/lib/scene/scene_change_component.h"
 #include "retronomicon/lib/graphic/window.h"
 #include "retronomicon/lib/core/transform_component.h"
 #include "retronomicon/lib/graphic/sprite_component.h"
-#include <SDL.h>
-#include <iostream>
+#include "retronomicon/lib/ui/text_label_component.h"
 #include "retronomicon/lib/ui/nine_slice_panel_component.h"
 
 namespace retronomicon::lib::scene {
     using retronomicon::lib::core::TransformComponent;
     using retronomicon::lib::ui::NineSlicePanelComponent;
+    using retronomicon::lib::ui::TextLabelComponent;
     using retronomicon::lib::graphic::SpriteComponent;
     using retronomicon::lib::graphic::Window;
     MenuScene::MenuScene()
         : Scene("menu_scene") {}
 
-    MenuScene::MenuScene(std::shared_ptr<ImageAsset> backgroundImage)
-        : Scene("menu_scene"),m_backgroundImage(backgroundImage) {
+    MenuScene::MenuScene(std::shared_ptr<ImageAsset> backgroundImage,std::shared_ptr<FontAsset> fontAsset)
+        : Scene("menu_scene"),m_backgroundImage(backgroundImage),m_fontAsset(fontAsset) {
             std::cout<<"Masuk constructor yang pake background Image"<<std::endl;
-
         }
+
 
     void MenuScene::init() {
         m_timer = 0.0f;
@@ -28,7 +31,8 @@ namespace retronomicon::lib::scene {
         if (m_backgroundImage){
 
             std::cout<<"Masuk init yang pake background Image"<<std::endl;
-            Entity* background = new Entity();
+            std::string name = "background";
+            Entity* background = new Entity(name);
             background->setName("menu_scene_bg");
             int imageWidth = m_backgroundImage->getWidth();
             int imageHeight = m_backgroundImage->getHeight();
@@ -51,14 +55,22 @@ namespace retronomicon::lib::scene {
         // You could load UI, background, menu music here later
     }
 
-    void MenuScene::createMenu(std::shared_ptr<ImageAsset> nineSliceImage) {
+    void MenuScene::createMenu(std::shared_ptr<ImageAsset> nineSliceImage = nullptr,std::shared_ptr<FontAsset> fontAsset = nullptr) {
+        if (nineSliceImage){
+            this->m_nineSliceImage = nineSliceImage;
+        }
+        if (fontAsset){
+            this->m_fontAsset = fontAsset;
+        }
         std::cout << "Creating 9-slice menu panel" << std::endl;
 
         int windowWidth = Window::getWidth();
         int windowHeight = Window::getHeight();
 
         // Create entity for panel
-        Entity* panel = new Entity();
+        std::string name = "nine slice panel";
+
+        Entity* panel = new Entity(name);
         panel->setName("menu_panel");
 
         // Panel size (customize later)
@@ -72,13 +84,27 @@ namespace retronomicon::lib::scene {
 
         // Add NineSlicePanelComponent
         auto* nineSlice = panel->addComponent<NineSlicePanelComponent>();
-        nineSlice->setImageAsset(nineSliceImage);
+        nineSlice->setImageAsset(this->m_nineSliceImage);
         nineSlice->setSlices(16, 16, 16, 16); // default slice sizes, adjust as needed
         nineSlice->setSize(panelWidth, panelHeight);
+        panel->start();
+
+        auto* m_splashChangeComponent = this->addComponent<SceneChangeComponent>("Splash");
+        // Create entity for panel
+        Entity* newGameOption = new Entity("newGameOption");
+        SDL_Color gray = { 70, 70, 70, 255};
+        newGameOption->addComponent<TextLabelComponent>("New Game",this->m_fontAsset,gray,5,5);
+        newGameOption->addComponent<TransformComponent>(10,10,1.0f,1.0f);
+        panel->m_childEntities.push_back(newGameOption);
+
+        panel->setName("menu_panel");
+        //create new game options:
+        m_options.emplace_back("New Game", m_splashChangeComponent) ;
+        newGameOption->start();
 
         // Start and add to scene
-        panel->start();
         m_childEntities.push_back(panel);
+        std::cout<<"Selesai"<<std::endl;
     }
 
 

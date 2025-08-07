@@ -1,9 +1,10 @@
 #include "retronomicon/lib/core/scene.h"
 #include <algorithm> // for std::remove
+#include <iostream>
 namespace retronomicon::lib::core {
 
     Scene::Scene(const std::string& name)
-        : m_name(name), m_isInitialized(false), m_isActive(false), m_requiresReset(false) {
+        : Entity(name), m_isInitialized(false), m_isActive(false), m_requiresReset(false) {
     }
 
     Scene::~Scene() {
@@ -20,6 +21,8 @@ namespace retronomicon::lib::core {
     }
 
     void Scene::update(float dt) {
+
+        // std::cout<< "test update di scene cpp : "<< this->getName() << std::endl;
         for (auto& system : m_systems) {
             system->update(dt, this);
         }
