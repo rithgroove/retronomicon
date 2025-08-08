@@ -144,3 +144,12 @@ TEST_CASE("Vector normalization works", "[math]") {
     REQUIRE(almostEqual(v2.x,0.6));
     REQUIRE(almostEqual(v2.y,0.8));
 }
+
+TEST_CASE("Vector dot product works", "[math]") {
+    using namespace retronomicon::lib::math;
+
+    Vec2 v1{3, 4};
+    Vec2 v2{5, 6};
+    float d = v1.dot(v2);
+    REQUIRE(almostEqual(39.0,d));
+}
