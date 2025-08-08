@@ -93,8 +93,8 @@ namespace retronomicon::lib::scene {
         // Create entity for panel
         Entity* newGameOption = new Entity("newGameOption");
         SDL_Color gray = { 70, 70, 70, 255};
-        newGameOption->addComponent<TextLabelComponent>("New Game",this->m_fontAsset,gray,5,5);
-        newGameOption->addComponent<TransformComponent>(10,10,1.0f,1.0f);
+        newGameOption->addComponent<TextLabelComponent>("New Game",this->m_fontAsset,gray,600,50,5,5);
+        newGameOption->addComponent<TransformComponent>(250,400,1.0f,1.0f);
         panel->m_childEntities.push_back(newGameOption);
 
         panel->setName("menu_panel");

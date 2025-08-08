@@ -92,7 +92,6 @@ namespace retronomicon::lib::asset {
         SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), fgC);  // aliased glyphs
         if (!textSurface) {
             SDL_Log("Failed to render text: %s", TTF_GetError());
-            return nullptr;
         }
 
         SDL_Surface* textBox = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_RGBA8888);
@@ -102,19 +101,30 @@ namespace retronomicon::lib::asset {
             return nullptr;
         }
 
+        if (!m_renderer) {
+            SDL_Log("Renderer is null in generateTexture!");
+        }
+
         // Brown color in RGBA: RGB(139, 69, 19)
         // Uint32 brown = SDL_MapRGBA(surface->format, 139, 69, 19, 255);
 
         // Fill the entire surface with the brown color
         // SDL_FillRect(surface, nullptr, brown);
         
-        SDL_Rect textLocation = { horizontalPadding, verticalPadding, 0, 0 };
-        SDL_BlitSurface(textSurface, nullptr, textBox, &textLocation);
+        SDL_Rect textLocation = { horizontalPadding, verticalPadding, textSurface->w, textSurface->h };
+        if (SDL_BlitSurface(textSurface, nullptr, textBox, &textLocation) != 0) {
+            SDL_Log("Failed to blit text: %s", SDL_GetError());
+        }
 
         SDL_Texture* texture = SDL_CreateTextureFromSurface(m_renderer, textBox);
 
         SDL_FreeSurface(textSurface);
         SDL_FreeSurface(textBox);
+
+        if (!texture){
+            SDL_Log("Failed to create texture: %s", SDL_GetError());
+            std::cout<<"texturenya gagal generated"<<std::endl;
+        }
 
         return texture;
     }

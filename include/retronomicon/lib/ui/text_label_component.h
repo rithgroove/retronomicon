@@ -18,6 +18,8 @@ public:
     TextLabelComponent(const std::string& text,
                        std::shared_ptr<asset::FontAsset> font,
                        SDL_Color color = {255, 255, 255, 255},
+                       int width = 0,
+                       int height = 0,
                        int paddingX = 0,
                        int paddingY = 0);
 

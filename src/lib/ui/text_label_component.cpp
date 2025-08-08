@@ -1,15 +1,22 @@
 #include "retronomicon/lib/ui/text_label_component.h"
-
+#include "retronomicon/lib/core/transform_component.h"
+#include "retronomicon/lib/core/entity.h"
+#include <iostream>
 namespace retronomicon::lib::ui {
-
+using retronomicon::lib::core::Entity;
+using retronomicon::lib::core::TransformComponent;
 TextLabelComponent::TextLabelComponent(const std::string& text,
                                        std::shared_ptr<asset::FontAsset> font,
                                        SDL_Color color,
+                                       int width,
+                                       int height,
                                        int paddingX,
                                        int paddingY)
     : text(text),
       font(std::move(font)),
       color(color),
+      width(width),
+      height(height),
       paddingX(paddingX),
       paddingY(paddingY) {
     regenerateTexture();
@@ -57,6 +64,9 @@ std::shared_ptr<asset::FontAsset> TextLabelComponent::getFont() const {
 }
 
 void TextLabelComponent::regenerateTexture() {
+    if (!font)     std::cout<<"no font"<<std::endl;
+    if (!font->isInitialized())     std::cout<<"font not initialized"<<std::endl;
+
     if (!font || !font->isInitialized()) return;
 
     if (texture) {
@@ -67,11 +77,15 @@ void TextLabelComponent::regenerateTexture() {
     int w = 0;
     int h = 0;
 
-    texture = font->generateTexture(text, paddingX, paddingY, w, h, color, {0, 0, 0, 0});
+    std::cout<<"dah masuk regenerateTexture: " << text << " " <<paddingX << " " <<paddingY << " " <<w << " " <<h<<std::endl;
+
+    texture = font->generateTexture(text, paddingX, paddingY, width, height, color, {0, 0, 0, 255});
 
     if (texture) {
+        std::cout<<"texture generated"<<std::endl;
         SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
     } else {
+        std::cout<<"texture not generated"<<std::endl;
         width = 0;
         height = 0;
     }
@@ -87,8 +101,9 @@ void TextLabelComponent::render(SDL_Renderer* renderer) {
     // Get position if the Entity has it
     auto* entity = getOwner();
     // If you have a TransformComponent, grab position from there.
-    // x = entity->getComponent<TransformComponent>()->x; etc.
-
+    x = entity->getComponent<TransformComponent>()->getX() + x;
+    y = entity->getComponent<TransformComponent>()->getY() + y;
+    std::cout<<"masuk render"<<std::endl;
     SDL_Rect dst = {x, y, width, height};
     SDL_RenderCopy(renderer, texture, nullptr, &dst);
 }
