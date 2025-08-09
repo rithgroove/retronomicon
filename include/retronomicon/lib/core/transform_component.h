@@ -1,12 +1,13 @@
 #pragma once
 
 #include "retronomicon/lib/core/component.h"
-
+#include "retronomicon/lib/math/vec2.h"
 using namespace retronomicon::lib::core;
 /**
  * @brief The namespace for core components
  */
 namespace retronomicon::lib::core{
+    using retronomicon::lib::math::Vec2;
     /**
      * @brief The components that defines the position of an gameobject
      */
@@ -107,6 +108,21 @@ namespace retronomicon::lib::core{
              * @return vertical scaling
              */
             float getAnchorY() const;
+
+            /**
+             * @brief a method to raw position of the image. (x,y)
+             * 
+             * @return Vec2 of the position
+             */
+            Vec2 getPosition() const;
+
+            /**
+             * @brief a method to get the render position of the image (might need to add viewport later)
+             * this methods loops their parent's transforms
+             * 
+             * @return Vec2 of the render position
+             */
+            Vec2 getRenderPosition() const ;
 
         public:
             float x;

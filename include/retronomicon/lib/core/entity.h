@@ -75,6 +75,11 @@ namespace retronomicon::lib::core{
             void removeGameObject(Entity* object);
             
             std::vector<Entity*> m_childEntities;
+
+
+            bool hasParent() const {return m_parentEntity!=nullptr;}
+
+            Entity* getParent() const {return m_parentEntity;}
         protected:
             Entity* m_parentEntity;
             unordered_map<type_index, unique_ptr<Component>> m_components;

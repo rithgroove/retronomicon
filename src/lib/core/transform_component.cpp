@@ -1,7 +1,7 @@
 #include "retronomicon/lib/core/transform_component.h"
-
+#include "retronomicon/lib/core/entity.h"
 namespace retronomicon::lib::core{
-
+    using retronomicon::lib::core::Entity;
     TransformComponent::TransformComponent()
         : x(0), y(0), rotation(0), scaleX(1.0f), scaleY(1.0f) {
         m_anchorX = 0.5;
@@ -37,6 +37,27 @@ namespace retronomicon::lib::core{
 
     float TransformComponent::getX() const { return x; }
     float TransformComponent::getY() const { return y; }
+
+    Vec2 TransformComponent::getPosition() const{
+        return Vec2{x,y};
+    }
+
+    Vec2 TransformComponent::getRenderPosition() const {
+        // Start with our local position
+        Vec2 worldPos = this->getPosition();
+
+        // Walk up the parent chain
+        Entity* current = this->getOwner();
+        while (current->hasParent()) {
+            current = current->getParent();
+            if (current->hasComponent<TransformComponent>()) {
+                const auto& parentTransform = current->getComponent<TransformComponent>();
+                worldPos += parentTransform->getPosition(); // could be parentTransform.getRenderPosition() if recursive
+            }
+        }
+
+        return worldPos;
+    }
     float TransformComponent::getRotation() const { return rotation; }
     float TransformComponent::getScaleX() const { return scaleX; }
     float TransformComponent::getScaleY() const { return scaleY; }
