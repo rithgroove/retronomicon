@@ -46,7 +46,7 @@ namespace retronomicon::lib::scene {
 
 
             TransformComponent* backgroundTransform = background->addComponent<TransformComponent>(windowWidth/2.0,windowHeight/2.0,0.0f,scaling,scaling);
-            backgroundTransform->setAnchor(0.0f,0.0f);
+            backgroundTransform->setAnchor(0.5f,0.5f);
             SpriteComponent *backgroundSprite = background->addComponent<SpriteComponent>(m_backgroundImage);
             background->start();
             this->addChildEntity(background);

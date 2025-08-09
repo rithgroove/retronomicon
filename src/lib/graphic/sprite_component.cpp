@@ -13,7 +13,7 @@ namespace retronomicon::lib::graphic {
     void SpriteComponent::start() {
         m_transform = getOwner()->getComponent<core::TransformComponent>();
         if (!m_transform) {
-            std::cerr << "[SpriteComponent] Missing TransformComponent on entity.\n";
+            std::cerr << "[SpriteComponent] Missing TransformComponent on entity.\n"<<std::endl;
         }
 
         m_animation = getOwner()->getComponent<animation::AnimationComponent>();
@@ -33,15 +33,15 @@ namespace retronomicon::lib::graphic {
 
         SDL_RendererFlip flip = SDL_FLIP_NONE;
 
-        SDL_Point center = {
-            static_cast<int>(dstRect.w * m_transform->getAnchorX()),
-            static_cast<int>(dstRect.h * m_transform->getAnchorY())
-        };
 
         if (m_animation) {
             const auto& currentFrame = m_animation->getCurrentFrame();
             dstRect.w = static_cast<int>(currentFrame.getWidth() * m_transform->getScaleX());
             dstRect.h = static_cast<int>(currentFrame.getHeight() * m_transform->getScaleY());
+            SDL_Point center = {
+                static_cast<int>(dstRect.w * m_transform->getAnchorX()),
+                static_cast<int>(dstRect.h * m_transform->getAnchorY())
+            };
             dstRect.x -= ((currentFrame.getWidth() * m_transform->getScaleX())- center.x);
             dstRect.y -= ((currentFrame.getHeight() * m_transform->getScaleY()) - center.y);
 
@@ -60,6 +60,10 @@ namespace retronomicon::lib::graphic {
         } else {
             dstRect.w = static_cast<int>(m_image->getWidth() * m_transform->getScaleX());
             dstRect.h = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
+            SDL_Point center = {
+                static_cast<int>(dstRect.w * m_transform->getAnchorX()),
+                static_cast<int>(dstRect.h * m_transform->getAnchorY())
+            };
             dstRect.x -= ((m_image->getWidth() * m_transform->getScaleX())- center.x);
             dstRect.y -= ((m_image->getHeight() * m_transform->getScaleY())- center.y);
 
