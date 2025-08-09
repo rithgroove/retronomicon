@@ -2,7 +2,7 @@
 #include "retronomicon/lib/core/component.h"
 #include "retronomicon/lib/core/transform_component.h"
 #include "retronomicon/lib/core/entity.h"
-
+#include <iostream>
 namespace retronomicon::lib::ui {
 
 NineSlicePanelComponent::NineSlicePanelComponent() = default;
@@ -17,6 +17,15 @@ void NineSlicePanelComponent::setSlices(int left, int right, int top, int bottom
     m_sliceTop = top;
     m_sliceBottom = bottom;
 }
+
+
+void NineSlicePanelComponent::start() {
+    m_transform = getOwner()->getComponent<core::TransformComponent>();
+    if (!m_transform) {
+        std::cerr << "[SpriteComponent] Missing TransformComponent on entity.\n"<<std::endl;
+    }
+}
+
 
 void NineSlicePanelComponent::setSize(int width, int height) {
     m_width = width;
@@ -41,13 +50,9 @@ void NineSlicePanelComponent::render(SDL_Renderer* renderer) {
     int x = 0;
     int y = 0;
 
-    if (owner) {
-        if (auto transform = owner->getComponent<retronomicon::lib::core::TransformComponent>()) {
-            x = transform->getX() - (m_width * transform->getAnchorX());
-            y = transform->getY() - (m_height * transform->getAnchorY());
-        }
-    }
-
+    Vec2 renderPosition = m_transform->getRenderPosition();
+    x = renderPosition.x - (m_width * m_transform->getAnchorX());
+    y = renderPosition.y - (m_height * m_transform->getAnchorY());
 
     int texW = m_imageAsset->getWidth();
     int texH = m_imageAsset->getHeight();

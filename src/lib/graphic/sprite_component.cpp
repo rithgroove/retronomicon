@@ -1,6 +1,5 @@
 #include "retronomicon/lib/graphic/sprite_component.h"
 #include "retronomicon/lib/graphic/internal/sdl_utils.h"
-#include "retronomicon/lib/core/transform_component.h"
 #include "retronomicon/lib/animation/animation_component.h"
 #include "retronomicon/lib/core/entity.h"
 #include <iostream>
@@ -13,7 +12,7 @@ namespace retronomicon::lib::graphic {
     void SpriteComponent::start() {
         m_transform = getOwner()->getComponent<core::TransformComponent>();
         if (!m_transform) {
-            std::cerr << "[SpriteComponent] Missing TransformComponent on entity.\n"<<std::endl;
+            std::cout << "[SpriteComponent] Missing TransformComponent on entity.\n"<<std::endl;
         }
 
         m_animation = getOwner()->getComponent<animation::AnimationComponent>();

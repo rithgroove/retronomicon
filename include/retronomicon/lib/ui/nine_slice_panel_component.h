@@ -3,10 +3,11 @@
 #include "retronomicon/lib/core/component.h"
 #include "retronomicon/lib/core/renderable.h"
 #include "retronomicon/lib/asset/image_asset.h"
+#include "retronomicon/lib/core/transform_component.h"
 #include <memory>
 
 namespace retronomicon::lib::ui {
-
+using retronomicon::lib::core::TransformComponent;
 /**
  * @brief A component that renders a 9-slice panel, typically used for scalable UI boxes.
  */
@@ -28,6 +29,8 @@ public:
     int getTop() const;
     int getBottom() const;
 
+    void start() override;
+
     /**
      * @brief Called by the RenderSystem or manual calls for rendering.
      */
@@ -36,6 +39,7 @@ public:
 private:
     std::shared_ptr<retronomicon::lib::asset::ImageAsset> m_imageAsset;
 
+    core::TransformComponent* m_transform = nullptr;
     int m_sliceLeft = 0;
     int m_sliceRight = 0;
     int m_sliceTop = 0;
