@@ -28,6 +28,17 @@ namespace retronomicon::lib::scene {
         m_timer = 0.0f;
 
         std::cout<<"Masuk init"<<std::endl;
+
+        // You could load UI, background, menu music here later
+    }
+
+    void MenuScene::createMenu(std::shared_ptr<ImageAsset> nineSliceImage = nullptr,std::shared_ptr<FontAsset> fontAsset = nullptr) {
+        if (nineSliceImage){
+            this->m_nineSliceImage = nineSliceImage;
+        }
+        if (fontAsset){
+            this->m_fontAsset = fontAsset;
+        }
         if (m_backgroundImage){
 
             std::cout<<"Masuk init yang pake background Image"<<std::endl;
@@ -52,16 +63,8 @@ namespace retronomicon::lib::scene {
             this->addChildEntity(background);
             // this->m_childEntities.push_back(background);
         }
-        // You could load UI, background, menu music here later
-    }
 
-    void MenuScene::createMenu(std::shared_ptr<ImageAsset> nineSliceImage = nullptr,std::shared_ptr<FontAsset> fontAsset = nullptr) {
-        if (nineSliceImage){
-            this->m_nineSliceImage = nineSliceImage;
-        }
-        if (fontAsset){
-            this->m_fontAsset = fontAsset;
-        }
+
         std::cout << "Creating 9-slice menu panel" << std::endl;
 
         int windowWidth = Window::getWidth();

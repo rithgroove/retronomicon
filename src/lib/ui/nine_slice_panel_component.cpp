@@ -18,14 +18,12 @@ void NineSlicePanelComponent::setSlices(int left, int right, int top, int bottom
     m_sliceBottom = bottom;
 }
 
-
 void NineSlicePanelComponent::start() {
     m_transform = getOwner()->getComponent<core::TransformComponent>();
     if (!m_transform) {
         std::cerr << "[SpriteComponent] Missing TransformComponent on entity.\n"<<std::endl;
     }
 }
-
 
 void NineSlicePanelComponent::setSize(int width, int height) {
     m_width = width;

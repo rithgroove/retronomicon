@@ -2,10 +2,14 @@
 #include "retronomicon/lib/graphic/internal/sdl_utils.h"
 #include "retronomicon/lib/animation/animation_component.h"
 #include "retronomicon/lib/core/entity.h"
+#include "retronomicon/lib/core/transform_component.h"
+#include "retronomicon/lib/math/vec2.h"
 #include <iostream>
 
 namespace retronomicon::lib::graphic {
-    using  retronomicon::lib::graphic::internal::toSDLRect;
+    using retronomicon::lib::graphic::internal::toSDLRect;
+    using retronomicon::lib::math::Vec2;
+    using retronomicon::lib::core::TransformComponent;
     SpriteComponent::SpriteComponent(std::shared_ptr<asset::ImageAsset> image)
         : m_image(image) {}
 
