@@ -82,7 +82,7 @@ namespace retronomicon::lib::core{
             Entity* getParent() const {return m_parentEntity;}
         protected:
             std::vector<Entity*> m_childEntities;
-            Entity* m_parentEntity;
+            Entity* m_parentEntity = nullptr;
             unordered_map<type_index, unique_ptr<Component>> m_components;
             string m_name;
     };

@@ -26,13 +26,10 @@ namespace retronomicon::lib::graphic {
     void SpriteComponent::render(SDL_Renderer* renderer) {
         if (!m_transform || !m_image || !renderer) return;
 
-        std::cout << "render1."<<std::endl;
         Vec2 renderPosition = m_transform->getRenderPosition();
         SDL_Rect dstRect;
-        std::cout << "render2."<<std::endl;
         dstRect.x = static_cast<int>(renderPosition.x);
         dstRect.y = static_cast<int>(renderPosition.y);
-        std::cout << "render3."<<std::endl;
 
         SDL_RendererFlip flip = SDL_FLIP_NONE;
 
@@ -61,12 +58,10 @@ namespace retronomicon::lib::graphic {
             );
 
         } else {
-            std::cout << "render5."<<std::endl;
             dstRect.w = static_cast<int>(m_image->getWidth() * m_transform->getScaleX());
             dstRect.h = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
             dstRect.x -= ((m_image->getWidth() * m_transform->getScaleX())- center.x);
             dstRect.y -= ((m_image->getHeight() * m_transform->getScaleY())- center.y);
-            std::cout << "render6."<<std::endl;
 
             SDL_RenderCopyEx(
                 renderer,
