@@ -10,7 +10,7 @@ namespace retronomicon::lib::scene {
             sceneChange->triggered = false;
         }
 
-        for (Entity* child : entity->m_childEntities) {
+        for (Entity* child : entity->getChilds()) {
             // std::cout<< "test2 child : "<< entity->getName() << std::endl;
             this->update(dt, child);
         }

@@ -74,13 +74,14 @@ namespace retronomicon::lib::core{
             Entity* createGameObject(const std::string& name);
             void removeGameObject(Entity* object);
             
-            std::vector<Entity*> m_childEntities;
-
-
+            void addChildEntity(Entity* entity);
+            std::vector<Entity*> getChilds(){return m_childEntities;}
+            void setParent(Entity* entity){this->m_parentEntity = entity;}
             bool hasParent() const {return m_parentEntity!=nullptr;}
 
             Entity* getParent() const {return m_parentEntity;}
         protected:
+            std::vector<Entity*> m_childEntities;
             Entity* m_parentEntity;
             unordered_map<type_index, unique_ptr<Component>> m_components;
             string m_name;

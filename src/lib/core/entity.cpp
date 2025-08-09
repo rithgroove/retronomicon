@@ -29,6 +29,11 @@ namespace retronomicon::lib::core{
         }
     }
 
+    void Entity::addChildEntity(Entity* entity){
+        m_childEntities.push_back(entity);
+        entity->setParent(this);
+    }
+
     std::vector<Component*> Entity::getComponents() {
         std::vector<Component*> components;
         for (auto& [type, ptr] : m_components) {

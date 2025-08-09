@@ -1,5 +1,6 @@
 #include "retronomicon/lib/core/transform_component.h"
 #include "retronomicon/lib/core/entity.h"
+#include <iostream>
 namespace retronomicon::lib::core{
     using retronomicon::lib::core::Entity;
     TransformComponent::TransformComponent()
@@ -44,15 +45,23 @@ namespace retronomicon::lib::core{
 
     Vec2 TransformComponent::getRenderPosition() const {
         // Start with our local position
+        std::cout << "render pos 1."<<std::endl;
+
         Vec2 worldPos = this->getPosition();
 
+        std::cout << "render pos 2."<<std::endl;
         // Walk up the parent chain
         Entity* current = this->getOwner();
+        std::cout << "render pos 3."<<std::endl;
         while (current->hasParent()) {
+            std::cout << "render pos 4."<<std::endl;
             current = current->getParent();
+            std::cout << "render pos 4.5."<<std::endl;
             if (current->hasComponent<TransformComponent>()) {
+                std::cout << "render pos 5."<<std::endl;
                 const auto& parentTransform = current->getComponent<TransformComponent>();
                 worldPos += parentTransform->getPosition(); // could be parentTransform.getRenderPosition() if recursive
+                std::cout << "render pos 6."<<std::endl;
             }
         }
 

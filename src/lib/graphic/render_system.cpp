@@ -14,7 +14,7 @@ namespace retronomicon::lib::graphic {
                 renderable->render(m_renderer);
             }
         }
-        for (Entity* obj : entity->m_childEntities) {
+        for (Entity* obj : entity->getChilds()) {
             this->render(obj);
         }
     }

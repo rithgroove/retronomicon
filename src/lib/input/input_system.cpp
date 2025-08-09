@@ -75,7 +75,7 @@ namespace retronomicon::lib::input{
             input->update(dt);
         }
 
-        for (Entity* obj : entity->m_childEntities) {
+        for (Entity* obj : entity->getChilds()) {
             // render logic
              this->update(dt,obj);
         }

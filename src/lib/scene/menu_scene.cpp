@@ -49,7 +49,7 @@ namespace retronomicon::lib::scene {
             backgroundTransform->setAnchor(0.5f,0.5f);
             SpriteComponent *backgroundSprite = background->addComponent<SpriteComponent>(m_backgroundImage);
             background->start();
-            this->m_childEntities.insert(this->m_childEntities.begin(), background); 
+            this->addChildEntity(background);
             // this->m_childEntities.push_back(background);
         }
         // You could load UI, background, menu music here later
@@ -95,7 +95,7 @@ namespace retronomicon::lib::scene {
         SDL_Color gray = { 70, 70, 70, 255};
         newGameOption->addComponent<TextLabelComponent>("New Game",this->m_fontAsset,gray,600,50,5,5);
         newGameOption->addComponent<TransformComponent>(250,400,1.0f,1.0f);
-        panel->m_childEntities.push_back(newGameOption);
+        panel->addChildEntity(newGameOption);
 
         panel->setName("menu_panel");
         //create new game options:
@@ -103,7 +103,7 @@ namespace retronomicon::lib::scene {
         newGameOption->start();
 
         // Start and add to scene
-        m_childEntities.push_back(panel);
+        this->addChildEntity(panel);
         std::cout<<"Selesai"<<std::endl;
     }
 
