@@ -1,15 +1,19 @@
 #pragma once
 
 #include <SDL.h>
+#include <memory>
 #include <string>
 #include <functional>
+#include "retronomicon/lib/engine/game_engine.h"
 #include "retronomicon/lib/core/scene.h"
+#include "retronomicon/lib/asset/image_asset.h"
 
 namespace retronomicon::lib::scene::splash {
-
+    using retronomicon::lib::asset::ImageAsset;
+    using retronomicon::lib::engine::GameEngine;
     class SplashScene : public retronomicon::lib::core::Scene {
     public:
-        explicit SplashScene(SDL_Renderer* renderer);
+        explicit SplashScene(GameEngine *engine,std::shared_ptr<ImageAsset> image);
         ~SplashScene() override;
 
         void init() override;
@@ -25,7 +29,9 @@ namespace retronomicon::lib::scene::splash {
         void setImage(SDL_Texture* texture);
 
     private:
-        SDL_Renderer* m_renderer;
+        std::shared_ptr<ImageAsset> m_image = nullptr;
+        GameEngine* m_engine = nullptr;
+        SDL_Renderer* m_renderer = nullptr
         SDL_Texture* m_logoTexture = nullptr;
 
         float m_timer = 0.0f;
