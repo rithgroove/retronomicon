@@ -1,6 +1,6 @@
-#include "retronomicon/lib/scene/menu_option.h"
+#include "retronomicon/lib/scene/menu/menu_option.h"
 #include <iostream>
-namespace retronomicon::lib::scene {
+namespace retronomicon::lib::scene::menu {
 
     MenuOption::MenuOption(std::string label, SceneChangeComponent* component)
         : m_label(std::move(label)), m_component(std::move(component)) {

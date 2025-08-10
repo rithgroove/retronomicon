@@ -2,10 +2,10 @@
 
 #include <string>
 #include <functional>
-#include "scene_change_component.h"
+#include "retronomicon/lib/scene/scene_change_component.h"
 
-namespace retronomicon::lib::scene {
-
+namespace retronomicon::lib::scene::menu {
+    using retronomicon::lib::scene::SceneChangeComponent;
     class MenuOption {
     public:
         MenuOption(std::string label, SceneChangeComponent* component);

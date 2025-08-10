@@ -6,7 +6,7 @@
 #include "retronomicon/lib/asset/font_asset.h"
 #include "menu_option.h"
 
-namespace retronomicon::lib::scene {
+namespace retronomicon::lib::scene::menu{
     using retronomicon::lib::asset::ImageAsset;
     using retronomicon::lib::asset::FontAsset;
     class MenuScene : public retronomicon::lib::core::Scene {

@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include <iostream>
 
-#include "retronomicon/lib/scene/menu_scene.h"
+#include "retronomicon/lib/scene/menu/menu_scene.h"
 #include "retronomicon/lib/scene/scene_change_component.h"
 #include "retronomicon/lib/graphic/window.h"
 #include "retronomicon/lib/core/transform_component.h"
@@ -9,7 +9,7 @@
 #include "retronomicon/lib/ui/text_label_component.h"
 #include "retronomicon/lib/ui/nine_slice_panel_component.h"
 
-namespace retronomicon::lib::scene {
+namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::core::TransformComponent;
     using retronomicon::lib::ui::NineSlicePanelComponent;
     using retronomicon::lib::ui::TextLabelComponent;
