@@ -77,6 +77,12 @@ namespace retronomicon::lib::scene::splash {
 		SplashAnimationListener* listener=  new SplashAnimationListener();
 		logoAnimationComponent->setListener(listener);
 
+	    std::cout << "[Splash Scene] create logo's scene change component trigger" <<std::endl;
+		logoEntity->addComponent<SceneChangeComponent>("Menu");
+
+		std::cout << "[Splash Scene] start the entity" <<std::endl;
+		logoEntity->start();
+
 		this->addChildEntity(logoEntity);
 	    m_timer = 0.0f;
 	    m_finished = false;

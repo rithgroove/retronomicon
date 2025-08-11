@@ -10,10 +10,8 @@ namespace retronomicon::lib::graphic {
 
     void RenderSystem::render(Entity* entity) {
 
-        std::cout<< "[Render System] test render di scene cpp : "<< entity->getName() << std::endl;
         for (auto& component : entity->getComponents()) {
             if (auto renderable = dynamic_cast<Renderable*>(component)) {
-                std::cout<< "[Render System] ketemu renderable : "<< entity->getName() << std::endl;
                 renderable->render(m_renderer);
             }
         }

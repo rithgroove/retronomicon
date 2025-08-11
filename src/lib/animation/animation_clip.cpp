@@ -1,6 +1,7 @@
 #include "retronomicon/lib/animation/animation_clip.h"
 #include <algorithm>  // for std::max
 #include <sstream>
+#include <iostream>
 /**
  * @brief The namespace for graphic utilities
  */
@@ -22,7 +23,10 @@ namespace retronomicon::lib::animation{
           m_name(std::move(name)),
           m_repeat(repeat),
           m_currentFrame(0)
-    {}
+    {
+        std::cout<<"repeat : " <<repeat<<std::endl;
+
+    }
 
     
     /***************************** Destructor *****************************/
@@ -38,7 +42,7 @@ namespace retronomicon::lib::animation{
      * @return true if m_repeat is false, and is currently on the last frame
      */
     bool AnimationClip::isFinished() const{
-        if (m_repeat && m_currentFrame >= getFrameCount()){
+        if (!m_repeat && m_currentFrame >= getFrameCount()){
             return true;
         }
         return false;
@@ -72,6 +76,7 @@ namespace retronomicon::lib::animation{
         float leftOver = dt;
         while (leftOver >0.0f){
             AnimationFrame *curFrame = &m_frames[m_currentFrame];
+            // std::cout << m_frames[m_currentFrame] <<std::endl;
             leftOver = curFrame->update(leftOver);
             if (leftOver > 0.0f){
                 m_currentFrame++;
@@ -79,7 +84,6 @@ namespace retronomicon::lib::animation{
                     if (m_repeat){
                         m_currentFrame = 0;
                     }else{
-                        m_currentFrame--;
                         break;
                     }
                 }
