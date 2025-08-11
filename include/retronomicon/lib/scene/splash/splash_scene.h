@@ -17,8 +17,8 @@ namespace retronomicon::lib::scene::splash {
         ~SplashScene() override;
 
         void init() override;
-        void update(float dt) override;
-        void render() override;
+        // void update(float dt) override;
+        // void render() override;
         void shutdown() override;
 
         bool isFinished() const;
@@ -31,7 +31,7 @@ namespace retronomicon::lib::scene::splash {
     private:
         std::shared_ptr<ImageAsset> m_image = nullptr;
         GameEngine* m_engine = nullptr;
-        SDL_Renderer* m_renderer = nullptr
+        SDL_Renderer* m_renderer = nullptr;
         SDL_Texture* m_logoTexture = nullptr;
 
         float m_timer = 0.0f;

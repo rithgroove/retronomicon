@@ -21,8 +21,6 @@ namespace retronomicon::lib::core {
     }
 
     void Scene::update(float dt) {
-
-        // std::cout<< "test update di scene cpp : "<< this->getName() << std::endl;
         for (auto& system : m_systems) {
             system->update(dt, this);
         }

@@ -23,7 +23,7 @@ namespace retronomicon::lib::animation{
 	    	 * @param name the name of of this animation
 	    	 * @param repeat set true if this animation is repeated
 	    	 */
-    		AnimationClip(const std::vector<AnimationFrame>& frames, std::string& name,bool repeat);
+    		AnimationClip(const std::vector<AnimationFrame>& frames, const std::string& name,bool repeat);
 
 		    /***************************** Destructor *****************************/
 

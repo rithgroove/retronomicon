@@ -1,4 +1,6 @@
 #pragma once
+// #include <iostream>
+#include <string>
 /**
  * @brief The namespace for animation utilities
  */
@@ -16,7 +18,7 @@ namespace retronomicon::lib::animation {
             /**
              * @brief default destructor
              */
-            virtual ~AnimationListener() = default;
+            virtual ~AnimationListener() = 0; // pure virtual destructor
 
             /***************************** Virtual Methods *****************************/
 
@@ -44,7 +46,7 @@ namespace retronomicon::lib::animation {
              * 
              * @return Brief summary of this object in string
              */
-            virtual std::string to_string() const;
+            virtual std::string to_string() const = 0;
     };
 
 }

@@ -26,12 +26,9 @@ namespace retronomicon::lib::core {
         void setInitialized(bool value) { m_isInitialized = value; }
         void setRequiresReset(bool value) { m_requiresReset = value; }
         void setActive(bool value) { m_isActive = value; }
-
-        std::string getName() const;
         void addSystem(std::unique_ptr<System> system);
 
     protected:
-        std::string m_name;
         bool m_isInitialized = false;
         bool m_requiresReset = false;
         bool m_isActive = false;

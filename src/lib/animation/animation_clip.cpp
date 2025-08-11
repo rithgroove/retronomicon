@@ -16,7 +16,7 @@ namespace retronomicon::lib::animation{
      * @param repeat set true if this animation is repeated
      */
     AnimationClip::AnimationClip(const std::vector<AnimationFrame>& frames,
-                                 std::string& name,
+                                 const std::string& name,
                                  bool repeat)
         : m_frames(frames),
           m_name(std::move(name)),
