@@ -21,6 +21,11 @@ namespace retronomicon::lib::input {
              */
             InputSystem();
 
+            /**
+             * @brief constructor with input map
+             */
+            InputSystem(InputMap* map);
+
             /***************************** Destructor *****************************/
 
             // ~InputSystem(); //default destructor
@@ -44,7 +49,7 @@ namespace retronomicon::lib::input {
             bool getInputStateForKey(const string& key){
                 return  m_inputState->isActionActive(key);
             }
-
+        
             /***************************** To String *****************************/
 
             /**

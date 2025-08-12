@@ -1,6 +1,6 @@
 
 #include <sstream>
-
+#include <iostream>
 #include "retronomicon/lib/input/input_system.h"
 #include "retronomicon/lib/input/input_component.h"
 
@@ -36,6 +36,17 @@ namespace retronomicon::lib::input{
         // If m_gameObjects should be provided externally, consider refactoring the constructor
     }
 
+    /**
+     * @brief default constructor
+     */
+    InputSystem::InputSystem(InputMap* inputMap) // Temp init to avoid reference error
+    {
+        RawInput* rawInput = new RawInput();
+
+        m_inputState = new InputState(rawInput,inputMap);
+
+        // If m_gameObjects should be provided externally, consider refactoring the constructor
+    }
 
     /***************************** Destructor *****************************/
 
@@ -69,6 +80,8 @@ namespace retronomicon::lib::input{
             m_inputState->updateFromSDL();
             m_isUpdating = true;
         }
+
+        std::cout<<m_inputState<<std::endl;
 
         auto input = entity->getComponent<InputComponent>();
         if (input){

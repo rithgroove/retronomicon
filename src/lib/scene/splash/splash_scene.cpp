@@ -16,7 +16,12 @@
 #include "retronomicon/lib/animation/animation_component.h"
 #include "retronomicon/lib/animation/animation_system.h"
 #include "retronomicon/lib/scene/splash/splash_animation_listener.h"
-
+// import for input
+#include "retronomicon/lib/input/input_system.h"
+#include "retronomicon/lib/input/input_map.h"
+// #include "retronomicon/lib/input/input_component.h"
+#include "retronomicon/lib/input/input_state.h"
+#include "retronomicon/lib/input/raw_input.h"
 
 namespace retronomicon::lib::scene::splash {
 	using retronomicon::lib::graphic::Window;
@@ -30,6 +35,8 @@ namespace retronomicon::lib::scene::splash {
 	using retronomicon::lib::animation::AnimationSystem;
 	using retronomicon::lib::scene::SceneChangeComponent;
 	using retronomicon::lib::scene::SceneChangeSystem;
+	using retronomicon::lib::input::InputMap;
+	using retronomicon::lib::input::InputSystem;
 	// using retronomicon::lib::graphic::SpriteComponent;
 	
 	SplashScene::SplashScene(GameEngine* engine,std::shared_ptr<ImageAsset> image)
@@ -49,6 +56,17 @@ namespace retronomicon::lib::scene::splash {
 		this->addSystem(std::make_unique<AnimationSystem>());
 		this->addSystem(std::make_unique<RenderSystem>(m_renderer));
 		this->addSystem(std::make_unique<SceneChangeSystem>(m_engine));
+
+		//setup input system with keymapping
+        InputMap* inputMap = new InputMap();
+        inputMap->bindAction(SDL_SCANCODE_SPACE, "confirm");
+        inputMap->bindAction(SDL_SCANCODE_RETURN, "confirm");
+        inputMap->bindAction(SDL_SCANCODE_A, "confirm");
+        inputMap->bindAction(SDL_SCANCODE_W, "confirm");
+        inputMap->bindAction(SDL_SCANCODE_S, "confirm");
+        inputMap->bindAction(SDL_SCANCODE_D, "confirm");
+        inputMap->bindAction(SDL_SCANCODE_ESCAPE,"quit");
+		this->addSystem(std::make_unique<InputSystem>(inputMap));
 
 		// getWindowDimension
         int windowWidth = Window::getWidth();
@@ -80,8 +98,12 @@ namespace retronomicon::lib::scene::splash {
 	    std::cout << "[Splash Scene] create logo's scene change component trigger" <<std::endl;
 		logoEntity->addComponent<SceneChangeComponent>("Menu");
 
+	    // std::cout << "[Splash Scene] create input component" <<std::endl;
+
+
 		std::cout << "[Splash Scene] start the entity" <<std::endl;
 		logoEntity->start();
+
 
 		this->addChildEntity(logoEntity);
 	    m_timer = 0.0f;
@@ -94,6 +116,8 @@ namespace retronomicon::lib::scene::splash {
 	void SplashScene::setOnFinish(std::function<void(const std::string&)> callback) {
 	    m_onFinish = std::move(callback);
 	}
+
+
 
 	// void SplashScene::update(float dt) {
 	//     handleInput();
