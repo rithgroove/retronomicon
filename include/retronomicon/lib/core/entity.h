@@ -119,21 +119,31 @@ namespace retronomicon::lib::core{
      /**
      * @brief The template for get component method
      */
+    // template <typename T>
+    // T* Entity::getComponent() {
+    //     // generate index based on class type
+    //     type_index typeId = type_index(typeid(T));
+
+    //     // find the unique_ptr containing the component
+    //     auto it = m_components.find(typeId);
+
+    //     // check if we found the component
+    //     if (it != m_components.end()) {
+    //         // return the down casted components (because we use unique_ptr)
+    //         return dynamic_cast<T*>(it->second.get());
+    //     }
+
+    //     //return null if not exist
+    //     return nullptr;
+    // }
+
     template <typename T>
     T* Entity::getComponent() {
-        // generate index based on class type
-        type_index typeId = type_index(typeid(T));
-
-        // find the unique_ptr containing the component
-        auto it = m_components.find(typeId);
-
-        // check if we found the component
-        if (it != m_components.end()) {
-            // return the down casted components (because we use unique_ptr)
-            return dynamic_cast<T*>(it->second.get());
+        for (auto& [typeId, comp] : m_components) {
+            if (auto casted = dynamic_cast<T*>(comp.get())) {
+                return casted;
+            }
         }
-
-        //return null if not exist
         return nullptr;
     }
 

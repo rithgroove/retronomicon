@@ -23,7 +23,6 @@ namespace retronomicon::lib::engine {
      */
     void GameEngine::changeScene(const std::string& name) {
         auto nextScene = m_sceneManager.changeScene(name);
-        std::cout<<"masuk engine Change scene"<<std::endl;
         if (nextScene) {
             setScene(nextScene);
         } else {

@@ -19,7 +19,7 @@
 // import for input
 #include "retronomicon/lib/input/input_system.h"
 #include "retronomicon/lib/input/input_map.h"
-// #include "retronomicon/lib/input/input_component.h"
+#include "retronomicon/lib/scene/splash/splash_input_component.h"
 #include "retronomicon/lib/input/input_state.h"
 #include "retronomicon/lib/input/raw_input.h"
 
@@ -98,8 +98,8 @@ namespace retronomicon::lib::scene::splash {
 	    std::cout << "[Splash Scene] create logo's scene change component trigger" <<std::endl;
 		logoEntity->addComponent<SceneChangeComponent>("Menu");
 
-	    // std::cout << "[Splash Scene] create input component" <<std::endl;
-
+	    std::cout << "[Splash Scene] create input component" <<std::endl;
+	    logoEntity->addComponent<SplashInputComponent>();
 
 		std::cout << "[Splash Scene] start the entity" <<std::endl;
 		logoEntity->start();

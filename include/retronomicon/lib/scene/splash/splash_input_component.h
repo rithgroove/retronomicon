@@ -8,7 +8,8 @@ namespace retronomicon::lib::scene::splash{
 
 	class SplashInputComponent:public InputComponent{
 		public:
-			virtual void updateFromState(const InputState& state, float dt) override;
+	        SplashInputComponent();
+			void updateFromState(InputState* state, float dt) override;
 	};
 
 

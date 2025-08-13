@@ -116,28 +116,20 @@ namespace retronomicon::lib::animation {
     void AnimationComponent::update(float dt){        
         if (m_paused || !m_currentClip) return;
         float leftover = dt;
-        std::cout<< "[Animation Component] test update : "<< this->getOwner()->getName() << std::endl;
-            std::cout<< "[Animation Component] dt "<< dt << std::endl;
 
         // if current clip is not the default and is finished, change it
         // this will not change if the animation is manually controlled (move,run etc, because those are repeated)
         while (leftover > 0.0f){
             leftover = m_currentClip->update(leftover);
 
-            std::cout<< "[Animation Component] leftover "<< leftover << std::endl;            
-            std::cout<< "[Animation Component] clip data "<< m_currentClip->to_string() << std::endl;            
             if (m_currentClip->isFinished()){
-                std::cout<< "Masuk dong " << std::endl; 
                 if (!m_animationClipsQueue.empty()) {
-                    std::cout<< "[Animation Component] kalau queuenya ga empty : "<< this->getOwner()->getName() << std::endl;
                     m_currentClip = m_animationClipsQueue.front();
                     m_animationClipsQueue.pop();
                 } else {
                     if (m_listener) {
-                        std::cout<< "[Animation Component] kalau ada listenernya : "<< this->getOwner()->getName() << std::endl;
                         m_listener->onAnimationFinished(this);
                     } else {
-                        std::cout<< "[Animation Component] kalau nggak reset() : "<< this->getOwner()->getName() << std::endl;
                         reset();
                     }
                     break; // Prevent another loop with a now-reset clip

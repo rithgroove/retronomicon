@@ -81,11 +81,12 @@ namespace retronomicon::lib::input{
             m_isUpdating = true;
         }
 
-        std::cout<<m_inputState<<std::endl;
+        // std::cout<<m_inputState<<std::endl;
 
         auto input = entity->getComponent<InputComponent>();
         if (input){
-            input->update(dt);
+            std::cout<<"ketemu input component" <<std::endl;
+            input->updateFromState(m_inputState,dt);
         }
 
         for (Entity* obj : entity->getChilds()) {

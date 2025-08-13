@@ -18,14 +18,15 @@ namespace retronomicon::lib::input {
         /**
          * @brief Called at the start of each frame to reset transient flags.
          */
-        virtual void beginFrame() = 0;
+        // virtual void beginFrame() = 0;
 
+        void update(float dt)override {}
         /**
          * @brief Feed hardware-level input for this frame.
          * @param state Current hardware input state.
          * @param dt Delta time since last frame.
          */
-        virtual void updateFromState(const InputState& state, float dt) = 0;
+        virtual void updateFromState(InputState* state, float dt) = 0;
     };
 
 } // namespace retronomicon::lib::input

@@ -76,12 +76,12 @@ namespace retronomicon::lib::input {
         }
 
 
-        for (const auto& it : m_actions) {
-            std::cout << it.first << ": " << (it.second ? "pressed" : "released") << endl;
-        }
+        // for (const auto& it : m_actions) {
+        //     std::cout << it.first << ": " << (it.second ? "pressed" : "released") << endl;
+        // }
 
-        for (const auto& it : m_axes) {
-            std::cout << it.first << ": " << it.second << endl;
-        }
+        // for (const auto& it : m_axes) {
+        //     std::cout << it.first << ": " << it.second << endl;
+        // }
     }
 } // namespace retronomicon::lib::input

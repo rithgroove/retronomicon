@@ -24,7 +24,7 @@ namespace retronomicon::lib::animation{
           m_repeat(repeat),
           m_currentFrame(0)
     {
-        std::cout<<"repeat : " <<repeat<<std::endl;
+        // std::cout<<"repeat : " <<repeat<<std::endl;
 
     }
 
