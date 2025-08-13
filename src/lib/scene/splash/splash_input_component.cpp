@@ -12,7 +12,7 @@ namespace retronomicon::lib::scene::splash{
 	// SplashInputComponent::beginFrame(){}
 
 	void SplashInputComponent::updateFromState(InputState* state, float dt){
-		if (state->isActionActive("confirm")){
+		if (state->wasActionJustPressed("confirm")){
 			auto* owner =  this->getOwner();
 			auto* sceneChangeComponent = owner->getComponent<SceneChangeComponent>();
 			sceneChangeComponent->triggered = true;

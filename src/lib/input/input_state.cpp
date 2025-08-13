@@ -49,13 +49,14 @@ namespace retronomicon::lib::input {
     /**
      * @brief a method to update from SDL Event Pool
      */
-    void InputState::updateFromSDL(){
+    void InputState::updateFromSDL() {
+        // save last frame state before overwriting
+        m_prevActions = m_actions;
+
         m_rawInput->clear();
         m_rawInput->poll();
-        const auto& events = m_rawInput->getEvents();
         const Uint8* keys = m_rawInput->getKeyboardState();
         this->clear();
-
 
         // Set actions
         for (const auto& it : m_inputMap->getActionBindings()) {
@@ -74,14 +75,5 @@ namespace retronomicon::lib::input {
             value = clamp(value, -1.0f, 1.0f);
             this->setAxis(it.first, value);
         }
-
-
-        // for (const auto& it : m_actions) {
-        //     std::cout << it.first << ": " << (it.second ? "pressed" : "released") << endl;
-        // }
-
-        // for (const auto& it : m_axes) {
-        //     std::cout << it.first << ": " << it.second << endl;
-        // }
     }
 } // namespace retronomicon::lib::input
