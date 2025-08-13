@@ -39,8 +39,8 @@ namespace retronomicon::lib::scene::splash {
 	using retronomicon::lib::input::InputSystem;
 	// using retronomicon::lib::graphic::SpriteComponent;
 	
-	SplashScene::SplashScene(GameEngine* engine,std::shared_ptr<ImageAsset> image)
-	    : Scene("Splash"), m_engine(engine),m_image(image) {}
+	SplashScene::SplashScene(GameEngine* engine,std::shared_ptr<ImageAsset> image, const std::string nextScene)
+	    : Scene("Splash"), m_engine(engine),m_image(image),m_nextScene(nextScene) {}
 
 	SplashScene::~SplashScene() {
 	    // unloadAssets();
@@ -96,7 +96,7 @@ namespace retronomicon::lib::scene::splash {
 		logoAnimationComponent->setListener(listener);
 
 	    std::cout << "[Splash Scene] create logo's scene change component trigger" <<std::endl;
-		logoEntity->addComponent<SceneChangeComponent>("Menu");
+		logoEntity->addComponent<SceneChangeComponent>(m_nextScene);
 
 	    std::cout << "[Splash Scene] create input component" <<std::endl;
 	    logoEntity->addComponent<SplashInputComponent>();
@@ -118,45 +118,11 @@ namespace retronomicon::lib::scene::splash {
 	}
 
 
-
-	// void SplashScene::update(float dt) {
-	//     handleInput();
-	//     m_timer += dt;
-	//     if (m_timer >= m_duration || m_finished) {
-	//         m_finished = true;
-
-	//         this->getComponent<SceneChangeComponent>()->triggered = true;
-	//         // Change scene to "Menu" if callback is set
-	//     }
-
-	//     // std::cout<<"masuk ga?"<< m_timer<<std::endl;
-	//     for (auto& system : m_systems) {
-	//         // std::cout<<"masuk kok"<<std::endl;
-	//         system->update(dt, this);
-	//     }            
-
-	// }
-
-
 	void SplashScene::shutdown() {
 	    // unloadAssets();
 	    setInitialized(false);
 	    setActive(false);
 	}
-
-	// void SplashScene::render() {
-	//     SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
-	//     SDL_RenderClear(m_renderer);
-
-	//     if (m_logoTexture) {
-	//         int w, h;
-	//         SDL_QueryTexture(m_logoTexture, nullptr, nullptr, &w, &h);
-	//         SDL_Rect dst = { (Window::getWidth() - w) / 2, (Window::getHeight() - h) / 2, w, h };
-	//         SDL_RenderCopy(m_renderer, m_logoTexture, nullptr, &dst);
-	//     }
-
-	//     SDL_RenderPresent(m_renderer);
-	// }
 
 	bool SplashScene::isFinished() const {
 	    return m_finished;

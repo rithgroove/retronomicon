@@ -13,7 +13,7 @@ namespace retronomicon::lib::scene::splash {
     using retronomicon::lib::engine::GameEngine;
     class SplashScene : public retronomicon::lib::core::Scene {
     public:
-        explicit SplashScene(GameEngine *engine,std::shared_ptr<ImageAsset> image);
+        explicit SplashScene(GameEngine *engine,std::shared_ptr<ImageAsset> image, const std::string nextScene);
         ~SplashScene() override;
 
         void init() override;
@@ -33,6 +33,7 @@ namespace retronomicon::lib::scene::splash {
         GameEngine* m_engine = nullptr;
         SDL_Renderer* m_renderer = nullptr;
         SDL_Texture* m_logoTexture = nullptr;
+        std::string m_nextScene = nullptr; // the default is Menu, but you can adjust it
 
         float m_timer = 0.0f;
         float m_duration = 3.0f;

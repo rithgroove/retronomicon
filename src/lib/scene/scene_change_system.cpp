@@ -6,6 +6,7 @@ namespace retronomicon::lib::scene {
         // std::cout<< "test1 : "<< entity->getName() << std::endl;
         auto* sceneChange = entity->getComponent<SceneChangeComponent>();
         if (sceneChange && sceneChange->triggered){
+            std::cout<< "next_scene : "<< sceneChange->next_scene << std::endl;
             m_engine->changeScene(sceneChange->next_scene);
             sceneChange->triggered = false;
         }
