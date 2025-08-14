@@ -31,7 +31,8 @@ namespace retronomicon::lib::input{
         inputMap->bindAxis(SDL_SCANCODE_W, "move_y", -1.0f);
         inputMap->bindAxis(SDL_SCANCODE_S, "move_y", 1.0f);
 
-        m_inputState = new InputState(rawInput,inputMap);
+        m_inputState = new InputState(rawInput);
+        m_inputState->setInputMap(inputMap);
 
         // If m_gameObjects should be provided externally, consider refactoring the constructor
     }
@@ -39,11 +40,9 @@ namespace retronomicon::lib::input{
     /**
      * @brief default constructor
      */
-    InputSystem::InputSystem(InputMap* inputMap) // Temp init to avoid reference error
+    InputSystem::InputSystem(InputState* inputState) // Temp init to avoid reference error
     {
-        RawInput* rawInput = new RawInput();
-
-        m_inputState = new InputState(rawInput,inputMap);
+        m_inputState = inputState;
 
         // If m_gameObjects should be provided externally, consider refactoring the constructor
     }

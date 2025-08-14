@@ -66,7 +66,9 @@ namespace retronomicon::lib::scene::splash {
         inputMap->bindAction(SDL_SCANCODE_S, "confirm");
         inputMap->bindAction(SDL_SCANCODE_D, "confirm");
         inputMap->bindAction(SDL_SCANCODE_ESCAPE,"quit");
-		this->addSystem(std::make_unique<InputSystem>(inputMap));
+        auto* inputState = m_engine->getInputState();
+        inputState->setInputMap(inputMap);
+		this->addSystem(std::make_unique<InputSystem>(inputState));
 
 		// getWindowDimension
         int windowWidth = Window::getWidth();

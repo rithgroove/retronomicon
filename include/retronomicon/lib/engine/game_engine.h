@@ -5,11 +5,12 @@
 #include "retronomicon/lib/core/scene.h"
 #include "retronomicon/lib/scene/scene_manager.h"
 #include "retronomicon/lib/graphic/window.h"
-
+#include "retronomicon/lib/input/input_state.h"
 /**
  * @brief The namespace for the core features of retronomicon
  */
 namespace retronomicon::lib::engine {
+    using retronomicon::lib::input::InputState;
     /**
      * @brief Game Engine class (the main class that you need to run)
      */
@@ -67,11 +68,14 @@ namespace retronomicon::lib::engine {
              * @brief method to start mainloop
              */
             void run();
+            
+            InputState* getInputState(){return m_inputState;}       
 
         private:
 
 
             /***************************** Attribute *****************************/
+            InputState* m_inputState = nullptr;
             retronomicon::lib::graphic::Window * m_window = nullptr; 
             bool m_running = false; 
             std::shared_ptr<Scene> m_activeScene;

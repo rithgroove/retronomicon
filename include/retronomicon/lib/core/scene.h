@@ -4,10 +4,11 @@
 #include <memory>
 #include <vector>
 #include "retronomicon/lib/core/entity.h"
+#include "retronomicon/lib/input/input_map.h"
 #include "system.h"
 
 namespace retronomicon::lib::core {
-
+    using retronomicon::lib::input::InputMap;
     class Scene : public Entity {
     public:
         Scene(const std::string& name);
@@ -32,7 +33,7 @@ namespace retronomicon::lib::core {
         bool m_isInitialized = false;
         bool m_requiresReset = false;
         bool m_isActive = false;
-
+        InputMap* m_inputMap = nullptr;
         std::vector<std::unique_ptr<System>> m_systems;
     };
 

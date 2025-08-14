@@ -12,7 +12,7 @@
 namespace retronomicon::lib::input {
     class InputState {
     public:
-        InputState(RawInput* rawInput, InputMap* inputMap);
+        InputState(RawInput* rawInput);
 
         void setAction(const std::string& name, bool active) {
             if (!m_actions[name]) {
@@ -55,6 +55,11 @@ namespace retronomicon::lib::input {
         void clear() {
             for (auto& data : m_actions) data.second = false;
             for (auto& data : m_axes) data.second = 0.0f;
+        }
+
+
+        void setInputMap(InputMap* inputMap) {  
+            m_inputMap = inputMap;
         }
 
         /***************************** To String *****************************/

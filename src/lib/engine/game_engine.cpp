@@ -1,15 +1,20 @@
-#include "retronomicon/lib/engine/game_engine.h"
 #include <iostream>
 #include <stdexcept>
+#include "retronomicon/lib/engine/game_engine.h"
+#include "retronomicon/lib/input/raw_input.h"
 
 namespace retronomicon::lib::engine {
     using retronomicon::lib::graphic::Window;
+    using retronomicon::lib::input::RawInput;
     /***************************** Constructor *****************************/
     
     /**
      * @brief default constructor
      */
-    GameEngine::GameEngine() = default;
+    GameEngine::GameEngine(){
+        RawInput* rawInput = new RawInput();
+        m_inputState = new InputState(rawInput);
+    }
 
     /***************************** Destructor *****************************/
     

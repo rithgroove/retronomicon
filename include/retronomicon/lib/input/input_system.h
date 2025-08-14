@@ -24,7 +24,7 @@ namespace retronomicon::lib::input {
             /**
              * @brief constructor with input map
              */
-            InputSystem(InputMap* map);
+            InputSystem(InputState* state);
 
             /***************************** Destructor *****************************/
 
