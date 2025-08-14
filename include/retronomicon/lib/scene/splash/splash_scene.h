@@ -29,7 +29,10 @@ namespace retronomicon::lib::scene::splash {
         SDL_Texture* m_logoTexture = nullptr;
         std::string m_nextScene = nullptr; // the default is Menu, but you can adjust it
 
-        InputMap* generateInput();
+        float m_duration = 3.0f;
+
+        
+        InputMap* generateInputMap();
         void setupSystem();
         void setupLogo();
     };
