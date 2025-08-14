@@ -91,6 +91,7 @@ namespace retronomicon::lib::scene::splash {
 		
 		// ---------------- setup transform component --------------------------
 		TransformComponent* logoTransformComponent = logoEntity->addComponent<TransformComponent>(windowWidth/2,windowHeight/2,1.0f,1.0f);
+		logoTransformComponent->setRotation(0.0f);
 		logoTransformComponent->setAnchor(0.5f,0.5f);
 
 		// ---------------- setup scene change component --------------------------

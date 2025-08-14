@@ -127,7 +127,7 @@ namespace retronomicon::lib::core{
         public:
             float x;
             float y;
-            float rotation;
+            float rotation = 0.0f;
             float scaleX;
             float scaleY;
             float m_anchorX;
