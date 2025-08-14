@@ -17,16 +17,10 @@ namespace retronomicon::lib::scene::splash {
         ~SplashScene() override;
 
         void init() override;
-        // void update(float dt) override;
-        // void render() override;
+
         void shutdown() override;
 
-        bool isFinished() const;
-
-        // New: Set the callback to change scene
-        void setOnFinish(std::function<void(const std::string&)> callback);
-
-        void setImage(SDL_Texture* texture);
+        void setImage(SDL_Texture* texture){ m_logoTexture = texture;}
 
     private:
         std::shared_ptr<ImageAsset> m_image = nullptr;
@@ -35,15 +29,9 @@ namespace retronomicon::lib::scene::splash {
         SDL_Texture* m_logoTexture = nullptr;
         std::string m_nextScene = nullptr; // the default is Menu, but you can adjust it
 
-        float m_timer = 0.0f;
-        float m_duration = 3.0f;
-        bool m_finished = false;
-
-        std::function<void(const std::string&)> m_onFinish;
-
-        void loadAssets();
-        void unloadAssets();
-        void handleInput();
+        InputMap* generateInput();
+        void setupSystem();
+        void setupLogo();
     };
 
 } // namespace retronomicon::platformer::scene

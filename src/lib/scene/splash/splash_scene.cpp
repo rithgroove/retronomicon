@@ -46,18 +46,8 @@ namespace retronomicon::lib::scene::splash {
 	    // unloadAssets();
 	}
 
-	void SplashScene::init() {
-		// setup renderer
-		std::cout << "[Splash Scene] setup renderer" <<std::endl;
-		m_renderer = m_engine->getRenderer();
-
-		// setup systems
-		std::cout << "[Splash Scene] setup systems" <<std::endl;
-		this->addSystem(std::make_unique<AnimationSystem>());
-		this->addSystem(std::make_unique<RenderSystem>(m_renderer));
-		this->addSystem(std::make_unique<SceneChangeSystem>(m_engine));
-
-		//setup input system with keymapping
+	InputMap* SplashScene::generateInputMap(){
+		std::cout << "[Splash Scene] setup input map" <<std::endl;
         InputMap* inputMap = new InputMap();
         inputMap->bindAction(SDL_SCANCODE_SPACE, "confirm");
         inputMap->bindAction(SDL_SCANCODE_RETURN, "confirm");
@@ -66,59 +56,72 @@ namespace retronomicon::lib::scene::splash {
         inputMap->bindAction(SDL_SCANCODE_S, "confirm");
         inputMap->bindAction(SDL_SCANCODE_D, "confirm");
         inputMap->bindAction(SDL_SCANCODE_ESCAPE,"quit");
-        auto* inputState = m_engine->getInputState();
-        inputState->setInputMap(inputMap);
-		this->addSystem(std::make_unique<InputSystem>(inputState));
+		return inputMap;		
+	}
 
-		// getWindowDimension
+	void SplashScene::setupSystem(){
+		//setup input map and update inputstate to use thesep
+        auto* inputState = m_engine->getInputState();
+        inputState->setInputMap(this->generateInputMap());
+
+		// setup systems
+		std::cout << "[Splash Scene] setup systems" <<std::endl;
+
+		// setup animation system used for timer until changing to next scene
+		this->addSystem(std::make_unique<AnimationSystem>());
+		// setup render system used to draw to screen
+		this->addSystem(std::make_unique<RenderSystem>(m_renderer));
+		// setup scene change system to trigger scene change to the next one
+		this->addSystem(std::make_unique<SceneChangeSystem>(m_engine));
+		// setup input system to skip to next scene
+		this->addSystem(std::make_unique<InputSystem>(inputState));
+	}
+
+	void SplashScene::setupLogo(){
+		// ------------- get important variable----------------------
         int windowWidth = Window::getWidth();
         int windowHeight = Window::getHeight();
 
-		// setup logo
+		// ------------- setup logo ----------------------
 		std::cout << "[Splash Scene] create logo entity" <<std::endl;
 		Entity* logoEntity = new Entity("logo");
 
-		std::cout << "[Splash Scene] create logo's sprite component" <<std::endl;
+		// ---------------- setup sprite component --------------------------
 		SpriteComponent* logoSpriteComponent = logoEntity->addComponent<SpriteComponent>(m_image);
 		
-		std::cout << "[Splash Scene] create logo's transform component" <<std::endl;
-		//setup position in the middle of the screen.
+		// ---------------- setup transform component --------------------------
 		TransformComponent* logoTransformComponent = logoEntity->addComponent<TransformComponent>(windowWidth/2,windowHeight/2,1.0f,1.0f);
-		// set anchor to middle of the image (just for future proofing in case default value of the anchor not in the middle)
 		logoTransformComponent->setAnchor(0.5f,0.5f);
 
-		std::cout << "[Splash Scene] create logo's animation sequence" <<std::endl;
-		//create animation frame
-		std::vector<AnimationFrame> frames;
-		frames.emplace_back(0, 0, m_image->getWidth(), m_image->getHeight(), this->m_duration);
-
-		auto clip = std::make_shared<AnimationClip>(frames, std::string("logo_wait"), false);
-		auto logoAnimationComponent = logoEntity->addComponent<AnimationComponent>(clip);
-		SplashAnimationListener* listener=  new SplashAnimationListener();
-		logoAnimationComponent->setListener(listener);
-
-	    std::cout << "[Splash Scene] create logo's scene change component trigger" <<std::endl;
+		// ---------------- setup scene change component --------------------------
 		logoEntity->addComponent<SceneChangeComponent>(m_nextScene);
 
-	    std::cout << "[Splash Scene] create input component" <<std::endl;
+		// ---------------- setup animation component using m_duration as wait time ------------------------
+		std::vector<AnimationFrame> frames; // array of frame
+		frames.emplace_back(0, 0, m_image->getWidth(), m_image->getHeight(), this->m_duration); // create a single frame 
+		auto clip = std::make_shared<AnimationClip>(frames, std::string("logo_wait"), false);  // create animation clip 
+		auto logoAnimationComponent = logoEntity->addComponent<AnimationComponent>(clip); // create animation component
+		logoAnimationComponent->setListener(new SplashAnimationListener()); // setup listener so it set scene changecomponent to true
+
+		// ---------------- setup splash input component to trigger scene change after any mapped input --------------------------
 	    logoEntity->addComponent<SplashInputComponent>();
 
-		std::cout << "[Splash Scene] start the entity" <<std::endl;
+	    // ---------------- start the entity so it could perform properly -----------------------
 		logoEntity->start();
 
-
+		// ---------------- add logoEntity as child of this scene --------------------
 		this->addChildEntity(logoEntity);
-	    m_timer = 0.0f;
-	    m_finished = false;
-	    // loadAssets();
+	}
+
+	void SplashScene::init() {
+		m_renderer = m_engine->getRenderer();
+		this->setupSystem();
+
+		this->setupLogo();
+
 	    setInitialized(true);
 	    setActive(true);
 	}
-
-	void SplashScene::setOnFinish(std::function<void(const std::string&)> callback) {
-	    m_onFinish = std::move(callback);
-	}
-
 
 	void SplashScene::shutdown() {
 	    // unloadAssets();
@@ -126,23 +129,5 @@ namespace retronomicon::lib::scene::splash {
 	    setActive(false);
 	}
 
-	bool SplashScene::isFinished() const {
-	    return m_finished;
-	}
-
-	void SplashScene::handleInput() {
-	    SDL_Event event;
-	    while (SDL_PollEvent(&event)) {
-	        if (event.type == SDL_QUIT ||
-	            event.type == SDL_KEYDOWN ||
-	            event.type == SDL_MOUSEBUTTONDOWN) {
-	            m_finished = true;
-	        }
-	    }
-	}
-
-	void SplashScene::setImage(SDL_Texture* texture){
-	    m_logoTexture = texture;
-	}
 
 } // namespace retronomicon::platformer::scene
