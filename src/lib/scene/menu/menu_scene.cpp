@@ -8,6 +8,9 @@
 #include "retronomicon/lib/graphic/sprite_component.h"
 #include "retronomicon/lib/ui/text_label_component.h"
 #include "retronomicon/lib/ui/nine_slice_panel_component.h"
+#include "retronomicon/lib/input/input_system.h"
+#include "retronomicon/lib/input/input_map.h"
+#include "retronomicon/lib/graphic/render_system.h"
 
 namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::core::TransformComponent;
@@ -15,6 +18,9 @@ namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::ui::TextLabelComponent;
     using retronomicon::lib::graphic::SpriteComponent;
     using retronomicon::lib::graphic::Window;
+    using retronomicon::lib::input::InputMap;
+    using retronomicon::lib::input::InputSystem;
+    using retronomicon::lib::graphic::RenderSystem;
     MenuScene::MenuScene()
         : Scene("menu_scene") {}
 
@@ -24,10 +30,11 @@ namespace retronomicon::lib::scene::menu {
         std::shared_ptr<ImageAsset> nineSliceImage,
         std::shared_ptr<FontAsset> fontAsset)
             : Scene("menu_scene"),
-              m_gameEngine(engine),
+              m_engine(engine),
               m_backgroundImage(backgroundImage),
               m_nineSliceImage(nineSliceImage),
-              m_fontAsset(fontAsset) 
+              m_fontAsset(fontAsset),
+              m_renderer(engine->getRenderer())
         {
             std::cout<<"[MenuScene] contruct menu scene will full parameters"<<std::endl;
         }

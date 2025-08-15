@@ -14,8 +14,11 @@ namespace retronomicon::lib::scene::menu{
     class MenuScene : public retronomicon::lib::core::Scene {
     public:
         MenuScene();
-        MenuScene(GameEngine* engine,std::shared_ptr<ImageAsset> backgroundImage,std::shared_ptr<FontAsset> fontAsset);
-
+        MenuScene(
+            GameEngine* engine, 
+            std::shared_ptr<ImageAsset> backgroundImage,
+            std::shared_ptr<ImageAsset> nineSliceImage,
+            std::shared_ptr<FontAsset> fontAsset);
         void init() override;
         // void update(float dt) override;
         // void render() override;
@@ -23,7 +26,8 @@ namespace retronomicon::lib::scene::menu{
 
     private:
         float m_timer = 0.0f;
-        GameEngine* m_gameEngine;
+        GameEngine* m_engine;
+        SDL_Renderer* m_renderer = nullptr;
         std::vector<MenuOption> m_options;
         std::shared_ptr<ImageAsset> m_backgroundImage = nullptr;
         std::shared_ptr<ImageAsset> m_nineSliceImage = nullptr;
