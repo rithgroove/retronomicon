@@ -16,8 +16,6 @@ namespace retronomicon::lib::scene::menu{
         MenuScene();
         MenuScene(GameEngine* engine,std::shared_ptr<ImageAsset> backgroundImage,std::shared_ptr<FontAsset> fontAsset);
 
-
-        void createMenu(std::shared_ptr<ImageAsset> nineSliceImage,std::shared_ptr<FontAsset> fontAsset);
         void init() override;
         // void update(float dt) override;
         // void render() override;
@@ -34,6 +32,7 @@ namespace retronomicon::lib::scene::menu{
         // NineSlicePanelComponent panelComponent;
         
         void buildBackgroundImage();
+        void buildNineSliceMenu();
         InputMap* generateInputMap();
         void setupSystem();
     };

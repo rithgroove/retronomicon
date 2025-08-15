@@ -18,23 +18,32 @@ namespace retronomicon::lib::scene::menu {
     MenuScene::MenuScene()
         : Scene("menu_scene") {}
 
-    MenuScene::MenuScene(GameEngine* engine, std::shared_ptr<ImageAsset> backgroundImage,std::shared_ptr<FontAsset> fontAsset)
-        : Scene("menu_scene"),m_gameEngine(engine),m_backgroundImage(backgroundImage),m_fontAsset(fontAsset) {
-            std::cout<<"Masuk constructor yang pake background Image"<<std::endl;
+    MenuScene::MenuScene(
+        GameEngine* engine, 
+        std::shared_ptr<ImageAsset> backgroundImage,
+        std::shared_ptr<ImageAsset> nineSliceImage,
+        std::shared_ptr<FontAsset> fontAsset)
+            : Scene("menu_scene"),
+              m_gameEngine(engine),
+              m_backgroundImage(backgroundImage),
+              m_nineSliceImage(nineSliceImage),
+              m_fontAsset(fontAsset) 
+        {
+            std::cout<<"[MenuScene] contruct menu scene will full parameters"<<std::endl;
         }
 
 
     void MenuScene::init() {
         std::cout<<"Masuk init"<<std::endl;
-
+        this->setupSystem();
         this->buildBackgroundImage();
-
+        this->buildNineSliceMenu();
         // You could load UI, background, menu music here later
     }
 
     void MenuScene::buildBackgroundImage(){
         if (m_backgroundImage){
-            std::cout<<"Menu Scene setup background image"<<std::endl;
+            std::cout<<"[Menu Scene] setup background image"<<std::endl;
             Entity* background = new Entity("background");
 
             // -------- recalculate scaling based on windows width -----
@@ -62,6 +71,57 @@ namespace retronomicon::lib::scene::menu {
             //--------- add background as child entity -------------------
             this->addChildEntity(background);
             // this->m_childEntities.push_back(background);
+        }
+    }
+
+    void MenuScene::buildNineSliceMenu(){
+        if (m_nineSliceImage){
+            std::cout << "[Menu Scene] Creating 9-slice menu panel" << std::endl;
+
+
+            // -------------- Create entity for panel------------------
+            Entity* panel = new Entity("nine slice panel");
+
+            // ----------------- Panel size (customize later)--------------------
+            int windowWidth = Window::getWidth();
+            int windowHeight = Window::getHeight();
+            int panelWidth = windowWidth/2;
+            int panelHeight = windowHeight/2;
+
+            // -------------- Add transform component -----------------------
+            auto* transform = panel->addComponent<TransformComponent>(
+                windowWidth / 2.0f, windowHeight - 100, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform->setAnchor(0.5f, 1.0f); // anchor bottom middle
+            transform->setRotation(0.0f); // anchor bottom middle
+
+            // --------------- Add NineSlicePanelComponent ----------------------
+            auto* nineSlice = panel->addComponent<NineSlicePanelComponent>();
+            nineSlice->setImageAsset(this->m_nineSliceImage);
+            nineSlice->setSlices(16, 16, 16, 16); // default slice sizes, adjust as needed
+            nineSlice->setSize(panelWidth, panelHeight);
+
+            //--------- initiate panel -------------------
+            panel->start();
+
+            //--------- add nine slice panel as child entity -------------------
+            this->addChildEntity(panel);
+
+
+
+        // auto* m_splashChangeComponent = this->addComponent<SceneChangeComponent>("Splash");
+        // // Create entity for panel
+        // Entity* newGameOption = new Entity("newGameOption");
+        // SDL_Color gray = { 70, 70, 70, 255};
+        // newGameOption->addComponent<TextLabelComponent>("New Game",this->m_fontAsset,gray,600,50,5,5);
+        // newGameOption->addComponent<TransformComponent>(250,400,1.0f,1.0f);
+        // panel->addChildEntity(newGameOption);
+
+        // panel->setName("menu_panel");
+        // //create new game options:
+        // m_options.emplace_back("New Game", m_splashChangeComponent) ;
+        // newGameOption->start();
+
+
         }
     }
 
@@ -96,62 +156,6 @@ namespace retronomicon::lib::scene::menu {
         // setup input system to skip to next scene
         this->addSystem(std::make_unique<InputSystem>(inputState));
     }
-
-    void MenuScene::createMenu(std::shared_ptr<ImageAsset> nineSliceImage = nullptr,std::shared_ptr<FontAsset> fontAsset = nullptr) {
-        if (nineSliceImage){
-            this->m_nineSliceImage = nineSliceImage;
-        }
-        if (fontAsset){
-            this->m_fontAsset = fontAsset;
-        }
-
-
-
-        std::cout << "Creating 9-slice menu panel" << std::endl;
-
-        int windowWidth = Window::getWidth();
-        int windowHeight = Window::getHeight();
-
-        // Create entity for panel
-        std::string name = "nine slice panel";
-
-        Entity* panel = new Entity(name);
-        panel->setName("menu_panel");
-
-        // Panel size (customize later)
-        int panelWidth = 300;
-        int panelHeight = 200;
-
-        // Add transform component
-        auto* transform = panel->addComponent<TransformComponent>(
-            windowWidth / 2.0f, windowHeight - 200, 0.0f, 1.0f, 1.0f);
-        transform->setAnchor(0.5f, 0.5f); // Center
-
-        // Add NineSlicePanelComponent
-        auto* nineSlice = panel->addComponent<NineSlicePanelComponent>();
-        nineSlice->setImageAsset(this->m_nineSliceImage);
-        nineSlice->setSlices(16, 16, 16, 16); // default slice sizes, adjust as needed
-        nineSlice->setSize(panelWidth, panelHeight);
-        panel->start();
-
-        auto* m_splashChangeComponent = this->addComponent<SceneChangeComponent>("Splash");
-        // Create entity for panel
-        Entity* newGameOption = new Entity("newGameOption");
-        SDL_Color gray = { 70, 70, 70, 255};
-        newGameOption->addComponent<TextLabelComponent>("New Game",this->m_fontAsset,gray,600,50,5,5);
-        newGameOption->addComponent<TransformComponent>(250,400,1.0f,1.0f);
-        panel->addChildEntity(newGameOption);
-
-        panel->setName("menu_panel");
-        //create new game options:
-        m_options.emplace_back("New Game", m_splashChangeComponent) ;
-        newGameOption->start();
-
-        // Start and add to scene
-        this->addChildEntity(panel);
-        std::cout<<"Selesai"<<std::endl;
-    }
-
 
     void MenuScene::shutdown() {
         // Clean up menu-related assets if needed later
