@@ -18,8 +18,8 @@ namespace retronomicon::lib::scene::menu {
     MenuScene::MenuScene()
         : Scene("menu_scene") {}
 
-    MenuScene::MenuScene(std::shared_ptr<ImageAsset> backgroundImage,std::shared_ptr<FontAsset> fontAsset)
-        : Scene("menu_scene"),m_backgroundImage(backgroundImage),m_fontAsset(fontAsset) {
+    MenuScene::MenuScene(GameEngine* engine, std::shared_ptr<ImageAsset> backgroundImage,std::shared_ptr<FontAsset> fontAsset)
+        : Scene("menu_scene"),m_gameEngine(engine),m_backgroundImage(backgroundImage),m_fontAsset(fontAsset) {
             std::cout<<"Masuk constructor yang pake background Image"<<std::endl;
         }
 
