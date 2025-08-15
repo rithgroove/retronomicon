@@ -25,15 +25,48 @@ namespace retronomicon::lib::scene::menu {
 
 
     void MenuScene::init() {
-        m_timer = 0.0f;
-
         std::cout<<"Masuk init"<<std::endl;
+
+        this->buildBackgroundImage();
 
         // You could load UI, background, menu music here later
     }
 
+    void MenuScene::buildBackgroundImage(){
+        if (m_backgroundImage){
+            std::cout<<"Menu Scene setup background image"<<std::endl;
+            Entity* background = new Entity("background");
 
-    InputMap* SplashScene::generateInputMap(){
+            // -------- recalculate scaling based on windows width -----
+            int imageWidth = m_backgroundImage->getWidth();
+            int imageHeight = m_backgroundImage->getHeight();
+            int windowWidth = Window::getWidth();
+            int windowHeight = Window::getHeight();
+
+            float scaling = float(windowWidth) / float(imageWidth);
+            if (float(windowHeight)/float(imageHeight)> scaling){
+                scaling = float(windowHeight)/float(imageHeight);
+            }
+
+            //-------- Build Transform Component for background ---------------
+            TransformComponent* backgroundTransform = background->addComponent<TransformComponent>(windowWidth/2.0,windowHeight/2.0,0.0f,scaling,scaling);
+            backgroundTransform->setAnchor(0.5f,0.5f);
+            backgroundTransform->setRotation(0.0f);
+
+            //-------- Build Sprite Component for background ---------------
+            SpriteComponent *backgroundSprite = background->addComponent<SpriteComponent>(m_backgroundImage);
+
+            //--------- initiate background -------------------
+            background->start();
+
+            //--------- add background as child entity -------------------
+            this->addChildEntity(background);
+            // this->m_childEntities.push_back(background);
+        }
+    }
+
+
+    InputMap* MenuScene::generateInputMap(){
         std::cout << "[Splash Scene] setup input map" <<std::endl;
         InputMap* inputMap = new InputMap();
         inputMap->bindAction(SDL_SCANCODE_SPACE, "confirm");
@@ -46,7 +79,7 @@ namespace retronomicon::lib::scene::menu {
         return inputMap;        
     }
 
-    void SplashScene::setupSystem(){
+    void MenuScene::setupSystem(){
         //setup input map and update inputstate to use thesep
         auto* inputState = m_engine->getInputState();
         inputState->setInputMap(this->generateInputMap());
@@ -71,30 +104,7 @@ namespace retronomicon::lib::scene::menu {
         if (fontAsset){
             this->m_fontAsset = fontAsset;
         }
-        if (m_backgroundImage){
 
-            std::cout<<"Masuk init yang pake background Image"<<std::endl;
-            std::string name = "background";
-            Entity* background = new Entity(name);
-            background->setName("menu_scene_bg");
-            int imageWidth = m_backgroundImage->getWidth();
-            int imageHeight = m_backgroundImage->getHeight();
-            int windowWidth = Window::getWidth();
-            int windowHeight = Window::getHeight();
-
-            float scaling = float(windowWidth) / float(imageWidth);
-            if (float(windowHeight)/float(imageHeight)> scaling){
-                scaling = float(windowHeight)/float(imageHeight);
-            }
-
-
-            TransformComponent* backgroundTransform = background->addComponent<TransformComponent>(windowWidth/2.0,windowHeight/2.0,0.0f,scaling,scaling);
-            backgroundTransform->setAnchor(0.5f,0.5f);
-            SpriteComponent *backgroundSprite = background->addComponent<SpriteComponent>(m_backgroundImage);
-            background->start();
-            this->addChildEntity(background);
-            // this->m_childEntities.push_back(background);
-        }
 
 
         std::cout << "Creating 9-slice menu panel" << std::endl;
