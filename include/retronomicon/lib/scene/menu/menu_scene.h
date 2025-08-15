@@ -5,8 +5,6 @@
 #include "retronomicon/lib/asset/image_asset.h"
 #include "retronomicon/lib/asset/font_asset.h"
 #include "retronomicon/lib/engine/game_engine.h"
-#include "menu_option.h"
-
 namespace retronomicon::lib::scene::menu{
     using retronomicon::lib::asset::ImageAsset;
     using retronomicon::lib::asset::FontAsset;
@@ -28,7 +26,7 @@ namespace retronomicon::lib::scene::menu{
         float m_timer = 0.0f;
         GameEngine* m_engine;
         SDL_Renderer* m_renderer = nullptr;
-        std::vector<MenuOption> m_options;
+        std::vector<Entity> m_options;
         std::shared_ptr<ImageAsset> m_backgroundImage = nullptr;
         std::shared_ptr<ImageAsset> m_nineSliceImage = nullptr;
         std::shared_ptr<FontAsset> m_fontAsset = nullptr;
