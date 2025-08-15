@@ -32,6 +32,9 @@ namespace retronomicon::lib::scene::menu{
         std::shared_ptr<FontAsset> m_fontAsset = nullptr;
         // std::shared_ptr<ImageAsset> m_nineSliceImage = nullptr;
         // NineSlicePanelComponent panelComponent;
+        
+        InputMap* generateInputMap();
+        void setupSystem();
     };
 
 }

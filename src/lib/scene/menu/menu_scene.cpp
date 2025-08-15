@@ -32,6 +32,38 @@ namespace retronomicon::lib::scene::menu {
         // You could load UI, background, menu music here later
     }
 
+
+    InputMap* SplashScene::generateInputMap(){
+        std::cout << "[Splash Scene] setup input map" <<std::endl;
+        InputMap* inputMap = new InputMap();
+        inputMap->bindAction(SDL_SCANCODE_SPACE, "confirm");
+        inputMap->bindAction(SDL_SCANCODE_RETURN, "confirm");
+        inputMap->bindAction(SDL_SCANCODE_A, "left");
+        inputMap->bindAction(SDL_SCANCODE_W, "up");
+        inputMap->bindAction(SDL_SCANCODE_S, "down");
+        inputMap->bindAction(SDL_SCANCODE_D, "right");
+        inputMap->bindAction(SDL_SCANCODE_ESCAPE,"quit");
+        return inputMap;        
+    }
+
+    void SplashScene::setupSystem(){
+        //setup input map and update inputstate to use thesep
+        auto* inputState = m_engine->getInputState();
+        inputState->setInputMap(this->generateInputMap());
+
+        // setup systems
+        std::cout << "[Splash Scene] setup systems" <<std::endl;
+
+        // setup animation system used for timer until changing to next scene
+        // this->addSystem(std::make_unique<AnimationSystem>());
+        // setup render system used to draw to screen
+        this->addSystem(std::make_unique<RenderSystem>(m_renderer));
+        // setup scene change system to trigger scene change to the next one
+        // this->addSystem(std::make_unique<SceneChangeSystem>(m_engine));
+        // setup input system to skip to next scene
+        this->addSystem(std::make_unique<InputSystem>(inputState));
+    }
+
     void MenuScene::createMenu(std::shared_ptr<ImageAsset> nineSliceImage = nullptr,std::shared_ptr<FontAsset> fontAsset = nullptr) {
         if (nineSliceImage){
             this->m_nineSliceImage = nineSliceImage;
