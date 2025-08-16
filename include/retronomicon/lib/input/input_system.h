@@ -28,7 +28,7 @@ namespace retronomicon::lib::input {
 
             /***************************** Destructor *****************************/
 
-            // ~InputSystem(); //default destructor
+            ~InputSystem(); //default destructor
 
             /***************************** Operator Overload *****************************/
 

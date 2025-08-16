@@ -58,7 +58,6 @@ namespace retronomicon::lib::scene::menu {
             static_cast<int>(renderPosition.y),
             texW, texH
         };
-        std::cout << "Render Position ("<<renderPosition.x<<","<<renderPosition.y<<")"<<std::endl;
 
         SDL_RenderCopy(renderer, m_texture, nullptr, &dstRect);
     }

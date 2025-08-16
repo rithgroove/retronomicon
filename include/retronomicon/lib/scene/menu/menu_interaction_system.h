@@ -12,13 +12,14 @@ namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::core::Entity;
     class MenuInteractionSystem : public retronomicon::lib::core::System {
     private:
-        retronomicon::lib::input::InputState* inputState;
+        retronomicon::lib::input::InputState* m_inputState;
         size_t selectedIndex = 0;
 
     public:
         MenuInteractionSystem(retronomicon::lib::input::InputState* input);
 
         void update(float dt, retronomicon::lib::core::Entity* objects) override;
+        // bool m_isUpdating= false;
     };
 
 } // namespace retronomicon::lib::scene::menu

@@ -49,7 +49,10 @@ namespace retronomicon::lib::input{
 
     /***************************** Destructor *****************************/
 
-    // InputSystem::~InputSystem(); //default destructor
+    InputSystem::~InputSystem(){
+        std::cout<<"masuk input system destructor" << std::endl;
+        m_inputState = nullptr;
+    } //default destructor
 
 
     /***************************** To String *****************************/
@@ -74,6 +77,7 @@ namespace retronomicon::lib::input{
      * @param objects the game objects (might change to Entity Later)
      */
     void InputSystem::update(float dt, Entity* entity) {
+        if (!m_inputState) return;
         if (!m_isUpdating){
             // so this line of code triggered once
             m_inputState->updateFromSDL();
@@ -84,7 +88,6 @@ namespace retronomicon::lib::input{
 
         auto input = entity->getComponent<InputComponent>();
         if (input){
-            std::cout<<"ketemu input component" <<std::endl;
             input->updateFromState(m_inputState,dt);
         }
 
