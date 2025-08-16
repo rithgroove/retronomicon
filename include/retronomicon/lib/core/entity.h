@@ -13,6 +13,7 @@ using namespace std;
  * @brief The namespace for core libraries such as game object and components
  */
 namespace retronomicon::lib::core{
+    class Renderable;
     class Entity {
         public:
             /**
@@ -80,10 +81,13 @@ namespace retronomicon::lib::core{
             bool hasParent() const {return m_parentEntity!=nullptr;}
 
             Entity* getParent() const {return m_parentEntity;}
+            std::shared_ptr<Renderable> getMainRenderableComponent(){return m_mainRenderableComponent;}
+            void setMainRenderableComponent(std::shared_ptr<Renderable> renderable){m_mainRenderableComponent = renderable;}
         protected:
             std::vector<Entity*> m_childEntities;
+            std::shared_ptr<Renderable> m_mainRenderableComponent = nullptr;
             Entity* m_parentEntity = nullptr;
-            unordered_map<type_index, unique_ptr<Component>> m_components;
+            unordered_map<type_index, shared_ptr<Component>> m_components;
             string m_name;
     };
 
@@ -93,26 +97,26 @@ namespace retronomicon::lib::core{
      */
     template <typename T, typename... Args>
     T* Entity::addComponent(Args&&... args) {
-        // generate index based on class type
         type_index typeId = type_index(typeid(T));
 
-        // check if exist or not (count is a method that used by unordered_map and order)
         if (m_components.count(typeId) == 0) {
-
-            // create new instance of said component (forwarding the arguments)
-            T* rawPtr = new T(forward<Args>(args)...);
-
-            // set the owner of the components to this entity
+            // create the component
+            T* rawPtr = new T(std::forward<Args>(args)...);
             rawPtr->setOwner(this);
 
-            // save to our map (use unique_ptr so it automatically cleaned if it removed from the map)
-            m_components[typeId] = unique_ptr<Component>(rawPtr);
+            std::shared_ptr<Component> compPtr(rawPtr);
+            m_components[typeId] = compPtr;
 
-            //return the component
+            // If T is also a Renderable, and we don't yet have a main one
+            if (!m_mainRenderableComponent) {
+                if constexpr (std::is_base_of<Renderable, T>::value) {
+                    m_mainRenderableComponent = std::shared_ptr<Renderable>(compPtr, rawPtr);
+                }
+            }
+
             return rawPtr;
         }
 
-        //return null if exists
         return nullptr;
     }
 

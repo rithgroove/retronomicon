@@ -1,8 +1,10 @@
 #include "retronomicon/lib/core/transform_component.h"
 #include "retronomicon/lib/core/entity.h"
+#include "retronomicon/lib/core/renderable.h"
 #include <iostream>
 namespace retronomicon::lib::core{
     using retronomicon::lib::core::Entity;
+    using retronomicon::lib::core::Renderable;
     TransformComponent::TransformComponent()
         : x(0), y(0), rotation(0), scaleX(1.0f), scaleY(1.0f) {
         m_anchorX = 0.5;
@@ -46,6 +48,14 @@ namespace retronomicon::lib::core{
     Vec2 TransformComponent::getRenderPosition() const {
         // Start with our local position
         Vec2 worldPos = this->getPosition();
+
+        Entity* owner = this->getOwner();
+        auto renderable = owner->getMainRenderableComponent();
+        if (renderable){
+            auto size= renderable->getSize();
+            worldPos.x -= size.getWidth()*this->m_anchorX;
+            worldPos.y -= size.getHeight()*this->m_anchorY;
+        }
         
         // get owner
         Entity* parent = this->getOwner()->getParent();
