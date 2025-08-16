@@ -14,6 +14,7 @@
 #include "retronomicon/lib/scene/menu/menu_item_component.h"
 #include "retronomicon/lib/scene/menu/menu_interaction_system.h"
 #include "retronomicon/lib/scene/scene_change_component.h"
+#include "retronomicon/lib/audio/audio_system.h"
 
 namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::core::TransformComponent;
@@ -27,6 +28,7 @@ namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::scene::menu::MenuItemComponent;
     using retronomicon::lib::scene::menu::MenuInteractionSystem;
     using retronomicon::lib::scene::SceneChangeComponent;
+    using retronomicon::lib::audio::AudioSystem;
     MenuScene::MenuScene()
         : Scene("menu_scene") {}
 
@@ -193,6 +195,7 @@ namespace retronomicon::lib::scene::menu {
         // setup input system to skip to next scene
         // this->addSystem(std::make_unique<InputSystem>(inputState));
         this->addSystem(std::make_unique<MenuInteractionSystem>(inputState));
+        this->addSystem(std::make_unique<AudioSystem>());
     }
 
     void MenuScene::shutdown() {
