@@ -29,7 +29,7 @@ namespace retronomicon::lib::graphic {
     Rect SpriteComponent::getSize(){
         if (m_animation) {
             const auto& currentFrame = m_animation->getCurrentFrame();
-            return Rect(0,0,currentFrame.getWidth() * m_transform->getScaleX(),m_image->getHeight() * currentFrame.getHeight() * m_transform->getScaleY());
+            return Rect(0,0,currentFrame.getWidth() * m_transform->getScaleX(),currentFrame.getHeight() * m_transform->getScaleY());
         }
         return Rect(0,0, m_image->getWidth() * m_transform->getScaleX(),m_image->getHeight() * m_transform->getScaleY());   
     }
@@ -42,6 +42,8 @@ namespace retronomicon::lib::graphic {
         dstRect.x = static_cast<int>(renderPosition.x);
         dstRect.y = static_cast<int>(renderPosition.y);
 
+        cout<<"dstRect ("<<dstRect.x<<","<<dstRect.y<<")"<<std::endl;
+
         SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 
@@ -53,8 +55,8 @@ namespace retronomicon::lib::graphic {
                 static_cast<int>(dstRect.w * m_transform->getAnchorX()),
                 static_cast<int>(dstRect.h * m_transform->getAnchorY())
             };
-            dstRect.x -= ((currentFrame.getWidth() * m_transform->getScaleX())- center.x);
-            dstRect.y -= ((currentFrame.getHeight() * m_transform->getScaleY()) - center.y);
+            // dstRect.x -= ((currentFrame.getWidth() * m_transform->getScaleX())- center.x);
+            // dstRect.y -= ((currentFrame.getHeight() * m_transform->getScaleY()) - center.y);
 
             SDL_Rect srcRect = toSDLRect(currentFrame.getRect());
 
@@ -75,8 +77,8 @@ namespace retronomicon::lib::graphic {
                 static_cast<int>(dstRect.w * m_transform->getAnchorX()),
                 static_cast<int>(dstRect.h * m_transform->getAnchorY())
             };
-            dstRect.x -= ((m_image->getWidth() * m_transform->getScaleX())- center.x);
-            dstRect.y -= ((m_image->getHeight() * m_transform->getScaleY())- center.y);
+            // dstRect.x -= ((m_image->getWidth() * m_transform->getScaleX())- center.x);
+            // dstRect.y -= ((m_image->getHeight() * m_transform->getScaleY())- center.y);
 
             SDL_RenderCopyEx(
                 renderer,
