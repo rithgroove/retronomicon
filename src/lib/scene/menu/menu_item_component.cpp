@@ -22,7 +22,7 @@ namespace retronomicon::lib::scene::menu {
 
         // Choose color based on selection
         SDL_Color textColor = m_is_selected
-            ? SDL_Color{0, 0, 0, 255} // yellow highlight
+            ? SDL_Color{255, 255, 255, 255} // yellow highlight
             : SDL_Color{100, 100, 100, 255}; // white normal
 
         if (m_texture) {

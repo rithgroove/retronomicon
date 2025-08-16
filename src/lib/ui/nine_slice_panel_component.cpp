@@ -55,8 +55,8 @@ void NineSlicePanelComponent::render(SDL_Renderer* renderer) {
     int y = 0;
 
     Vec2 renderPosition = m_transform->getRenderPosition();
-    x = renderPosition.x - (m_width * m_transform->getAnchorX());
-    y = renderPosition.y - (m_height * m_transform->getAnchorY());
+    x = renderPosition.x;
+    y = renderPosition.y;
 
     int texW = m_imageAsset->getWidth();
     int texH = m_imageAsset->getHeight();

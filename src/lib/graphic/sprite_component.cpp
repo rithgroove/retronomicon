@@ -42,8 +42,6 @@ namespace retronomicon::lib::graphic {
         dstRect.x = static_cast<int>(renderPosition.x);
         dstRect.y = static_cast<int>(renderPosition.y);
 
-        cout<<"dstRect ("<<dstRect.x<<","<<dstRect.y<<")"<<std::endl;
-
         SDL_RendererFlip flip = SDL_FLIP_NONE;
 
 
