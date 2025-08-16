@@ -12,6 +12,11 @@ namespace retronomicon::lib::scene::menu {
         }
     }
 
+
+    Rect MenuItemComponent::getSize(){
+        return Rect();
+    }
+
     void MenuItemComponent::regenerateTexture(SDL_Renderer* renderer) {
         if (!m_font) return;
 
@@ -47,11 +52,13 @@ namespace retronomicon::lib::scene::menu {
         int texW = 0, texH = 0;
         SDL_QueryTexture(m_texture, nullptr, nullptr, &texW, &texH);
 
+        Vec2 renderPosition = m_transform->getRenderPosition();
         SDL_Rect dstRect = {
-            static_cast<int>(m_transform->getX()),
-            static_cast<int>(m_transform->getY()),
+            static_cast<int>(renderPosition.x),
+            static_cast<int>(renderPosition.y),
             texW, texH
         };
+        std::cout << "Render Position ("<<renderPosition.x<<","<<renderPosition.y<<")"<<std::endl;
 
         SDL_RenderCopy(renderer, m_texture, nullptr, &dstRect);
     }

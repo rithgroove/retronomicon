@@ -45,17 +45,33 @@ namespace retronomicon::lib::core{
 
     Vec2 TransformComponent::getRenderPosition() const {
         // Start with our local position
-
         Vec2 worldPos = this->getPosition();
+        
+        // get owner
+        Entity* parent = this->getOwner()->getParent();
 
-        // Walk up the parent chain
-        Entity* current = this->getOwner();
-        while (current->hasParent()) {
-            current = current->getParent();
-            if (current->hasComponent<TransformComponent>()) {
-                const auto& parentTransform = current->getComponent<TransformComponent>();
-                worldPos += parentTransform->getPosition(); // could be parentTransform.getRenderPosition() if recursive
+        /*
+        * since there is posibilities that owner doesnt not have transform,
+        * we traverse to find owner that have transform component (
+        * (or stop when we find the owner that doesn't have parent)
+        */ 
+        while (parent->hasParent()) {
+            // check if it has transform component
+            if (parent->hasComponent<TransformComponent>()) {
+                // if have, break from loop
+                break; 
+            }else{
+                // if not set owner as their parent
+                parent = parent->getParent();
             }
+        }
+
+        // check if the owner doesn't have transform component
+        // this means we're at the scene level
+        if (parent->hasComponent<TransformComponent>()){
+            // if we have, gather it, and call recursively
+            const auto& parentTransform = parent->getComponent<TransformComponent>();
+            worldPos += parentTransform->getRenderPosition();            
         }
 
         return worldPos;

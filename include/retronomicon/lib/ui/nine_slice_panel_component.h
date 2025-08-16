@@ -30,6 +30,7 @@ public:
     int getBottom() const;
 
     void start() override;
+    Rect getSize() override;
 
     /**
      * @brief Called by the RenderSystem or manual calls for rendering.

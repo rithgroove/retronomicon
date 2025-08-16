@@ -7,9 +7,9 @@
 #include "retronomicon/lib/core/component.h"
 #include "retronomicon/lib/core/renderable.h"
 #include "retronomicon/lib/asset/font_asset.h"
-
+#include "retronomicon/lib/math/rect.h"
 namespace retronomicon::lib::ui {
-
+    using retronomicon::lib::math::Rect;
 /**
  * @brief A simple text label component that can be attached to an entity.
  */
@@ -29,6 +29,7 @@ public:
     void setColor(SDL_Color newColor);
     void setFont(std::shared_ptr<asset::FontAsset> newFont);
     void setPadding(int horizontal, int vertical);
+    Rect getSize() override;
 
     const std::string& getText() const;
     SDL_Color getColor() const;

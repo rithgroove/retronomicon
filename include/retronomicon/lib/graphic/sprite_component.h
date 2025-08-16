@@ -7,13 +7,14 @@
 #include "retronomicon/lib/core/component.h"
 #include "retronomicon/lib/core/renderable.h"
 #include "retronomicon/lib/asset/image_asset.h"
+#include "retronomicon/lib/math/rect.h"
 
 // Forward declarations to avoid unnecessary includes
 namespace retronomicon::lib::core { class TransformComponent; }
 namespace retronomicon::lib::animation { class AnimationComponent; }
 
 namespace retronomicon::lib::graphic {
-
+    using retronomicon::lib::math::Rect;
     /**
      * @brief A drawable sprite that optionally supports animation.
      */
@@ -25,6 +26,8 @@ namespace retronomicon::lib::graphic {
         void start() override;
         void update(float dt) override;
         void render(SDL_Renderer* renderer) override;
+
+        Rect getSize() override;
 
     private:
         std::shared_ptr<asset::ImageAsset> m_image = nullptr;

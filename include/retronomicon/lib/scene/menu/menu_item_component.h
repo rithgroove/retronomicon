@@ -28,6 +28,7 @@ namespace retronomicon::lib::scene::menu {
                 }
             }
 
+            Rect getSize() override;
             // --- Label handling ---
             const std::string& getLabel() const { return m_label; }
             void setLabel(const std::string& label) { m_label = label; m_dirty = true; }

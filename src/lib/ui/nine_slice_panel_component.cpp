@@ -34,6 +34,12 @@ std::shared_ptr<retronomicon::lib::asset::ImageAsset> NineSlicePanelComponent::g
     return m_imageAsset;
 }
 
+
+    Rect NineSlicePanelComponent::getSize(){
+        return Rect(0,0, m_width* m_transform->getScaleX(),m_height * m_transform->getScaleY());   
+    }
+
+
 int NineSlicePanelComponent::getWidth() const { return m_width; }
 int NineSlicePanelComponent::getHeight() const { return m_height; }
 int NineSlicePanelComponent::getLeft() const { return m_sliceLeft; }

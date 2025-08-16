@@ -116,7 +116,7 @@ namespace retronomicon::lib::scene::menu {
             auto* newGameEntity = new Entity("New Game");
             newGameEntity->addComponent<MenuItemComponent>("New Game",m_fontAsset);
             newGameEntity->addComponent<SceneChangeComponent>("Splash");
-            transform = newGameEntity->addComponent<TransformComponent>(30, 30, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform = newGameEntity->addComponent<TransformComponent>(50, 30, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.0f, 0.0f); // anchor top left
             transform->setRotation(0.0f); // no rotation
             newGameEntity->start();
@@ -126,7 +126,7 @@ namespace retronomicon::lib::scene::menu {
             auto* loadProgressEntity = new Entity("Load Progress");
             loadProgressEntity->addComponent<MenuItemComponent>("Load Progress",m_fontAsset);
             loadProgressEntity->addComponent<SceneChangeComponent>("Splash");
-            transform = loadProgressEntity->addComponent<TransformComponent>(30, 110, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform = loadProgressEntity->addComponent<TransformComponent>(50, 80, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.0f, 0.0f); // anchor top left
             transform->setRotation(0.0f); // no rotation
             loadProgressEntity->start();
@@ -136,7 +136,7 @@ namespace retronomicon::lib::scene::menu {
             auto* optionEntity = new Entity("Option");
             optionEntity->addComponent<MenuItemComponent>("Option",m_fontAsset);
             optionEntity->addComponent<SceneChangeComponent>("Splash");
-            transform = optionEntity->addComponent<TransformComponent>(30, 190, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform = optionEntity->addComponent<TransformComponent>(50, 130, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.0f, 0.0f); // anchor top left
             transform->setRotation(0.0f); // no rotation
             optionEntity->start();
@@ -146,7 +146,7 @@ namespace retronomicon::lib::scene::menu {
             auto* exitEntity = new Entity("Exit Game");
             exitEntity->addComponent<MenuItemComponent>("Exit Game",m_fontAsset);
             exitEntity->addComponent<SceneChangeComponent>("Splash");
-            transform = exitEntity->addComponent<TransformComponent>(30, 270, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform = exitEntity->addComponent<TransformComponent>(50, 180, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.0f, 0.0f); // anchor top left
             transform->setRotation(0.0f); // no rotation
             exitEntity->start();

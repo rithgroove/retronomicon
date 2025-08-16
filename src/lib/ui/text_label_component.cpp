@@ -22,6 +22,10 @@ TextLabelComponent::TextLabelComponent(const std::string& text,
     regenerateTexture();
 }
 
+    Rect TextLabelComponent::getSize(){
+       return Rect();
+    }
+
 TextLabelComponent::~TextLabelComponent() {
     if (texture) {
         SDL_DestroyTexture(texture);
@@ -29,6 +33,7 @@ TextLabelComponent::~TextLabelComponent() {
 }
 
 void TextLabelComponent::setText(const std::string& newText) {
+
     if (text != newText) {
         text = newText;
         regenerateTexture();

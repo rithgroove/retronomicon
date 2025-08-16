@@ -22,8 +22,16 @@ namespace retronomicon::lib::graphic {
         m_animation = getOwner()->getComponent<animation::AnimationComponent>();
     }
 
-    void SpriteComponent::update(float /*dt*/) {
+    void SpriteComponent::update(float dt) {
         // Possibly trigger animation state changes here
+    }
+
+    Rect SpriteComponent::getSize(){
+        if (m_animation) {
+            const auto& currentFrame = m_animation->getCurrentFrame();
+            return Rect(0,0,currentFrame.getWidth() * m_transform->getScaleX(),m_image->getHeight() * currentFrame.getHeight() * m_transform->getScaleY());
+        }
+        return Rect(0,0, m_image->getWidth() * m_transform->getScaleX(),m_image->getHeight() * m_transform->getScaleY());   
     }
 
     void SpriteComponent::render(SDL_Renderer* renderer) {
