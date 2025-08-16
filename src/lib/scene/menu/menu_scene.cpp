@@ -11,6 +11,9 @@
 #include "retronomicon/lib/input/input_system.h"
 #include "retronomicon/lib/input/input_map.h"
 #include "retronomicon/lib/graphic/render_system.h"
+#include "retronomicon/lib/scene/menu/menu_item_component.h"
+#include "retronomicon/lib/scene/menu/menu_interaction_system.h"
+#include "retronomicon/lib/scene/scene_change_component.h"
 
 namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::core::TransformComponent;
@@ -21,6 +24,9 @@ namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::input::InputMap;
     using retronomicon::lib::input::InputSystem;
     using retronomicon::lib::graphic::RenderSystem;
+    using retronomicon::lib::scene::menu::MenuItemComponent;
+    using retronomicon::lib::scene::menu::MenuInteractionSystem;
+    using retronomicon::lib::scene::SceneChangeComponent;
     MenuScene::MenuScene()
         : Scene("menu_scene") {}
 
@@ -85,7 +91,6 @@ namespace retronomicon::lib::scene::menu {
         if (m_nineSliceImage){
             std::cout << "[Menu Scene] Creating 9-slice menu panel" << std::endl;
 
-
             // -------------- Create entity for panel------------------
             Entity* panel = new Entity("nine slice panel");
 
@@ -99,7 +104,7 @@ namespace retronomicon::lib::scene::menu {
             auto* transform = panel->addComponent<TransformComponent>(
                 windowWidth / 2.0f, windowHeight - 100, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.5f, 1.0f); // anchor bottom middle
-            transform->setRotation(0.0f); // anchor bottom middle
+            transform->setRotation(0.0f); // no rotation
 
             // --------------- Add NineSlicePanelComponent ----------------------
             auto* nineSlice = panel->addComponent<NineSlicePanelComponent>();
@@ -107,27 +112,52 @@ namespace retronomicon::lib::scene::menu {
             nineSlice->setSlices(16, 16, 16, 16); // default slice sizes, adjust as needed
             nineSlice->setSize(panelWidth, panelHeight);
 
+            //--------- add newGameEntity -------------------
+            auto* newGameEntity = new Entity("New Game");
+            newGameEntity->addComponent<MenuItemComponent>("New Game",m_fontAsset);
+            newGameEntity->addComponent<SceneChangeComponent>("Splash");
+            transform = newGameEntity->addComponent<TransformComponent>(30, 30, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform->setAnchor(0.0f, 0.0f); // anchor top left
+            transform->setRotation(0.0f); // no rotation
+            newGameEntity->start();
+            panel->addChildEntity(newGameEntity);
+
+            //--------- add loadProgressEntity -------------------
+            auto* loadProgressEntity = new Entity("Load Progress");
+            loadProgressEntity->addComponent<MenuItemComponent>("Load Progress",m_fontAsset);
+            loadProgressEntity->addComponent<SceneChangeComponent>("Splash");
+            transform = loadProgressEntity->addComponent<TransformComponent>(30, 110, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform->setAnchor(0.0f, 0.0f); // anchor top left
+            transform->setRotation(0.0f); // no rotation
+            loadProgressEntity->start();
+            panel->addChildEntity(loadProgressEntity);
+
+            //--------- add optionEntity -------------------
+            auto* optionEntity = new Entity("Option");
+            optionEntity->addComponent<MenuItemComponent>("Option",m_fontAsset);
+            optionEntity->addComponent<SceneChangeComponent>("Splash");
+            transform = optionEntity->addComponent<TransformComponent>(30, 190, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform->setAnchor(0.0f, 0.0f); // anchor top left
+            transform->setRotation(0.0f); // no rotation
+            optionEntity->start();
+            panel->addChildEntity(optionEntity);
+
+            //--------- add exitEntity -------------------
+            auto* exitEntity = new Entity("Exit Game");
+            exitEntity->addComponent<MenuItemComponent>("Exit Game",m_fontAsset);
+            exitEntity->addComponent<SceneChangeComponent>("Splash");
+            transform = exitEntity->addComponent<TransformComponent>(30, 270, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform->setAnchor(0.0f, 0.0f); // anchor top left
+            transform->setRotation(0.0f); // no rotation
+            exitEntity->start();
+            panel->addChildEntity(exitEntity);
+
+
             //--------- initiate panel -------------------
             panel->start();
 
             //--------- add nine slice panel as child entity -------------------
             this->addChildEntity(panel);
-
-
-
-        // auto* m_splashChangeComponent = this->addComponent<SceneChangeComponent>("Splash");
-        // // Create entity for panel
-        // Entity* newGameOption = new Entity("newGameOption");
-        // SDL_Color gray = { 70, 70, 70, 255};
-        // newGameOption->addComponent<TextLabelComponent>("New Game",this->m_fontAsset,gray,600,50,5,5);
-        // newGameOption->addComponent<TransformComponent>(250,400,1.0f,1.0f);
-        // panel->addChildEntity(newGameOption);
-
-        // panel->setName("menu_panel");
-        // //create new game options:
-        // m_options.emplace_back("New Game", m_splashChangeComponent) ;
-        // newGameOption->start();
-
 
         }
     }
@@ -161,7 +191,8 @@ namespace retronomicon::lib::scene::menu {
         // setup scene change system to trigger scene change to the next one
         // this->addSystem(std::make_unique<SceneChangeSystem>(m_engine));
         // setup input system to skip to next scene
-        this->addSystem(std::make_unique<InputSystem>(inputState));
+        // this->addSystem(std::make_unique<InputSystem>(inputState));
+        this->addSystem(std::make_unique<MenuInteractionSystem>(inputState));
     }
 
     void MenuScene::shutdown() {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "retronomicon/lib/core/system.h"
+#include "retronomicon/lib/core/entity.h"
 #include "retronomicon/lib/input/input_state.h"
 #include "menu_item_component.h"
 #include "retronomicon/lib/scene/scene_change_component.h"

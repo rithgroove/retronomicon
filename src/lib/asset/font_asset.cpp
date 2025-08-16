@@ -87,13 +87,29 @@ namespace retronomicon::lib::asset {
                                             SDL_Color fgC,
                                             SDL_Color bgC)
     {
+        if (!m_font) {
+            SDL_Log("Font not loaded in generateTexture!");
+            return nullptr;
+        }
+
         TTF_SetFontStyle(m_font, TTF_STYLE_BOLD);
 
+        // Render text to a surface
         SDL_Surface* textSurface = TTF_RenderText_Solid(m_font, text.c_str(), fgC);  // aliased glyphs
         if (!textSurface) {
             SDL_Log("Failed to render text: %s", TTF_GetError());
+            return nullptr;
         }
 
+        // Auto-size if width/height are zero
+        if (width == 0) {
+            width = textSurface->w + horizontalPadding * 2;
+        }
+        if (height == 0) {
+            height = textSurface->h + verticalPadding * 2;
+        }
+
+        // Create target surface for text box
         SDL_Surface* textBox = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_RGBA8888);
         if (!textBox) {
             SDL_Log("Failed to create surface: %s", SDL_GetError());
@@ -103,27 +119,26 @@ namespace retronomicon::lib::asset {
 
         if (!m_renderer) {
             SDL_Log("Renderer is null in generateTexture!");
+            SDL_FreeSurface(textSurface);
+            SDL_FreeSurface(textBox);
+            return nullptr;
         }
 
-        // Brown color in RGBA: RGB(139, 69, 19)
-        // Uint32 brown = SDL_MapRGBA(surface->format, 139, 69, 19, 255);
-
-        // Fill the entire surface with the brown color
-        // SDL_FillRect(surface, nullptr, brown);
-        
+        // Blit the text onto the text box
         SDL_Rect textLocation = { horizontalPadding, verticalPadding, textSurface->w, textSurface->h };
         if (SDL_BlitSurface(textSurface, nullptr, textBox, &textLocation) != 0) {
             SDL_Log("Failed to blit text: %s", SDL_GetError());
         }
 
+        // Convert surface to texture
         SDL_Texture* texture = SDL_CreateTextureFromSurface(m_renderer, textBox);
 
         SDL_FreeSurface(textSurface);
         SDL_FreeSurface(textBox);
 
-        if (!texture){
+        if (!texture) {
             SDL_Log("Failed to create texture: %s", SDL_GetError());
-            std::cout<<"texturenya gagal generated"<<std::endl;
+            std::cout << "Texturenya gagal generated" << std::endl;
         }
 
         return texture;
