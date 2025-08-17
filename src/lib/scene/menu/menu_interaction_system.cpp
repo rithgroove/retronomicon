@@ -1,8 +1,10 @@
 #include "retronomicon/lib/scene/menu/menu_interaction_system.h"
 #include "retronomicon/lib/audio/sound_effect_component.h"
+#include "retronomicon/lib/engine/exit_game_component.h"
 #include <iostream>
 namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::audio::SoundEffectComponent;
+    using retronomicon::lib::engine::ExitGameComponent;
     MenuInteractionSystem::MenuInteractionSystem(retronomicon::lib::input::InputState* input)
         : m_inputState(input) {}
 
@@ -56,7 +58,14 @@ namespace retronomicon::lib::scene::menu {
             if (m_inputState->wasActionJustPressed("confirm")) {
                 std::cout << "confirm pressed" <<std::endl;
                 auto* sceneChange = menuItems[selectedIndex]->getComponent<SceneChangeComponent>();
-                sceneChange->triggered = true;
+                if (sceneChange){
+                    sceneChange->triggered = true;  
+                }
+
+                auto* exitComponent = menuItems[selectedIndex]->getComponent<ExitGameComponent>();
+                if (exitComponent){
+                    exitComponent->activate();
+                }
 
             }
         }
