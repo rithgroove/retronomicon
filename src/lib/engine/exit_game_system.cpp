@@ -40,7 +40,7 @@ namespace retronomicon::lib::engine{
      */
     void ExitGameSystem::update(float dt, retronomicon::lib::core::Entity* entity){
         auto egc = entity->getComponent<ExitGameComponent>();
-        if (egc->isActivated()){
+        if (egc && egc->isActivated()){
             m_gameEngine->stop();
         }
 

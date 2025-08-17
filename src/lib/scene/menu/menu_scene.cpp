@@ -214,7 +214,7 @@ namespace retronomicon::lib::scene::menu {
         // this->addSystem(std::make_unique<InputSystem>(inputState));
         this->addSystem(std::make_unique<MenuInteractionSystem>(inputState));
         this->addSystem(std::make_unique<AudioSystem>());
-        // this->addSystem(std::make_unique<ExitGameSystem>(m_engine));
+        this->addSystem(std::make_unique<ExitGameSystem>(m_engine));
     }
 
     void MenuScene::shutdown() {
