@@ -100,6 +100,8 @@ namespace retronomicon::lib::engine {
      * @param dt, the delta time since last update
      */
     void GameEngine::update(float dt) {
+        
+        m_inputState->updateFromSDL();
         if (m_activeScene)
             m_activeScene->update(dt);
     }

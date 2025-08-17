@@ -32,7 +32,6 @@ namespace retronomicon::lib::scene::menu {
             }
         }else{
 
-            m_inputState->updateFromSDL();
             // std::cout<<m_inputState->to_string()<<std::endl;
             if (m_inputState->wasActionJustPressed("up")) {
                 std::cout << "up pressed" <<std::endl;

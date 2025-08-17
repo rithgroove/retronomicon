@@ -78,11 +78,6 @@ namespace retronomicon::lib::input{
      */
     void InputSystem::update(float dt, Entity* entity) {
         if (!m_inputState) return;
-        if (!m_isUpdating){
-            // so this line of code triggered once
-            m_inputState->updateFromSDL();
-            m_isUpdating = true;
-        }
 
         // std::cout<<m_inputState<<std::endl;
 
@@ -96,7 +91,6 @@ namespace retronomicon::lib::input{
              this->update(dt,obj);
         }
 
-        m_isUpdating = false;
     }
 
 
