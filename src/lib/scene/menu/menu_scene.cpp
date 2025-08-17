@@ -17,6 +17,7 @@
 #include "retronomicon/lib/audio/audio_system.h"
 #include "retronomicon/lib/audio/music_component.h"
 #include "retronomicon/lib/audio/sound_effect_component.h"
+#include "retronomicon/lib/engine/exit_game_system.h"
 
 namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::core::TransformComponent;
@@ -33,6 +34,7 @@ namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::audio::AudioSystem;
     using retronomicon::lib::audio::SoundEffectComponent;
     using retronomicon::lib::audio::MusicComponent;
+    using retronomicon::lib::engine::ExitGameSystem;
     MenuScene::MenuScene()
         : Scene("menu_scene") {}
 
@@ -210,6 +212,7 @@ namespace retronomicon::lib::scene::menu {
         // this->addSystem(std::make_unique<InputSystem>(inputState));
         this->addSystem(std::make_unique<MenuInteractionSystem>(inputState));
         this->addSystem(std::make_unique<AudioSystem>());
+        this->addSystem(std::make_unique<ExitGameSystem>(m_engine));
     }
 
     void MenuScene::shutdown() {
