@@ -2,7 +2,7 @@
 #include "retronomicon/lib/engine/exit_game_component.h"
 
 #include <sstream>
-
+#include <iostream>
 /**
  * @brief The namespace for animation utilities
  */

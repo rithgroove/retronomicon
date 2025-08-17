@@ -18,6 +18,7 @@
 #include "retronomicon/lib/audio/music_component.h"
 #include "retronomicon/lib/audio/sound_effect_component.h"
 #include "retronomicon/lib/engine/exit_game_system.h"
+#include "retronomicon/lib/engine/exit_game_component.h"
 
 namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::core::TransformComponent;
@@ -35,6 +36,7 @@ namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::audio::SoundEffectComponent;
     using retronomicon::lib::audio::MusicComponent;
     using retronomicon::lib::engine::ExitGameSystem;
+    using retronomicon::lib::engine::ExitGameComponent;
     MenuScene::MenuScene()
         : Scene("menu_scene") {}
 
@@ -162,8 +164,8 @@ namespace retronomicon::lib::scene::menu {
             //--------- add exitEntity -------------------
             auto* exitEntity = new Entity("Exit Game");
             exitEntity->addComponent<MenuItemComponent>("Exit Game",m_fontAsset);
-            exitEntity->addComponent<SceneChangeComponent>("Splash");
             exitEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
+            exitEntity->addComponent<ExitGameComponent>();
             transform = exitEntity->addComponent<TransformComponent>(50, 180, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.0f, 0.0f); // anchor top left
             transform->setRotation(0.0f); // no rotation
@@ -212,7 +214,7 @@ namespace retronomicon::lib::scene::menu {
         // this->addSystem(std::make_unique<InputSystem>(inputState));
         this->addSystem(std::make_unique<MenuInteractionSystem>(inputState));
         this->addSystem(std::make_unique<AudioSystem>());
-        this->addSystem(std::make_unique<ExitGameSystem>(m_engine));
+        // this->addSystem(std::make_unique<ExitGameSystem>(m_engine));
     }
 
     void MenuScene::shutdown() {

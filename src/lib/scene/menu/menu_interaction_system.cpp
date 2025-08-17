@@ -15,7 +15,10 @@ namespace retronomicon::lib::scene::menu {
         // Collect menu items
         for (Entity* current : entity->getChilds()) {
             if (current->hasComponent<MenuItemComponent>() &&
-                current->hasComponent<SceneChangeComponent>()) {
+                    ( current->hasComponent<SceneChangeComponent>() ||
+                      current->hasComponent<ExitGameComponent>() 
+                    )
+                ) {
                 menuItems.push_back(current);
             }
         }
