@@ -17,7 +17,7 @@ namespace retronomicon::lib::audio {
         if (auto* music = entity->getComponent<MusicComponent>()) {
             if (music->isPlayRequested()) {
                 m_musicPlayer.play(music->getAsset(), music->getLoopCount());
-                music->update(dt);
+                music->resetPlayRequest();
             }
         }
         // Check and process sound effect component

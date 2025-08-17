@@ -58,9 +58,11 @@ namespace retronomicon::lib::scene::menu {
 
     void MenuScene::init() {
         std::cout<<"Masuk init"<<std::endl;
+        auto musicComponent = this->addComponent<MusicComponent>(m_musicAsset.get(),1000);
         this->setupSystem();
         this->buildBackgroundImage();
         this->buildNineSliceMenu();
+        musicComponent->play();
         // You could load UI, background, menu music here later
     }
 
