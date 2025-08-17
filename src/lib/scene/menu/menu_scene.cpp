@@ -36,13 +36,17 @@ namespace retronomicon::lib::scene::menu {
         GameEngine* engine, 
         std::shared_ptr<ImageAsset> backgroundImage,
         std::shared_ptr<ImageAsset> nineSliceImage,
-        std::shared_ptr<FontAsset> fontAsset)
+        std::shared_ptr<FontAsset> fontAsset,
+        std::shared_ptr<MusicAsset> musicAsset,
+        std::shared_ptr<SoundEffectAsset> soundEffectAsset)
             : Scene("menu_scene"),
               m_engine(engine),
               m_backgroundImage(backgroundImage),
               m_nineSliceImage(nineSliceImage),
               m_fontAsset(fontAsset),
-              m_renderer(engine->getRenderer())
+              m_renderer(engine->getRenderer()),
+              m_musicAsset(musicAsset),
+              m_soundEffectAsset(soundEffectAsset)
         {
             std::cout<<"[MenuScene] contruct menu scene will full parameters"<<std::endl;
         }
