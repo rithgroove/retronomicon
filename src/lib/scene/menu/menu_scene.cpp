@@ -15,6 +15,8 @@
 #include "retronomicon/lib/scene/menu/menu_interaction_system.h"
 #include "retronomicon/lib/scene/scene_change_component.h"
 #include "retronomicon/lib/audio/audio_system.h"
+#include "retronomicon/lib/audio/music_component.h"
+#include "retronomicon/lib/audio/sound_effect_component.h"
 
 namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::core::TransformComponent;
@@ -29,6 +31,8 @@ namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::scene::menu::MenuInteractionSystem;
     using retronomicon::lib::scene::SceneChangeComponent;
     using retronomicon::lib::audio::AudioSystem;
+    using retronomicon::lib::audio::SoundEffectComponent;
+    using retronomicon::lib::audio::MusicComponent;
     MenuScene::MenuScene()
         : Scene("menu_scene") {}
 
@@ -122,6 +126,7 @@ namespace retronomicon::lib::scene::menu {
             auto* newGameEntity = new Entity("New Game");
             newGameEntity->addComponent<MenuItemComponent>("New Game",m_fontAsset);
             newGameEntity->addComponent<SceneChangeComponent>("Splash");
+            newGameEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
             transform = newGameEntity->addComponent<TransformComponent>(50, 30, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.0f, 0.0f); // anchor top left
             transform->setRotation(0.0f); // no rotation
@@ -132,6 +137,7 @@ namespace retronomicon::lib::scene::menu {
             auto* loadProgressEntity = new Entity("Load Progress");
             loadProgressEntity->addComponent<MenuItemComponent>("Load Progress",m_fontAsset);
             loadProgressEntity->addComponent<SceneChangeComponent>("Splash");
+            loadProgressEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
             transform = loadProgressEntity->addComponent<TransformComponent>(50, 80, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.0f, 0.0f); // anchor top left
             transform->setRotation(0.0f); // no rotation
@@ -142,6 +148,7 @@ namespace retronomicon::lib::scene::menu {
             auto* optionEntity = new Entity("Option");
             optionEntity->addComponent<MenuItemComponent>("Option",m_fontAsset);
             optionEntity->addComponent<SceneChangeComponent>("Splash");
+            optionEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
             transform = optionEntity->addComponent<TransformComponent>(50, 130, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.0f, 0.0f); // anchor top left
             transform->setRotation(0.0f); // no rotation
@@ -152,6 +159,7 @@ namespace retronomicon::lib::scene::menu {
             auto* exitEntity = new Entity("Exit Game");
             exitEntity->addComponent<MenuItemComponent>("Exit Game",m_fontAsset);
             exitEntity->addComponent<SceneChangeComponent>("Splash");
+            exitEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
             transform = exitEntity->addComponent<TransformComponent>(50, 180, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.0f, 0.0f); // anchor top left
             transform->setRotation(0.0f); // no rotation
