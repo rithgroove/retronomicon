@@ -1,7 +1,8 @@
 #include "retronomicon/lib/scene/menu/menu_interaction_system.h"
+#include "retronomicon/lib/audio/sound_effect_component.h"
 #include <iostream>
 namespace retronomicon::lib::scene::menu {
-
+    using retronomicon::lib::audio::SoundEffectComponent;
     MenuInteractionSystem::MenuInteractionSystem(retronomicon::lib::input::InputState* input)
         : m_inputState(input) {}
 
@@ -35,10 +36,14 @@ namespace retronomicon::lib::scene::menu {
                 } else {
                     selectedIndex--;
                 }
+                auto* sfx = menuItems[selectedIndex]->getComponent<SoundEffectComponent>();
+                sfx->play();
             }
             if (m_inputState->wasActionJustPressed("down")) {
                 std::cout << "down pressed" <<std::endl;
                 selectedIndex = (selectedIndex + 1) % menuItems.size();
+                auto* sfx = menuItems[selectedIndex]->getComponent<SoundEffectComponent>();
+                sfx->play();
             }
 
             // Apply highlight
@@ -52,6 +57,7 @@ namespace retronomicon::lib::scene::menu {
                 std::cout << "confirm pressed" <<std::endl;
                 auto* sceneChange = menuItems[selectedIndex]->getComponent<SceneChangeComponent>();
                 sceneChange->triggered = true;
+
             }
         }
        
