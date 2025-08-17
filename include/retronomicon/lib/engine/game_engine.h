@@ -71,6 +71,7 @@ namespace retronomicon::lib::engine {
             
             InputState* getInputState(){return m_inputState;}       
 
+            void stop(){m_running = false;}
         private:
 
 
