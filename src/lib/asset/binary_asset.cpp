@@ -1,41 +1,48 @@
 #include "retronomicon/lib/asset/binary_asset.h"
+
 #include <fstream>
 #include <stdexcept>
 #include <sstream>
 
+/**
+ * @brief The namespace for assets and loaders
+ */
 namespace retronomicon::lib::asset {
 
-BinaryAsset::BinaryAsset(const std::string& path,const std::string& name) {
-    m_path = path;
-    m_name = name;
+    /**
+     * @brief Constructor for the binary asset
+     *
+     * @param path path the file
+     * @param name the given name for this font
+     */
+    BinaryAsset::BinaryAsset(const std::string& path,const std::string& name) {
+        m_path = path;
+        m_name = name;
 
-    std::ifstream file(path, std::ios::binary);
-    if (!file) {
-        throw std::runtime_error("Failed to load binary file: " + path);
-    }
+        std::ifstream file(path, std::ios::binary);
+        if (!file) {
+            throw std::runtime_error("Failed to load binary file: " + path);
+        }
 
-    file.seekg(0, std::ios::end);
-    std::streamsize size = file.tellg();
-    file.seekg(0, std::ios::beg);
+        file.seekg(0, std::ios::end);
+        std::streamsize size = file.tellg();
+        file.seekg(0, std::ios::beg);
 
-    if (size > 0) {
-        m_data.resize(static_cast<size_t>(size));
-        if (!file.read(reinterpret_cast<char*>(m_data.data()), size)) {
-            throw std::runtime_error("Failed to read binary data from: " + path);
+        if (size > 0) {
+            m_data.resize(static_cast<size_t>(size));
+            if (!file.read(reinterpret_cast<char*>(m_data.data()), size)) {
+                throw std::runtime_error("Failed to read binary data from: " + path);
+            }
         }
     }
-}
 
-const std::vector<uint8_t>& BinaryAsset::getData() const {
-    return m_data;
-}
+    /***************************** Getter *****************************/
 
-size_t BinaryAsset::getSize() const {
-    return m_data.size();
-}
-
-std::string BinaryAsset::to_string() const {
-    return "[BinaryAsset] " + m_path + " (" + std::to_string(m_data.size()) + " bytes)";
-}
+    /**
+     * @brief Textual representation for logging/debug/editor use.
+     */
+    std::string BinaryAsset::to_string() const {
+        return "[BinaryAsset] " + m_path + " (" + std::to_string(m_data.size()) + " bytes)";
+    }
 
 }

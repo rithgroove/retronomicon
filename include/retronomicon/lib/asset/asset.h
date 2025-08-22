@@ -35,6 +35,15 @@ namespace retronomicon::lib::asset {
              */
             std::string getName(){return m_name;}
 
+            /***************************** Operator Overload *****************************/
+
+            /**
+             * @brief overloading operator << to call to_string()
+             */
+            friend std::ostream& operator<<(std::ostream& os, const Asset& obj) {
+                return os << obj.to_string();
+            }
+
             /***************************** To String *****************************/
 
             /**
