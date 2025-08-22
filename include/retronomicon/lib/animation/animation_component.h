@@ -4,7 +4,6 @@
 #include <queue>
 #include <memory>
 #include <string>
-
 #include "animation_clip.h"
 #include "animation_listener.h"
 #include "retronomicon/lib/core/component.h"

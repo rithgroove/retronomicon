@@ -1,8 +1,9 @@
 #pragma once
-#include <vector>
 
+#include <vector>
 #include "retronomicon/lib/core/system.h"
 #include "retronomicon/lib/core/entity.h"
+
 /**
  * @brief The namespace for animation utilities
  */

@@ -2,27 +2,51 @@
 
 #include <string>
 
+/**
+ * @brief The namespace for assets and loaders
+ */
 namespace retronomicon::lib::asset {
+    /**
+     * @brief abstract class that will be extended by many asset types
+     */ 
+    class Asset {
+        public:
 
-class Asset {
-    public:
-        virtual ~Asset() = default;
+            /***************************** Destructor *****************************/
 
-        // For logging, editor, debug UI
-        virtual std::string to_string() const = 0;
+            /**
+             * @brief default destructor
+             */ 
+            virtual ~Asset() = default;
 
-        // Optional: path getter if all assets come from file
-        std::string getPath(){
-            return m_path;
-        }
-        
-        std::string getName(){
-            return m_name;
-        }
+            /***************************** Getter *****************************/
 
-    protected:
+            /**
+             * @brief getter for path
+             * 
+             * @return path to the file
+             */
+            std::string getPath(){return m_path;}
+            
+            /**
+             * @brief getter for filename
+             * 
+             * @return name of the file
+             */
+            std::string getName(){return m_name;}
 
-        std::string m_path;
-        std::string m_name;
+            /***************************** To String *****************************/
+
+            /**
+             * @brief a method to help people debug this object
+             * 
+             * @return Brief summary of this object in string
+             */
+            virtual std::string to_string() const = 0;
+
+        protected:
+            /***************************** attributes *****************************/
+            std::string m_path;
+            std::string m_name;
     };
 }
