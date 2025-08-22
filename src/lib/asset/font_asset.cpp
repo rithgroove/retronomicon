@@ -1,11 +1,16 @@
 #include "retronomicon/lib/asset/font_asset.h"
+
 #include <iostream>
 #include <sstream>
 #include <SDL.h>
 #include <SDL_ttf.h>
 
+/**
+ * @brief The namespace for assets and loaders
+ */
 namespace retronomicon::lib::asset {
 
+    /***************************** Constructor *****************************/
     /**
      * @brief Constructor for the font asset
      *
@@ -30,6 +35,7 @@ namespace retronomicon::lib::asset {
         }
     }
 
+    /***************************** Destructor *****************************/
     /**
      * @brief Destructor: destroys the loaded TTF_Font
      */
@@ -40,32 +46,7 @@ namespace retronomicon::lib::asset {
         }
     }
 
-    /**
-     * @brief Check if the font is loaded correctly
-     *
-     * @return true if font is valid
-     */
-    bool FontAsset::isInitialized() const {
-        return m_font != nullptr;
-    }
-
-    /**
-     * @brief Get the raw TTF_Font pointer
-     *
-     * @return pointer to loaded font
-     */
-    TTF_Font* FontAsset::getRawFont() const {
-        return m_font;
-    }
-
-    /**
-     * @brief Get the font size
-     *
-     * @return integer font size
-     */
-    int FontAsset::getFontSize() const {
-        return m_fontSize;
-    }
+    /***************************** Main Methods *****************************/
 
     /**
      * @brief Generate an SDL_Texture for the given text
@@ -144,6 +125,8 @@ namespace retronomicon::lib::asset {
         return texture;
     }
 
+    /***************************** To String *****************************/
+    
     /**
      * @brief Return a debug string representation of this font
      */
