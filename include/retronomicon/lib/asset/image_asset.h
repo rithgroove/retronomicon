@@ -71,6 +71,8 @@ namespace retronomicon::lib::asset {
             std::string to_string() const override;
 
         private:
+
+            /***************************** Attribute *****************************/
             SDL_Texture* m_texture = nullptr;  // The texture created from the image file
             int m_width = 0;                   // Width of the image
             int m_height = 0;                  // Height of the image

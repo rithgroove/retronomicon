@@ -86,7 +86,9 @@ namespace retronomicon::lib::asset {
             /***************************** To string *****************************/
 
             /**
-             * @brief Return a debug description of this font asset
+             * @brief Textual representation of this asset (for debugging / editor)
+             *     
+             * @return string representation
              */
             std::string to_string() const override;
 

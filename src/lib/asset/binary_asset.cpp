@@ -41,7 +41,9 @@ namespace retronomicon::lib::asset {
     /***************************** To String *****************************/
 
     /**
-     * @brief Textual representation for logging/debug/editor use.
+     * @brief Textual representation of this asset (for debugging / editor)
+     *     
+     * @return string representation
      */
     std::string BinaryAsset::to_string() const {
         return "[BinaryAsset] " + m_path + " (" + std::to_string(m_data.size()) + " bytes)";

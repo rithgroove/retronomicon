@@ -14,47 +14,53 @@ namespace retronomicon::lib::asset {
      * Use for any non-text, structured or opaque file format.
      */
     class BinaryAsset : public Asset {
-    public:
-        /***************************** Constructor *****************************/
+        public:
+            /***************************** Constructor *****************************/
 
-        /**
-         * @brief Constructor for the binary asset
-         *
-         * @param path path the file
-         * @param name the given name for this font
-         */
-        explicit BinaryAsset(const std::string& path, const std::string& name);
+            /**
+             * @brief Constructor for the binary asset
+             *
+             * @param path path the file
+             * @param name the given name for this font
+             */
+            explicit BinaryAsset(const std::string& path, const std::string& name);
 
-        /***************************** Destructor *****************************/
+            /***************************** Destructor *****************************/
 
-        /**
-         * @brief default destructor
-         */ 
-        ~BinaryAsset() override = default;
+            /**
+             * @brief default destructor
+             */ 
+            ~BinaryAsset() override = default;
 
-        /***************************** Getter *****************************/
+            /***************************** Getter *****************************/
 
-        /**
-         * @brief Returns a const reference to the raw data buffer.
-         */
-        const std::vector<uint8_t>& getData() const { return m_data;}
+            /**
+             * @brief Returns a const reference to the raw data buffer.
+             * 
+             * @return vector of unsigned integer that represent the data
+             */
+            const std::vector<uint8_t>& getData() const { return m_data;}
 
-        /**
-         * @brief Returns the size (in bytes) of the loaded binary content.
-         */
-        size_t getSize() const { return m_data.size();}
+            /**
+             * @brief Returns the size (in bytes) of the loaded binary content.
+             * 
+             * @return how many bytes of data this file is.
+             */
+            size_t getSize() const { return m_data.size();}
 
 
-        /***************************** To String *****************************/
-        /**
-         * @brief Textual representation for logging/debug/editor use.
-         */
-        std::string to_string() const override;
+            /***************************** To String *****************************/
+            /**
+             * @brief Textual representation of this asset (for debugging / editor)
+             *     
+             * @return string representation
+             */
+            std::string to_string() const override;
 
-    private:
+        private:
 
-        /***************************** Attribute *****************************/
-        std::vector<uint8_t> m_data;
+            /***************************** Attribute *****************************/
+            std::vector<uint8_t> m_data;
     };
 
 }

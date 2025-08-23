@@ -128,7 +128,9 @@ namespace retronomicon::lib::asset {
     /***************************** To String *****************************/
     
     /**
-     * @brief Return a debug string representation of this font
+     * @brief Textual representation of this asset (for debugging / editor)
+     *     
+     * @return string representation
      */
     std::string FontAsset::to_string() const {
         std::ostringstream oss;

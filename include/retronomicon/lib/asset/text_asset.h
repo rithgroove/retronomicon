@@ -18,8 +18,10 @@ namespace retronomicon::lib::asset {
              */
             const std::string& getContent() const;
 
-            /**
-             * @brief Textual description for editor/log/debug use.
+           /**
+             * @brief a method to help people debug this object
+             * 
+             * @return Brief summary of this object in string
              */
             std::string to_string() const override;
 

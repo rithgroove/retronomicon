@@ -1,8 +1,18 @@
 #include "retronomicon/lib/asset/music_asset.h"
 #include <stdexcept>
-
+/**
+ * @brief The namespace for assets and loaders
+ */
 namespace retronomicon::lib::asset {
 
+    /***************************** Constructor *****************************/
+    
+    /**
+     * @brief Constructor for the image asset
+     *
+     * @param imagePath the path to the image
+     * @param name the name of the image
+     */
     MusicAsset::MusicAsset(const std::string& path,
                          const std::string& name)
         : m_music(nullptr)
@@ -17,6 +27,13 @@ namespace retronomicon::lib::asset {
         }
     }
 
+    /***************************** Destructor *****************************/
+
+    /**
+     * @brief Destructor for the image asset
+     *
+     * Releases the asset from memory
+     */
     MusicAsset::~MusicAsset() {
         if (m_music) {
             Mix_FreeMusic(m_music);
@@ -24,17 +41,15 @@ namespace retronomicon::lib::asset {
         }
     }
 
-    Mix_Music* MusicAsset::getRawMusic() const {
-        return m_music;
-    }
+    /***************************** To String *****************************/
 
+    /**
+     * @brief Textual representation of this asset (for debugging / editor)
+     * 
+     * @return string representation
+     */
     std::string MusicAsset::to_string() const {
         return "[MusicAsset] " + m_path;
     }
-
-    bool MusicAsset::isValid() const {
-        return m_music != nullptr;
-    }
-
 
 }

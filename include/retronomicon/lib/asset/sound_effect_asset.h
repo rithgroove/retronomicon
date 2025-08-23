@@ -20,8 +20,10 @@ namespace retronomicon::lib::asset {
              */
             Mix_Chunk* getRawSound() const;
 
-            /**
-             * @brief Textual representation of this asset (for debugging / editor)
+           /**
+             * @brief a method to help people debug this object
+             * 
+             * @return Brief summary of this object in string
              */
             std::string to_string() const override;
 
