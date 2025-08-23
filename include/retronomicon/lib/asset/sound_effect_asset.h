@@ -3,7 +3,9 @@
 #include <string>
 #include <SDL_mixer.h>
 #include "asset.h"
-
+/**
+ * @brief The namespace for assets and loaders
+ */
 namespace retronomicon::lib::asset {
 
     /**
@@ -12,14 +14,33 @@ namespace retronomicon::lib::asset {
      */
     class SoundEffectAsset : public Asset {
         public:
+            /***************************** Constructor *****************************/
+            
+            /**
+             * @brief Constructor for the sfx asset
+             *
+             * @param path the path to the sfx
+             * @param name the name of the sfx
+             */
             explicit SoundEffectAsset(const std::string& path,const std::string& name);
+
+            /***************************** Destructor *****************************/
+
+            /**
+             * @brief Destructor for the sfx asset
+             *
+             * Releases the asset from memory
+             */
             ~SoundEffectAsset() override;
+
+            /***************************** Getter *****************************/
 
             /**
              * @brief Get the raw Mix_Chunk pointer
              */
-            Mix_Chunk* getRawSound() const;
+            Mix_Chunk* getRawSound() const { return m_chunk; }
 
+            /***************************** To String *****************************/
            /**
              * @brief a method to help people debug this object
              * 
@@ -28,6 +49,7 @@ namespace retronomicon::lib::asset {
             std::string to_string() const override;
 
         private:
+            /***************************** Attribute *****************************/
             Mix_Chunk* m_chunk;
     };
 

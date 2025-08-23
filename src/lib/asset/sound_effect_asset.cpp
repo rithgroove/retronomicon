@@ -1,8 +1,18 @@
 #include "retronomicon/lib/asset/sound_effect_asset.h"
 #include <stdexcept>
 
+/**
+ * @brief The namespace for assets and loaders
+ */
 namespace retronomicon::lib::asset {
-
+    /***************************** Constructor *****************************/
+    
+    /**
+     * @brief Constructor for the sfx asset
+     *
+     * @param path the path to the sfx
+     * @param name the name of the sfx
+     */
     SoundEffectAsset::SoundEffectAsset(const std::string& path,const std::string& name)
         : m_chunk(nullptr)
      {
@@ -16,6 +26,13 @@ namespace retronomicon::lib::asset {
         }
     }
 
+    /***************************** Destructor *****************************/
+
+    /**
+     * @brief Destructor for the sfx asset
+     *
+     * Releases the asset from memory
+     */
     SoundEffectAsset::~SoundEffectAsset() {
         if (m_chunk) {
             Mix_FreeChunk(m_chunk);
@@ -23,10 +40,9 @@ namespace retronomicon::lib::asset {
         }
     }
 
-    Mix_Chunk* SoundEffectAsset::getRawSound() const {
-        return m_chunk;
-    }
-   /**
+    /***************************** To String *****************************/
+
+    /**
      * @brief a method to help people debug this object
      * 
      * @return Brief summary of this object in string

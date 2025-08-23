@@ -17,17 +17,17 @@ namespace retronomicon::lib::asset {
             /***************************** Constructor *****************************/
             
             /**
-             * @brief Constructor for the image asset
+             * @brief Constructor for the music asset
              *
-             * @param imagePath the path to the image
-             * @param name the name of the image
+             * @param path the path to the music
+             * @param name the name of the music
              */
             explicit MusicAsset(const std::string& path,const std::string& name);
 
             /***************************** Destructor *****************************/
 
             /**
-             * @brief Destructor for the image asset
+             * @brief Destructor for the music asset
              *
              * Releases the asset from memory
              */
