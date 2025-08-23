@@ -22,7 +22,7 @@ namespace retronomicon::lib::asset {
              * @param path the path to the sfx
              * @param name the name of the sfx
              */
-            explicit SoundEffectAsset(const std::string& path,const std::string& name);
+            SoundEffectAsset(const std::string& path,const std::string& name);
 
             /***************************** Destructor *****************************/
 

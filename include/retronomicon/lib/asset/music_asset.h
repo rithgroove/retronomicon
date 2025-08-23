@@ -13,7 +13,7 @@ namespace retronomicon::lib::asset {
      * Uses SDL_mixer to load and play music from file.
      */
     class MusicAsset : public Asset{
-
+        public:
             /***************************** Constructor *****************************/
             
             /**
@@ -22,7 +22,7 @@ namespace retronomicon::lib::asset {
              * @param path the path to the music
              * @param name the name of the music
              */
-            explicit MusicAsset(const std::string& path,const std::string& name);
+            MusicAsset(const std::string& path,const std::string& name);
 
             /***************************** Destructor *****************************/
 
