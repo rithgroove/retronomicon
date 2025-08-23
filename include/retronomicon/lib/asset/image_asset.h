@@ -4,14 +4,22 @@
 #include <string>
 #include "asset.h"
 
+/**
+ * @brief The namespace for assets and loaders
+ */
 namespace retronomicon::lib::asset {
 
+
+    /***************************** Constructor *****************************/
     /**
      * @brief A class that represents a loaded image asset from storage into memory.
      *        Converts an image file into an SDL_Texture for rendering.
      */
     class ImageAsset : public Asset {
         public:
+
+            /***************************** Constructor *****************************/
+            
             /**
              * @brief Constructor for the image asset
              *
@@ -21,6 +29,8 @@ namespace retronomicon::lib::asset {
              */
             ImageAsset(const std::string& imagePath, const std::string& name, SDL_Renderer* renderer);
 
+            /***************************** Destructor *****************************/
+
             /**
              * @brief Destructor for the image asset
              *
@@ -28,26 +38,30 @@ namespace retronomicon::lib::asset {
              */
             ~ImageAsset() override;
 
+            /***************************** Getter *****************************/
+        
             /**
              * @brief Get the width of the image
              *
              * @return the width in pixels
              */
-            int getWidth() const;
+            int getWidth() const{ return m_width; }
 
             /**
              * @brief Get the height of the image
              *
              * @return the height in pixels
              */
-            int getHeight() const;
+            int getHeight() const{ return m_height; }
 
             /**
              * @brief Get the loaded SDL_Texture
              *
              * @return the image texture
              */
-            SDL_Texture* getTexture() const;
+            SDL_Texture* getTexture() const{ return m_texture;}
+
+            /***************************** To String *****************************/
 
             /**
              * @brief Return a textual description of the image asset

@@ -9,6 +9,8 @@
  */
 namespace retronomicon::lib::asset {
 
+    /***************************** Constructor *****************************/
+
     /**
      * @brief Constructor for the binary asset
      *
@@ -36,7 +38,7 @@ namespace retronomicon::lib::asset {
         }
     }
 
-    /***************************** Getter *****************************/
+    /***************************** To String *****************************/
 
     /**
      * @brief Textual representation for logging/debug/editor use.

@@ -3,7 +3,12 @@
 #include <stdexcept>
 #include <sstream>
 
+/**
+ * @brief The namespace for assets and loaders
+ */
 namespace retronomicon::lib::asset {
+
+    /***************************** Constructor *****************************/
 
     /**
      * @brief Constructor for the image asset
@@ -39,6 +44,8 @@ namespace retronomicon::lib::asset {
         SDL_FreeSurface(surface); // Free the CPU surface
     }
 
+    /***************************** Destructor *****************************/
+
     /**
      * @brief Destructor of the image asset
      * 
@@ -51,32 +58,7 @@ namespace retronomicon::lib::asset {
         }
     }
 
-    /**
-     * @brief Get the loaded texture
-     * 
-     * @return the image in texture format
-     */
-    SDL_Texture* ImageAsset::getTexture() const {
-        return m_texture;
-    }
-
-    /**
-     * @brief Get the width of the image 
-     * 
-     * @return the image width
-     */
-    int ImageAsset::getWidth() const {
-        return m_width;
-    }
-
-    /**
-     * @brief Get the height of the image 
-     * 
-     * @return the image height
-     */
-    int ImageAsset::getHeight() const {
-        return m_height;
-    }
+    /***************************** To String *****************************/
 
     /**
      * @brief Return a debug description of this image
