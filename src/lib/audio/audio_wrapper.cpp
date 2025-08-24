@@ -1,7 +1,14 @@
 #include "retronomicon/lib/audio/audio_wrapper.h"
 
+/**
+ * @brief The namespace for audio 
+ */
 namespace retronomicon::lib::audio {
 
+    /***************************** Main Methods *****************************/
+    /**
+     * @brief A wrapper class to encapsulate SDL_mixer init 
+     */
     bool AudioWrapper::init() {
         if (SDL_InitSubSystem(SDL_INIT_AUDIO) < 0) {
             std::cerr << "SDL audio init failed: " << SDL_GetError() << std::endl;
@@ -22,6 +29,9 @@ namespace retronomicon::lib::audio {
         return true;
     }
 
+    /**
+     * @brief A wrapper class to encapsulate SDL_mixer cleanup.
+     */
     void AudioWrapper::shutdown() {
         Mix_CloseAudio();
         Mix_Quit();
