@@ -125,6 +125,66 @@ namespace retronomicon::lib::asset {
         return texture;
     }
 
+    /**
+     * @brief Measure the pixel size of a string using this font.
+     * 
+     * @param text input text
+     * @param w output width in pixels
+     * @param h output height in pixels
+     * @return true if successful
+     */
+    bool FontAsset::measureText(const std::string& text, int& w, int& h) const {
+        if (!m_font) {
+            w = h = 0;
+            return false;
+        }
+        if (TTF_SizeUTF8(m_font, text.c_str(), &w, &h) != 0) {
+            SDL_Log("TTF_SizeUTF8 failed: %s", TTF_GetError());
+            w = h = 0;
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @brief Word-wrap text to fit within a maximum width.
+     * 
+     * @param text input text
+     * @param maxWidth maximum line width in pixels
+     * @return vector of lines after wrapping
+     */
+    std::vector<std::string> FontAsset::wrapText(const std::string& text, int maxWidth) const {
+        std::vector<std::string> lines;
+        if (!m_font || text.empty()) {
+            return lines;
+        }
+
+        std::istringstream iss(text);
+        std::string word;
+        std::string currentLine;
+
+        while (iss >> word) {
+            std::string trialLine = currentLine.empty() ? word : currentLine + " " + word;
+
+            int w, h;
+            measureText(trialLine, w, h);
+
+            if (w > maxWidth && !currentLine.empty()) {
+                // push current line, start a new one
+                lines.push_back(currentLine);
+                currentLine = word;
+            } else {
+                currentLine = trialLine;
+            }
+        }
+
+        if (!currentLine.empty()) {
+            lines.push_back(currentLine);
+        }
+
+        return lines;
+    }
+
     /***************************** To String *****************************/
     
     /**

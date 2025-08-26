@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <string>
+#include <vector>
 #include "retronomicon/lib/asset/asset.h"
 
 /**
@@ -82,6 +83,27 @@ namespace retronomicon::lib::asset {
                                          int height,
                                          SDL_Color fgC,
                                          SDL_Color bgC);
+
+
+            /**
+             * @brief Measure the pixel size of a string using this font.
+             * 
+             * @param text input text
+             * @param w output width in pixels
+             * @param h output height in pixels
+             * @return true if successful
+             */
+            bool measureText(const std::string& text, int& w, int& h) const;
+
+            /**
+             * @brief Word-wrap text to fit within a maximum width.
+             * 
+             * @param text input text
+             * @param maxWidth maximum line width in pixels
+             * @return vector of lines after wrapping
+             */
+            std::vector<std::string> wrapText(const std::string& text, int maxWidth) const;
+
 
             /***************************** To string *****************************/
 
