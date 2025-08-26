@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <stdexcept>
 #include <string>
 #include <vector>
 #include "retronomicon/lib/asset/asset.h"
@@ -40,6 +41,16 @@ namespace retronomicon::lib::asset {
             ~FontAsset() override;
 
             /***************************** Getter *****************************/
+            /**
+             * @brief Get the font's line height (in pixels).
+             */
+            int getLineHeight() const;
+
+            /**
+             * @brief Measure the width of a text string in pixels.
+             */
+            int measureTextWidth(const std::string& text) const;
+
 
             /**
              * @brief Returns whether the font was successfully loaded
@@ -103,6 +114,17 @@ namespace retronomicon::lib::asset {
              * @return vector of lines after wrapping
              */
             std::vector<std::string> wrapText(const std::string& text, int maxWidth) const;
+            
+            /**
+             * @brief Render the given text string at position (x, y) using SDL_ttf.
+             * 
+             * @param renderer SDL_Renderer to draw on
+             * @param text UTF-8 encoded string to render
+             * @param x Screen x position
+             * @param y Screen y position
+             * @param color SDL_Color to use (default: white)
+             */
+            void renderText(SDL_Renderer* renderer, const std::string& text, int x, int y, SDL_Color color = {255, 255, 255, 255});
 
 
             /***************************** To string *****************************/

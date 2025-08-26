@@ -124,7 +124,20 @@ namespace retronomicon::lib::asset {
 
         return texture;
     }
+    
+    int FontAsset::getLineHeight() const {
+        if (!m_font) return 0;
+        return TTF_FontLineSkip(m_font);
+    }
 
+    int FontAsset::measureTextWidth(const std::string& text) const {
+        if (!m_font) return 0;
+        int w = 0, h = 0;
+        if (TTF_SizeUTF8(m_font, text.c_str(), &w, &h) == 0) {
+            return w;
+        }
+        return 0;
+    }
     /**
      * @brief Measure the pixel size of a string using this font.
      * 
@@ -183,6 +196,29 @@ namespace retronomicon::lib::asset {
         }
 
         return lines;
+    }
+
+    void FontAsset::renderText(SDL_Renderer* renderer, const std::string& text, int x, int y, SDL_Color color) {
+        if (!m_font) {
+            throw std::runtime_error("FontAsset::renderText called with null font");
+        }
+
+        SDL_Surface* surface = TTF_RenderUTF8_Blended(m_font, text.c_str(), color);
+        if (!surface) {
+            throw std::runtime_error(std::string("TTF_RenderUTF8_Blended failed: ") + TTF_GetError());
+        }
+
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+        if (!texture) {
+            SDL_FreeSurface(surface);
+            throw std::runtime_error(std::string("SDL_CreateTextureFromSurface failed: ") + SDL_GetError());
+        }
+
+        SDL_Rect dstRect { x, y, surface->w, surface->h };
+        SDL_RenderCopy(renderer, texture, nullptr, &dstRect);
+
+        SDL_DestroyTexture(texture);
+        SDL_FreeSurface(surface);
     }
 
     /***************************** To String *****************************/
