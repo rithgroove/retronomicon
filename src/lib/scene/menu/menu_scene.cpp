@@ -13,6 +13,7 @@
 #include "retronomicon/lib/graphic/render_system.h"
 #include "retronomicon/lib/scene/menu/menu_item_component.h"
 #include "retronomicon/lib/scene/menu/menu_interaction_system.h"
+#include "retronomicon/lib/scene/scene_change_system.h"
 #include "retronomicon/lib/scene/scene_change_component.h"
 #include "retronomicon/lib/audio/audio_system.h"
 #include "retronomicon/lib/audio/music_component.h"
@@ -209,7 +210,7 @@ namespace retronomicon::lib::scene::menu {
         // setup render system used to draw to screen
         this->addSystem(std::make_unique<RenderSystem>(m_renderer));
         // setup scene change system to trigger scene change to the next one
-        // this->addSystem(std::make_unique<SceneChangeSystem>(m_engine));
+        this->addSystem(std::make_unique<SceneChangeSystem>(m_engine));
         // setup input system to skip to next scene
         // this->addSystem(std::make_unique<InputSystem>(inputState));
         this->addSystem(std::make_unique<MenuInteractionSystem>(inputState));

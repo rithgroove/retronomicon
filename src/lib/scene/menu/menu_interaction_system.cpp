@@ -61,6 +61,7 @@ namespace retronomicon::lib::scene::menu {
                 std::cout << "confirm pressed" <<std::endl;
                 auto* sceneChange = menuItems[selectedIndex]->getComponent<SceneChangeComponent>();
                 if (sceneChange){
+                    std::cout << "should be here" <<std::endl;
                     sceneChange->triggered = true;  
                 }
 
