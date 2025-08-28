@@ -42,5 +42,6 @@ CMakeFiles/
 !/external/SDL2_mixer
 !/external/libavif
 !/external/catch2
+!/external/json
 
 documentation/
