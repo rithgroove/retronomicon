@@ -132,7 +132,7 @@ namespace retronomicon::lib::scene::menu {
             //--------- add newGameEntity -------------------
             auto* newGameEntity = new Entity("New Game");
             newGameEntity->addComponent<MenuItemComponent>("New Game",m_fontAsset);
-            newGameEntity->addComponent<SceneChangeComponent>("Splash");
+            newGameEntity->addComponent<SceneChangeComponent>("New Game");
             newGameEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
             transform = newGameEntity->addComponent<TransformComponent>(50, 30, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.0f, 0.0f); // anchor top left
