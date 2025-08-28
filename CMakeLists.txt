@@ -34,6 +34,7 @@ set(SDL2MIXER_FLUIDSYNTH OFF CACHE BOOL "" FORCE)
 set(SDL2MIXER_VORBIS STB CACHE BOOL "" FORCE)
 add_subdirectory(external/SDL2_mixer)
 add_subdirectory(external/catch2)
+add_subdirectory(external/json)
 
 # Engine source (will add retronomicon library)
 add_subdirectory(src)
@@ -46,6 +47,7 @@ include_directories(
     ${RETRO_INCLUDE_DIR}/external/SDL2_image/include
     ${RETRO_INCLUDE_DIR}/external/SDL2_mixer/include
     ${RETRO_INCLUDE_DIR}/external/catch2/src
+    ${RETRO_INCLUDE_DIR}/external/catch2/json
 )
 
 add_subdirectory(tests)
