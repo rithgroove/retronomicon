@@ -115,18 +115,18 @@ namespace retronomicon::lib::scene::splash {
 	}
 
 	void SplashScene::init() {
-		m_renderer = m_engine->getRenderer();
-		this->setupSystem();
+		if (!m_isInitialized){
+			m_renderer = m_engine->getRenderer();
+			this->setupSystem();
 
-		this->setupLogo();
-
+			this->setupLogo();
+		}
 	    setInitialized(true);
 	    setActive(true);
 	}
 
 	void SplashScene::shutdown() {
 	    // unloadAssets();
-	    setInitialized(false);
 	    setActive(false);
 	}
 
