@@ -1,5 +1,6 @@
 #pragma once
 #include <ostream>
+#include <cmath>
 
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
@@ -12,14 +13,14 @@ namespace retronomicon::lib::math {
     class Vec2 {
         public:
             /***************************** Attribute *****************************/
-            float x, y; // because Vec2 values changes a lot we put it in public
+            float x{0.0f}, y{0.0f}; // because Vec2 values changes a lot we put it in public
 
             /***************************** Constructor *****************************/
 
             /**
              * @brief default constructor (0,0)
              */
-            Vec2() : x(0), y(0) {}
+            constexpr Vec2() = default;
  
             /**
              * @brief constructor (x,y)
@@ -27,7 +28,7 @@ namespace retronomicon::lib::math {
              * @param x value
              * @param y value
              */
-            Vec2(float x, float y) : x(x), y(y) {}
+            constexpr Vec2(float x, float y) : x(x), y(y) {}
 
             /***************************** Utility *****************************/
             /**
@@ -35,7 +36,7 @@ namespace retronomicon::lib::math {
              *      
              * @return true if zero
              */ 
-             bool isZero() const;
+            [[nodiscard]] constexpr bool isZero() const noexcept { return x == 0.0f && y == 0.0f;}
 
             /***************************** Operator Overload *****************************/
 
@@ -44,57 +45,78 @@ namespace retronomicon::lib::math {
              * 
              * @param other another vec2
              */
-            Vec2 operator+(const Vec2& other) const;
+            constexpr Vec2 operator+(const Vec2& other) const noexcept{
+                return Vec2(x + other.x, y + other.y);
+            }
 
             /**
              * @brief overloading operator - 
              * 
              * @param other another vec2
              */
-            Vec2 operator-(const Vec2& other) const;
+            constexpr Vec2 operator-(const Vec2& other) const noexcept{
+                return Vec2(x - other.x, y - other.y);
+            }
 
             /**
              * @brief overloading operator +=
              * 
              * @param other another vec2
              */
-            Vec2& operator+=(const Vec2& other);
+            constexpr Vec2& operator+=(const Vec2& other) noexcept{
+                x += other.x; y += other.y;
+                return *this;
+            }
 
             /**
              * @brief overloading operator -=
              * 
              * @param other another vec2
              */
-            Vec2& operator-=(const Vec2& other);
+            constexpr Vec2& operator-=(const Vec2& other) noexcept{
+                x -= other.x; y -= other.y;
+                return *this;
+            }
 
             /**
              * @brief overloading operator * with scalar
              * 
              * @param scalar the scalar value
              */
-            Vec2 operator*(float scalar) const;
+            constexpr Vec2 operator*(float scalar) const noexcept{
+                return Vec2(x * scalar, y * scalar);
+            }
 
             /**
              * @brief overloading operator / with scalar
              * 
              * @param scalar the scalar value
              */
-            Vec2 operator/(float scalar) const;
+            constexpr Vec2 operator/(float scalar) const noexcept{
+                return Vec2(x / scalar, y / scalar);
+            }
 
             /**
              * @brief overloading operator *= with scalar
              * 
              * @param scalar the scalar value
              */
-            Vec2& operator*=(float scalar);
+            constexpr Vec2& operator*=(float scalar) noexcept {
+                x *= scalar; 
+                y *= scalar;
+                return *this;
+            }
 
             /**
              * @brief overloading operator /= with scalar
              * 
              * @param scalar the scalar value
              */
-            Vec2& operator/=(float scalar) ;
-
+            constexpr Vec2& operator/=(float scalar) noexcept{
+                x /= scalar;
+                y /= scalar;
+                return *this;                
+            }
 
             /**
              * @brief overloading operator << to call to_string()
@@ -110,7 +132,7 @@ namespace retronomicon::lib::math {
              * 
              * @return Brief summary of this object in string
              */
-            std::string to_string() const;
+            [[nodiscard]] std::string to_string() const;
 
 
             /***************************** Main Methods *****************************/
@@ -120,7 +142,9 @@ namespace retronomicon::lib::math {
              * 
              * @return the length of this vector
              */
-            float length() const;
+            [[nodiscard]] constexpr float length() const noexcept{
+                return std::sqrt(x * x + y * y);
+            }
 
             /**
              * @brief a method to calculate the normalized vector of this vector
@@ -129,7 +153,11 @@ namespace retronomicon::lib::math {
              * 
              * @return the normalized vector (magnitude 1 vector)
              */ 
-            Vec2 normalized() const;
+            [[nodiscard]] constexpr Vec2 normalized() const noexcept{
+                float len = length();
+                if (len == 0.0f) return Vec2(0, 0);
+                return *this / len;
+            }
             
             /**
              * @brief a method to calculate the dot product of this vector with another vector.
@@ -144,7 +172,9 @@ namespace retronomicon::lib::math {
              * 
              * @return the scalar representation of the dot product
              */ 
-            float dot(const Vec2& other) const;
+            [[nodiscard]] constexpr float dot(const Vec2& other) const noexcept{        
+                return x * other.x + y * other.y;
+            }
 
     };
 
