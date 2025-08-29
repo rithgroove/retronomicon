@@ -18,7 +18,7 @@ namespace retronomicon::lib::scene::splash {
 
         void init() override;
 
-        void deinit() override;
+        // void deinit() override;
 
         void shutdown() override;
 
@@ -32,7 +32,6 @@ namespace retronomicon::lib::scene::splash {
         std::string m_nextScene = nullptr; // the default is Menu, but you can adjust it
 
         float m_duration = 3.0f;
-
         
         InputMap* generateInputMap();
         void setupSystem();

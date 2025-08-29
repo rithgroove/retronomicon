@@ -44,9 +44,9 @@ namespace retronomicon::lib::animation{
             animation->update(dt);
         }
 
-        for (auto obj : entity->getChilds()) {
+        for (Entity* obj : entity->getChilds()) {
             // render logic
-             this->update(dt,obj.get());
+             this->update(dt,obj);
         }
     }
 }

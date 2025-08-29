@@ -21,7 +21,7 @@ namespace retronomicon::lib::math{
 	    	constexpr Point() = default;
 
 	    	/**
-	    	 * @brief constructor with 2 points 	    	 
+	    	 * @brief constructor with 2 float 	    	 
 	    	 * 
 	    	 * @param x the x position
 	    	 * @param y the y position
@@ -34,7 +34,7 @@ namespace retronomicon::lib::math{
 	    	 * 
 	    	 * @param vector the 2D vector we want to convert to point
 	    	 */
-	        explicit Point(const Vec2& vector); // no accidental implicit conversions
+	        explicit Point(const Vec2& vector) noexcept; // no accidental implicit conversions
 
 	    	/***************************** Destructor *****************************/
 
@@ -48,7 +48,7 @@ namespace retronomicon::lib::math{
 	    	 * @param x the x position
 	    	 * @param y the y position
 	    	 */
-			void set(float x, float y) { m_x = x; m_y = y; }
+			void set(float x, float y) noexcept { m_x = x; m_y = y; }
 
 
 	    	/***************************** Getter *****************************/
@@ -74,28 +74,37 @@ namespace retronomicon::lib::math{
 		     * 
 		     * @param other another point
 		     */
-	    	constexpr bool operator==(const Point& other) const noexcept;
+	    	constexpr bool operator==(const Point& other) const noexcept {
+		        return m_x == other.m_x && m_y == other.m_y;
+		    };
+
 
     	    /**
 		     * @brief overloading operator !=
 		     * 
 		     * @param other another point
 		     */
-			constexpr bool operator!=(const Point& other) const noexcept;
+			constexpr bool operator!=(const Point& other) const noexcept{
+		        return !(*this == other);
+		    };
 
     	    /**
 		     * @brief overloading operator +
 		     * 
 		     * @param other another point
 		     */
-			constexpr Point operator+(const Point& other) const noexcept;
+			constexpr Point operator+(const Point& other) const noexcept{
+		        return Point(m_x + other.m_x, m_y + other.m_y);
+		    };
 
     	    /**
 		     * @brief overloading operator -
 		     * 
 		     * @param other another point
 		     */
-			constexpr Point operator-(const Point& other) const noexcept;
+			constexpr Point operator-(const Point& other) const noexcept{
+		        return Point(m_x - other.m_x, m_y - other.m_y);
+		    };
 
 			/**
 			 * @brief overloading operator << to call to_string()
