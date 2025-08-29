@@ -36,6 +36,11 @@ namespace retronomicon::lib::core{
             void start();
 
             /**
+             * @brief start function (used to initialize stuff)
+             */
+            void deinit();
+
+            /**
              * @brief a method to add components. this will use templates
              * 
              * @param args the component 
@@ -75,8 +80,9 @@ namespace retronomicon::lib::core{
             Entity* createGameObject(const std::string& name);
             void removeGameObject(Entity* object);
             
-            void addChildEntity(Entity* entity);
-            std::vector<Entity*> getChilds(){return m_childEntities;}
+            void addChildEntity(std::unique_ptr<Entity> entity);
+            std::vector<std::unique_ptr<Entity>> getChilds();
+            
             void setParent(Entity* entity){this->m_parentEntity = entity;}
             bool hasParent() const {return m_parentEntity!=nullptr;}
 
@@ -84,7 +90,7 @@ namespace retronomicon::lib::core{
             std::shared_ptr<Renderable> getMainRenderableComponent(){return m_mainRenderableComponent;}
             void setMainRenderableComponent(std::shared_ptr<Renderable> renderable){m_mainRenderableComponent = renderable;}
         protected:
-            std::vector<Entity*> m_childEntities;
+            std::vector<std::unique_ptr<Entity>> m_childEntities;  // owns children
             std::shared_ptr<Renderable> m_mainRenderableComponent = nullptr;
             Entity* m_parentEntity = nullptr;
             unordered_map<type_index, shared_ptr<Component>> m_components;

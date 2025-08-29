@@ -124,6 +124,17 @@ namespace retronomicon::lib::scene::splash {
 	    setInitialized(true);
 	    setActive(true);
 	}
+	
+	void SplashScene::deinit() {
+		if (!m_isInitialized){
+			m_renderer = m_engine->getRenderer();
+			this->setupSystem();
+
+			this->setupLogo();
+		}
+	    setInitialized(true);
+	    setActive(true);
+	}
 
 	void SplashScene::shutdown() {
 	    // unloadAssets();

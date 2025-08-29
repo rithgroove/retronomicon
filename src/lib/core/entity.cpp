@@ -41,4 +41,10 @@ namespace retronomicon::lib::core{
         }
         return components;
     }
+
+    void Entity::deinit() {
+        m_components.clear();       // shared_ptr will free components
+        m_childEntities.clear();    // unique_ptr will free children recursively
+        m_mainRenderableComponent.reset();
+    }
 }

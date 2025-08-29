@@ -18,6 +18,8 @@ namespace retronomicon::lib::scene::splash {
 
         void init() override;
 
+        void deinit() override;
+
         void shutdown() override;
 
         void setImage(SDL_Texture* texture){ m_logoTexture = texture;}

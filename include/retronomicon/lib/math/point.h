@@ -14,11 +14,11 @@ namespace retronomicon::lib::math{
     class Point {
 	    public:
 	    	/***************************** Constructor *****************************/
-
+        
 	    	/**
 	    	 *  @brief default constructor with x=0 and y =0
 	    	 */
-	    	Point();
+	    	constexpr Point() = default;
 
 	    	/**
 	    	 * @brief constructor with 2 points 	    	 
@@ -26,7 +26,7 @@ namespace retronomicon::lib::math{
 	    	 * @param x the x position
 	    	 * @param y the y position
 	    	 */
-	    	Point(float x, float y);
+	        constexpr Point(float x, float y) : m_x(x), m_y(y) {}
 	    	
 
 	    	/**
@@ -34,7 +34,7 @@ namespace retronomicon::lib::math{
 	    	 * 
 	    	 * @param vector the 2D vector we want to convert to point
 	    	 */
-	    	Point(Vec2& vector);
+	        explicit Point(const Vec2& vector); // no accidental implicit conversions
 
 	    	/***************************** Destructor *****************************/
 
@@ -58,14 +58,14 @@ namespace retronomicon::lib::math{
 	    	 * 
 	    	 * @return the x position of the point
 	    	 */
-	    	float getX() const { return m_x; }
-
+	    	[[nodiscard]] constexpr float getX() const noexcept { return m_x; }
+        
 	    	/**
 	    	 * @brief return the y position of the point
 	    	 * 
 	    	 * @return the y position of the point
 	    	 */
-	    	float getY() const { return m_y; }
+	        [[nodiscard]] constexpr float getY() const noexcept { return m_y; }
 
 	    	/***************************** Operator Overload *****************************/
 
@@ -74,28 +74,28 @@ namespace retronomicon::lib::math{
 		     * 
 		     * @param other another point
 		     */
-	    	bool operator==(const Point& other) const;
+	    	constexpr bool operator==(const Point& other) const noexcept;
 
     	    /**
 		     * @brief overloading operator !=
 		     * 
 		     * @param other another point
 		     */
-			bool operator!=(const Point& other) const;
+			constexpr bool operator!=(const Point& other) const noexcept;
 
     	    /**
 		     * @brief overloading operator +
 		     * 
 		     * @param other another point
 		     */
-			Point operator+(const Point& other) const;
+			constexpr Point operator+(const Point& other) const noexcept;
 
     	    /**
 		     * @brief overloading operator -
 		     * 
 		     * @param other another point
 		     */
-			Point operator-(const Point& other) const;
+			constexpr Point operator-(const Point& other) const noexcept;
 
 			/**
 			 * @brief overloading operator << to call to_string()
@@ -111,7 +111,7 @@ namespace retronomicon::lib::math{
 	    	 * 
 	    	 * @return Brief summary of this object in string
 	    	 */
-	    	std::string to_string() const;
+	    	[[nodiscard]] std::string to_string() const;
 
 	    	/***************************** Main Methods *****************************/
 
@@ -121,7 +121,7 @@ namespace retronomicon::lib::math{
 	    	 * @param target the target point
 	    	 * @return the distance in float
 	    	 */
-	    	float calculateDistance(const Point& target) const;
+	    	[[nodiscard]] float calculateDistance(const Point& target) const noexcept;
 
 	    	/***************************** Other Methods *****************************/
 
@@ -130,10 +130,10 @@ namespace retronomicon::lib::math{
 		     * 
 		     * @return the vec2 representation of current point
 		     */
-    	    Vec2 toVec2() const;
+    	    [[nodiscard]] Vec2 toVec2() const noexcept;
 	    private:
             /***************************** Attribute *****************************/
-	    	float m_x; // x position
-	    	float m_y; // y position
+	    	float m_x{0.0f}; // x position
+	    	float m_y{0.0f}; // y position
     };
 } // namespace Retronomicon
