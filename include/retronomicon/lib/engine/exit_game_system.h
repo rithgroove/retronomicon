@@ -41,7 +41,7 @@ namespace retronomicon::lib::engine{
              * 
              * @return Brief summary of this object in string
              */
-            virtual std::string to_string() const;
+            [[nodiscard]] virtual std::string to_string() const;
             
             /***************************** Override Method *****************************/
 
@@ -54,6 +54,9 @@ namespace retronomicon::lib::engine{
             void update(float dt, retronomicon::lib::core::Entity* entities)  override;
 
         private:
+            
+            /***************************** Attribute *****************************/
+
             GameEngine* m_gameEngine = nullptr;
     };
 }
