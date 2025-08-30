@@ -18,7 +18,7 @@ namespace retronomicon::lib::math{
 	        /**
 	    	* @brief Default constructor
 	    	*/
-	        Rect();
+	        constexpr Rect() = default;
 
 	    	/**
 	    	* @brief constructor that accept 4 floating value
@@ -29,7 +29,8 @@ namespace retronomicon::lib::math{
 	    	* @param width the width this rectangle
 	    	* @param height the height this rectangle
 	    	*/
-	    	Rect(float x, float y, float width, float height); 
+	    	constexpr Rect(float x, float y, float width, float height) noexcept
+		        : m_position(x, y), m_anchor(0.0f, 0.0f), m_width(width), m_height(height) {}
 
 	    	/**
 	    	* @brief constructor with the position of this rectangle
@@ -39,7 +40,8 @@ namespace retronomicon::lib::math{
 	    	* @param width the width this rectangle
 	    	* @param height the height this rectangle
 	    	*/
-	        Rect(const Point& position, float width, float height);
+	        Rect(const Point& position, float width, float height) noexcept
+		        : m_position(position), m_anchor(0.0f, 0.0f), m_width(width), m_height(height) {}
 
 	    	/**
 	    	* @brief constructor with the position of this rectangle
@@ -50,7 +52,8 @@ namespace retronomicon::lib::math{
 	    	* @param width the width this rectangle
 	    	* @param height the height this rectangle
 	    	*/
-	        Rect(const Point& position, const Point& anchor, float width, float height);
+	        Rect(const Point& position, const Point& anchor, float width, float height) noexcept
+        		: m_position(position), m_anchor(anchor), m_width(width), m_height(height) {}
 
 
 	    	/***************************** Destructor *****************************/
@@ -65,7 +68,7 @@ namespace retronomicon::lib::math{
 	    	* @param width the new width for this rectangle
 	    	* @param height the new height for this rectangle
 	    	*/
-			void setSize(float width, float height) { m_width = width; m_height = height; }
+			void setSize(float width, float height) noexcept { m_width = width; m_height = height; }
 
 	       /**
 	    	* @brief a method to change the position of the rectangle
@@ -73,14 +76,14 @@ namespace retronomicon::lib::math{
 	    	* @param x the new x position for this rectangle
 	    	* @param y the new y position for this rectangle
 	    	*/
-			void setPosition(float x, float y) { m_position.set(x, y); }
+			void setPosition(float x, float y) noexcept { m_position.set(x, y); }
 
 	    	/**
 	    	 * @brief a method to change the position of the rectangle
 	    	 * 
 	    	 * @param position the new position in Point class
 	    	 */
-			void setPosition(const Point& position) { m_position = position; }
+			void setPosition(const Point& position) noexcept { m_position = position; }
 
 
 	    	/***************************** Getter *****************************/
@@ -90,42 +93,42 @@ namespace retronomicon::lib::math{
 	    	 * 
 	    	 * @return the position in point format
 	    	 */
-			Point getPosition() const { return m_position; }
+			[[nodiscard]] constexpr Point getPosition() const noexcept { return m_position; }
 
 	    	/**
 	    	 * @brief a method to get the anchor position of the rectangle
 	    	 * 
 	    	 * @return the anchor position in point format
 	    	 */
-			Point getAnchor() const { return m_anchor; }
+			[[nodiscard]] constexpr Point getAnchor() const noexcept { return m_anchor; }
 
 	    	/**
 	    	 * @brief a method to get the width of rectangle
 	    	 * 
 	    	 * @return the width of the rectangle
 	    	 */
-			float getWidth() const { return m_width; }
+			[[nodiscard]] constexpr float getWidth() const noexcept { return m_width; }
 
 	    	/**
 	    	 * @brief a method to get the height of rectangle
 	    	 * 
 	    	 * @return the height of the rectangle
 	    	 */
-			float getHeight() const { return m_height; }
+			[[nodiscard]] constexpr float getHeight() const noexcept { return m_height; }
 
 	    	/**
 	    	 * @brief a method to get the x position of this rectangle
 	    	 * 
 	    	 * @return the x position of the rectangle
 	    	 */
-			float getX() const { return m_position.getX(); }
+			[[nodiscard]] constexpr float getX() const noexcept { return m_position.getX(); }
 
 	    	/**
 	    	 * @brief a method to get the y position of this rectangle
 	    	 * 
 	    	 * @return the y position of the rectangle
 	    	 */
-			float getY() const { return m_position.getY(); }
+			[[nodiscard]] constexpr float getY() const noexcept { return m_position.getY(); }
 
 	    	/***************************** Operator Overload *****************************/
 
@@ -143,14 +146,13 @@ namespace retronomicon::lib::math{
 	    	 * 
 	    	 * @return Brief summary of this object in string
 	    	 */
-	    	std::string to_string() const;
-
+	    	[[nodiscard]] std::string to_string() const;
 
 	    private:
             /***************************** Attribute *****************************/            
-	    	Point m_anchor;
-	    	Point m_position;
-	    	float m_width;
-	    	float m_height;
+	    	Point m_anchor{0.5f,0.5f};
+	    	Point m_position{0.0f,0.0f};
+	    	float m_width{0.0f};
+	    	float m_height{0.0f};
     };
 } // namespace Retronomicon

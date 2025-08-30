@@ -26,7 +26,7 @@ namespace retronomicon::lib::math{
 	    	 * @param x the x position
 	    	 * @param y the y position
 	    	 */
-	        constexpr Point(float x, float y) : m_x(x), m_y(y) {}
+	        constexpr Point(float x, float y) noexcept : m_x(x), m_y(y) {}
 	    	
 
 	    	/**

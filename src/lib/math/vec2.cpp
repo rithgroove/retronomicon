@@ -1,5 +1,4 @@
 #include "retronomicon/lib/math/vec2.h"
-#include <cmath>
 #include <sstream>
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
