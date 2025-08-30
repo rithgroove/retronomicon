@@ -14,8 +14,8 @@ namespace retronomicon::lib::input {
      * @param rawInput the rawInput class
      * @param inputMap key mapping from SDL to what the game understand
      */
-    InputState::InputState(RawInput * rawInput){
-        m_rawInput = rawInput;
+    InputState::InputState(){
+        m_rawInput = new RawInput();
     }
 
     /***************************** Destructor *****************************/

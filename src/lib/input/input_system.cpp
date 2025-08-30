@@ -16,7 +16,6 @@ namespace retronomicon::lib::input{
      */
     InputSystem::InputSystem() // Temp init to avoid reference error
     {
-        RawInput* rawInput = new RawInput();
 
         InputMap* inputMap = new InputMap();
         inputMap->bindAction(SDL_SCANCODE_SPACE, "jump");
@@ -31,7 +30,7 @@ namespace retronomicon::lib::input{
         inputMap->bindAxis(SDL_SCANCODE_W, "move_y", -1.0f);
         inputMap->bindAxis(SDL_SCANCODE_S, "move_y", 1.0f);
 
-        m_inputState = new InputState(rawInput);
+        m_inputState = std::make_shared<InputState>();
         m_inputState->setInputMap(inputMap);
 
         // If m_gameObjects should be provided externally, consider refactoring the constructor
@@ -40,7 +39,7 @@ namespace retronomicon::lib::input{
     /**
      * @brief default constructor
      */
-    InputSystem::InputSystem(InputState* inputState) // Temp init to avoid reference error
+    InputSystem::InputSystem(std::shared_ptr<InputState> inputState) // Temp init to avoid reference error
     {
         m_inputState = inputState;
 

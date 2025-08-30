@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 #include "retronomicon/lib/input/input_state.h"
 #include "retronomicon/lib/core/entity.h"
 #include "retronomicon/lib/core/system.h"
@@ -24,7 +25,7 @@ namespace retronomicon::lib::input {
             /**
              * @brief constructor with input map
              */
-            InputSystem(InputState* state);
+            InputSystem(std::shared_ptr<InputState> state);
 
             /***************************** Destructor *****************************/
 
@@ -70,7 +71,7 @@ namespace retronomicon::lib::input {
             void update(float dt, retronomicon::lib::core::Entity* objects)  override;
         private:
             /***************************** Attribute *****************************/
-            InputState* m_inputState;
+            std::shared_ptr<InputState> m_inputState;
             bool m_isUpdating= false;
     };
 

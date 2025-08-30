@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "retronomicon/lib/core/system.h"
 #include "retronomicon/lib/core/entity.h"
 #include "retronomicon/lib/input/input_state.h"
@@ -10,16 +11,17 @@
 namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::scene::SceneChangeComponent;
     using retronomicon::lib::core::Entity;
+    using retronomicon::lib::input::InputState;
     class MenuInteractionSystem : public retronomicon::lib::core::System {
-    private:
-        retronomicon::lib::input::InputState* m_inputState;
-        size_t selectedIndex = 0;
 
     public:
-        MenuInteractionSystem(retronomicon::lib::input::InputState* input);
+        MenuInteractionSystem(std::shared_ptr<InputState> input);
 
         void update(float dt, retronomicon::lib::core::Entity* objects) override;
         // bool m_isUpdating= false;
+    private:
+        std::shared_ptr<InputState> m_inputState;
+        size_t selectedIndex = 0;
     };
 
 } // namespace retronomicon::lib::scene::menu

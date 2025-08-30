@@ -5,7 +5,7 @@
 namespace retronomicon::lib::scene::menu {
     using retronomicon::lib::audio::SoundEffectComponent;
     using retronomicon::lib::engine::ExitGameComponent;
-    MenuInteractionSystem::MenuInteractionSystem(retronomicon::lib::input::InputState* input)
+    MenuInteractionSystem::MenuInteractionSystem(std::shared_ptr<InputState> input)
         : m_inputState(input) {}
 
     void MenuInteractionSystem::update(float dt, retronomicon::lib::core::Entity* entity) {

@@ -61,7 +61,7 @@ namespace retronomicon::lib::scene::splash {
 
 	void SplashScene::setupSystem(){
 		//setup input map and update inputstate to use thesep
-        auto* inputState = m_engine->getInputState();
+        auto inputState = m_engine->getInputState();
         inputState->setInputMap(this->generateInputMap());
 
 		// setup systems

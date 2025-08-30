@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "retronomicon/lib/input/input_component.h"
 #include "retronomicon/lib/input/input_state.h"
 namespace retronomicon::lib::scene::splash{
@@ -9,7 +10,7 @@ namespace retronomicon::lib::scene::splash{
 	class SplashInputComponent:public InputComponent{
 		public:
 	        SplashInputComponent();
-			void updateFromState(InputState* state, float dt) override;
+			void updateFromState(std::shared_ptr<InputState> state, float dt) override;
 	};
 
 

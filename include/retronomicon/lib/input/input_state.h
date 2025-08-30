@@ -12,7 +12,7 @@
 namespace retronomicon::lib::input {
     class InputState {
     public:
-        InputState(RawInput* rawInput);
+        InputState();
 
         void setAction(const std::string& name, bool active) {
             m_actions[name] = active;

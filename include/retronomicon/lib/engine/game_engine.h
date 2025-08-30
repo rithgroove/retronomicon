@@ -21,6 +21,7 @@ namespace retronomicon::lib::engine {
 
             /**
              * @brief default constructor
+             * initiate m_inputState 
              */
             GameEngine();
 
@@ -32,26 +33,50 @@ namespace retronomicon::lib::engine {
             // ~GameEngine();
 
             /***************************** Setter *****************************/
+
             /**
              * @brief set active scene
+             * 
+             * @param newScene the shared pointer of the new scene we wanted to set
              */
-            void setScene(std::shared_ptr<Scene> newScene) {
+            void setScene(std::shared_ptr<Scene> newScene) noexcept {
                 m_activeScene = std::move(newScene);
             }
 
-
-            void registerScene(const std::string &name , std::shared_ptr<Scene> newScene) {
+            /**
+             * @brief register scene in m_sceneManager. so we could use scene manager to change scene by keyword
+             * 
+             * @param name the name of this scene
+             * @param newScene the shared pointer of the new scene we wanted to register
+             */
+            void registerScene(const std::string &name , std::shared_ptr<Scene> newScene) noexcept{
                 m_sceneManager.registerScene(name,newScene);
             }
 
+            /**
+             * @brief method to get InputState
+             * 
+             * @return inputState
+             */
+            std::shared_ptr<InputState>  getInputState() noexcept {return m_inputState;}  
+
+
             /***************************** Getter *****************************/
-            SDL_Renderer* getRenderer(){
+
+            /**
+             * @brief inline method to get the renderer
+             * 
+             * @return the SDL_Renderer from window
+             */
+            [[nodiscard]] SDL_Renderer* getRenderer() noexcept{
                 return m_window->getRenderer();
             }
 
             /***************************** Main Methods *****************************/
+
             /**
              * @brief changes scene using scene manager (with reset/initialization logic)
+             * 
              * @param name the scene name to switch to
              */
             void changeScene(const std::string& name);
@@ -68,19 +93,22 @@ namespace retronomicon::lib::engine {
              * @brief method to start mainloop
              */
             void run();
-            
-            InputState* getInputState(){return m_inputState;}       
+                 
+            /**
+             * @brief method to set m_running to false which will trigger the engine to exit mainloop.
+             */
+            void stop() noexcept {m_running = false;}
 
-            void stop(){m_running = false;}
         private:
-
-
             /***************************** Attribute *****************************/
-            InputState* m_inputState = nullptr;
-            retronomicon::lib::graphic::Window * m_window = nullptr; 
-            bool m_running = false; 
+
+            std::shared_ptr<InputState> m_inputState;
+            std::unique_ptr<retronomicon::lib::graphic::Window> m_window;
             std::shared_ptr<Scene> m_activeScene;
+
+            bool m_running = false; 
             retronomicon::lib::scene::SceneManager m_sceneManager;
+
             /***************************** Main Private Methods *****************************/
 
             /**

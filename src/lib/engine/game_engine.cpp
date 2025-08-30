@@ -1,19 +1,16 @@
 #include <iostream>
 #include <stdexcept>
 #include "retronomicon/lib/engine/game_engine.h"
-#include "retronomicon/lib/input/raw_input.h"
 
 namespace retronomicon::lib::engine {
     using retronomicon::lib::graphic::Window;
-    using retronomicon::lib::input::RawInput;
     /***************************** Constructor *****************************/
     
     /**
      * @brief default constructor
      */
     GameEngine::GameEngine(){
-        RawInput* rawInput = new RawInput();
-        m_inputState = new InputState(rawInput);
+        m_inputState = std::make_shared<InputState>();
     }
 
     /***************************** Destructor *****************************/
@@ -24,11 +21,13 @@ namespace retronomicon::lib::engine {
     
     /**
      * @brief changes scene using scene manager (with reset/initialization logic)
+     *
      * @param name the scene name to switch to
      */
     void GameEngine::changeScene(const std::string& name) {
         auto nextScene = m_sceneManager.changeScene(name);
         if (nextScene) {
+            // m_activeScene.reset();
             setScene(nextScene);
         } else {
             // Log or handle error: unknown scene name
@@ -44,7 +43,7 @@ namespace retronomicon::lib::engine {
      */
     bool GameEngine::init(const char* title, int width, int height) {
         try{
-            m_window = new Window(title,width,height);
+            m_window = std::make_unique<Window>(title, width, height);
             m_running = true;
         }catch (const std::runtime_error &e){
             std::cerr << "Failure to init game engine: " << e.what() << std::endl;

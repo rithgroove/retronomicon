@@ -1,6 +1,7 @@
 // InputComponent.hpp
 #pragma once
 
+#include <memory>
 #include "input_state.h"   // your global/hardware state wrapper
 #include "retronomicon/lib/core/component.h"
 
@@ -26,7 +27,7 @@ namespace retronomicon::lib::input {
          * @param state Current hardware input state.
          * @param dt Delta time since last frame.
          */
-        virtual void updateFromState(InputState* state, float dt) = 0;
+        virtual void updateFromState(std::shared_ptr<InputState> state, float dt) = 0;
     };
 
 } // namespace retronomicon::lib::input
