@@ -7,7 +7,7 @@
 #include "retronomicon/lib/graphic/window.h"
 #include "retronomicon/lib/input/input_state.h"
 /**
- * @brief The namespace for the core features of retronomicon
+ * @brief The namespace for the core engine features of retronomicon
  */
 namespace retronomicon::lib::engine {
     using retronomicon::lib::input::InputState;

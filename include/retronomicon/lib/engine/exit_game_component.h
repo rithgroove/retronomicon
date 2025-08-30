@@ -2,6 +2,9 @@
 
 #include "retronomicon/lib/core/component.h"   // your base Component class
 
+/**
+ * @brief The namespace for the core engine features of retronomicon
+ */
 namespace retronomicon::lib::engine {
     using retronomicon::lib::core::Component;
     /**
@@ -12,26 +15,42 @@ namespace retronomicon::lib::engine {
      */
     class ExitGameComponent : public Component {
     public:
-        ExitGameComponent();
-        virtual ~ExitGameComponent();
+        /***************************** Constructor *****************************/
+
+        /**
+         * @brief default constructor
+         */
+        ExitGameComponent() = default;
+
+        /***************************** Destructor *****************************/
+
+        /**
+         * @brief default desstructor
+         */
+        virtual ~ExitGameComponent() = default;
+
+        /***************************** Getter *****************************/
 
         /**
          * @brief Whether this component has been activated (e.g., user pressed the button).
          */
-        bool isActivated() const;
+        [[nodiscard]] bool isActivated() const noexcept { return m_activated; }
+
+        /***************************** Setter *****************************/
 
         /**
          * @brief Activate the exit signal.
          */
-        void activate();
+        void activate() noexcept { m_activated = true; }
 
         /**
          * @brief Reset the activation state.
          */
-        void reset();
+        void reset() noexcept { m_activated = false; }
 
     private:
-        bool m_activated;
+        /***************************** Attribute *****************************/
+        bool m_activated = false;
     };
 
 } // namespace retronomicon::lib::core
