@@ -23,7 +23,7 @@ namespace retronomicon::lib::animation{
 	    	 * @param name the name of of this animation
 	    	 * @param repeat set true if this animation is repeated
 	    	 */
-    		AnimationClip(const std::vector<AnimationFrame>& frames, const std::string& name,bool repeat);
+    		AnimationClip(const std::vector<AnimationFrame>& frames, const std::string& name,bool repeat) noexcept;
 
 		    /***************************** Destructor *****************************/
 
@@ -36,14 +36,14 @@ namespace retronomicon::lib::animation{
 	    	 * 
 	    	 * @param frame the new frame index
 	    	 */
-	        void setCurrentFrame(int frame) { m_currentFrame = frame; }
+	        void setCurrentFrame(int frame) noexcept { m_currentFrame = frame; }
 
 	    	/**
 	    	 * @brief set this clip to repeat or not
 	    	 * 
 	    	 * @param repeat boolean true = repeat, false = one time
 	    	 */
-	        void setRepeat(bool repeat) { m_repeat = repeat;} 
+	        void setRepeat(bool repeat) noexcept { m_repeat = repeat;} 
 
 	    	/***************************** Getter *****************************/
 
@@ -52,28 +52,28 @@ namespace retronomicon::lib::animation{
 	    	 * 
 	    	 * @return name of the AnimationClip
 	    	 */    
-	        const std::string& getName() const { return m_name; }
+	        [[nodiscard]] const std::string& getName() const noexcept{ return m_name; }
 
 			/**
 	    	 * @brief getter of the current frame index
 	    	 * 
 	    	 * @return the current frame index
 	    	 */    
-	        size_t getCurrentFrameIndex() const { return static_cast<size_t>(m_currentFrame); }
+	        [[nodiscard]] size_t getCurrentFrameIndex() const noexcept{ return static_cast<size_t>(m_currentFrame); }
 
 			/**
 	    	 * @brief getter of the current frame
 	    	 * 
 	    	 * @return the current frame in AnimationFrame class
 	    	 */    
-	        const AnimationFrame& getCurrentFrame() const { return m_frames[m_currentFrame]; }
+	        [[nodiscard]] const AnimationFrame& getCurrentFrame() const noexcept{ return m_frames[m_currentFrame]; }
 
 			/**
 	    	 * @brief get the number of frame in this clip
 	    	 * 
 	    	 * @return the number of frame
 	    	 */    
-	        int getFrameCount() const {return static_cast<int>(m_frames.size());}
+	        [[nodiscard]] int getFrameCount() const noexcept{return static_cast<int>(m_frames.size());}
 
 	    	/***************************** Utility *****************************/
 
@@ -82,14 +82,14 @@ namespace retronomicon::lib::animation{
 	    	 * 
 	    	 * @return the current frame in AnimationFrame class
 	    	 */    
-	        bool isRepeating() const { return m_repeat; }
+	        [[nodiscard]] bool isRepeating() const noexcept{ return m_repeat; }
 
 	    	/**
 	    	 * @brief a method to check if the animation is finished?
 	    	 * 
 	    	 * @return true if m_repeat is false, and is currently on the last frame
 	    	 */    
-            bool isFinished() const;
+            [[nodiscard]] bool isFinished() const noexcept;
 
 	    	/***************************** Operator Overload *****************************/
 
@@ -107,7 +107,7 @@ namespace retronomicon::lib::animation{
 	    	 * 
 	    	 * @return Brief summary of this object in string
 	    	 */
-	    	std::string to_string() const;
+	    	[[nodiscard]] std::string to_string() const noexcept;
 
 		    /***************************** Main Methods *****************************/
 

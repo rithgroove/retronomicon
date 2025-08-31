@@ -18,7 +18,7 @@ namespace retronomicon::lib::animation{
      */
     AnimationClip::AnimationClip(const std::vector<AnimationFrame>& frames,
                                  const std::string& name,
-                                 bool repeat)
+                                 bool repeat) noexcept
         : m_frames(frames),
           m_name(std::move(name)),
           m_repeat(repeat),
@@ -41,7 +41,7 @@ namespace retronomicon::lib::animation{
      * 
      * @return true if m_repeat is false, and is currently on the last frame
      */
-    bool AnimationClip::isFinished() const{
+    bool AnimationClip::isFinished() const noexcept{
         if (!m_repeat && m_currentFrame >= getFrameCount()){
             return true;
         }
@@ -55,7 +55,7 @@ namespace retronomicon::lib::animation{
      * 
      * @return Brief summary of this object in string
      */
-    std::string AnimationClip::to_string() const{
+    std::string AnimationClip::to_string() const noexcept{
         std::ostringstream oss;
         oss << "[AnimationClip]\n";
         oss << "values:\n";
