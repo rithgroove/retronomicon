@@ -39,8 +39,10 @@ namespace retronomicon::lib::scene::splash {
 	using retronomicon::lib::input::InputSystem;
 	// using retronomicon::lib::graphic::SpriteComponent;
 	
-	SplashScene::SplashScene(GameEngine* engine,std::shared_ptr<ImageAsset> image, const std::string nextScene)
-	    : Scene("Splash"), m_engine(engine),m_image(image),m_nextScene(nextScene) {}
+	SplashScene::SplashScene(GameEngine* engine,std::string filePath,std::string fileKey, const std::string nextScene)
+	    : Scene("Splash"), m_engine(engine),m_filePath(filePath),m_fileKey(fileKey),m_nextScene(nextScene) {
+	    	m_assetManager = engine->getAssetManager();
+	    }
 
 	SplashScene::~SplashScene() {
 	    // unloadAssets();
@@ -81,6 +83,9 @@ namespace retronomicon::lib::scene::splash {
 		// ------------- get important variable----------------------
         int windowWidth = Window::getWidth();
         int windowHeight = Window::getHeight();
+
+	    m_image = m_assetManager->loadImage(m_filePath,m_fileKey);
+	    if (!m_image){return;}
 
 		// ------------- setup logo ----------------------
 		std::cout << "[Splash Scene] create logo entity" <<std::endl;
