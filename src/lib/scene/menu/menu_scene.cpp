@@ -43,19 +43,22 @@ namespace retronomicon::lib::scene::menu {
 
     MenuScene::MenuScene(
         GameEngine* engine, 
-        std::shared_ptr<ImageAsset> backgroundImage,
-        std::shared_ptr<ImageAsset> nineSliceImage,
-        std::shared_ptr<FontAsset> fontAsset,
-        std::shared_ptr<MusicAsset> musicAsset,
-        std::shared_ptr<SoundEffectAsset> soundEffectAsset)
+        std::string backgroundImageFilepath,
+        std::string nineSliceImageFilepath,
+        std::string fontAssetFilepath,
+        int fontSize,
+        std::string musicAssetFilepath,
+        std::string soundEffectAssetFilepath)
             : Scene("menu_scene"),
               m_engine(engine),
-              m_backgroundImage(backgroundImage),
-              m_nineSliceImage(nineSliceImage),
-              m_fontAsset(fontAsset),
+              m_backgroundImageFilepath(backgroundImageFilepath),
+              m_nineSliceImageFilepath(nineSliceImageFilepath),
+              m_fontAssetFilepath(fontAssetFilepath),
+              m_fontSize(fontSize),
               m_renderer(engine->getRenderer()),
-              m_musicAsset(musicAsset),
-              m_soundEffectAsset(soundEffectAsset)
+              m_musicAssetFilepath(musicAssetFilepath),
+              m_soundEffectAssetFilepath(soundEffectAssetFilepath),
+              m_assetManager(engine->getAssetManager())
         {
             std::cout<<"[MenuScene] contruct menu scene will full parameters"<<std::endl;
         }
@@ -63,6 +66,11 @@ namespace retronomicon::lib::scene::menu {
 
     void MenuScene::init() {
         if (!m_isInitialized){
+            m_backgroundImage = m_assetManager->loadImage(m_backgroundImageFilepath,"menu_background");
+            m_nineSliceImage = m_assetManager->loadImage(m_nineSliceImageFilepath, "menu_nine_slice_image");
+            m_fontAsset = m_assetManager->loadFont(m_fontAssetFilepath,"menu_font",m_fontSize);
+            m_musicAsset = m_assetManager->loadMusic(m_musicAssetFilepath, "menu_music");
+            m_soundEffectAsset = m_assetManager->loadSound(m_soundEffectAssetFilepath, "menu_sfx");
             std::cout<<"Masuk init"<<std::endl;
             auto musicComponent = this->addComponent<MusicComponent>(m_musicAsset.get(),1000);
             this->setupSystem();
