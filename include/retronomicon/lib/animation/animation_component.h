@@ -24,7 +24,7 @@ namespace retronomicon::lib::animation{
              * 
              * @param defaultClip the default animation clip in shared pointer
              */
-            explicit AnimationComponent(std::shared_ptr<AnimationClip> defaultClip);
+            explicit AnimationComponent(std::shared_ptr<AnimationClip> defaultClip) noexcept;
 
             /***************************** Destructor *****************************/
 
@@ -40,7 +40,7 @@ namespace retronomicon::lib::animation{
              * 
              * @param listener the animation listeneer class
              */
-            inline void setListener(AnimationListener* listener) { m_listener = listener; }
+            inline void setListener(AnimationListener* listener) noexcept{ m_listener = listener; }
 
             /***************************** Getter *****************************/
 
@@ -49,42 +49,42 @@ namespace retronomicon::lib::animation{
              * 
              * @return current animation clip
              */
-            inline std::shared_ptr<AnimationClip> getCurrentClip() const { return m_currentClip; }
+            [[nodiscard]] inline std::shared_ptr<AnimationClip> getCurrentClip() const noexcept{ return m_currentClip; }
 
             /**
              * @brief method to get current animation frame
              * 
              * @return current animation frame
              */
-            inline const AnimationFrame& getCurrentFrame() const { return m_currentClip->getCurrentFrame(); }
+            [[nodiscard]] inline const AnimationFrame& getCurrentFrame() const noexcept { return m_currentClip->getCurrentFrame(); }
 
             /**
              * @brief method to get current animation state name
              * 
              * @return current animation state name
              */
-            inline const std::string& getCurrentStateName() const { return m_currentClip->getName(); }
+            [[nodiscard]] inline const std::string& getCurrentStateName() const noexcept { return m_currentClip->getName(); }
 
             /**
              * @brief method to get current animation listener
              * 
              * @return current animation listener
              */
-            inline AnimationListener* getListener() const { return m_listener; }
+            [[nodiscard]] inline AnimationListener* getListener() const noexcept { return m_listener; }
 
             /***************************** Utility *****************************/
 
             /**
              * @brief check is current animation is animating
              */
-            bool isPlaying() const{ return !m_paused;}
+            [[nodiscard]] inline bool isPlaying() const noexcept{ return !m_paused;}
 
             /**
              * @brief a method to check if this component have a specific animation clip
              * 
              * @param name of the clip
              */
-            bool hasClip(const std::string& name) const  {return m_animationClips.count(name) > 0;}
+            [[nodiscard]] inline bool hasClip(const std::string& name) const noexcept {return m_animationClips.count(name) > 0;}
 
             /***************************** Operator Overload *****************************/
 
@@ -113,7 +113,7 @@ namespace retronomicon::lib::animation{
              * 
              * @param animationClip the animation clip that we'll be adding to the manager
              */
-            bool addClip(std::shared_ptr<AnimationClip> clip);
+            bool addClip(std::shared_ptr<AnimationClip> clip) noexcept;
 
             /**
              * @brief remove clip from the dictionary

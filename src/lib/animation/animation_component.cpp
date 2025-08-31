@@ -17,7 +17,7 @@ namespace retronomicon::lib::animation {
      * @param name the name of of this animation
      * @param repeat set true if this animation is repeated
      */
-    AnimationComponent::AnimationComponent(std::shared_ptr<AnimationClip> defaultClip) {
+    AnimationComponent::AnimationComponent(std::shared_ptr<AnimationClip> defaultClip) noexcept {
         m_defaultClip = defaultClip;
         addClip(defaultClip);
         changeClip(defaultClip->getName());
@@ -60,7 +60,7 @@ namespace retronomicon::lib::animation {
      * 
      * @param animationClip the animation clip that we'll be adding to the manager
      */
-    bool AnimationComponent::addClip(std::shared_ptr<AnimationClip> clip) {
+    bool AnimationComponent::addClip(std::shared_ptr<AnimationClip> clip) noexcept{
         const std::string& name = clip->getName();
         if (m_animationClips.count(name)) return false;
         m_animationClips[name] = std::move(clip);
