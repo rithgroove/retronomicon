@@ -10,7 +10,6 @@ namespace retronomicon::lib::engine {
      * @brief default constructor
      */
     GameEngine::GameEngine(){
-        m_inputState = std::make_shared<InputState>();
     }
 
     /***************************** Destructor *****************************/
@@ -43,7 +42,9 @@ namespace retronomicon::lib::engine {
      */
     bool GameEngine::init(const char* title, int width, int height) {
         try{
+            m_inputState = std::make_shared<InputState>();
             m_window = std::make_unique<Window>(title, width, height);
+            m_assetManager = std::make_shared<AssetManager>(m_window->getRenderer());
             m_running = true;
         }catch (const std::runtime_error &e){
             std::cerr << "Failure to init game engine: " << e.what() << std::endl;

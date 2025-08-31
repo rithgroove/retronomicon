@@ -6,11 +6,13 @@
 #include "retronomicon/lib/scene/scene_manager.h"
 #include "retronomicon/lib/graphic/window.h"
 #include "retronomicon/lib/input/input_state.h"
+#include "retronomicon/lib/asset/asset_manager.h"
 /**
  * @brief The namespace for the core engine features of retronomicon
  */
 namespace retronomicon::lib::engine {
     using retronomicon::lib::input::InputState;
+    using retronomicon::lib::asset::AssetManager;
     /**
      * @brief Game Engine class (the main class that you need to run)
      */
@@ -60,6 +62,13 @@ namespace retronomicon::lib::engine {
              */
             std::shared_ptr<InputState>  getInputState() noexcept {return m_inputState;}  
 
+            /**
+             * @brief method to get InputState
+             * 
+             * @return inputState
+             */
+            std::shared_ptr<AssetManager>  getAssetManager() noexcept {return m_assetManager;}  
+
 
             /***************************** Getter *****************************/
 
@@ -102,6 +111,7 @@ namespace retronomicon::lib::engine {
         private:
             /***************************** Attribute *****************************/
 
+            std::shared_ptr<AssetManager> m_assetManager;
             std::shared_ptr<InputState> m_inputState;
             std::unique_ptr<retronomicon::lib::graphic::Window> m_window;
             std::shared_ptr<Scene> m_activeScene;
