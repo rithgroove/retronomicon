@@ -22,7 +22,7 @@ namespace retronomicon::lib::animation{
 	    	 * @param height the height of the current frame from the spritesheet
 	    	 * @param duration in milisecond
 	    	 */
-	    	AnimationFrame(int x, int y,int width, int height, float duration);
+	    	AnimationFrame(int x, int y,int width, int height, float duration) noexcept;
 
 	    	/**
 	    	 * @brief basic constructor
@@ -32,7 +32,7 @@ namespace retronomicon::lib::animation{
 	    	 * @param height the height of the current frame from the spritesheet
 	    	 * @param duration in milisecond
 	    	 */
-		    AnimationFrame(const retronomicon::lib::math::Point& point, int width, int height, float duration);
+		    AnimationFrame(const retronomicon::lib::math::Point& point, int width, int height, float duration) noexcept;
 	    
 	    	/**
 	    	 * @brief basic constructor
@@ -40,7 +40,7 @@ namespace retronomicon::lib::animation{
 	    	 * @param rect the source rectangle of this frame
 	    	 * @param duration in milisecond
 	    	 */
-    		AnimationFrame(const retronomicon::lib::math::Rect& rect, float duration);
+    		AnimationFrame(const retronomicon::lib::math::Rect& rect, float duration) noexcept;
 
 		    /***************************** Destructor *****************************/
 
@@ -54,41 +54,41 @@ namespace retronomicon::lib::animation{
 	    	 * 
 	    	 * @return x position
 	    	 */
-	    	int getX() const {return m_rect.getX();} // get X position
+	    	[[nodiscard]] int getX() const noexcept {return m_rect.getX();} // get X position
 	    	
 	    	/**
 	    	 * @brief get the y position of this frame
 	    	 * 
 	    	 * @return y position
 	    	 */
-	    	 int getY() const {return m_rect.getY();} // get Y position
+	    	 [[nodiscard]] int getY() const noexcept {return m_rect.getY();} // get Y position
 
 	    	/**
 	    	 * @brief get the width  of this frame
 	    	 * 
 	    	 * @return width
 	    	 */
-	    	int getWidth() const {return m_rect.getWidth();} // get X position
+	    	[[nodiscard]] int getWidth() const noexcept {return m_rect.getWidth();} // get X position
 	    	
 	    	/**	    	 * @brief get height of this frame
 	    	 * 
 	    	 * @return height
 	    	 */
-	    	 int getHeight() const {return m_rect.getHeight();} // get Y position
+	    	 [[nodiscard]] int getHeight() const noexcept {return m_rect.getHeight();} // get Y position
 
 	    	/**
 	    	 * the rectangle representing the source rectangle of the sprite
 	    	 * 
 	    	 * @return the source rectangle
 	    	 */
-	    	retronomicon::lib::math::Rect getRect() const {return m_rect;}
+	    	[[nodiscard]] retronomicon::lib::math::Rect getRect() const noexcept {return m_rect;}
 
 		    /***************************** Utility *****************************/
 
 	    	/**
 	    	 * @brief a method to reset spent duration (set m_spentDuration to 0)
 	    	 */
-	    	void reset(){ m_elapsedTime = 0.0f; }
+	    	void reset() noexcept { m_elapsedTime = 0.0f; }
 
 	    	/***************************** Operator Overload *****************************/
 
@@ -106,7 +106,7 @@ namespace retronomicon::lib::animation{
 	    	 * 
 	    	 * @return Brief summary of this object in string
 	    	 */
-	    	std::string to_string() const;
+	    	[[nodiscard]] std::string to_string() const;
 
 		    /***************************** Main Method *****************************/
 

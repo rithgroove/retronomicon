@@ -21,7 +21,7 @@ namespace retronomicon::lib::animation{
      * @param height the height of the current frame from the spritesheet
      * @param duration in milisecond
      */
-    AnimationFrame::AnimationFrame(int x, int y, int width, int height, float duration)
+    AnimationFrame::AnimationFrame(int x, int y, int width, int height, float duration) noexcept
     : m_rect((float)x, (float)y, (float)width, (float)height), // fill up m_rect
       m_duration(duration), //fill_up m_duration
       m_elapsedTime(0.0f) {} //set m_elapsedtime to 0
@@ -34,7 +34,7 @@ namespace retronomicon::lib::animation{
      * @param height the height of the current frame from the spritesheet
      * @param duration in milisecond
      */
-    AnimationFrame::AnimationFrame(const Point& point, int width, int height, float duration)
+    AnimationFrame::AnimationFrame(const Point& point, int width, int height, float duration) noexcept
     : m_rect(point, (float)width, (float)height), // fill up m_rect
       m_duration(duration), //fill_up m_duration
       m_elapsedTime(0.0f) {} //set m_elapsedtime to 0
@@ -45,7 +45,7 @@ namespace retronomicon::lib::animation{
      * @param rect the source rectangle of this frame
      * @param duration in milisecond
      */
-    AnimationFrame::AnimationFrame(const Rect& rect, float duration)
+    AnimationFrame::AnimationFrame(const Rect& rect, float duration) noexcept
     : m_rect(rect), // fill_up m_rect
       m_duration(duration), // fill_up m_duration
       m_elapsedTime(0.0f) {} //set m_elapstedtime to 0
