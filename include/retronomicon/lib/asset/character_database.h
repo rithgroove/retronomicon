@@ -21,7 +21,7 @@ class CharacterDatabase {
          * @brief Register a module loader. Call this during module init.
          */
         void registerModuleLoader(std::shared_ptr<CharacterModuleLoader> loader);
-
+        void init();
     private:
         std::shared_ptr<AssetManager> m_assetManager;
         std::vector<std::shared_ptr<CharacterModuleLoader>> m_loaders;

@@ -44,6 +44,13 @@ namespace retronomicon::lib::asset {
         m_loaders.push_back(std::move(loader));
     }
 
+    void CharacterDatabase::init(){
+        for (const auto& loader : m_loaders) {
+            loader->setAssetManager(m_assetManager);
+        }
+
+    }
+
 
     [[nodiscard]] std::shared_ptr<core::Character> CharacterDatabase::getCharacter(const std::string& id) noexcept {
         auto it = m_characters.find(id);
