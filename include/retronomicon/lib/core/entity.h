@@ -83,7 +83,12 @@ namespace retronomicon::lib::core{
             Entity* getParent() const {return m_parentEntity;}
             std::shared_ptr<Renderable> getMainRenderableComponent(){return m_mainRenderableComponent;}
             void setMainRenderableComponent(std::shared_ptr<Renderable> renderable){m_mainRenderableComponent = renderable;}
+
+            bool isVisible() {return visible;}
+            void setVisible() {visible = true;}
+            void setInvisible() {visible = false;}
         protected:
+            bool visible = true;
             std::vector<Entity*> m_childEntities;
             std::shared_ptr<Renderable> m_mainRenderableComponent = nullptr;
             Entity* m_parentEntity = nullptr;
