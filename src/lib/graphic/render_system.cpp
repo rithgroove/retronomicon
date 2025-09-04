@@ -10,11 +10,14 @@ namespace retronomicon::lib::graphic {
 
     void RenderSystem::render(Entity* entity) {
 
-        for (auto& component : entity->getComponents()) {
-            if (auto renderable = dynamic_cast<Renderable*>(component)) {
-                renderable->render(m_renderer);
-            }
+        if (entity->isVisible()){
+            for (auto& component : entity->getComponents()) {
+                if (auto renderable = dynamic_cast<Renderable*>(component)) {
+                    renderable->render(m_renderer);
+                }
+            }            
         }
+
         for (Entity* obj : entity->getChilds()) {
             this->render(obj);
         }
