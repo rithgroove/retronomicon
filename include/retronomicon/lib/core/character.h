@@ -41,17 +41,33 @@ class Character : public Entity {
 
 
         void registerModuleEntity(std::string moduleName, Entity* entity) noexcept{
-            characterModuleEntity[moduleName] = entity
+            m_characterModuleEntities[moduleName] = entity;
+            addChildEntity(entity);
         }
 
-        void getModuleEntity(std::string moduleName) const {
-        auto it = characterModuleEntity.find(moduleName);
-        if (it != characterModuleEntity.end()) {
-            return it->second;
+        Entity* getModuleEntity(std::string moduleName) const {
+            auto it = m_characterModuleEntities.find(moduleName);
+            if (it != m_characterModuleEntities.end()) {
+                return it->second;
+            }
+            return nullptr; // not found
         }
-    return nullptr; // not found
+
+        void setActiveModule(const std::string& moduleName) {
+            for (auto& [key, entity] : m_characterModuleEntities) {
+                if (entity) {
+                    entity->setInvisible(); // hide everything
+                }
+            }
+
+            auto it = m_characterModuleEntities.find(moduleName);
+            if (it != m_characterModuleEntities.end() && it->second) {
+                it->second->setVisible(); // show the active one
+            }
+        }
+
     private:
-        std::unordered_map<std::string, Entity*> characterModuleEntity;
+        std::unordered_map<std::string, Entity*> m_characterModuleEntities;
         std::string m_id;
         std::string m_name;
         std::string m_displayName;
