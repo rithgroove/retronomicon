@@ -39,7 +39,19 @@ class Character : public Entity {
         inline void setDisplayName(const std::string& displayName) noexcept { m_displayName = displayName; }
         inline void setDescription(const std::string& description) noexcept { m_description = description; }
 
+
+        void registerModuleEntity(std::string moduleName, Entity* entity) noexcept{
+            characterModuleEntity[moduleName] = entity
+        }
+
+        void getModuleEntity(std::string moduleName) const {
+        auto it = characterModuleEntity.find(moduleName);
+        if (it != characterModuleEntity.end()) {
+            return it->second;
+        }
+    return nullptr; // not found
     private:
+        std::unordered_map<std::string, Entity*> characterModuleEntity;
         std::string m_id;
         std::string m_name;
         std::string m_displayName;
