@@ -77,9 +77,11 @@ namespace retronomicon::lib::asset {
             auto character = std::make_shared<core::Character>(id,characterJson["name"],characterJson["displayName"],characterJson["description"]);
 
             // Let registered loaders fill the character
-            // for (const auto& loader : m_loaders) {
-            //     loader->load(characterJson, *character, m_assetManager);
-            // }
+            for (const auto& loader : m_loaders) {
+                loader->setAssetManager(m_assetManager);
+                std::cout<<"$$$$$$$$$$$$$$\nMasuk loader loop\n$$$$$$$$$$$$"<<std::endl;
+                loader->load(character,characterJson);
+            }
 
             m_characters[id] = character;
             return character;
