@@ -45,6 +45,7 @@ namespace retronomicon::lib::engine {
             m_inputState = std::make_shared<InputState>();
             m_window = std::make_unique<Window>(title, width, height);
             m_assetManager = std::make_shared<AssetManager>(m_window->getRenderer());
+            m_characterDatabase = std::make_shared<CharacterDatabase>(m_assetManager);
             m_running = true;
         }catch (const std::runtime_error &e){
             std::cerr << "Failure to init game engine: " << e.what() << std::endl;

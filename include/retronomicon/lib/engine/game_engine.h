@@ -7,12 +7,16 @@
 #include "retronomicon/lib/graphic/window.h"
 #include "retronomicon/lib/input/input_state.h"
 #include "retronomicon/lib/asset/asset_manager.h"
+#include "retronomicon/lib/asset/character_database.h"
+#include "retronomicon/lib/asset/character_module_loader.h"
 /**
  * @brief The namespace for the core engine features of retronomicon
  */
 namespace retronomicon::lib::engine {
     using retronomicon::lib::input::InputState;
     using retronomicon::lib::asset::AssetManager;
+    using retronomicon::lib::asset::CharacterDatabase;
+    using retronomicon::lib::asset::CharacterModuleLoader;
     /**
      * @brief Game Engine class (the main class that you need to run)
      */
@@ -56,6 +60,30 @@ namespace retronomicon::lib::engine {
             }
 
             /**
+             * @brief register scene in m_sceneManager. so we could use scene manager to change scene by keyword
+             * 
+             */
+            void loadCharacterDb(const std::string &filepath){
+                if (m_characterDatabase->loadDatabase(filepath)){
+                    std::cout<< "Loading character db : " +filepath +". Successful" << std::endl;
+                }else{
+                    std::cout<< "Loading character db : " +filepath +". Failed" << std::endl;
+                }
+                
+            }
+
+            /**
+             * @brief register characterLoaderModule so it could load necessary setting
+             * 
+             * @param module the module
+             */
+            void registerCharacterLoaderModule(std::shared_ptr<CharacterModuleLoader>  module) noexcept{
+                m_characterDatabase->registerModuleLoader(module);
+            }
+
+            /***************************** Getter *****************************/
+
+            /**
              * @brief method to get InputState
              * 
              * @return inputState
@@ -69,8 +97,12 @@ namespace retronomicon::lib::engine {
              */
             std::shared_ptr<AssetManager>  getAssetManager() noexcept {return m_assetManager;}  
 
-
-            /***************************** Getter *****************************/
+            /**
+             * @brief method to get InputState
+             * 
+             * @return inputState
+             */
+            std::shared_ptr<CharacterDatabase>  getCharacterDatabase() noexcept {return m_characterDatabase;}  
 
             /**
              * @brief inline method to get the renderer
@@ -108,10 +140,13 @@ namespace retronomicon::lib::engine {
              */
             void stop() noexcept {m_running = false;}
 
+
+
         private:
             /***************************** Attribute *****************************/
 
             std::shared_ptr<AssetManager> m_assetManager;
+            std::shared_ptr<CharacterDatabase> m_characterDatabase = nullptr;
             std::shared_ptr<InputState> m_inputState;
             std::unique_ptr<retronomicon::lib::graphic::Window> m_window;
             std::shared_ptr<Scene> m_activeScene;

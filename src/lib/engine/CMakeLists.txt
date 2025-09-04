@@ -12,4 +12,5 @@ target_include_directories(
     ${RETRO_DIR}/external/SDL2_ttf
     ${RETRO_DIR}/external/SDL2_image/include
     ${RETRO_DIR}/external/SDL2_mixer/include
+    ${RETRO_DIR}/external/json/include
 )
