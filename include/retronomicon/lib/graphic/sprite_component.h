@@ -27,6 +27,10 @@ namespace retronomicon::lib::graphic {
         void update(float dt) override;
         void render(SDL_Renderer* renderer) override;
 
+        void changeAsset(std::shared_ptr<asset::ImageAsset> asset){
+            m_image = asset;
+        }
+
         Rect getSize() override;
 
     private:
