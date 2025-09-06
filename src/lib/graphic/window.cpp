@@ -77,6 +77,7 @@ namespace retronomicon::lib::graphic{
             throw std::runtime_error("[Window.initialize] Failed to initialize SDL_INIT_VIDEO");
         }
 
+        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"); // linear
         Uint32 windowFlags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
         if (fullscreen) {
             windowFlags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
