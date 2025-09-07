@@ -125,13 +125,13 @@ namespace retronomicon::lib::core{
             Vec2 getRenderPosition() const ;
 
         public:
-            float x;
-            float y;
+            float x = 0.0f;
+            float y = 0.0f;
             float rotation = 0.0f;
-            float scaleX;
-            float scaleY;
-            float m_anchorX;
-            float m_anchorY;
+            float scaleX =0.0f;
+            float scaleY = 0.0f;
+            float m_anchorX = 0.5f;
+            float m_anchorY = 0.5f;
     };
 
 } // namespace retronomicon
