@@ -76,6 +76,7 @@ namespace retronomicon::lib::core{
             void removeGameObject(Entity* object);
             
             void addChildEntity(Entity* entity);
+            void removeChildEntity(Entity* entity);
             std::vector<Entity*> getChilds(){return m_childEntities;}
             void setParent(Entity* entity){this->m_parentEntity = entity;}
             bool hasParent() const {return m_parentEntity!=nullptr;}
