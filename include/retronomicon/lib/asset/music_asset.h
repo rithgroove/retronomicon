@@ -41,14 +41,14 @@ namespace retronomicon::lib::asset {
              *
              *  @return raw music
              */
-            Mix_Music* getRawMusic() const { return m_music; }
+            Mix_Music* getRawMusic() const noexcept { return m_music; }
 
             /**
              * @brief check if it valid to play
              * 
              * @return boolean of validity
              */
-            bool isValid() const{ return m_music != nullptr;}
+            bool isValid() const noexcept { return m_music != nullptr;}
 
             /***************************** To String *****************************/
 

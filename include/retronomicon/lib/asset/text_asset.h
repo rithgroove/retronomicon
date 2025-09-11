@@ -38,7 +38,7 @@ namespace retronomicon::lib::asset {
              * 
              * @return the content
              */
-            const std::string& getContent() const{return m_content;}
+            const std::string& getContent() const noexcept {return m_content;}
 
             /***************************** To String *****************************/
 

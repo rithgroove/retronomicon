@@ -142,18 +142,18 @@ namespace retronomicon::lib::animation{
             /**
              * @brief reset animation to default animation
              */
-            void reset(){ m_currentClip = m_defaultClip;}
+            void reset() noexcept { m_currentClip = m_defaultClip;}
 
             // --- Playback Control ---
             /**
              * @brief pause animation
              */
-            void pause(){ m_paused = true; }
+            void pause() noexcept { m_paused = true; }
 
             /**
              * @brief resume pause animation
              */
-            void resume() { m_paused = false; }         
+            void resume() noexcept { m_paused = false; }         
 
 
             /***************************** Override Methods *****************************/

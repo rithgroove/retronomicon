@@ -26,14 +26,14 @@ namespace retronomicon::lib::asset {
              * 
              * @return path to the file
              */
-            std::string getPath(){return m_path;}
+            std::string getPath() noexcept {return m_path;}
             
             /**
              * @brief getter for filename
              * 
              * @return name of the file
              */
-            std::string getName(){return m_name;}
+            std::string getName() noexcept {return m_name;}
 
             /***************************** Operator Overload *****************************/
 

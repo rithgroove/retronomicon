@@ -52,14 +52,14 @@ namespace retronomicon::lib::asset {
              *
              * @return the height in pixels
              */
-            int getHeight() const{ return m_height; }
+            int getHeight() const noexcept { return m_height; }
 
             /**
              * @brief Get the loaded SDL_Texture
              *
              * @return the image texture
              */
-            SDL_Texture* getTexture() const{ return m_texture;}
+            SDL_Texture* getTexture() const noexcept { return m_texture;}
 
             /***************************** To String *****************************/
 

@@ -40,14 +40,14 @@ namespace retronomicon::lib::asset {
              * 
              * @return vector of unsigned integer that represent the data
              */
-            const std::vector<uint8_t>& getData() const { return m_data;}
+            const std::vector<uint8_t>& getData() const noexcept { return m_data;}
 
             /**
              * @brief Returns the size (in bytes) of the loaded binary content.
              * 
              * @return how many bytes of data this file is.
              */
-            size_t getSize() const { return m_data.size();}
+            size_t getSize() const noexcept { return m_data.size();}
 
 
             /***************************** To String *****************************/

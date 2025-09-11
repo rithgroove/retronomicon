@@ -38,7 +38,7 @@ namespace retronomicon::lib::asset {
             /**
              * @brief Get the raw Mix_Chunk pointer
              */
-            Mix_Chunk* getRawSound() const { return m_chunk; }
+            Mix_Chunk* getRawSound() const noexcept { return m_chunk; }
 
             /***************************** To String *****************************/
            /**
