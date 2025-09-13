@@ -70,10 +70,10 @@ namespace retronomicon::lib::graphic{
             /**
              * @brief the method to get the renderer
              * 
-             * @return the SDL_Renderer
+             * @return the SDL_GLContext
              */
-            SDL_Renderer* getRenderer() const{return m_renderer;}
-
+            SDL_GLContext getGLContext() const { return m_glContext; }
+            
             /**
              * @brief the method to get the SDL_Window
              * 
@@ -115,7 +115,7 @@ namespace retronomicon::lib::graphic{
         private:
             /***************************** Attributes *****************************/
             SDL_Window* m_window = nullptr;
-            SDL_Renderer* m_renderer = nullptr;
+            SDL_Renderer SDL_GLContext = nullptr;
             static int m_width;
             static int m_height;
             bool m_fullscreen = false;

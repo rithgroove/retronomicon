@@ -107,10 +107,10 @@ namespace retronomicon::lib::engine {
             /**
              * @brief inline method to get the renderer
              * 
-             * @return the SDL_Renderer from window
+             * @return the SDL_GLContext from window
              */
-            [[nodiscard]] SDL_Renderer* getRenderer() noexcept{
-                return m_window->getRenderer();
+            [[nodiscard]] SDL_GLContext getGLContext() noexcept {
+                return m_window->getGLContext();
             }
 
             /***************************** Main Methods *****************************/

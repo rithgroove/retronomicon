@@ -35,15 +35,20 @@ namespace retronomicon::lib::graphic{
      * @brief a method to clear the screen
      */
     void Window::clear() {
-        SDL_SetRenderDrawColor(m_renderer, m_clearColor.r, m_clearColor.g, m_clearColor.b, m_clearColor.a);
-        SDL_RenderClear(m_renderer);
+        glClearColor(
+            m_clearColor.r / 255.0f,
+            m_clearColor.g / 255.0f,
+            m_clearColor.b / 255.0f,
+            m_clearColor.a / 255.0f
+        );
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     /**
      * @brief a method to present all rendered image
      */
     void Window::present() {
-        SDL_RenderPresent(m_renderer);
+        SDL_GL_SwapWindow(m_window);
     }
 
     /**
@@ -63,6 +68,7 @@ namespace retronomicon::lib::graphic{
         // Optional: adjust render scale or UI here
     }
 
+
     /***************************** Private Main Method *****************************/
     /**
      * @brief the method to initialize SDL, SDL_Window, and SDL_Renderer
@@ -78,32 +84,38 @@ namespace retronomicon::lib::graphic{
         }
 
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"); // linear
-        Uint32 windowFlags = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
+
+        Uint32 windowFlags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
         if (fullscreen) {
             windowFlags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
         }
 
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
         m_window = SDL_CreateWindow(title.c_str(),
                                     SDL_WINDOWPOS_CENTERED,
                                     SDL_WINDOWPOS_CENTERED,
-                                    width, height, SDL_WINDOW_FOREIGN);
+                                    width, height, windowFlags);
         if (!m_window) {
             throw std::runtime_error("[Window.initialize] Failed to create SDL_WINDOW");
         }
 
-        m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-        if (!m_renderer) {
-            throw std::runtime_error("[Window.initialize] Failed to create SDL_RENDERER");
+        m_glContext = SDL_GL_CreateContext(m_window);
+        if (!m_glContext) {
+            throw std::runtime_error("[Window.initialize] Failed to create SDL_GLContext");
         }
+        SDL_GL_SetSwapInterval(1); // enable vsync
     }
 
     /**
      * @brief the method to destroy sdl objects. called by destructor
      */
     void Window::cleanup() {
-        if (m_renderer) {
-            SDL_DestroyRenderer(m_renderer);
-            m_renderer = nullptr;
+        if (m_glContext) {
+            SDL_GL_DeleteContext(m_glContext);
+            m_glContext = nullptr;
         }
 
         if (m_window) {
