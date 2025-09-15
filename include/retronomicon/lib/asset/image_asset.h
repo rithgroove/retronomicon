@@ -75,14 +75,6 @@ namespace retronomicon::lib::asset {
              */
             int getChannels() const { return m_channels; }
 
-
-            /**
-             * @brief overloading operator << to call to_string()
-             */
-            friend std::ostream& operator<<(std::ostream& os, const ImageAsset& obj) {
-                return os << obj.to_string();
-            }
-
             /***************************** To String *****************************/
 
             /**

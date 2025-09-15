@@ -1,15 +1,3 @@
-[submodule "external/SDL2"]
-	path = external/SDL2
-	url = https://github.com/libsdl-org/SDL.git
-[submodule "external/SDL2_ttf"]
-	path = external/SDL2_ttf
-	url = https://github.com/libsdl-org/SDL_ttf.git
-[submodule "external/SDL2_image"]
-	path = external/SDL2_image
-	url = https://github.com/libsdl-org/SDL_image.git
-[submodule "external/SDL2_mixer"]
-	path = external/SDL2_mixer
-	url = https://github.com/libsdl-org/SDL_mixer.git
 [submodule "external/catch2"]
 	path = external/catch2
 	url = https://github.com/catchorg/catch2.git

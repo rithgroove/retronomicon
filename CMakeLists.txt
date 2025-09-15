@@ -42,10 +42,6 @@ add_subdirectory(src)
 # Public include paths
 include_directories(
     ${RETRO_INCLUDE_DIR}/include
-    ${RETRO_INCLUDE_DIR}/external/SDL2/include
-    ${RETRO_INCLUDE_DIR}/external/SDL2_ttf/include
-    ${RETRO_INCLUDE_DIR}/external/SDL2_image/include
-    ${RETRO_INCLUDE_DIR}/external/SDL2_mixer/include
     ${RETRO_INCLUDE_DIR}/external/catch2/src
     ${RETRO_INCLUDE_DIR}/external/catch2/json
 )

@@ -1,147 +1,54 @@
 #pragma once
 
-#include <SDL.h>
-#include <SDL_ttf.h>
-#include <GL/glew.h> 
-#include <stdexcept>
 #include <string>
 #include <vector>
-
+#include <memory>
 #include "retronomicon/lib/asset/asset.h"
+#include "retronomicon/lib/math/color.h"
+#include "retronomicon/lib/graphics/texture.h"
 
-/**
- * @brief The namespace for assets and loaders
- */
 namespace retronomicon::lib::asset {
 
-    /**
-     * @brief A class that represents a loaded font from storage to memory.
-     *        Provides functionality to render text as textures.
-     */
     class FontAsset : public Asset {
-        public:
-            /***************************** Constructor *****************************/
+    public:
+        FontAsset(const std::string& filePath,
+                  const std::string& name,
+                  int fontSize);
 
-            /**
-             * @brief Constructor for the font asset
-             *
-             * @param filePath path to the TTF file
-             * @param name the given name for this font
-             * @param fontSize the size (in pt) of the font
-             * @param renderer SDL_Renderer for texture generation
-             */
-            FontAsset(const std::string& filePath,
-                      const std::string& name,
-                      int fontSize,
-                      SDL_Renderer* renderer);
+        ~FontAsset() override;
 
-            /***************************** Destructor *****************************/
+        int getLineHeight() const;
+        int measureTextWidth(const std::string& text) const;
+        bool isInitialized() const { return m_initialized; }
+        int getFontSize() const { return m_fontSize; }
 
-            /**
-             * @brief Destructor: destroys the TTF_Font and releases resources
-             */
-            ~FontAsset() override;
+        /**
+         * @brief Generate a rendered texture from text.
+         * 
+         * This returns a backend-neutral Texture. Implementation decides
+         * whether it becomes an OpenGL texture, Vulkan image, etc.
+         */
+        std::unique_ptr<retronomicon::lib::graphics::Texture> generateTexture(
+            const std::string& text,
+            int horizontalPadding,
+            int verticalPadding,
+            int width,
+            int height,
+            retronomicon::lib::math::Color fgC,
+            retronomicon::lib::math::Color bgC
+        );
 
-            /***************************** Getter *****************************/
-            /**
-             * @brief Get the font's line height (in pixels).
-             */
-            int getLineHeight() const;
+        bool measureText(const std::string& text, int& w, int& h) const;
+        std::vector<std::string> wrapText(const std::string& text, int maxWidth) const;
 
-            /**
-             * @brief Measure the width of a text string in pixels.
-             */
-            int measureTextWidth(const std::string& text) const;
+        std::string to_string() const override;
 
+    private:
+        int m_fontSize = 0;
+        bool m_initialized = false;
 
-            /**
-             * @brief Returns whether the font was successfully loaded
-             *
-             * @return true if font is valid
-             */
-            bool isInitialized() const{ return m_font != nullptr;}
-
-            /**
-             * @brief Get the raw TTF_Font pointer
-             *
-             * @return pointer to TTF_Font
-             */
-            TTF_Font* getRawFont() const { return m_font;}
-
-            /**
-             * @brief Get the font size in points
-             *
-             * @return font size
-             */
-            int getFontSize() const {return m_fontSize;}
-
-            /***************************** Main Methods *****************************/
-            
-            /**
-             * @brief Generate a rendered texture from text
-             *
-             * @param text the string to render
-             * @param horizontalPadding pixels of horizontal margin
-             * @param verticalPadding pixels of vertical margin
-             * @param width target texture width
-             * @param height target texture height
-             * @param fgC foreground color (text)
-             * @param bgC background color (drop shadow - not used)
-             * @return SDL_Texture containing the rendered text
-             */
-            SDL_Texture* generateTexture(const std::string& text,
-                                         int horizontalPadding,
-                                         int verticalPadding,
-                                         int width,
-                                         int height,
-                                         SDL_Color fgC,
-                                         SDL_Color bgC);
-
-
-            /**
-             * @brief Measure the pixel size of a string using this font.
-             * 
-             * @param text input text
-             * @param w output width in pixels
-             * @param h output height in pixels
-             * @return true if successful
-             */
-            bool measureText(const std::string& text, int& w, int& h) const;
-
-            /**
-             * @brief Word-wrap text to fit within a maximum width.
-             * 
-             * @param text input text
-             * @param maxWidth maximum line width in pixels
-             * @return vector of lines after wrapping
-             */
-            std::vector<std::string> wrapText(const std::string& text, int maxWidth) const;
-            
-            /**
-             * @brief Render the given text string at position (x, y) using SDL_ttf.
-             * 
-             * @param renderer SDL_Renderer to draw on
-             * @param text UTF-8 encoded string to render
-             * @param x Screen x position
-             * @param y Screen y position
-             * @param color SDL_Color to use (default: white)
-             */
-            void renderText(SDL_Renderer* renderer, const std::string& text, int x, int y, SDL_Color color = {255, 255, 255, 255});
-
-
-            /***************************** To string *****************************/
-
-            /**
-             * @brief Textual representation of this asset (for debugging / editor)
-             *     
-             * @return string representation
-             */
-            std::string to_string() const override;
-
-        private:
-            SDL_Renderer* m_renderer = nullptr;
-            int m_fontSize = 0;       // size in pt
-            TTF_Font* m_font = nullptr;  // SDL_ttf loaded font
+        struct Impl;
+        std::unique_ptr<Impl> m_impl;
     };
 
 }
