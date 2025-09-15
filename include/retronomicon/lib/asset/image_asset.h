@@ -1,6 +1,5 @@
 #pragma once
 
-#include <SDL.h>
 #include <string>
 #include "asset.h"
 
@@ -19,15 +18,20 @@ namespace retronomicon::lib::asset {
         public:
 
             /***************************** Constructor *****************************/
-            
+            /**
+             * @brief Constructor for the image asset
+             *
+             * @param imagePath the path to the image
+            */
+            ImageAsset(const std::string& imagePath);
+
             /**
              * @brief Constructor for the image asset
              *
              * @param imagePath the path to the image
              * @param name the name of the image
-             * @param renderer SDL_Renderer used to create texture from image
              */
-            ImageAsset(const std::string& imagePath, const std::string& name, SDL_Renderer* renderer);
+            ImageAsset(const std::string& imagePath, const std::string& name);
 
             /***************************** Destructor *****************************/
 
@@ -52,14 +56,32 @@ namespace retronomicon::lib::asset {
              *
              * @return the height in pixels
              */
-            int getHeight() const noexcept { return m_height; }
+            int getHeight() const { return m_height; }
 
             /**
-             * @brief Get the loaded SDL_Texture
+             * @brief Get the vector of unsigned_char pixels
              *
              * @return the image texture
              */
-            SDL_Texture* getTexture() const noexcept { return m_texture;}
+            SDL_Texture* getTexture() const { return m_texture;}
+    
+            /**
+             * @brief Get the image channels 
+             * - 1 Grayscale
+             * - 3 RGB
+             * - 4 RGBA
+             *
+             * @return the image channel;
+             */
+            int getChannels() const { return m_channels; }
+
+
+            /**
+             * @brief overloading operator << to call to_string()
+             */
+            friend std::ostream& operator<<(std::ostream& os, const ImageAsset& obj) {
+                return os << obj.to_string();
+            }
 
             /***************************** To String *****************************/
 
@@ -73,9 +95,10 @@ namespace retronomicon::lib::asset {
         private:
 
             /***************************** Attribute *****************************/
-            SDL_Texture* m_texture = nullptr;  // The texture created from the image file
-            int m_width = 0;                   // Width of the image
-            int m_height = 0;                  // Height of the image
+            std::vector<unsigned char> m_pixels;
+            int m_width = 0;
+            int m_height = 0;
+            int m_channels = 0; // e.g. 3 = RGB, 4 = RGBA
     };
 
 }

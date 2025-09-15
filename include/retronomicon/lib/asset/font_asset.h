@@ -2,9 +2,11 @@
 
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <GL/glew.h> 
 #include <stdexcept>
 #include <string>
 #include <vector>
+
 #include "retronomicon/lib/asset/asset.h"
 
 /**

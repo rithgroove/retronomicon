@@ -115,7 +115,7 @@ namespace retronomicon::lib::graphic{
         private:
             /***************************** Attributes *****************************/
             SDL_Window* m_window = nullptr;
-            SDL_Renderer SDL_GLContext = nullptr;
+            SDL_GLContext m_glContext = nullptr;
             static int m_width;
             static int m_height;
             bool m_fullscreen = false;

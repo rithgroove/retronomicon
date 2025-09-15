@@ -1,72 +1,76 @@
 #include "retronomicon/lib/asset/image_asset.h"
-#include <SDL_image.h>
 #include <stdexcept>
 #include <sstream>
 
-/**
- * @brief The namespace for assets and loaders
- */
+// stb_image implementation
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+
 namespace retronomicon::lib::asset {
 
     /***************************** Constructor *****************************/
 
     /**
      * @brief Constructor for the image asset
-     * 
+     *
+     * @param imagePath the path to the image
+    */
+    ImageAsset::ImageAsset(const std::string& imagePath)
+        : ImageAsset(imagePath, std::filesystem::path(imagePath).filename().string()) {
+        // delegates to second constructor
+    }
+
+    /**
+     * @brief Constructor for the image asset
+     *
      * @param imagePath the path to the image
      * @param name the name of the image
-     * @param renderer used to generate texture from the surface (image files -> SDL_Surface -> SDL_Texture)
      */
     ImageAsset::ImageAsset(const std::string& imagePath,
-                           const std::string& name,
-                           SDL_Renderer* renderer)
+                           const std::string& name)
     {
         m_path = imagePath;
         m_name = name;
 
-        // Load image to memory for CPU use
-        SDL_Surface* surface = IMG_Load(imagePath.c_str());
-        if (!surface) {
-            throw std::runtime_error("Failed to load image: " + std::string(IMG_GetError()));
+        int width, height, channels;
+        unsigned char* data = stbi_load(imagePath.c_str(), &width, &height, &channels, 4);
+        // force 4 channels (RGBA), so every backend has consistent data
+
+        if (!data) {
+            throw std::runtime_error("Failed to load image: " + std::string(stbi_failure_reason()));
         }
 
-        // Move from CPU surface to GPU texture
-        m_texture = SDL_CreateTextureFromSurface(renderer, surface);
-        if (!m_texture) {
-            SDL_FreeSurface(surface);
-            throw std::runtime_error("Failed to create texture: " + std::string(SDL_GetError()));
-        }
+        m_width = width;
+        m_height = height;
+        m_channels = 4; // because we forced RGBA
+        m_pixels.assign(data, data + (width * height * 4));
 
-        // Store width and height
-        m_width = surface->w;
-        m_height = surface->h;
-
-        SDL_FreeSurface(surface); // Free the CPU surface
+        stbi_image_free(data); // free stb’s temp buffer
     }
 
     /***************************** Destructor *****************************/
 
     /**
-     * @brief Destructor of the image asset
-     * 
-     * Releases the SDL texture to free GPU memory
+     * @brief Destructor for the image asset
+     *
+     * Releases the SDL_Texture from memory
      */
     ImageAsset::~ImageAsset() {
-        if (m_texture) {
-            SDL_DestroyTexture(m_texture);
-            m_texture = nullptr;
-        }
+        // nothing to cleanup, pixels live in std::vector
     }
 
     /***************************** To String *****************************/
 
     /**
-     * @brief Return a debug description of this image
+     * @brief Return a textual description of the image asset
+     *
+     * @return debug string with name and path
      */
     std::string ImageAsset::to_string() const {
         std::ostringstream oss;
         oss << "[ImageAsset] " << m_name
-            << " (" << m_width << "x" << m_height << ") from " << m_path;
+            << " (" << m_width << "x" << m_height
+            << ", channels=" << m_channels << ") from " << m_path;
         return oss.str();
     }
 
