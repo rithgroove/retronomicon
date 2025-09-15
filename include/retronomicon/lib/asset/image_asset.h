@@ -63,7 +63,7 @@ namespace retronomicon::lib::asset {
              *
              * @return the image texture
              */
-            SDL_Texture* getTexture() const { return m_texture;}
+            const std::vector<unsigned char>& getPixels() const { return m_pixels; }
     
             /**
              * @brief Get the image channels 
