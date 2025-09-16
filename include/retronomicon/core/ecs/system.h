@@ -7,7 +7,7 @@
 
 using namespace std;
 using namespace retronomicon::lib::core;
-namespace retronomicon::lib::core{
+namespace retronomicon::core::ecs{
     class System {
     public:
         virtual ~System() = default;

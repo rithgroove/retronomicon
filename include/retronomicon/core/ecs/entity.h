@@ -64,8 +64,6 @@ namespace retronomicon::core::ecs{
              */
             void setName(const string& name){m_name = name;}
 
-
-            std::shared_ptr<Renderable> getMainRenderableComponent(){return m_mainRenderableComponent;}
             /***************************** Getter *****************************/
 
             /**
@@ -103,9 +101,15 @@ namespace retronomicon::core::ecs{
              */
             const string& getName() const{return m_name;}
 
-            std::vector<Component*> getComponents();
             void setParent(Entity* entity){this->m_parentEntity = entity;}
-            void setMainRenderableComponent(std::shared_ptr<Renderable> renderable){m_mainRenderableComponent = renderable;}
+
+            /**
+             * @brief method to get all components
+             * 
+             * @return list of component in vector formats
+             */
+            std::vector<Component*> getComponents();
+
 
             /***************************** Utilities *****************************/
 
@@ -117,20 +121,18 @@ namespace retronomicon::core::ecs{
             void start();
 
             /**
-             * @brief a method 
+             * @brief a method to add child entity
              * 
-             * @param args the component 
+             * @param args the child entity
              */
-            void addEntities(unique_ptr<Entity> entity);
-
-            void update(float dt);
-
-
-            Entity* createGameObject(const std::string& name);
-            void removeGameObject(Entity* object);
-            
             void addChildEntity(Entity* entity);
-            void removeChildEntity(Entity* entity);
+
+            /**
+             * @brief a method to remove a child entity
+             * 
+             * @param args the child entity
+             */
+            void removeChildEntity(Entity* entity);            
             
             /*********** Component Related Method [using c++ template] *************/
 
@@ -168,7 +170,6 @@ namespace retronomicon::core::ecs{
             std::weak_ptr<Entity> m_parentEntity;
 
             std::unordered_map<std::type_index, std::shared_ptr<Component>> m_components;
-            std::weak_ptr<Renderable> m_mainRenderableComponent;
     };
 
     // ---------- Template definitions ----------
