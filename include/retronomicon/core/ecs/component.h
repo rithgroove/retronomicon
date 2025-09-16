@@ -1,9 +1,10 @@
 #pragma once
-// #include <SDL.h>
+#include <memory>
+
 /**
  * @brief The namespace for core components
  */
-namespace retronomicon::lib::core{
+namespace retronomicon::core::ecs{
     // Forward declaration
     class Entity;
     /**
@@ -33,21 +34,22 @@ namespace retronomicon::lib::core{
              * @param dt time interval since last update
              */
             virtual void update(float dt) {}
+
             /**
              * @brief a to set the owner of this component
              * 
              * @param owner the game object that owns this.
              */
-            void setOwner(Entity* owner) { this->owner = owner; }
+            void setOwner(std::shared_ptr<Entity> owner) { this->owner = owner; }
 
             /**
              * @brief a method to get the owner of this component
              * 
              * @return the game object that owns this component.
              */
-            Entity* getOwner() const { return owner; }
+            std::shared_ptr<Entity> getOwner() const { return owner.lock(); }
 
         protected:
-            Entity* owner = nullptr;
+            std::weak_ptr<Entity> owner;  ///< Non-owning reference to Entity
     };
 }
