@@ -7,15 +7,25 @@
 #include <vector>
 #include <string>
 #include "component.h"
+#include "renderable.h"
 
 using namespace std;
 /**
- * @brief The namespace for core libraries such as game object and components
+ * @brief The namespace for ECS libraries that will be the building blocks for the engine
  */
-namespace retronomicon::lib::core{
+namespace retronomicon::core::ecs{
+
+    /**
+     * @brief forward declaration of renderable
+     */ 
     class Renderable;
-    class Entity {
+
+    /**
+     * @brief Entity class that represent almost anything in the game
+     */ 
+    class Entity  : public std::enable_shared_from_this<Entity>{
         public:
+            /***************************** Constructor *****************************/
             /**
              * @brief empty constructor 
              */
@@ -23,17 +33,106 @@ namespace retronomicon::lib::core{
 
             /**
              * @brief empty constructor 
+             * 
+             * @param name the name of this entity
              */
-            Entity(const std::string &name);
+            explicit Entity(const std::string& name);
+
+            /***************************** Destructor *****************************/
+
             /**
              * @brief default destructor 
              */
             // ~Entity();
 
+            /***************************** Setter *****************************/
+
+            /**
+             * @brief method make this entity visible
+             */
+            void setVisible() {m_visible = true;}
+
+            /**
+             * @brief method make this entity invisible
+             */
+            void setInvisible() {m_visible = false;}
+
+            /**
+             * @brief method to change the name of this entity
+             * 
+             * @param name the name of this entity
+             */
+            void setName(const string& name){m_name = name;}
+
+
+            std::shared_ptr<Renderable> getMainRenderableComponent(){return m_mainRenderableComponent;}
+            /***************************** Getter *****************************/
+
+            /**
+             * @brief method to get whether or not this entity is visible?
+             * 
+             * @return true if visible
+             */
+            bool isVisible() {return m_visible;}
+
+            /**
+             * @brief method to get this entity parents
+             * 
+             * @return shared ptr of parent entity
+             */
+            std::shared_ptr<Entity> getParent() const { return m_parentEntity.lock(); }
+
+            /**
+             * @brief get the vector of it's childrens
+             * 
+             * @return list (in vector class object) of this entity's childrens
+             */
+            std::vector<std::shared_ptr<Entity>> getChildren() const { return m_childEntities; }
+
+            /**
+             * @brief a method to check this class parents
+             * 
+             * @return true if it has parent
+             */
+            bool hasParent() const { return !m_parentEntity.expired(); }        
+
+            /**
+             * @brief a method to get entity name
+             * 
+             * @return the name of this entity
+             */
+            const string& getName() const{return m_name;}
+
+            std::vector<Component*> getComponents();
+            void setParent(Entity* entity){this->m_parentEntity = entity;}
+            void setMainRenderableComponent(std::shared_ptr<Renderable> renderable){m_mainRenderableComponent = renderable;}
+
+            /***************************** Utilities *****************************/
+
+
+            /***************************** Main Method *****************************/
             /**
              * @brief start function (used to initialize stuff)
              */
             void start();
+
+            /**
+             * @brief a method 
+             * 
+             * @param args the component 
+             */
+            void addEntities(unique_ptr<Entity> entity);
+
+            void update(float dt);
+
+
+            Entity* createGameObject(const std::string& name);
+            void removeGameObject(Entity* object);
+            
+            void addChildEntity(Entity* entity);
+            void removeChildEntity(Entity* entity);
+            
+            /*********** Component Related Method [using c++ template] *************/
 
             /**
              * @brief a method to add components. this will use templates
@@ -42,13 +141,6 @@ namespace retronomicon::lib::core{
              */
             template <typename T, typename... Args>
             T* addComponent(Args&&... args);
-
-            /**
-             * @brief a method 
-             * 
-             * @param args the component 
-             */
-            void addEntities(unique_ptr<Entity> entity);
 
             /**
              * @brief a method to return a components with a specific types
@@ -66,97 +158,67 @@ namespace retronomicon::lib::core{
             template <typename T>
             bool hasComponent() const;
 
-            void update(float dt);
-            void setName(const string& name){m_name = name;}
-            std::vector<Component*> getComponents();
 
-            const string& getName() const{return m_name;}
-
-            Entity* createGameObject(const std::string& name);
-            void removeGameObject(Entity* object);
-            
-            void addChildEntity(Entity* entity);
-            void removeChildEntity(Entity* entity);
-            std::vector<Entity*> getChilds(){return m_childEntities;}
-            void setParent(Entity* entity){this->m_parentEntity = entity;}
-            bool hasParent() const {return m_parentEntity!=nullptr;}
-
-            Entity* getParent() const {return m_parentEntity;}
-            std::shared_ptr<Renderable> getMainRenderableComponent(){return m_mainRenderableComponent;}
-            void setMainRenderableComponent(std::shared_ptr<Renderable> renderable){m_mainRenderableComponent = renderable;}
-
-            bool isVisible() {return visible;}
-            void setVisible() {visible = true;}
-            void setInvisible() {visible = false;}
         protected:
-            bool visible = true;
-            std::vector<Entity*> m_childEntities;
-            std::shared_ptr<Renderable> m_mainRenderableComponent = nullptr;
-            Entity* m_parentEntity = nullptr;
-            unordered_map<type_index, shared_ptr<Component>> m_components;
-            string m_name;
+            /***************************** Attribute *****************************/
+            bool m_visible = true; // visibility flag
+            std::string m_name; // name of this entity
+
+            std::vector<std::shared_ptr<Entity>> m_childEntities; //child entity
+            std::weak_ptr<Entity> m_parentEntity;
+
+            std::unordered_map<std::type_index, std::shared_ptr<Component>> m_components;
+            std::weak_ptr<Renderable> m_mainRenderableComponent;
     };
 
     // ---------- Template definitions ----------
      /**
      * @brief The template for add component method
+     * 
+     * @return the added component
      */
     template <typename T, typename... Args>
-    T* Entity::addComponent(Args&&... args) {
+    std::shared_ptr<T> Entity::addComponent(Args&&... args) {
         type_index typeId = type_index(typeid(T));
 
         if (m_components.count(typeId) == 0) {
-            // create the component
-            T* rawPtr = new T(std::forward<Args>(args)...);
-            rawPtr->setOwner(this);
-
-            std::shared_ptr<Component> compPtr(rawPtr);
+            auto compPtr = std::make_shared<T>(std::forward<Args>(args)...);
+            compPtr->setOwner(this);
             m_components[typeId] = compPtr;
 
-            // If T is also a Renderable, and we don't yet have a main one
-            if (!m_mainRenderableComponent) {
-                if constexpr (std::is_base_of<Renderable, T>::value) {
-                    m_mainRenderableComponent = std::shared_ptr<Renderable>(compPtr, rawPtr);
+            // If T is a Renderable and no main one exists, set it
+            if constexpr (std::is_base_of<Renderable, T>::value) {
+                if (m_mainRenderableComponent.expired()) {
+                    m_mainRenderableComponent = std::static_pointer_cast<Renderable>(compPtr);
                 }
             }
 
-            return rawPtr;
+            return compPtr;
         }
 
         return nullptr;
     }
 
-     /**
+    /**
      * @brief The template for get component method
+     * 
+     * @return the component
      */
-    // template <typename T>
-    // T* Entity::getComponent() {
-    //     // generate index based on class type
-    //     type_index typeId = type_index(typeid(T));
-
-    //     // find the unique_ptr containing the component
-    //     auto it = m_components.find(typeId);
-
-    //     // check if we found the component
-    //     if (it != m_components.end()) {
-    //         // return the down casted components (because we use unique_ptr)
-    //         return dynamic_cast<T*>(it->second.get());
-    //     }
-
-    //     //return null if not exist
-    //     return nullptr;
-    // }
-
     template <typename T>
-    T* Entity::getComponent() {
+    std::shared_ptr<T> Entity::getComponent() {
         for (auto& [typeId, comp] : m_components) {
-            if (auto casted = dynamic_cast<T*>(comp.get())) {
+            if (auto casted = std::dynamic_pointer_cast<T>(comp)) {
                 return casted;
             }
         }
         return nullptr;
     }
 
+    /**
+     * @brief The template to check if this class has a specific components
+     * 
+     * @return true if the component with said type exist on this class
+     */
     template <typename T>
     bool Entity::hasComponent() const {
         type_index typeId = type_index(typeid(T));
