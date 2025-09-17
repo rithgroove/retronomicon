@@ -7,7 +7,7 @@
 /**
  * @brief The namespace for basic math libraries such as points, rectangle cirle, etc.
  */
-namespace retronomicon::lib::math{
+namespace retronomicon::core::math{
 	/**
 	 * @brief A class that represent a single point
 	 */

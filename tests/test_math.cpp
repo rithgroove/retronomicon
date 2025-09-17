@@ -1,9 +1,9 @@
 #include <catch2/catch_test_macros.hpp>
-#include "retronomicon/lib/math/point.h"
+#include "retronomicon/core/math/point.h"
 #include <cmath>
 
 TEST_CASE("Point addition works", "[math]") {
-    using namespace retronomicon::lib::math;
+    using namespace retronomicon::core::math;
 
     Point p1{1, 2};
     Point p2{3, 4};
@@ -14,7 +14,7 @@ TEST_CASE("Point addition works", "[math]") {
 }
 
 TEST_CASE("Point substraction works", "[math]") {
-    using namespace retronomicon::lib::math;
+    using namespace retronomicon::core::math;
 
     Point p1{5, 6};
     Point p2{3, 4};
@@ -25,7 +25,7 @@ TEST_CASE("Point substraction works", "[math]") {
 }
 
 TEST_CASE("Calculate Distance works", "[math]") {
-    using namespace retronomicon::lib::math;
+    using namespace retronomicon::core::math;
 
     Point p1{0, 6};
     Point p2{0, 4};
@@ -49,7 +49,7 @@ TEST_CASE("Calculate Distance works", "[math]") {
 
 
 TEST_CASE("Point to Vector convertion works", "[math]") {
-    using namespace retronomicon::lib::math;
+    using namespace retronomicon::core::math;
 
     Point p1{5, 6};
 
@@ -61,7 +61,7 @@ TEST_CASE("Point to Vector convertion works", "[math]") {
 
 
 TEST_CASE("Vector addition works", "[math]") {
-    using namespace retronomicon::lib::math;
+    using namespace retronomicon::core::math;
 
     Vec2 v1{2, 3};
     Vec2 v2{4, 5};
@@ -77,7 +77,7 @@ TEST_CASE("Vector addition works", "[math]") {
 }
 
 TEST_CASE("Vector substraction works", "[math]") {
-    using namespace retronomicon::lib::math;
+    using namespace retronomicon::core::math;
 
     Vec2 v1{2, 3};
     Vec2 v2{4, 5};
@@ -94,7 +94,7 @@ TEST_CASE("Vector substraction works", "[math]") {
 
 
 TEST_CASE("Vector scalar multiplication works", "[math]") {
-    using namespace retronomicon::lib::math;
+    using namespace retronomicon::core::math;
 
     Vec2 v1{2, 4};
     Vec2 v2 = v1 *2;
@@ -110,7 +110,7 @@ TEST_CASE("Vector scalar multiplication works", "[math]") {
 
 
 TEST_CASE("Vector scalar division works", "[math]") {
-    using namespace retronomicon::lib::math;
+    using namespace retronomicon::core::math;
 
     Vec2 v1{2, 4};
     Vec2 v2 = v1 /2;
@@ -126,7 +126,7 @@ TEST_CASE("Vector scalar division works", "[math]") {
 
 
 TEST_CASE("Vector length works", "[math]") {
-    using namespace retronomicon::lib::math;
+    using namespace retronomicon::core::math;
 
     Vec2 v1{3, 4};
     REQUIRE(v1.length() == 5);
@@ -137,7 +137,7 @@ bool almostEqual(float a, float b, float epsilon = 1e-5f) {
 }
 
 TEST_CASE("Vector normalization works", "[math]") {
-    using namespace retronomicon::lib::math;
+    using namespace retronomicon::core::math;
 
     Vec2 v1{3, 4};
     Vec2 v2 = v1.normalized();
@@ -146,7 +146,7 @@ TEST_CASE("Vector normalization works", "[math]") {
 }
 
 TEST_CASE("Vector dot product works", "[math]") {
-    using namespace retronomicon::lib::math;
+    using namespace retronomicon::core::math;
 
     Vec2 v1{3, 4};
     Vec2 v2{5, 6};

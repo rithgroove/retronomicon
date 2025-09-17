@@ -1,9 +1,9 @@
-#include "retronomicon/lib/math/vec2.h"
+#include "retronomicon/core/math/vec2.h"
 #include <sstream>
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
-namespace retronomicon::lib::math {
+namespace retronomicon::core::math {
 
     /***************************** To String *****************************/
     
