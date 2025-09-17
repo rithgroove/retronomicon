@@ -45,8 +45,11 @@ namespace retronomicon::scene {
              */    
             virtual void update(float dt);
 
+            /**
+             * @brief render method call all system render (not yet efficient enough)
+             */    
             virtual void render();
-            
+
             /**
              * @brief method to shutdown and delete all child entities
              */
@@ -72,8 +75,7 @@ namespace retronomicon::scene {
 
         protected:
             /***************************** Attribute *****************************/
-            bool m_requiresReset = false;
-            bool m_isActive = false;
+            bool m_isActive = false; // used in some systems to trigger only active scene (basically so we could include scene inside scene)
             // InputMap* m_inputMap = nullptr;
             std::vector<std::unique_ptr<System>> m_systems;
     };

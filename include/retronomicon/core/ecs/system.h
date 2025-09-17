@@ -2,9 +2,13 @@
 #include <memory>
 #include "entity.h"
 #include "component.h"
-
+/**
+ * @brief The namespace for ECS libraries that will be the building blocks for the engine
+ */
 namespace retronomicon::core::ecs {
-
+    /**
+     * @brief generic class that loops all specified component and calls update
+     */
     template <typename T>
     class System {
         static_assert(std::is_base_of<Component, T>::value,

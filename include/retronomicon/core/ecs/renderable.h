@@ -7,7 +7,7 @@ namespace retronomicon::core::ecs{
     /**
      * @brief Optional interface for components that can be rendered.
      */
-    class Renderable  : public Component {
+    class Renderable {
         public:
 
             /**
