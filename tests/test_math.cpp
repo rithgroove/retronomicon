@@ -1,5 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 #include "retronomicon/core/math/point.h"
+#include "retronomicon/core/math/rect.h"
 #include <cmath>
 
 TEST_CASE("Point addition works", "[math]") {

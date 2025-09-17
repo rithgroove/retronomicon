@@ -27,6 +27,7 @@ namespace retronomicon::core::ecs{
         for (auto& child : m_childEntities) {
             child->start();
         }
+        m_isInitialized = true;
     }
 
     /**

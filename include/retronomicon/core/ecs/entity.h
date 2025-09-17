@@ -76,6 +76,13 @@ namespace retronomicon::core::ecs{
             /***************************** Getter *****************************/
 
             /**
+             * @brief a method to check if this instance is initialized or not.
+             * 
+             * @return true if start() have been called
+             */            
+            bool isInitialized() const { return m_isInitialized; }
+            
+            /**
              * @brief method to get whether or not this entity is visible?
              * 
              * @return true if visible
@@ -172,6 +179,7 @@ namespace retronomicon::core::ecs{
         protected:
             /***************************** Attribute *****************************/
             bool m_visible = true; // visibility flag
+            bool m_isInitialized = false;
             std::string m_name; // name of this entity
 
             std::vector<std::shared_ptr<Entity>> m_childEntities; //child entity
