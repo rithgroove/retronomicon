@@ -64,6 +64,15 @@ namespace retronomicon::core::ecs{
              */
             void setName(const string& name){m_name = name;}
 
+            /**
+             * @brief method to set the parent of this entity
+             * 
+             * @param entity parent entity
+             */
+            void setParent(const std::shared_ptr<Entity>& entity) {
+                m_parentEntity = entity;
+            }
+
             /***************************** Getter *****************************/
 
             /**
@@ -101,7 +110,6 @@ namespace retronomicon::core::ecs{
              */
             const string& getName() const{return m_name;}
 
-            void setParent(Entity* entity){this->m_parentEntity = entity;}
 
             /**
              * @brief method to get all components
@@ -109,7 +117,6 @@ namespace retronomicon::core::ecs{
              * @return list of component in vector formats
              */
             std::vector<Component*> getComponents();
-
 
             /***************************** Utilities *****************************/
 
@@ -125,14 +132,15 @@ namespace retronomicon::core::ecs{
              * 
              * @param args the child entity
              */
-            void addChildEntity(Entity* entity);
+            void addChildEntity(const std::shared_ptr<Entity>& child);
 
             /**
              * @brief a method to remove a child entity
              * 
              * @param args the child entity
              */
-            void removeChildEntity(Entity* entity);            
+            void removeChildEntity(const std::shared_ptr<Entity>& child);
+        
             
             /*********** Component Related Method [using c++ template] *************/
 
@@ -142,7 +150,7 @@ namespace retronomicon::core::ecs{
              * @param args the component 
              */
             template <typename T, typename... Args>
-            T* addComponent(Args&&... args);
+            std::shared_ptr<T> addComponent(Args&&... args);
 
             /**
              * @brief a method to return a components with a specific types
@@ -150,7 +158,7 @@ namespace retronomicon::core::ecs{
              * @return the component 
              */
             template <typename T>
-            T* getComponent();
+            std::shared_ptr<T>  getComponent();
 
             /**
              * @brief Check if the entity has a component of type T
@@ -186,13 +194,6 @@ namespace retronomicon::core::ecs{
             auto compPtr = std::make_shared<T>(std::forward<Args>(args)...);
             compPtr->setOwner(this);
             m_components[typeId] = compPtr;
-
-            // If T is a Renderable and no main one exists, set it
-            if constexpr (std::is_base_of<Renderable, T>::value) {
-                if (m_mainRenderableComponent.expired()) {
-                    m_mainRenderableComponent = std::static_pointer_cast<Renderable>(compPtr);
-                }
-            }
 
             return compPtr;
         }

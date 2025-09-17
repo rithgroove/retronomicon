@@ -13,26 +13,10 @@ set(RETRO_DIR ${CMAKE_CURRENT_SOURCE_DIR} CACHE PATH "Retronomicon include path"
 set(RETRO_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include CACHE PATH "Retronomicon include path")
 
 # Engine feature flags
-option(ENABLE_LUA "Enable Lua scripting" ON)
-option(ENABLE_PYTHON "Enable Python scripting" ON)
+# option(ENABLE_LUA "Enable Lua scripting" ON)
+# option(ENABLE_PYTHON "Enable Python scripting" ON)
 
 # External libraries
-add_subdirectory(external/SDL2)
-add_subdirectory(external/SDL2_ttf)
-add_subdirectory(external/SDL2_image)
-set(SDL2MIXER_OPUS OFF CACHE BOOL "" FORCE)
-set(SDL2MIXER_WAVPACK OFF CACHE BOOL "" FORCE)
-set(SDL2MIXER_FLAC OFF CACHE BOOL "" FORCE)
-set(SDL2MIXER_MIDI OFF CACHE BOOL "" FORCE)
-set(SDL2MIXER_MOD OFF CACHE BOOL "" FORCE)
-set(SDL2MIXER_MP3 OFF CACHE BOOL "" FORCE)
-set(SDL2MIXER_MPG123 OFF CACHE BOOL "" FORCE)
-set(SDL2MIXER_MOD_MODPLUG OFF CACHE BOOL "" FORCE)
-set(SDL2MIXER_MOD_XMP OFF CACHE BOOL "" FORCE)
-set(SDL2MIXER_FLUIDSYNTH OFF CACHE BOOL "" FORCE)
-# use STB vorbis
-set(SDL2MIXER_VORBIS STB CACHE BOOL "" FORCE)
-add_subdirectory(external/SDL2_mixer)
 add_subdirectory(external/catch2)
 add_subdirectory(external/json)
 

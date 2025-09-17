@@ -1,10 +1,10 @@
-#include "retronomicon/lib/core/entity.h"
+#include "retronomicon/core/ecs/entity.h"
 #include <algorithm> // for std::remove
 #include <vector>
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
-namespace retronomicon::lib::core{
+namespace retronomicon::core::ecs{
     /***************************** Constructor *****************************/
 
     /**
@@ -34,9 +34,11 @@ namespace retronomicon::lib::core{
      * 
      * @param args the child entity
      */
-    void Entity::addChildEntity(Entity* entity){
-        m_childEntities.push_back(entity);
-        entity->setParent(this);
+    void Entity::addChildEntity(const std::shared_ptr<Entity>& child) {
+        if (child) {
+            child->setParent(shared_from_this());
+            m_childEntities.push_back(child);
+        }
     }
 
     /**
@@ -44,16 +46,17 @@ namespace retronomicon::lib::core{
      * 
      * @param args the child entity
      */
-    void Entity::removeChildEntity(Entity* entity) {
-        auto it = std::remove(m_childEntities.begin(), m_childEntities.end(), entity);
+    void Entity::removeChildEntity(const std::shared_ptr<Entity>& child) {
+
+        auto it = std::remove(m_childEntities.begin(), m_childEntities.end(), child);
         if (it != m_childEntities.end()) {
             m_childEntities.erase(it, m_childEntities.end());
-            if (entity->getParent() == this) {
-                entity->setParent(nullptr);
+            if (child->getParent() == shared_from_this()) {
+                child->setParent(nullptr);
             }
         }
     }
-    
+
     /**
      * @brief method to get all components
      * 
