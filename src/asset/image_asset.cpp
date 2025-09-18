@@ -15,8 +15,9 @@ namespace retronomicon::asset {
      * @param imagePath the path to the image
     */
     ImageAsset::ImageAsset(const std::string& imagePath)
-        : Asset(imagePath){ // path + auto name
-        // delegates to second constructor
+        : ImageAsset(imagePath, std::filesystem::path(imagePath).filename().string())
+    {
+        // delegates to the two-parameter constructor
     }
 
     /**
