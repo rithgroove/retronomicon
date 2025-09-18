@@ -11,7 +11,25 @@ namespace retronomicon::asset {
      */ 
     class Asset {
         public:
+             /**
+             * @brief Construct an asset from a file path.
+             *        Automatically extracts filename as asset name.
+             *
+             * @param path Path to the asset file.
+             */
+            explicit Asset(const std::string& path)
+                : m_path(path),
+                  m_name(std::filesystem::path(path).filename().string()) {}
 
+            /**
+             * @brief Construct an asset with explicit name.
+             *
+             * @param path Path to the asset file.
+             * @param name Custom name of the asset.
+             */
+            Asset(const std::string& path, const std::string& name)
+                : m_path(path), m_name(name) {}
+                
             /***************************** Destructor *****************************/
 
             /**
