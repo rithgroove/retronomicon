@@ -64,6 +64,13 @@ namespace retronomicon::scene {
 
 
             /***************************** Getter *****************************/
+            /**
+             * @brief method to check if scene is active. This is useful if we 
+             * layer scene on top of each other. Some system will check for this
+             * and update the active scene only (like menu scene)
+             * 
+             * @return true if active
+             */
             bool isActive() const { return m_isActive; }
 
             /***************************** Setter *****************************/
