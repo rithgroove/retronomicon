@@ -132,7 +132,7 @@ namespace retronomicon::core::ecs{
             /**
              * @brief start function (used to initialize stuff)
              */
-            void start();
+            virtual void start();
 
             /**
              * @brief a method to add child entity

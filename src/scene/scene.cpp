@@ -13,7 +13,7 @@ namespace retronomicon::scene {
      * @param name will be passed to entity parent class
      */
     Scene::Scene(const std::string& name)
-        : Entity(name), m_isInitialized(false), m_isActive(false), m_requiresReset(false) {
+        : Entity(name),  m_isActive(false) {
     }
 
     /***************************** Destructor *****************************/
@@ -34,7 +34,6 @@ namespace retronomicon::scene {
     void Scene::start(){
         // call base class version
         Entity::start();  // <-- "super.start()" equivalent
-        m_requiresReset = false;
     }
 
     /**
@@ -44,15 +43,15 @@ namespace retronomicon::scene {
      */    
     void Scene::update(float dt) {
         for (auto& system : m_systems) {
-            system->update(dt, this);
+        system->update(dt, shared_from_this());  
         }
     }
 
-    void Scene::render() {
-        for (auto& system : m_systems) {
-            system->render(this);
-        }
-    }
+    // void Scene::render() {
+    //     for (auto& system : m_systems) {
+    //         system->render(shared_from_this());  
+    //     }
+    // }
 
     /**
      * @brief method to shutdown and delete all child entities
@@ -62,9 +61,9 @@ namespace retronomicon::scene {
         //     system->shutdown(this);
         // }
 
-        for (auto* obj : m_childEntities) {
-            delete obj;  // future: switch to smart pointers
-        }
+        // for (auto* obj : m_childEntities) {
+        //     delete obj;  // future: switch to smart pointers
+        // }
 
         m_childEntities.clear();
         m_isInitialized = false;
