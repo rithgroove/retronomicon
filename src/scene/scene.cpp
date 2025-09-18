@@ -58,16 +58,14 @@ namespace retronomicon::scene {
      * @brief method to shutdown and delete all child entities
      */
     void Scene::shutdown() {
-        // for (auto& system : m_systems) {
-        //     system->shutdown(this);
-        // }
+        // Call base Entity::shutdown to cleanup children/components
+        Entity::shutdown();
 
-        // for (auto* obj : m_childEntities) {
-        //     delete obj;  // future: switch to smart pointers
-        // }
+        // Shut down systems (if they have their own cleanup)
+        m_systems.clear();
 
-        m_childEntities.clear();
         m_isInitialized = false;
+        m_isActive = false;
     }
 
     /**

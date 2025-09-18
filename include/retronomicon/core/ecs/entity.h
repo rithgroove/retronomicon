@@ -43,7 +43,7 @@ namespace retronomicon::core::ecs{
             /**
              * @brief default destructor 
              */
-            // ~Entity();
+            ~Entity();
 
             /***************************** Setter *****************************/
 
@@ -148,7 +148,11 @@ namespace retronomicon::core::ecs{
              */
             void removeChildEntity(const std::shared_ptr<Entity>& child);
         
-            
+            /**
+             * @brief clean up child entities
+             */
+            virtual void shutdown();
+
             /*********** Component Related Method [using c++ template] *************/
 
             /**

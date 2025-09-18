@@ -14,6 +14,15 @@ namespace retronomicon::core::ecs{
      */
     Entity::Entity(const std::string &name):m_name(name){}
     
+    /***************************** Destructore *****************************/
+    
+    /**
+     * @brief overidable destructor. calls shutdown()
+     */
+    Entity::~Entity() {
+        shutdown();
+    }
+
     /***************************** Constructor *****************************/
     
     /**
@@ -69,5 +78,21 @@ namespace retronomicon::core::ecs{
             components.push_back(ptr);
         }
         return components;
+    }
+
+    /**
+     * @brief method to shutdown and delete all child entities
+     */
+    void Entity::shutdown() {
+        // Clean up components if needed
+        m_components.clear();
+        
+        // Shutdown children first (recursive!)
+        for (auto& child : m_childEntities) {
+            child->shutdown();
+        }
+        m_childEntities.clear();
+
+        m_isInitialized = false;
     }
 }
