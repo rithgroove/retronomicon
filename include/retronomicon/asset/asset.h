@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <filesystem>
 
 /**
  * @brief The namespace for assets and loaders

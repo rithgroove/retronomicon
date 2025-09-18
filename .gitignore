@@ -36,11 +36,7 @@ build-aarch64/
 CMakeFiles/
 
 /external/*
-!/external/SDL2
-!/external/SDL2_ttf
-!/external/SDL2_image
-!/external/SDL2_mixer
-!/external/libavif
+!/external/stb
 !/external/catch2
 !/external/json
 

@@ -7,5 +7,6 @@ add_library(retronomicon-asset OBJECT ${ASSET_SRC})
 
 target_include_directories(retronomicon-asset PUBLIC
     ${RETRO_DIR}/include
+    ${RETRO_DIR}/external
 )
 

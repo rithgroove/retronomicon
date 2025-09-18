@@ -1,10 +1,9 @@
 #include "retronomicon/asset/image_asset.h"
 #include <stdexcept>
 #include <sstream>
-
 // stb_image implementation
 #define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
+#include <stb/stb_image.h>
 
 namespace retronomicon::asset {
 
@@ -15,8 +14,8 @@ namespace retronomicon::asset {
      *
      * @param imagePath the path to the image
     */
-    ImageAsset::ImageAsset(const std::string& imagePath){
-        : Asset(imagePath) // path + auto name
+    ImageAsset::ImageAsset(const std::string& imagePath)
+        : Asset(imagePath){ // path + auto name
         // delegates to second constructor
     }
 

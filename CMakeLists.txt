@@ -26,8 +26,9 @@ add_subdirectory(src)
 # Public include paths
 include_directories(
     ${RETRO_INCLUDE_DIR}/include
-    ${RETRO_INCLUDE_DIR}/external/catch2/src
-    ${RETRO_INCLUDE_DIR}/external/catch2/json
+    ${RETRO_DIR}/external/catch2/src
+    ${RETRO_DIR}/external/stb
+    ${RETRO_DIR}/external/catch2/json
 )
 
 add_subdirectory(tests)
