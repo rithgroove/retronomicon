@@ -123,7 +123,7 @@ namespace retronomicon::core::ecs{
              * 
              * @return list of component in vector formats
              */
-            std::vector<Component*> getComponents();
+            std::vector<std::shared_ptr<Component>> getComponents();
 
             /***************************** Utilities *****************************/
 

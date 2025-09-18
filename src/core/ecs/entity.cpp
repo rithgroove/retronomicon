@@ -63,10 +63,10 @@ namespace retronomicon::core::ecs{
      * 
      * @return list of component in vector formats
      */
-    std::vector<Component*> Entity::getComponents() {
-        std::vector<Component*> components;
+    std::vector<std::shared_ptr<Component>> Entity::getComponents() {
+        std::vector<std::shared_ptr<Component>> components;
         for (auto& [type, ptr] : m_components) {
-            components.push_back(ptr.get());
+            components.push_back(ptr);
         }
         return components;
     }

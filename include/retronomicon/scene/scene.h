@@ -4,11 +4,13 @@
 #include <memory>
 #include <vector>
 #include "retronomicon/core/ecs/entity.h"
-#include "system.h"
+#include "retronomicon/core/ecs/system.h"
+#include "retronomicon/core/ecs/renderer.h"
 /**
  * @brief namespace for scene
  */
 namespace retronomicon::scene {
+    using namespace retronomicon::core::ecs;
     /**
      * @brief abstract scene class
      */

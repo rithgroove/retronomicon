@@ -1,4 +1,4 @@
-#include "retronomicon/lib/core/scene.h"
+#include "retronomicon/scene/scene.h"
 #include <algorithm> // for std::remove
 #include <iostream>
 /**
