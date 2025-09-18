@@ -4,6 +4,7 @@ message(STATUS "==== Processing ${CMAKE_CURRENT_LIST_FILE} ====")
 #add_subdirectory(lib)
 add_subdirectory(core)
 add_subdirectory(scene)
+add_subdirectory(asset)
 
 # Define the main retronomicon engine library
 add_library(retronomicon)
@@ -11,9 +12,9 @@ add_library(retronomicon)
 # Link subsystem libraries
 target_link_libraries(retronomicon
     PUBLIC
-        retronomicon-core-math
-        retronomicon-core-ecs
+        retronomicon-core
         retronomicon-scene
+        retronomicon-asset
 )
 
 # Global engine include path
