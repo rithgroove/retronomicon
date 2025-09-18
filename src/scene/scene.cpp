@@ -47,11 +47,12 @@ namespace retronomicon::scene {
         }
     }
 
-    // void Scene::render() {
-    //     for (auto& system : m_systems) {
-    //         system->render(shared_from_this());  
-    //     }
-    // }
+    /**
+     * @brief render method call all system render (not yet efficient enough)
+     */  
+    void Scene::render() {
+        m_renderManager.render(shared_from_this());
+    }
 
     /**
      * @brief method to shutdown and delete all child entities

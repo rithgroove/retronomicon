@@ -5,7 +5,7 @@
 #include <vector>
 #include "retronomicon/core/ecs/entity.h"
 #include "retronomicon/core/ecs/system.h"
-#include "retronomicon/core/ecs/renderer.h"
+#include "retronomicon/core/ecs/render_manager.h"
 /**
  * @brief namespace for scene
  */
@@ -86,7 +86,9 @@ namespace retronomicon::scene {
             /***************************** Attribute *****************************/
             bool m_isActive = false; // used in some systems to trigger only active scene (basically so we could include scene inside scene)
             // InputMap* m_inputMap = nullptr;
+            
             std::vector<std::unique_ptr<System>> m_systems;
+            RenderManager m_renderManager; 
     };
 
 }
