@@ -1,18 +1,17 @@
 #pragma once
 
-#include "retronomicon/lib/core/component.h"
-#include "retronomicon/lib/math/vec2.h"
-using namespace retronomicon::lib::core;
+#include "retronomicon/core/ecs/component.h"
+#include "retronomicon/core/math/vec2.h"
 /**
  * @brief The namespace for core components
  */
-namespace retronomicon::lib::core{
-    using retronomicon::lib::math::Vec2;
+namespace retronomicon::core::ecs {
+    using retronomicon::core::math::Vec2;
     /**
-     * @brief The components that defines the position of an gameobject
+     * @brief Defines position, rotation, and scale of an entity.
      */
     class TransformComponent : public Component {
-        public:
+
             /**
              * @brief empty constructor
              */
@@ -125,11 +124,11 @@ namespace retronomicon::lib::core{
             Vec2 getRenderPosition() const ;
 
         public:
-            float x = 0.0f;
-            float y = 0.0f;
-            float rotation = 0.0f;
-            float scaleX =0.0f;
-            float scaleY = 0.0f;
+            float m_x = 0.0f;
+            float m_y = 0.0f;
+            float m_rotation = 0.0f;
+            float m_scaleX =0.0f;
+            float m_scaleY = 0.0f;
             float m_anchorX = 0.5f;
             float m_anchorY = 0.5f;
     };
