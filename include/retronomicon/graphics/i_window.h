@@ -2,10 +2,6 @@
 
 #include <string>
 
-#pragma once
-
-#include <string>
-
 namespace retronomicon::graphics {
 
 /**
