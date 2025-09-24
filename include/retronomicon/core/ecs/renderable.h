@@ -11,7 +11,7 @@ namespace retronomicon::core::ecs{
         public:
 
             /**
-             * @brief Called when rendering with SDL
+             * @brief Called when rendering
              */
             virtual void render() = 0;
     };
