@@ -6,16 +6,16 @@
 #include <string>
 #include "animation_clip.h"
 #include "animation_listener.h"
-#include "retronomicon/lib/core/component.h"
+#include "retronomicon/core/ecs/component.h"
 
 /**
  * @brief The namespace for animation utilities
  */
-namespace retronomicon::lib::animation{
+namespace retronomicon::animation{
     /**
      * @brief Component responsible for managing animation clip states and playback.
      */
-    class AnimationComponent : public retronomicon::lib::core::Component {
+    class AnimationComponent : public retronomicon::core::ecs::Component {
         public:
             /***************************** Constructor *****************************/
 

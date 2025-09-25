@@ -1,14 +1,14 @@
-#include "retronomicon/lib/animation/animation_frame.h"
+#include "retronomicon/animation/animation_frame.h"
 #include <sstream>
 
 /**
  * @brief The namespace for graphic utilities
  */
-namespace retronomicon::lib::animation{
+namespace retronomicon::animation{
     /***************************** Using *****************************/
 
-    using retronomicon::lib::math::Point;
-    using retronomicon::lib::math::Rect;
+    using retronomicon::core::math::Point;
+    using retronomicon::core::math::Rect;
 
     /***************************** Constructor *****************************/
 

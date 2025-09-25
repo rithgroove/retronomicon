@@ -1,11 +1,11 @@
 #pragma once
 
-#include "retronomicon/lib/math/rect.h"
+#include "retronomicon/core/math/rect.h"
 
 /**
  * @brief The namespace for animation utilities
  */
-namespace retronomicon::lib::animation{
+namespace retronomicon::animation{
 	/**
 	 * @brief A class that represent a frame in the animation sequence (the source image from sprite sheet)
 	 */
@@ -32,7 +32,7 @@ namespace retronomicon::lib::animation{
 	    	 * @param height the height of the current frame from the spritesheet
 	    	 * @param duration in milisecond
 	    	 */
-		    AnimationFrame(const retronomicon::lib::math::Point& point, int width, int height, float duration) noexcept;
+		    AnimationFrame(const retronomicon::core::math::Point& point, int width, int height, float duration) noexcept;
 	    
 	    	/**
 	    	 * @brief basic constructor
@@ -40,7 +40,7 @@ namespace retronomicon::lib::animation{
 	    	 * @param rect the source rectangle of this frame
 	    	 * @param duration in milisecond
 	    	 */
-    		AnimationFrame(const retronomicon::lib::math::Rect& rect, float duration) noexcept;
+    		AnimationFrame(const retronomicon::core::math::Rect& rect, float duration) noexcept;
 
 		    /***************************** Destructor *****************************/
 
@@ -81,7 +81,7 @@ namespace retronomicon::lib::animation{
 	    	 * 
 	    	 * @return the source rectangle
 	    	 */
-	    	[[nodiscard]] retronomicon::lib::math::Rect getRect() const noexcept {return m_rect;}
+	    	[[nodiscard]] retronomicon::core::math::Rect getRect() const noexcept {return m_rect;}
 
 		    /***************************** Utility *****************************/
 
@@ -119,7 +119,7 @@ namespace retronomicon::lib::animation{
 
 	    private:
 		    /***************************** Attribute *****************************/
-	    	retronomicon::lib::math::Rect m_rect; //the rectangle
+	    	retronomicon::core::math::Rect m_rect; //the rectangle
 	    	float m_duration; // duration for this frame in ms
 	    	float m_elapsedTime; //how many of the duration is spent currently
     };

@@ -1,11 +1,11 @@
-#include "retronomicon/lib/animation/animation_clip.h"
+#include "retronomicon/animation/animation_clip.h"
 #include <algorithm>  // for std::max
 #include <sstream>
 #include <iostream>
 /**
  * @brief The namespace for graphic utilities
  */
-namespace retronomicon::lib::animation{
+namespace retronomicon::animation{
 
     /***************************** Constructor *****************************/
 

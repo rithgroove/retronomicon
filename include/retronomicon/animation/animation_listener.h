@@ -5,7 +5,7 @@
 /**
  * @brief The namespace for animation utilities
  */
-namespace retronomicon::lib::animation {
+namespace retronomicon::animation {
     // Forward Declaration
     class AnimationComponent;
 

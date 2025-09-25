@@ -1,11 +1,11 @@
-#include "retronomicon/lib/animation/animation_component.h"
-#include "retronomicon/lib/core/entity.h"
+#include "retronomicon/animation/animation_component.h"
+#include "retronomicon/core/ecs/entity.h"
 #include <iostream>
 #include <sstream>
 /**
  * @brief The namespace for graphic utilities
  */
-namespace retronomicon::lib::animation {
+namespace retronomicon::animation {
     
     /***************************** Constructor *****************************/
 

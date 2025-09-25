@@ -1,12 +1,12 @@
-#include "retronomicon/lib/animation/animation_system.h"
-#include "retronomicon/lib/animation/animation_component.h"
+#include "retronomicon/animation/animation_system.h"
+#include "retronomicon/animation/animation_component.h"
 
 #include <sstream>
 
 /**
  * @brief The namespace for animation utilities
  */
-namespace retronomicon::lib::animation{
+namespace retronomicon::animation{
     /***************************** Constructor *****************************/
     
     /**
@@ -38,15 +38,17 @@ namespace retronomicon::lib::animation{
      * @param dt time interval since last update
      * @param entity the parent entity, will call this method recursively
      */
-    void AnimationSystem::update(float dt, retronomicon::lib::core::Entity* entity){
-        auto animation = entity->getComponent<AnimationComponent>();
-        if (animation){
-            animation->update(dt);
-        }
+    void AnimationSystem::update(float dt, std::weak_ptr<Entity> weakEntity){
+        if (auto entity = weakEntity.lock()) { // only proceed if entity is alive
+            auto animation = entity->getComponent<AnimationComponent>();
+            if (animation) {
+                animation->update(dt);
+            }
 
-        for (Entity* obj : entity->getChilds()) {
-            // render logic
-             this->update(dt,obj);
+            // Recurse into children
+            for (auto& child : entity->getChildren()) {
+                this->update(dt, child);
+            }
         }
     }
 }

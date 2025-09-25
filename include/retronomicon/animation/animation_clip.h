@@ -7,7 +7,7 @@
 /**
  * @brief The namespace for animation utilities
  */
-namespace retronomicon::lib::animation{
+namespace retronomicon::animation{
 	/**
 	 * @brief A class that represent an animation AnimationClip.
 	 * each frame will be represented by an instance of Frame class.
