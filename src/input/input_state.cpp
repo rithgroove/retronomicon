@@ -1,10 +1,10 @@
-#include "retronomicon/lib/input/input_state.h"
+#include "retronomicon/input/input_state.h"
 #include <sstream>
 #include <iostream>
 /**
  * @brief This namespace is for handling input
  */
-namespace retronomicon::lib::input {
+namespace retronomicon::input {
 
     /***************************** Constructor *****************************/
 

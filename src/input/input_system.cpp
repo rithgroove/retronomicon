@@ -1,8 +1,8 @@
 
 #include <sstream>
 #include <iostream>
-#include "retronomicon/lib/input/input_system.h"
-#include "retronomicon/lib/input/input_component.h"
+#include "retronomicon/lib/input_system.h"
+#include "retronomicon/lib/input_component.h"
 
 /**
  * @brief This namespace is for handling input
@@ -15,26 +15,7 @@ namespace retronomicon::lib::input{
      * @brief default constructor
      */
     InputSystem::InputSystem() // Temp init to avoid reference error
-    {
-
-        InputMap* inputMap = new InputMap();
-        inputMap->bindAction(SDL_SCANCODE_SPACE, "jump");
-        inputMap->bindAction(SDL_SCANCODE_RETURN, "interact");
-        inputMap->bindAction(SDL_SCANCODE_ESCAPE,"quit");
-        // inputMap->bindAction(SDL_WINDOWEVENT_CLOSE,"quit");
-        // inputMap->bindAction(SDL_QUIT,"quit");
-
-
-        inputMap->bindAxis(SDL_SCANCODE_A, "move_x", -1.0f);
-        inputMap->bindAxis(SDL_SCANCODE_D, "move_x", 1.0f);
-        inputMap->bindAxis(SDL_SCANCODE_W, "move_y", -1.0f);
-        inputMap->bindAxis(SDL_SCANCODE_S, "move_y", 1.0f);
-
-        m_inputState = std::make_shared<InputState>();
-        m_inputState->setInputMap(inputMap);
-
-        // If m_gameObjects should be provided externally, consider refactoring the constructor
-    }
+    {}
 
     /**
      * @brief default constructor
