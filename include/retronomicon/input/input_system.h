@@ -2,9 +2,9 @@
 
 #include <vector>
 #include <memory>
-#include "retronomicon/lib/input/input_state.h"
-#include "retronomicon/lib/core/entity.h"
-#include "retronomicon/lib/core/system.h"
+#include "input_state.h"
+#include "retronomicon/core/ecs/entity.h"
+#include "retronomicon/core/ecs/system.h"
 
 /**
  * @brief This namespace is for handling input
