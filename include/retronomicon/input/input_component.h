@@ -2,32 +2,30 @@
 #pragma once
 
 #include <memory>
-#include "input_state.h"   // your global/hardware state wrapper
+#include "input_state.h"
 #include "retronomicon/lib/core/component.h"
 
-namespace retronomicon::lib::input {
+namespace retronomicon::input {
 
     /**
-     * @brief Abstract base for all input-intent components.
-     * - Defines per-frame lifecycle for input handling.
-     * - Subclasses translate hardware input into gameplay actions.
+     * @brief Base class for input-aware ECS components.
+     * - Stores pointer to global InputState (from GameEngine).
+     * - Subclasses read from the state during update().
      */
     class InputComponent : public retronomicon::lib::core::Component {
     public:
+        explicit InputComponent(std::shared_ptr<InputState> state)
+            : m_inputState(std::move(state)) {}
+
         virtual ~InputComponent() = default;
 
         /**
-         * @brief Called at the start of each frame to reset transient flags.
+         * @brief Subclasses implement how input affects the entity.
          */
-        // virtual void beginFrame() = 0;
+        void update(float dt) override = 0;
 
-        void update(float dt)override {}
-        /**
-         * @brief Feed hardware-level input for this frame.
-         * @param state Current hardware input state.
-         * @param dt Delta time since last frame.
-         */
-        virtual void updateFromState(std::shared_ptr<InputState> state, float dt) = 0;
+    protected:
+        std::shared_ptr<InputState> m_inputState; ///< Shared global state
     };
 
 } // namespace retronomicon::lib::input
