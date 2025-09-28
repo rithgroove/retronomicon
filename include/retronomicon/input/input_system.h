@@ -9,7 +9,7 @@
 /**
  * @brief This namespace is for handling input
  */
-namespace retronomicon::lib::input {
+namespace retronomicon::input {
     /**
      * @brief A system that handles input. fill up input state from sdl and pass it to all input components
      */

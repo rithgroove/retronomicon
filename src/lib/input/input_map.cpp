@@ -4,7 +4,7 @@
 /**
  * @brief This namespace is for handling input
  */
-namespace retronomicon::lib::input {
+namespace retronomicon::input {
     /***************************** Destructor *****************************/
 
     /**
