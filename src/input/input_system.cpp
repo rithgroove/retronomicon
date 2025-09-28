@@ -63,7 +63,7 @@ namespace retronomicon::input{
 
         auto input = entity->getComponent<InputComponent>();
         if (input){
-            input->updateFromState(m_inputState,dt);
+            input->update(dt);
         }
 
         for (Entity* obj : entity->getChilds()) {
