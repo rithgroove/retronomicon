@@ -1,8 +1,8 @@
 
 #include <sstream>
 #include <iostream>
-#include "retronomicon/input_system.h"
-#include "retronomicon/input_component.h"
+#include "retronomicon/input/input_system.h"
+#include "retronomicon/input/input_component.h"
 
 /**
  * @brief This namespace is for handling input

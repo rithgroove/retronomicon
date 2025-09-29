@@ -5,6 +5,7 @@ message(STATUS "==== Processing ${CMAKE_CURRENT_LIST_FILE} ====")
 add_subdirectory(core)
 add_subdirectory(scene)
 add_subdirectory(asset)
+add_subdirectory(input)
 add_subdirectory(animation)
 
 # Define the main retronomicon engine library
@@ -16,6 +17,7 @@ target_link_libraries(retronomicon
         retronomicon-core
         retronomicon-scene
         retronomicon-asset
+        retronomicon-input
         retronomicon-animation
 )
 
