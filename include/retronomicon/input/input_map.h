@@ -5,11 +5,12 @@
 #include <string>
 #include <utility>
 #include <ostream>
+#include <sstream>
 
 /**
  * @brief This namespace is for handling input
  */
-namespace retronomicon::lib::input {
+namespace retronomicon::input {
 
     /**
      * @brief Generic key identifier (backend translates into this)

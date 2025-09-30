@@ -54,26 +54,20 @@ namespace retronomicon::input{
      * @brief method to update all component
      * 
      * @param dt time interval since last update
-     * @param objects the game objects (might change to Entity Later)
+     * @param entity weak_ptr to the entity
      */
-    void InputSystem::update(float dt, Entity* entity) {
-        if (!m_inputState) return;
+    void InputSystem::update(float dt, std::weak_ptr<Entity> entity) {
+        if (auto e = entity.lock()) {
+            auto comp = e->getComponent<InputComponent>();
+            if (comp) {
+                comp->update(dt);  // always valid now
+            }
 
-        // std::cout<<m_inputState<<std::endl;
-
-        auto input = entity->getComponent<InputComponent>();
-        if (input){
-            input->update(dt);
+            for (auto& child : e->getChildren()) {
+                update(dt, child);
+            }
         }
-
-        for (Entity* obj : entity->getChilds()) {
-            // render logic
-             this->update(dt,obj);
-        }
-
     }
-
-
 }
 
 

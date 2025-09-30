@@ -10,10 +10,13 @@
  * @brief This namespace is for handling input
  */
 namespace retronomicon::input {
+    using retronomicon::core::ecs::System;
+    using retronomicon::core::ecs::Entity;
+    
     /**
      * @brief A system that handles input. fill up input state from sdl and pass it to all input components
      */
-    class InputSystem : public retronomicon::lib::core::System {
+    class InputSystem : public System {
         public:
             /***************************** Constructor *****************************/
 
@@ -68,7 +71,7 @@ namespace retronomicon::input {
              * @param dt time interval since last update
              * @param objects the game objects (might change to Entity Later)
              */
-            void update(float dt, retronomicon::lib::core::Entity* objects)  override;
+            void update(float dt, std::weak_ptr<Entity> entity) override;
         private:
             /***************************** Attribute *****************************/
             std::shared_ptr<InputState> m_inputState;
