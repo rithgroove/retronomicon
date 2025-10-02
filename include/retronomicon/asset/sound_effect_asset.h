@@ -1,16 +1,14 @@
 #pragma once
 
 #include <string>
-#include <SDL_mixer.h>
 #include "asset.h"
 /**
  * @brief The namespace for assets and loaders
  */
-namespace retronomicon::lib::asset {
+namespace retronomicon::asset {
 
     /**
      * @brief Represents a short sound effect asset (WAV, OGG, etc.).
-     *        Managed using SDL_mixer's Mix_Chunk.
      */
     class SoundEffectAsset : public Asset {
         public:

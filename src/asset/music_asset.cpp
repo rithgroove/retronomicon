@@ -1,9 +1,9 @@
-#include "retronomicon/lib/asset/music_asset.h"
+#include "retronomicon/asset/music_asset.h"
 #include <stdexcept>
 /**
  * @brief The namespace for assets and loaders
  */
-namespace retronomicon::lib::asset {
+namespace retronomicon::asset {
 
     /***************************** Constructor *****************************/
     

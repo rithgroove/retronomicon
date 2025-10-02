@@ -1,10 +1,10 @@
-#include "retronomicon/lib/asset/sound_effect_asset.h"
+#include "retronomicon/asset/sound_effect_asset.h"
 #include <stdexcept>
 
 /**
  * @brief The namespace for assets and loaders
  */
-namespace retronomicon::lib::asset {
+namespace retronomicon::asset {
     /***************************** Constructor *****************************/
     
     /**

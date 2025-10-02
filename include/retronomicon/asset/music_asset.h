@@ -1,12 +1,11 @@
 #pragma once
 
 #include <string>
-#include <SDL_mixer.h>
 #include "asset.h"
 /**
  * @brief The namespace for assets and loaders
  */
-namespace retronomicon::lib::asset {
+namespace retronomicon::asset {
 
     /**
      * @brief Represents a music asset (typically long background music).
