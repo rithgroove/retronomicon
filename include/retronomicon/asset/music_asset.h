@@ -1,6 +1,5 @@
 #pragma once
 
-#include <string>
 #include "asset.h"
 /**
  * @brief The namespace for assets and loaders
@@ -34,21 +33,6 @@ namespace retronomicon::asset {
 
             /***************************** Getter *****************************/
 
-            /**
-             * @brief Get the raw Mix_Music pointer
-             * 
-             *
-             *  @return raw music
-             */
-            Mix_Music* getRawMusic() const noexcept { return m_music; }
-
-            /**
-             * @brief check if it valid to play
-             * 
-             * @return boolean of validity
-             */
-            bool isValid() const noexcept { return m_music != nullptr;}
-
             /***************************** To String *****************************/
 
             /**
@@ -56,11 +40,10 @@ namespace retronomicon::asset {
              *     
              * @return string representation
              */
-            std::string to_string() const override;
-        private:
+            std::string to_string() const override; {
+                return "[MusicAsset]\n-name=" + m_name + "\n-path=" + m_path + "\n";
+            }
 
-            /***************************** Attribute *****************************/
-            Mix_Music* m_music;
     };
 
 }

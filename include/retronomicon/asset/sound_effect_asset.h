@@ -31,12 +31,6 @@ namespace retronomicon::asset {
              */
             ~SoundEffectAsset() override;
 
-            /***************************** Getter *****************************/
-
-            /**
-             * @brief Get the raw Mix_Chunk pointer
-             */
-            Mix_Chunk* getRawSound() const noexcept { return m_chunk; }
 
             /***************************** To String *****************************/
            /**
@@ -44,11 +38,10 @@ namespace retronomicon::asset {
              * 
              * @return Brief summary of this object in string
              */
-            std::string to_string() const override;
+            std::string to_string() const override {
+                return "[SoundEffectAsset]\n-name=" + m_name + "\n-path=" + m_path + "\n";
+            }
 
-        private:
-            /***************************** Attribute *****************************/
-            Mix_Chunk* m_chunk;
     };
 
 }
