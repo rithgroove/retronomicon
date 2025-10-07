@@ -1,15 +1,15 @@
-#include "retronomicon/lib/audio/sound_effect_component.h"
+#include "retronomicon/audio/sound_effect_component.h"
 
-namespace retronomicon::lib::audio {
+namespace retronomicon::audio {
 
-    SoundEffectComponent::SoundEffectComponent(retronomicon::lib::asset::SoundEffectAsset* asset, int loopCount)
+    SoundEffectComponent::SoundEffectComponent(retronomicon::asset::SoundEffectAsset* asset, int loopCount)
         : m_asset(asset), m_loopCount(loopCount), m_playRequested(false) {}
 
-    void SoundEffectComponent::setAsset(retronomicon::lib::asset::SoundEffectAsset* asset) {
+    void SoundEffectComponent::setAsset(retronomicon::asset::SoundEffectAsset* asset) {
         m_asset = asset;
     }
 
-    retronomicon::lib::asset::SoundEffectAsset* SoundEffectComponent::getAsset() const {
+    retronomicon::asset::SoundEffectAsset* SoundEffectComponent::getAsset() const {
         return m_asset;
     }
 

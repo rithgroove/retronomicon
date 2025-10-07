@@ -40,7 +40,7 @@ namespace retronomicon::asset {
              *     
              * @return string representation
              */
-            std::string to_string() const override; {
+            std::string to_string() const override {
                 return "[MusicAsset]\n-name=" + m_name + "\n-path=" + m_path + "\n";
             }
 

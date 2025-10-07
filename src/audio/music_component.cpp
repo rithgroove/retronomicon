@@ -1,15 +1,15 @@
-#include "retronomicon/lib/audio/music_component.h"
+#include "retronomicon/audio/music_component.h"
 
-namespace retronomicon::lib::audio {
+namespace retronomicon::audio {
 
-    MusicComponent::MusicComponent(retronomicon::lib::asset::MusicAsset* asset, int loopCount)
+    MusicComponent::MusicComponent(retronomicon::asset::MusicAsset* asset, int loopCount)
         : m_asset(asset), m_loopCount(loopCount), m_playRequested(false) {}
 
-    void MusicComponent::setAsset(retronomicon::lib::asset::MusicAsset* asset) {
+    void MusicComponent::setAsset(retronomicon::asset::MusicAsset* asset) {
         m_asset = asset;
     }
 
-    retronomicon::lib::asset::MusicAsset* MusicComponent::getAsset() const {
+    retronomicon::asset::MusicAsset* MusicComponent::getAsset() const {
         return m_asset;
     }
 

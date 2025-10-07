@@ -5,6 +5,7 @@ message(STATUS "==== Processing ${CMAKE_CURRENT_LIST_FILE} ====")
 add_subdirectory(core)
 add_subdirectory(scene)
 add_subdirectory(asset)
+add_subdirectory(audio)
 add_subdirectory(input)
 add_subdirectory(animation)
 
@@ -18,6 +19,7 @@ target_link_libraries(retronomicon
         retronomicon-scene
         retronomicon-asset
         retronomicon-input
+        retronomicon-audio
         retronomicon-animation
 )
 

@@ -1,27 +1,27 @@
 #pragma once
 
-#include "retronomicon/lib/core/component.h"
-#include "retronomicon/lib/asset/sound_effect_asset.h"
+#include "retronomicon/core/ecs/component.h"
+#include "retronomicon/asset/sound_effect_asset.h"
 
-namespace retronomicon::lib::audio {
+namespace retronomicon::audio {
 
     /**
      * @brief Component representing a sound effect to be triggered by the audio system.
      */
-    class SoundEffectComponent : public retronomicon::lib::core::Component {
+    class SoundEffectComponent : public retronomicon::core::ecs::Component {
     public:
         SoundEffectComponent() = default;
-        explicit SoundEffectComponent(retronomicon::lib::asset::SoundEffectAsset* asset, int loopCount = 0);
+        explicit SoundEffectComponent(retronomicon::asset::SoundEffectAsset* asset, int loopCount = 0);
 
         /**
          * @brief Set the sound asset to be played.
          */
-        void setAsset(retronomicon::lib::asset::SoundEffectAsset* asset);
+        void setAsset(retronomicon::asset::SoundEffectAsset* asset);
 
         /**
          * @brief Get the sound asset currently attached.
          */
-        retronomicon::lib::asset::SoundEffectAsset* getAsset() const;
+        retronomicon::asset::SoundEffectAsset* getAsset() const;
 
         /**
          * @brief Set how many times the sound should loop.
@@ -49,7 +49,7 @@ namespace retronomicon::lib::audio {
         void resetPlayRequest();
 
     private:
-        retronomicon::lib::asset::SoundEffectAsset* m_asset = nullptr;
+        retronomicon::asset::SoundEffectAsset* m_asset = nullptr;
         int m_loopCount = 0;
         bool m_playRequested = false;
     };
