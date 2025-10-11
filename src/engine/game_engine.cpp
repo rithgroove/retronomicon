@@ -1,9 +1,9 @@
 #include <iostream>
 #include <stdexcept>
-#include "retronomicon/lib/engine/game_engine.h"
+#include "retronomicon/engine/game_engine.h"
 
-namespace retronomicon::lib::engine {
-    using retronomicon::lib::graphic::Window;
+namespace retronomicon::engine {
+    using retronomicon::graphic::Window;
     /***************************** Constructor *****************************/
     
     /**
@@ -121,4 +121,4 @@ namespace retronomicon::lib::engine {
     }
 
 
-} // namespace retronomicon::lib::core
+} // namespace retronomicon::core

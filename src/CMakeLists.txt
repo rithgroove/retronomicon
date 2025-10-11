@@ -7,6 +7,7 @@ add_subdirectory(scene)
 add_subdirectory(asset)
 add_subdirectory(audio)
 add_subdirectory(input)
+add_subdirectory(engine)
 add_subdirectory(animation)
 
 # Define the main retronomicon engine library
@@ -20,6 +21,7 @@ target_link_libraries(retronomicon
         retronomicon-asset
         retronomicon-input
         retronomicon-audio
+        retronomicon-engine
         retronomicon-animation
 )
 
