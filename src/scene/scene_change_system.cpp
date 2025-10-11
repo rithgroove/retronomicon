@@ -1,5 +1,4 @@
-#include <retronomicon/scene/scene_change_system.h>
-#include <retronomicon/scene/engine.h> // or wherever Engine is defined
+#include <retronomicon/scene/scene_change_system.h>// or wherever Engine is defined
 #include <iostream>
 
 using namespace retronomicon::scene;

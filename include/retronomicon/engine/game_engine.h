@@ -1,10 +1,9 @@
 #pragma once
 
 #include <memory>
-#include <SDL.h>
-#include "retronomicon/lib/core/scene.h"
-#include "retronomicon/lib/scene/scene_manager.h"
-#include "retronomicon/lib/graphic/window.h"
+#include "retronomicon/scene/scene.h"
+#include "retronomicon/scene/scene_manager.h"
+#include "retronomicon/graphics/i_window.h"
 #include "retronomicon/lib/input/input_state.h"
 #include "retronomicon/lib/asset/asset_manager.h"
 #include "retronomicon/lib/asset/character_database.h"
@@ -104,14 +103,6 @@ namespace retronomicon::lib::engine {
              */
             std::shared_ptr<CharacterDatabase>  getCharacterDatabase() noexcept {return m_characterDatabase;}  
 
-            /**
-             * @brief inline method to get the renderer
-             * 
-             * @return the SDL_GLContext from window
-             */
-            [[nodiscard]] SDL_GLContext getGLContext() noexcept {
-                return m_window->getGLContext();
-            }
 
             /***************************** Main Methods *****************************/
 
@@ -148,11 +139,11 @@ namespace retronomicon::lib::engine {
             std::shared_ptr<AssetManager> m_assetManager;
             std::shared_ptr<CharacterDatabase> m_characterDatabase = nullptr;
             std::shared_ptr<InputState> m_inputState;
-            std::unique_ptr<retronomicon::lib::graphic::Window> m_window;
+            std::unique_ptr<retronomicon::lib::graphic::IWindow> m_window;
             std::shared_ptr<Scene> m_activeScene;
 
             bool m_running = false; 
-            retronomicon::lib::scene::SceneManager m_sceneManager;
+            retronomicon::scene::SceneManager m_sceneManager;
 
             /***************************** Main Private Methods *****************************/
 
