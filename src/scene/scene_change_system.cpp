@@ -7,15 +7,15 @@ using namespace retronomicon::core::ecs;
 void SceneChangeSystem::update(float dt, std::weak_ptr<Entity> entity) {
     if (auto e = entity.lock()) {
         auto sceneChange = e->getComponent<SceneChangeComponent>();
-        if (sceneChange && sceneChange->triggered) {
+        if (sceneChange && sceneChange->isTriggered()) {
             std::cout << "[SceneChangeSystem] next_scene: "
-                      << sceneChange->next_scene << std::endl;
+                      << sceneChange->getNextScene() << std::endl;
 
             if (m_engine) {
-                m_engine->changeScene(sceneChange->next_scene);
+                m_engine->changeScene(sceneChange->getNextScene());
             }
 
-            sceneChange->triggered = false;
+            sceneChange->resetTrigger();
         }
 
         // Recurse through children

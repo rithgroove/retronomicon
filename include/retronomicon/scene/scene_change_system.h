@@ -6,10 +6,10 @@
 
 namespace retronomicon::scene {
 
+    using retronomicon::engine::GameEngine;
     class SceneChangeSystem : public core::ecs::System {
-        using retronomicon::engine::GameEngine;
     public:
-        explicit SceneChangeSystem(Engine* engine)
+        explicit SceneChangeSystem(GameEngine* engine)
             : m_engine(engine) {}
 
         void update(float dt, std::weak_ptr<core::ecs::Entity> entity) override;

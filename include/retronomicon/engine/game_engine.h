@@ -4,18 +4,13 @@
 #include "retronomicon/scene/scene.h"
 #include "retronomicon/scene/scene_manager.h"
 #include "retronomicon/graphics/i_window.h"
-#include "retronomicon/lib/input/input_state.h"
-#include "retronomicon/lib/asset/asset_manager.h"
-#include "retronomicon/lib/asset/character_database.h"
-#include "retronomicon/lib/asset/character_module_loader.h"
+#include "retronomicon/input/input_state.h"
 /**
  * @brief The namespace for the core engine features of retronomicon
  */
-namespace retronomicon::lib::engine {
-    using retronomicon::lib::input::InputState;
-    using retronomicon::lib::asset::AssetManager;
-    using retronomicon::lib::asset::CharacterDatabase;
-    using retronomicon::lib::asset::CharacterModuleLoader;
+namespace retronomicon::engine {
+    using retronomicon::input::InputState;
+    using retronomicon::scene::Scene;
     /**
      * @brief Game Engine class (the main class that you need to run)
      */
@@ -58,27 +53,6 @@ namespace retronomicon::lib::engine {
                 m_sceneManager.registerScene(name,newScene);
             }
 
-            /**
-             * @brief register scene in m_sceneManager. so we could use scene manager to change scene by keyword
-             * 
-             */
-            void loadCharacterDb(const std::string &filepath){
-                if (m_characterDatabase->loadDatabase(filepath)){
-                    std::cout<< "Loading character db : " +filepath +". Successful" << std::endl;
-                }else{
-                    std::cout<< "Loading character db : " +filepath +". Failed" << std::endl;
-                }
-                
-            }
-
-            /**
-             * @brief register characterLoaderModule so it could load necessary setting
-             * 
-             * @param module the module
-             */
-            void registerCharacterLoaderModule(std::shared_ptr<CharacterModuleLoader>  module) noexcept{
-                m_characterDatabase->registerModuleLoader(module);
-            }
 
             /***************************** Getter *****************************/
 
@@ -87,21 +61,7 @@ namespace retronomicon::lib::engine {
              * 
              * @return inputState
              */
-            std::shared_ptr<InputState>  getInputState() noexcept {return m_inputState;}  
-
-            /**
-             * @brief method to get InputState
-             * 
-             * @return inputState
-             */
-            std::shared_ptr<AssetManager>  getAssetManager() noexcept {return m_assetManager;}  
-
-            /**
-             * @brief method to get InputState
-             * 
-             * @return inputState
-             */
-            std::shared_ptr<CharacterDatabase>  getCharacterDatabase() noexcept {return m_characterDatabase;}  
+            std::shared_ptr<InputState>  getInputState() noexcept {return m_inputState;}    
 
 
             /***************************** Main Methods *****************************/
@@ -136,10 +96,8 @@ namespace retronomicon::lib::engine {
         private:
             /***************************** Attribute *****************************/
 
-            std::shared_ptr<AssetManager> m_assetManager;
-            std::shared_ptr<CharacterDatabase> m_characterDatabase = nullptr;
             std::shared_ptr<InputState> m_inputState;
-            std::unique_ptr<retronomicon::lib::graphic::IWindow> m_window;
+            std::unique_ptr<retronomicon::graphics::IWindow> m_window;
             std::shared_ptr<Scene> m_activeScene;
 
             bool m_running = false; 
@@ -166,4 +124,4 @@ namespace retronomicon::lib::engine {
             void render();
     };
 
-} // namespace retronomicon::lib::core
+} // namespace retronomicon::core
