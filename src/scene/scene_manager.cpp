@@ -18,8 +18,8 @@ std::shared_ptr<Scene> SceneManager::changeScene(const std::string& name) {
 
     // ✅ Preserve exact old behavior
     if (!scene->isInitialized()) {
-        scene->init();
-    } else if (scene->requiresReset()) {
+        scene->start();
+    } else if (scene->isRequiresReset()) {
         scene->reset();
     }
 

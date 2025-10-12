@@ -74,6 +74,7 @@ namespace retronomicon::scene {
     void Scene::reset() {
         shutdown();
         start();
+        m_requiresReset = false;
     }
 
 

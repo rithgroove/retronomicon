@@ -62,7 +62,13 @@ namespace retronomicon::scene {
              */
             virtual void reset();
 
+            void setRequiresReset(bool requireReset){
+                m_requiresReset = requireReset;
+            }
 
+            bool isRequiresReset(){
+                return m_requiresReset;
+            }
             /***************************** Getter *****************************/
             /**
              * @brief method to check if scene is active. This is useful if we 
@@ -85,6 +91,7 @@ namespace retronomicon::scene {
         protected:
             /***************************** Attribute *****************************/
             bool m_isActive = false; // used in some systems to trigger only active scene (basically so we could include scene inside scene)
+            bool m_requiresReset = false;
             // InputMap* m_inputMap = nullptr;
             
             std::vector<std::unique_ptr<System>> m_systems;

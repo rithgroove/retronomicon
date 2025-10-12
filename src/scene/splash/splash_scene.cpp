@@ -1,6 +1,6 @@
 #include <retronomicon/scene/splash/splash_scene.h>
 #include <retronomicon/core/ecs/transform_component.h>
-#include <retronomicon/core/ecs/renderable_component.h>
+#include <retronomicon/core/ecs/renderable.h>
 #include <retronomicon/core/ecs/animation_component.h>
 #include <retronomicon/core/ecs/scene_change_component.h>
 #include <retronomicon/core/ecs/systems/animation_system.h>
