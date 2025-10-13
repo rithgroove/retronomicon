@@ -1,74 +1,97 @@
-#include <retronomicon/scene/splash/splash_scene.h>
-#include <retronomicon/core/ecs/transform_component.h>
-#include <retronomicon/core/ecs/renderable.h>
-#include <retronomicon/core/ecs/animation_component.h>
-#include <retronomicon/core/ecs/scene_change_component.h>
-#include <retronomicon/core/ecs/systems/animation_system.h>
-#include <retronomicon/core/ecs/systems/input_system.h>
-#include <retronomicon/core/ecs/systems/scene_change_system.h>
+#include "retronomicon/scene/splash/splash_scene.h"
+
+#include "retronomicon/core/ecs/transform_component.h"
+#include "retronomicon/core/ecs/renderable.h"
+#include "retronomicon/animation/animation_component.h"
+#include "retronomicon/scene/scene_change_component.h"
+#include "retronomicon/animation/animation_system.h"
+#include "retronomicon/input/input_system.h"
+#include "retronomicon/scene/scene_change_system.h"
+
+#include <iostream>
 
 using namespace retronomicon::scene::splash;
 using namespace retronomicon::core::ecs;
+using namespace retronomicon::graphics;
+using namespace retronomicon::animation;
+using namespace retronomicon::asset;
 
-SplashScene::SplashScene(std::shared_ptr<graphics::IRenderer> renderer,
+SplashScene::SplashScene(std::shared_ptr<IRenderer> renderer,
                          const std::string& imagePath,
                          const std::string& nextScene)
-    : m_renderer(std::move(renderer))
+    : Scene("SplashScene")
+    , m_renderer(std::move(renderer))
     , m_imagePath(imagePath)
     , m_nextScene(nextScene)
 {}
 
 void SplashScene::start() {
-    // Load image asset (engine-agnostic)
-    m_logoImage = std::make_shared<asset::ImageAsset>();
-    if (!m_logoImage->load(m_imagePath)) {
-        // log error, but continue
+    // Always call base version
+    Scene::start();
+
+    // Construct ImageAsset directly — it loads during construction
+    try {
+        m_logoImage = std::make_shared<ImageAsset>(m_imagePath);
+    } catch (const std::exception& e) {
+        std::cerr << "[SplashScene] Failed to create ImageAsset: "
+                  << e.what() << " (" << m_imagePath << ")\n";
     }
 
-    // Create ECS entity for logo
     createLogoEntity();
 
-    // Attach systems
-    addSystem(std::make_shared<AnimationSystem>());
-    addSystem(std::make_shared<InputSystem>());
-    addSystem(std::make_shared<SceneChangeSystem>());
+    // Register systems in correct order
+    addSystem(std::make_unique<animation::AnimationSystem>());
+    addSystem(std::make_unique<input::InputSystem>());
+    addSystem(std::make_unique<scene::SceneChangeSystem>());
+
+    m_isActive = true;
 }
 
 void SplashScene::createLogoEntity() {
-    m_logoEntity = std::make_shared<Entity>();
+    m_logoEntity = std::make_shared<Entity>("SplashLogo");
 
-    // Position logo at center (temporary, 0,0)
-    auto transform = m_logoEntity->addComponent<TransformComponent>(Vec2{0.0f, 0.0f});
-    m_logoEntity->addComponent<RenderableComponent>(m_logoImage);
-    m_logoEntity->addComponent<AnimationComponent>(3.0f /* duration seconds */);
-    m_logoEntity->addComponent<SceneChangeComponent>(m_nextScene);
+    // Place logo at center (temporary)
+    m_logoEntity->addComponent<TransformComponent>(0.0f, 0.0f);
+
+    // Attach renderable using the image asset
+    // m_logoEntity->addComponent<Sp>(m_logoImage);
+
+    // Simple animation + scene change// ---------------- setup animation component using m_duration as wait time ------------------------
+    std::vector<AnimationFrame> frames; // array of frame
+    frames.emplace_back(0, 0, m_image->getWidth(), m_image->getHeight(), this->m_duration); // create a single frame 
+    auto clip = std::make_shared<AnimationClip>(frames, std::string("logo_wait"), false);  // create animation clip 
+    auto logoAnimationComponent = logoEntity->addComponent<AnimationComponent>(clip); // create animation component
+    logoAnimationComponent->setListener(new SplashAnimationListener()); // setup listener so it set scene changecomponent to true
+
+    m_logoEntity->addComponent<scene::SceneChangeComponent>(m_nextScene);
 
     addChild(m_logoEntity);
 }
 
 void SplashScene::update(float dt) {
+    Scene::update(dt);
+
     m_elapsedTime += dt;
 
-    // Skip check via InputSystem or a flag updated externally
     if (m_skipRequested || m_elapsedTime >= 3.0f) {
-        // Trigger scene transition
-        auto sceneChange = m_logoEntity->getComponent<SceneChangeComponent>();
-        if (sceneChange) {
+        if (auto sceneChange = m_logoEntity->getComponent<scene::SceneChangeComponent>()) {
             sceneChange->trigger();
         }
     }
-
-    for (auto& sys : m_systems)
-        sys->update(dt, shared_from_this());
 }
 
 void SplashScene::render() {
-    m_renderManager.render(shared_from_this(), m_renderer);
+    // Let base render manager traverse scene hierarchy
+    m_renderManager.render(shared_from_this());
+
+    // Delegate to backend renderer for frame presentation
+    if (m_renderer) {
+        m_renderer->render();
+    }
 }
 
 void SplashScene::shutdown() {
     m_logoEntity.reset();
     m_logoImage.reset();
-    m_systems.clear();
-    clearChildren();
+    Scene::shutdown();
 }

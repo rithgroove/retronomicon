@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace retronomicon::core::ecs {
+namespace retronomicon::scene {
 
     class SceneChangeComponent {
         public:

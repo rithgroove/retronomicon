@@ -2,14 +2,16 @@
 #include <memory>
 #include <string>
 #include <retronomicon/scene/scene.h>
+// NOTE: IRenderer lives in retronomicon::graphics per core docs.
 #include <retronomicon/graphics/renderer/i_renderer.h>
 #include <retronomicon/asset/image_asset.h>
 
 namespace retronomicon::scene::splash {
-
-class SplashScene : public Scene {
+using retronomicon::graphics::renderer::IRenderer;
+class SplashScene : public retronomicon::scene::Scene,
+                    public std::enable_shared_from_this<SplashScene> {
 public:
-    SplashScene(std::shared_ptr<graphics::IRenderer> renderer,
+    SplashScene(std::shared_ptr<IRenderer> renderer,
                 const std::string& imagePath,
                 const std::string& nextScene = "");
 
@@ -22,9 +24,9 @@ private:
     void createLogoEntity();
 
 private:
-    std::shared_ptr<graphics::IRenderer> m_renderer;
-    std::shared_ptr<asset::ImageAsset> m_logoImage;
-    std::shared_ptr<Entity> m_logoEntity;
+    std::shared_ptr<IRenderer> m_renderer;
+    std::shared_ptr<retronomicon::asset::ImageAsset> m_logoImage;
+    std::shared_ptr<retronomicon::core::ecs::Entity> m_logoEntity;
 
     std::string m_imagePath;
     std::string m_nextScene;

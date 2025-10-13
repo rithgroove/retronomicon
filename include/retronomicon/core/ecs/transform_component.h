@@ -11,7 +11,7 @@ namespace retronomicon::core::ecs {
      * @brief Defines position, rotation, and scale of an entity.
      */
     class TransformComponent : public Component {
-
+        public:
             /**
              * @brief empty constructor
              */
@@ -123,7 +123,7 @@ namespace retronomicon::core::ecs {
              */
             Vec2 getRenderPosition() const ;
 
-        public:
+        private:
             float m_x = 0.0f;
             float m_y = 0.0f;
             float m_rotation = 0.0f;
