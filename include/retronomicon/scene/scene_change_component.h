@@ -1,9 +1,10 @@
 #pragma once
 #include <string>
 
+#include "retronomicon/core/ecs/component.h"
 namespace retronomicon::scene {
-
-    class SceneChangeComponent {
+    using retronomicon::core::ecs::Component;
+    class SceneChangeComponent : public Component {
         public:
             explicit SceneChangeComponent(const std::string& next)
                 : m_nextScene(next)

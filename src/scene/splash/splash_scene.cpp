@@ -40,9 +40,9 @@ void SplashScene::start() {
     createLogoEntity();
 
     // Register systems in correct order
-    addSystem(std::make_unique<animation::AnimationSystem>());
-    addSystem(std::make_unique<input::InputSystem>());
-    addSystem(std::make_unique<scene::SceneChangeSystem>());
+    // addSystem(std::make_unique<animation::AnimationSystem>());
+    // addSystem(std::make_unique<input::InputSystem>());
+    // addSystem(std::make_unique<scene::SceneChangeSystem>());
 
     m_isActive = true;
 }
@@ -58,14 +58,14 @@ void SplashScene::createLogoEntity() {
 
     // Simple animation + scene change// ---------------- setup animation component using m_duration as wait time ------------------------
     std::vector<AnimationFrame> frames; // array of frame
-    frames.emplace_back(0, 0, m_image->getWidth(), m_image->getHeight(), this->m_duration); // create a single frame 
+    frames.emplace_back(0, 0, m_logoImage->getWidth(), m_logoImage->getHeight(), this->m_duration); // create a single frame 
     auto clip = std::make_shared<AnimationClip>(frames, std::string("logo_wait"), false);  // create animation clip 
-    auto logoAnimationComponent = logoEntity->addComponent<AnimationComponent>(clip); // create animation component
-    logoAnimationComponent->setListener(new SplashAnimationListener()); // setup listener so it set scene changecomponent to true
+    auto logoAnimationComponent = m_logoEntity->addComponent<AnimationComponent>(clip); // create animation component
+    // logoAnimationComponent->setListener(new SplashAnimationListener()); // setup listener so it set scene changecomponent to true
 
     m_logoEntity->addComponent<scene::SceneChangeComponent>(m_nextScene);
 
-    addChild(m_logoEntity);
+    addChildEntity(m_logoEntity);
 }
 
 void SplashScene::update(float dt) {
@@ -81,13 +81,13 @@ void SplashScene::update(float dt) {
 }
 
 void SplashScene::render() {
-    // Let base render manager traverse scene hierarchy
-    m_renderManager.render(shared_from_this());
+    // // Let base render manager traverse scene hierarchy
+    // m_renderManager.render(shared_from_this());
 
-    // Delegate to backend renderer for frame presentation
-    if (m_renderer) {
-        m_renderer->render();
-    }
+    // // Delegate to backend renderer for frame presentation
+    // if (m_renderer) {
+    //     m_renderer->render();
+    // }
 }
 
 void SplashScene::shutdown() {

@@ -31,6 +31,7 @@ private:
     std::string m_imagePath;
     std::string m_nextScene;
     float m_elapsedTime = 0.0f;
+    float m_duration = 3.0f;
     bool m_skipRequested = false;
 };
 

@@ -1,10 +1,10 @@
-#include "retronomicon/core/ecs/entity.h"
+#include "retronomicon/entity/entity.h"
 #include <algorithm> // for std::remove
 #include <vector>
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
-namespace retronomicon::core::ecs{
+namespace retronomicon::entity{
     /***************************** Constructor *****************************/
 
     /**

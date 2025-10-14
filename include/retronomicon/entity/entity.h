@@ -13,7 +13,7 @@ using namespace std;
 /**
  * @brief The namespace for ECS libraries that will be the building blocks for the engine
  */
-namespace retronomicon::core::ecs{
+namespace retronomicon::entity{
 
     /**
      * @brief forward declaration of renderable
@@ -204,7 +204,7 @@ namespace retronomicon::core::ecs{
 
         if (m_components.count(typeId) == 0) {
             auto compPtr = std::make_shared<T>(std::forward<Args>(args)...);
-            compPtr->setOwner(this);
+            compPtr->setOwner(shared_from_this());
             m_components[typeId] = compPtr;
 
             return compPtr;
