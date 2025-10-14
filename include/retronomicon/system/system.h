@@ -1,9 +1,9 @@
 #pragma once
 #include <memory>
+#include "retronomicon/entity/entity.h"
 
-namespace retronomicon::core::ecs {
-    class Entity;
-
+namespace retronomicon::system {
+    using retronomicon::entity::Entity;
     /**
      * @brief Base class for all systems.
      * Every system must at least implement update().

@@ -2,7 +2,7 @@
 #include <algorithm> // for std::remove
 #include <vector>
 /**
- * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
+ * @brief The namespace for entities, scene etc
  */
 namespace retronomicon::entity{
     /***************************** Constructor *****************************/

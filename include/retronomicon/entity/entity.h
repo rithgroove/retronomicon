@@ -11,7 +11,7 @@
 
 using namespace std;
 /**
- * @brief The namespace for ECS libraries that will be the building blocks for the engine
+ * @brief The namespace for entities, scene etc 
  */
 namespace retronomicon::entity{
 

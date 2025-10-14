@@ -6,7 +6,7 @@
 /**
  * @brief The namespace for ECS libraries that will be the building blocks for the engine
  */
-namespace retronomicon::core::ecs {
+namespace retronomicon::system {
     /**
      * @brief generic class that loops all specified component and calls update
      */
