@@ -1,7 +1,7 @@
 #pragma once
 #include <type_traits>
 
-namespace retronomicon::core::math {
+namespace retronomicon::math {
 
     /**
      * @brief Clamp a value between a minimum and maximum.

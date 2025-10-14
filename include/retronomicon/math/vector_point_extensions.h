@@ -3,7 +3,7 @@
 #include "point.h"
 #include "vec2.h"
 
-namespace retronomicon::core::math {
+namespace retronomicon::math {
 
     /***************************** Point *****************************/
 

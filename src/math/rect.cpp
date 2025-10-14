@@ -1,10 +1,10 @@
-#include "retronomicon/core/math/rect.h"
+#include "retronomicon/math/rect.h"
 
 #include <sstream>
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
-namespace retronomicon::core::math{
+namespace retronomicon::math{
 
     /***************************** To String *****************************/
     

@@ -6,7 +6,7 @@
 /**
  * @brief The namespace for basic libraries such as points, rectangle cirle, etc.
  */
-namespace retronomicon::core::math{
+namespace retronomicon::math{
 	/**
 	 * @brief A class that represent a rectangle
 	 */
