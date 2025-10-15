@@ -2,6 +2,7 @@
 #include <memory>
 #include "retronomicon/entity/entity.h"
 
+
 namespace retronomicon::system {
     using retronomicon::entity::Entity;
     /**

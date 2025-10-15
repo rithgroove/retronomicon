@@ -1,12 +1,14 @@
 #pragma once
 #include <memory>
-#include "entity.h"
-#include "component.h"
+#include "retronomicon/entity/entity.h"
+#include "retronomicon/component/component.h"
 #include "system.h"
 /**
  * @brief The namespace for ECS libraries that will be the building blocks for the engine
  */
 namespace retronomicon::system {
+    using retronomicon::entity::Entity;
+    using retronomicon::component::Component;
     /**
      * @brief generic class that loops all specified component and calls update
      */
