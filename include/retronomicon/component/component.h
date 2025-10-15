@@ -1,13 +1,13 @@
 #pragma once
 #include <memory>
-#include "retronomicon/entity/entity.h"
+
+namespace retronomicon::entity { class Entity; }
 
 /**
  * @brief The namespace for core components
  */
 namespace retronomicon::component{
     using retronomicon::entity::Entity;
-
     /**
      * @brief The interface for components (so we could easily includes multiple tipes in game objects)
      */

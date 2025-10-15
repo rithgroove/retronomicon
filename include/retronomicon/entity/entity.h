@@ -6,20 +6,20 @@
 #include <memory>
 #include <vector>
 #include <string>
-#include "component.h"
-#include "renderable.h"
 
 using namespace std;
+
+namespace retronomicon::component { 
+    class Component; 
+    class Renderable;
+}
 /**
  * @brief The namespace for entities, scene etc 
  */
 namespace retronomicon::entity{
 
-    /**
-     * @brief forward declaration of renderable
-     */ 
-    class Renderable;
-
+    using retronomicon::component::Component;
+    using retronomicon::component::Renderable;
     /**
      * @brief Entity class that represent almost anything in the game
      */ 

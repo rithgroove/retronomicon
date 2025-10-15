@@ -1,4 +1,6 @@
 #include "retronomicon/entity/entity.h"
+#include "retronomicon/component/component.h"
+#include "retronomicon/component/renderable.h"
 #include <algorithm> // for std::remove
 #include <vector>
 /**
