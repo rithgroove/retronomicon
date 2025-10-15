@@ -1,12 +1,12 @@
 #pragma once
 
-#include "retronomicon/core/ecs/component.h"
-#include "retronomicon/core/math/vec2.h"
+#include "component.h"
+#include "retronomicon/math/vec2.h"
 /**
  * @brief The namespace for core components
  */
-namespace retronomicon::core::ecs {
-    using retronomicon::core::math::Vec2;
+namespace retronomicon::component{
+    using retronomicon::math::Vec2;
     /**
      * @brief Defines position, rotation, and scale of an entity.
      */

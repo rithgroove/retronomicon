@@ -1,6 +1,6 @@
-#include "retronomicon/core/ecs/bound_component.h"
+#include "retronomicon/component/bound_component.h"
 
-namespace retronomicon::core::ecs {
+namespace retronomicon::component {
 
     BoundComponent::BoundComponent()
         : m_width(0.0f), m_height(0.0f), m_offsetX(0.0f), m_offsetY(0.0f) {}
@@ -23,9 +23,9 @@ namespace retronomicon::core::ecs {
     float BoundComponent::getOffsetX() const { return m_offsetX; }
     float BoundComponent::getOffsetY() const { return m_offsetY; }
 
-    void BoundComponent::fitToTexture(const retronomicon::graphics::Texture& texture) {
-        m_width = static_cast<float>(texture.getWidth());
-        m_height = static_cast<float>(texture.getHeight());
-    }
+    // void BoundComponent::fitToTexture(const retronomicon::graphics::Texture& texture) {
+    //     m_width = static_cast<float>(texture.getWidth());
+    //     m_height = static_cast<float>(texture.getHeight());
+    // }
 
 } // namespace retronomicon::core::ecs

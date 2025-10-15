@@ -1,7 +1,7 @@
-#include "retronomicon/core/ecs/transform_component.h"
+#include "retronomicon/component/transform_component.h"
 #include <iostream>
 #include <memory>
-namespace retronomicon::core::ecs{
+namespace retronomicon::component{
 
     TransformComponent::TransformComponent()
         : m_x(0), m_y(0), m_rotation(0), m_scaleX(1.0f), m_scaleY(1.0f) {

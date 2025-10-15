@@ -1,9 +1,9 @@
 #pragma once
 
-#include "retronomicon/core/ecs/component.h"
-#include "retronomicon/graphics/texture.h"
+#include "component.h"
+//#include "retronomicon/graphics/texture.h"
 
-namespace retronomicon::core::ecs {
+namespace retronomicon::component {
 
     /**
      * @brief Component defining the spatial bounds (size and offset) of an entity.
@@ -26,7 +26,7 @@ namespace retronomicon::core::ecs {
         float getOffsetY() const;
 
         /// Fit bounds to a texture’s dimensions
-        void fitToTexture(const retronomicon::graphics::Texture& texture);
+        //void fitToTexture(const retronomicon::graphics::Texture& texture);
 
     private:
         float m_width;
