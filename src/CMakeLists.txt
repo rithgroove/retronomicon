@@ -11,6 +11,7 @@ message(STATUS "==== Processing ${CMAKE_CURRENT_LIST_FILE} ====")
 add_subdirectory(entity)
 add_subdirectory(component)
 add_subdirectory(system)
+add_subdirectory(manager)
 add_subdirectory(math)
 add_subdirectory(asset)
 
@@ -23,6 +24,7 @@ target_link_libraries(retronomicon
         retronomicon-entity
         retronomicon-component
         retronomicon-system
+        retronomicon-manager
         retronomicon-math
         retronomicon-asset
         #retronomicon-core

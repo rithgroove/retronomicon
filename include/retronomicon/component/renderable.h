@@ -10,6 +10,7 @@ namespace retronomicon::component{
     class Renderable {
         public:
 
+            virtual ~Renderable() = default;
             /**
              * @brief Called when rendering
              */

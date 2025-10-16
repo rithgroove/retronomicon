@@ -1,10 +1,10 @@
-#include "retronomicon/scene/scene.h"
+#include "retronomicon/entity/scene/scene.h"
 #include <algorithm> // for std::remove
 #include <iostream>
 /**
  * @brief namespace for scene
  */
-namespace retronomicon::scene {
+namespace retronomicon::entity::scene {
     /***************************** Constructor *****************************/
 
     /**
