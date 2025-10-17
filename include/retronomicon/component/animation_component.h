@@ -4,18 +4,19 @@
 #include <queue>
 #include <memory>
 #include <string>
-#include "animation_clip.h"
-#include "animation_listener.h"
-#include "retronomicon/core/ecs/component.h"
+#include "retronomicon/animation/animation_clip.h"
+#include "retronomicon/animation/animation_listener.h"
+#include "component.h"
 
 /**
  * @brief The namespace for animation utilities
  */
-namespace retronomicon::animation{
+namespace retronomicon::component{
+    using namespace retronomicon::animation;
     /**
      * @brief Component responsible for managing animation clip states and playback.
      */
-    class AnimationComponent : public retronomicon::core::ecs::Component {
+    class AnimationComponent : public retronomicon::component::Component {
         public:
             /***************************** Constructor *****************************/
 

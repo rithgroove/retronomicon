@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-namespace retronomicon::graphics {
+namespace retronomicon::component {
     using retronomicon::core::ecs::TransformComponent;
     using retronomicon::animation::AnimationComponent;
 

@@ -2,8 +2,8 @@
 
 #include <memory>
 
-#include "retronomicon/core/ecs/component.h"
-#include "retronomicon/core/ecs/transform_component.h"
+#include "retronomicon/component/component.h"
+#include "transform_component.h"
 #include "retronomicon/animation/animation_component.h"
 #include "retronomicon/core/ecs/renderable.h"
 #include "retronomicon/asset/image_asset.h"
@@ -17,7 +17,7 @@
 //     class AnimationComponent; 
 // }
 
-namespace retronomicon::graphics {
+namespace retronomicon::component {
     using retronomicon::core::math::Rect;
 
     /**

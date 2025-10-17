@@ -1,6 +1,6 @@
 #pragma once
 
-#include "retronomicon/core/math/rect.h"
+#include "retronomicon/math/rect.h"
 
 /**
  * @brief The namespace for animation utilities

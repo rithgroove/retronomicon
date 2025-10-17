@@ -2,13 +2,17 @@
 
 #include <string>
 
+
+namespace retronomicon::component{
+    // Forward Declaration
+    class AnimationComponent;    
+}
+
 /**
  * @brief The namespace for animation utilities
  */
 namespace retronomicon::animation {
-    // Forward Declaration
-    class AnimationComponent;
-
+    using retronomicon::component::AnimationComponent
     /**
      * @brief The abstract class for animation listener
      */
