@@ -12,7 +12,7 @@ namespace retronomicon::component{
  * @brief The namespace for animation utilities
  */
 namespace retronomicon::animation {
-    using retronomicon::component::AnimationComponent
+    using retronomicon::component::AnimationComponent;
     /**
      * @brief The abstract class for animation listener
      */

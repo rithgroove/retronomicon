@@ -6,7 +6,8 @@
 /**
  * @brief The namespace for animation utilities
  */
-namespace retronomicon::syatem{
+namespace retronomicon::system{
+    using retronomicon::component::AnimationComponent;
     /***************************** Constructor *****************************/
     
     /**

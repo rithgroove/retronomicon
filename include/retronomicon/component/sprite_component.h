@@ -19,7 +19,7 @@
 
 namespace retronomicon::component {
     using retronomicon::math::Rect;
-    using retronomicon::graphic::Texture;
+    using retronomicon::graphics::Texture;
     /**
      * @brief A drawable sprite that optionally supports animation.
      *
@@ -44,8 +44,8 @@ namespace retronomicon::component {
         std::unique_ptr<Texture> m_texture = nullptr; ///< Backend texture
 
         // Cached pointers (owned by ECS, safe to cache)
-        TransformComponent* m_transform = nullptr;
-        AnimationComponent* m_animation = nullptr;
+        std::shared_ptr<TransformComponent> m_transform = nullptr;
+        std::shared_ptr<AnimationComponent> m_animation = nullptr;
     };
 
 } // namespace retronomicon::graphics

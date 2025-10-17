@@ -7,8 +7,8 @@
 namespace retronomicon::animation{
     /***************************** Using *****************************/
 
-    using retronomicon::core::math::Point;
-    using retronomicon::core::math::Rect;
+    using retronomicon::math::Point;
+    using retronomicon::math::Rect;
 
     /***************************** Constructor *****************************/
 

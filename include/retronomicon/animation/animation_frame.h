@@ -32,7 +32,7 @@ namespace retronomicon::animation{
 	    	 * @param height the height of the current frame from the spritesheet
 	    	 * @param duration in milisecond
 	    	 */
-		    AnimationFrame(const retronomicon::core::math::Point& point, int width, int height, float duration) noexcept;
+		    AnimationFrame(const retronomicon::math::Point& point, int width, int height, float duration) noexcept;
 	    
 	    	/**
 	    	 * @brief basic constructor
@@ -40,7 +40,7 @@ namespace retronomicon::animation{
 	    	 * @param rect the source rectangle of this frame
 	    	 * @param duration in milisecond
 	    	 */
-    		AnimationFrame(const retronomicon::core::math::Rect& rect, float duration) noexcept;
+    		AnimationFrame(const retronomicon::math::Rect& rect, float duration) noexcept;
 
 		    /***************************** Destructor *****************************/
 
@@ -81,7 +81,7 @@ namespace retronomicon::animation{
 	    	 * 
 	    	 * @return the source rectangle
 	    	 */
-	    	[[nodiscard]] retronomicon::core::math::Rect getRect() const noexcept {return m_rect;}
+	    	[[nodiscard]] retronomicon::math::Rect getRect() const noexcept {return m_rect;}
 
 		    /***************************** Utility *****************************/
 
@@ -119,7 +119,7 @@ namespace retronomicon::animation{
 
 	    private:
 		    /***************************** Attribute *****************************/
-	    	retronomicon::core::math::Rect m_rect; //the rectangle
+	    	retronomicon::math::Rect m_rect; //the rectangle
 	    	float m_duration; // duration for this frame in ms
 	    	float m_elapsedTime; //how many of the duration is spent currently
     };

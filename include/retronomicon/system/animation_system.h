@@ -11,7 +11,7 @@ namespace retronomicon::system{
     /**
      * @brief The Animation System which loops all animation component and update it
      */
-    using retronomicon::core::ecs::Entity;
+    using retronomicon::entity::Entity;
     class AnimationSystem : public retronomicon::system::System {
         public:
             /***************************** Constructor *****************************/
