@@ -1,12 +1,12 @@
-#include "retronomicon/animation/animation_system.h"
-#include "retronomicon/animation/animation_component.h"
+#include "retronomicon/system/animation_system.h"
+#include "retronomicon/component/animation_component.h"
 
 #include <sstream>
 
 /**
  * @brief The namespace for animation utilities
  */
-namespace retronomicon::animation{
+namespace retronomicon::syatem{
     /***************************** Constructor *****************************/
     
     /**

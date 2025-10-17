@@ -2,13 +2,13 @@
 
 #include <memory>
 
-#include "retronomicon/component/component.h"
+#include "component.h"
 #include "transform_component.h"
-#include "retronomicon/animation/animation_component.h"
-#include "retronomicon/core/ecs/renderable.h"
+#include "animation_component.h"
+#include "renderable.h"
 #include "retronomicon/asset/image_asset.h"
 #include "retronomicon/graphics/texture.h"
-#include "retronomicon/core/math/rect.h"
+#include "retronomicon/math/rect.h"
 // Forward declarations
 // namespace retronomicon::core::ecs { 
 //     class TransformComponent; 
@@ -18,8 +18,8 @@
 // }
 
 namespace retronomicon::component {
-    using retronomicon::core::math::Rect;
-
+    using retronomicon::math::Rect;
+    using retronomicon::graphic::Texture;
     /**
      * @brief A drawable sprite that optionally supports animation.
      *
@@ -27,7 +27,7 @@ namespace retronomicon::component {
      * rotation, and anchor. If an AnimationComponent is present, it uses
      * the current animation frame; otherwise, it renders the static image.
      */
-    class SpriteComponent : public core::ecs::Component, public core::ecs::Renderable {
+    class SpriteComponent : public Component, public Renderable {
     public:
         explicit SpriteComponent(std::shared_ptr<asset::ImageAsset> imageAsset);
         ~SpriteComponent() override = default;
@@ -44,8 +44,8 @@ namespace retronomicon::component {
         std::unique_ptr<Texture> m_texture = nullptr; ///< Backend texture
 
         // Cached pointers (owned by ECS, safe to cache)
-        core::ecs::TransformComponent* m_transform = nullptr;
-        animation::AnimationComponent* m_animation = nullptr;
+        TransformComponent* m_transform = nullptr;
+        AnimationComponent* m_animation = nullptr;
     };
 
 } // namespace retronomicon::graphics

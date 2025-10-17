@@ -1,18 +1,18 @@
 #pragma once
 
 #include <vector>
-#include "retronomicon/core/ecs/system.h"
-#include "retronomicon/core/ecs/entity.h"
+#include "system.h"
+#include "retronomicon/entity/entity.h"
 
 /**
  * @brief The namespace for animation utilities
  */
-namespace retronomicon::animation{
+namespace retronomicon::system{
     /**
      * @brief The Animation System which loops all animation component and update it
      */
     using retronomicon::core::ecs::Entity;
-    class AnimationSystem : public retronomicon::core::ecs::System {
+    class AnimationSystem : public retronomicon::system::System {
         public:
             /***************************** Constructor *****************************/
 

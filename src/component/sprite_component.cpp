@@ -1,13 +1,11 @@
-#include "retronomicon/graphics/sprite_component.h"
-#include "retronomicon/core/ecs/entity.h"
-#include "retronomicon/core/ecs/transform_component.h"
-#include "retronomicon/animation/animation_component.h"
+#include "retronomicon/component/sprite_component.h"
+#include "retronomicon/entity/entity.h"
+#include "retronomicon/component/transform_component.h"
+#include "retronomicon/component/animation_component.h"
 
 #include <iostream>
 
 namespace retronomicon::component {
-    using retronomicon::core::ecs::TransformComponent;
-    using retronomicon::animation::AnimationComponent;
 
     SpriteComponent::SpriteComponent(std::shared_ptr<asset::ImageAsset> image)
         : m_image(std::move(image)) 
