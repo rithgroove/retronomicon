@@ -1,14 +1,14 @@
 #pragma once
 
-#include "retronomicon/core/ecs/component.h"
+#include "component.h"
 #include "retronomicon/asset/sound_effect_asset.h"
 
-namespace retronomicon::audio {
+namespace retronomicon::component {
 
     /**
      * @brief Component representing a sound effect to be triggered by the audio system.
      */
-    class SoundEffectComponent : public retronomicon::core::ecs::Component {
+    class SoundEffectComponent : public Component {
     public:
         SoundEffectComponent() = default;
         explicit SoundEffectComponent(retronomicon::asset::SoundEffectAsset* asset, int loopCount = 0);

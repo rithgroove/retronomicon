@@ -1,6 +1,6 @@
-#include "retronomicon/audio/sound_effect_component.h"
+#include "retronomicon/component/sound_effect_component.h"
 
-namespace retronomicon::audio {
+namespace retronomicon::component {
 
     SoundEffectComponent::SoundEffectComponent(retronomicon::asset::SoundEffectAsset* asset, int loopCount)
         : m_asset(asset), m_loopCount(loopCount), m_playRequested(false) {}

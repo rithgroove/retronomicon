@@ -1,6 +1,6 @@
-#include "retronomicon/audio/music_component.h"
+#include "retronomicon/component/music_component.h"
 
-namespace retronomicon::audio {
+namespace retronomicon::component {
 
     MusicComponent::MusicComponent(retronomicon::asset::MusicAsset* asset, int loopCount)
         : m_asset(asset), m_loopCount(loopCount), m_playRequested(false) {}

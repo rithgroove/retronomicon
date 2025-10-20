@@ -1,18 +1,18 @@
 #pragma once
 
 #include <memory>
-#include "retronomicon/core/ecs/system.h"
-#include "retronomicon/core/ecs/entity.h"
+#include "system.h"
+#include "retronomicon/entity/entity.h"
 #include "retronomicon/audio/i_audio_player.h"
 
-namespace retronomicon::audio {
+namespace retronomicon::system {
 
-    using retronomicon::core::ecs::Entity;
-
+    using retronomicon::entity::Entity;
+    using retronomicon::audio::IAudioPlayer;
     /**
      * @brief System responsible for handling playback of MusicComponent and SoundEffectComponent.
      */
-    class AudioSystem : public retronomicon::core::ecs::System {
+    class AudioSystem : public System {
     public:
         /**
          * @brief Construct the AudioSystem with a given audio player backend.

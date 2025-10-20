@@ -1,14 +1,14 @@
 #pragma once
 
-#include "retronomicon/core/ecs/component.h"
+#include "component.h"
 #include "retronomicon/asset/music_asset.h"
 
-namespace retronomicon::audio {
+namespace retronomicon::component {
 
     /**
      * @brief Component representing a music track to be played by the audio system.
      */
-    class MusicComponent : public retronomicon::core::ecs::Component {
+    class MusicComponent : public Component {
     public:
         MusicComponent() = default;
         explicit MusicComponent(retronomicon::asset::MusicAsset* asset, int loopCount = 0);

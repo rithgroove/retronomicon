@@ -1,11 +1,13 @@
-#include "retronomicon/audio/audio_system.h"
-#include "retronomicon/audio/music_component.h"
-#include "retronomicon/audio/sound_effect_component.h"
+#include "retronomicon/system/audio_system.h"
+#include "retronomicon/component/music_component.h"
+#include "retronomicon/component/sound_effect_component.h"
 
 #include <sstream>
 
-namespace retronomicon::audio {
-
+namespace retronomicon::system {
+    using retronomicon::component::MusicComponent;
+    using retronomicon::component::SoundEffectComponent;
+    
     /***************************** Constructor *****************************/
     AudioSystem::AudioSystem(std::shared_ptr<IAudioPlayer> audioPlayer)
         : m_audioPlayer(std::move(audioPlayer)) {}
