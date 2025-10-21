@@ -69,9 +69,11 @@ namespace retronomicon::asset {
      */
     std::string ImageAsset::to_string() const {
         std::ostringstream oss;
-        oss << "[ImageAsset] " << m_name
-            << " (" << m_width << "x" << m_height
-            << ", channels=" << m_channels << ") from " << m_path;
+        oss << "\n\n";
+        oss << "[ImageAsset]\n- filename: " << m_name
+            << "\n- size: (" << m_width << "x" << m_height
+            << ", channels=" << m_channels << ")\n- path: " << m_path;
+        oss << "\n\n";
         return oss.str();
     }
 
