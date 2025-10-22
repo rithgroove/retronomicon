@@ -34,7 +34,7 @@ namespace retronomicon::component {
 
         void start() override;                ///< Cache Transform + Animation
         void update(float dt) override;       ///< Hook for animation triggers
-        void Render(retronomicon::graphics::IRenderer& renderer)  override;               ///< Delegates to backend renderer
+        void render(retronomicon::graphics::renderer::IRenderer& renderer)  override;               ///< Delegates to backend renderer
 
         /// Swap sprite image at runtime (e.g., skin or asset change)
         void changeAsset(std::shared_ptr<asset::ImageAsset> asset);

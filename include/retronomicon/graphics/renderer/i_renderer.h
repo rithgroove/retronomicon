@@ -1,6 +1,9 @@
 
 
 #pragma once
+
+#include "retronomicon/graphics/texture.h"
+#include "retronomicon/math/vec2.h"
 /**
  * @brief Defines the IRenderer interface for graphics backends.
  *
@@ -10,7 +13,8 @@
  * backend, performing rendering, and releasing resources on shutdown.
  */
 namespace retronomicon::graphics::renderer {
-
+    using retronomicon::graphics::Texture;
+    using retronomicon::math::Vec2;
     /**
      * @brief Abstract interface for all rendering backends.
      *
@@ -36,15 +40,18 @@ namespace retronomicon::graphics::renderer {
              * graphics to the screen. The exact behavior depends on the
              * underlying graphics API.
              */
-            virtual void Render(std::shared_ptr<Texture> texture,
+            virtual void render(std::shared_ptr<Texture> texture,
                         const Vec2& position,
                         const Vec2& scale,
                         float rotation = 0.0f,
                         float alpha = 1.0f) = 0;
 
             // Called after all Render() calls are finished
-            virtual void Show() = 0;
-            
+            virtual void show() = 0;
+
+            // Called before the start of render
+            virtual void clear() = 0;
+
             /**
              * @brief Shutdown the renderer and release resources.
              *

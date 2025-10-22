@@ -29,7 +29,7 @@ namespace retronomicon::component {
         // Animation state checks could go here (optional)
     }
     
-    void SpriteComponent::render(retronomicon::graphics::IRenderer& renderer)  {
+    void SpriteComponent::render(retronomicon::graphics::renderer::IRenderer& renderer)  {
         // if (!m_transform || !m_texture) return;
 
         // if (m_animation) {

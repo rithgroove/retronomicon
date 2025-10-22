@@ -1,5 +1,5 @@
 #pragma once
-#include "retronomicon/core/graphics/renderer/i_renderer.h"
+#include "retronomicon/graphics/renderer/i_renderer.h"
 /**
  * @brief The namespace for ECS libraries that will be the building blocks for the engine
  */
@@ -14,7 +14,7 @@ namespace retronomicon::component{
             /**
              * @brief Called when rendering
              */
-            virtual void Render(retronomicon::graphics::IRenderer& renderer) = 0;
+            virtual void render(retronomicon::graphics::renderer::IRenderer& renderer) = 0;
 
             bool isVisible() {return m_isVisible;}
 

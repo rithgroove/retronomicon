@@ -17,26 +17,26 @@ using retronomicon::component::Renderable;
  */
 class RenderManager {
     public:
-    /**
-     * @brief Traverse an entity and its children, rendering any Renderable components.
-     *
-     * @param entity Weak pointer to the entity root.
-     */
-    virtual void render(std::weak_ptr<Entity> entity) {
-        if (auto e = entity.lock()) {
-            // Render components that are also Renderable
-            for (auto& comp : e->getComponents()) {
-                if (auto renderable = dynamic_cast<Renderable*>(comp.get())) {
-                    renderable->render();
+        /**
+         * @brief Traverse an entity and its children, rendering any Renderable components.
+         *
+         * @param entity Weak pointer to the entity root.
+         */
+        virtual void render(std::weak_ptr<Entity> entity) {
+            if (auto e = entity.lock()) {
+                // Render components that are also Renderable
+                for (auto& comp : e->getComponents()) {
+                    if (auto renderable = dynamic_cast<Renderable*>(comp.get())) {
+                        // renderable->render();
+                    }
+                }
+
+                // Recurse into children
+                for (auto& child : e->getChildren()) {
+                    render(child);
                 }
             }
-
-            // Recurse into children
-            for (auto& child : e->getChildren()) {
-                render(child);
-            }
         }
-    }
 };
 
 } // namespace retronomicon::manager
