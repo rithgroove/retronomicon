@@ -28,8 +28,8 @@ namespace retronomicon::component {
     void SpriteComponent::update(float /*dt*/) {
         // Animation state checks could go here (optional)
     }
-
-    void SpriteComponent::render() {
+    
+    void SpriteComponent::render(retronomicon::graphics::IRenderer& renderer)  {
         // if (!m_transform || !m_texture) return;
 
         // if (m_animation) {
