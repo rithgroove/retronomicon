@@ -3,10 +3,6 @@ message(STATUS "==== Processing ${CMAKE_CURRENT_LIST_FILE} ====")
 # Collect engine modules
 #add_subdirectory(lib)
 #add_subdirectory(core)
-#add_subdirectory(scene)
-#add_subdirectory(audio)
-#add_subdirectory(input)
-#add_subdirectory(engine)
 add_subdirectory(entity)
 add_subdirectory(component)
 add_subdirectory(system)
@@ -14,6 +10,10 @@ add_subdirectory(manager)
 add_subdirectory(math)
 add_subdirectory(asset)
 add_subdirectory(animation)
+add_subdirectory(input)
+add_subdirectory(engine)
+add_subdirectory(audio)
+add_subdirectory(scene)
 
 # Define the main retronomicon engine library
 add_library(retronomicon)
@@ -28,11 +28,10 @@ target_link_libraries(retronomicon
         retronomicon-math
         retronomicon-asset
         retronomicon-animation
-        #retronomicon-core
-        #retronomicon-scene
-        #retronomicon-input
-        #retronomicon-audio
-        #retronomicon-engine
+        retronomicon-input
+        retronomicon-scene
+        retronomicon-audio
+        retronomicon-engine
 )
 
 # Global engine include path

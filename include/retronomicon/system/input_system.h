@@ -3,15 +3,15 @@
 #include <vector>
 #include <memory>
 #include "input_state.h"
-#include "retronomicon/core/ecs/entity.h"
-#include "retronomicon/core/ecs/system.h"
+#include "retronomicon/entity/entity.h"
+#include "retronomicon/system/system.h"
 
 /**
  * @brief This namespace is for handling input
  */
 namespace retronomicon::input {
-    using retronomicon::core::ecs::System;
-    using retronomicon::core::ecs::Entity;
+    using retronomicon::system::System;
+    using retronomicon::entity::Entity;
     
     /**
      * @brief A system that handles input. fill up input state from sdl and pass it to all input components

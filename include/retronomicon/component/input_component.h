@@ -3,16 +3,16 @@
 
 #include <memory>
 #include "input_state.h"
-#include "retronomicon/core/ecs/component.h"
+#include "retronomicon/component/component.h"
 
-namespace retronomicon::input {
+namespace retronomicon::component {
 
     /**
      * @brief Base class for input-aware ECS components.
      * - Stores pointer to global InputState (from GameEngine).
      * - Subclasses read from the state during update().
      */
-    class InputComponent : public retronomicon::core::ecs::Component {
+    class InputComponent : public retronomicon::component::Component {
     public:
         explicit InputComponent(std::shared_ptr<InputState> state)
             : m_inputState(std::move(state)) {}

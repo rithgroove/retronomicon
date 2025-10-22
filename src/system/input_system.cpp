@@ -1,13 +1,13 @@
+#include "retronomicon/component/input_component.h"
 
 #include <sstream>
 #include <iostream>
 #include "retronomicon/input/input_system.h"
-#include "retronomicon/input/input_component.h"
 
 /**
  * @brief This namespace is for handling input
  */
-namespace retronomicon::input{
+namespace retronomicon::component{
 
     /***************************** Constructor *****************************/
 
