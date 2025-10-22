@@ -1,10 +1,10 @@
-#include "retronomicon/entity/scene/scene.h"
+#include "retronomicon/scene/scene.h"
 #include <algorithm> // for std::remove
 #include <iostream>
 /**
  * @brief namespace for scene
  */
-namespace retronomicon::entity::scene {
+namespace retronomicon::scene {
     /***************************** Constructor *****************************/
 
     /**
@@ -51,7 +51,7 @@ namespace retronomicon::entity::scene {
      * @brief render method call all system render (not yet efficient enough)
      */  
     void Scene::render() {
-        m_renderManager.render(shared_from_this());
+        // m_renderManager.render(shared_from_this());
     }
 
     /**

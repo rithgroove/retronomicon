@@ -5,12 +5,14 @@
 #include "retronomicon/scene/scene_manager.h"
 #include "retronomicon/graphics/i_window.h"
 #include "retronomicon/input/input_state.h"
+#include "retronomicon/manager/render_manager.h"
 /**
  * @brief The namespace for the core engine features of retronomicon
  */
 namespace retronomicon::engine {
     using retronomicon::input::InputState;
     using retronomicon::scene::Scene;
+    using retronomicon::manager::RenderManager;
     /**
      * @brief Game Engine class (the main class that you need to run)
      */
@@ -95,7 +97,7 @@ namespace retronomicon::engine {
 
         private:
             /***************************** Attribute *****************************/
-
+            std::shared_ptr<RenderManager>
             std::shared_ptr<InputState> m_inputState;
             std::unique_ptr<retronomicon::graphics::IWindow> m_window;
             std::shared_ptr<Scene> m_activeScene;

@@ -9,34 +9,25 @@
  */
 namespace retronomicon::manager {
 
-using retronomicon::entity::Entity;
-using retronomicon::component::Renderable;
+    using retronomicon::entity::Entity;
+    using retronomicon::component::Renderable;
+    using retronomicon::graphics::renderer::IRenderer;
+    /**
+     * @brief Generic class that traverses entities and calls render() on renderable components.
+     */
+    class RenderManager {
+        public:
+            RenderManager(std::shared_ptr<IRenderer> renderer);
 
-/**
- * @brief Generic class that traverses entities and calls render() on renderable components.
- */
-class RenderManager {
-    public:
-        /**
-         * @brief Traverse an entity and its children, rendering any Renderable components.
-         *
-         * @param entity Weak pointer to the entity root.
-         */
-        virtual void render(std::weak_ptr<Entity> entity) {
-            if (auto e = entity.lock()) {
-                // Render components that are also Renderable
-                for (auto& comp : e->getComponents()) {
-                    if (auto renderable = dynamic_cast<Renderable*>(comp.get())) {
-                        // renderable->render();
-                    }
-                }
+            /**
+             * @brief Traverse an entity and its children, rendering any Renderable components.
+             *
+             * @param entity Weak pointer to the entity root.
+             */
+            virtual void render(std::weak_ptr<Entity> entity);
+        private:
 
-                // Recurse into children
-                for (auto& child : e->getChildren()) {
-                    render(child);
-                }
-            }
-        }
-};
+            std::shared_ptr<IRenderer> m_renderer;
+    };
 
 } // namespace retronomicon::manager

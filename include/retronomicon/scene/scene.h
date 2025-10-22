@@ -3,15 +3,17 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include "retronomicon/core/ecs/entity.h"
-#include "retronomicon/core/ecs/system.h"
-#include "retronomicon/core/ecs/render_manager.h"
+#include "retronomicon/entity/entity.h"
+#include "retronomicon/system/system.h"
+#include "retronomicon/manager/render_manager.h"
 /**
  * @brief namespace for scene
  */
 namespace retronomicon::scene {
-    using namespace retronomicon::core::ecs;
-    /**
+    using retronomicon::entity::Entity;
+    using retronomicon::system::System;
+    using retronomicon::manager::RenderManager;
+    /*
      * @brief abstract scene class
      */
     class Scene : public Entity {
@@ -95,7 +97,6 @@ namespace retronomicon::scene {
             // InputMap* m_inputMap = nullptr;
             
             std::vector<std::unique_ptr<System>> m_systems;
-            RenderManager m_renderManager; 
     };
 
 }
