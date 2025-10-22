@@ -16,7 +16,7 @@ using retronomicon::component::Renderable;
  * @brief Generic class that traverses entities and calls render() on renderable components.
  */
 class RenderManager {
-public:
+    public:
     /**
      * @brief Traverse an entity and its children, rendering any Renderable components.
      *

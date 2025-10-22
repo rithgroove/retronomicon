@@ -19,41 +19,49 @@ namespace retronomicon::graphics::renderer {
      * rendering, and shutdown logic for their specific API.
      */
     class IRenderer {
-    public:
-        /**
-         * @brief Initialize the renderer.
-         *
-         * Called once before rendering begins. 
-         * Implementations should allocate resources, create contexts,
-         * and prepare the backend for rendering.
-         */
-        virtual void init() = 0;
+        public:
+            /**
+             * @brief Initialize the renderer.
+             *
+             * Called once before rendering begins. 
+             * Implementations should allocate resources, create contexts,
+             * and prepare the backend for rendering.
+             */
+            virtual void init() = 0;
 
-        /**
-         * @brief Perform rendering operations.
-         *
-         * Called every frame to issue draw commands and present
-         * graphics to the screen. The exact behavior depends on the
-         * underlying graphics API.
-         */
-        virtual void render() = 0;
+            /**
+             * @brief Perform rendering operations.
+             *
+             * Called every frame to issue draw commands and present
+             * graphics to the screen. The exact behavior depends on the
+             * underlying graphics API.
+             */
+            virtual void Render(std::shared_ptr<Texture> texture,
+                        const Vec2& position,
+                        const Vec2& scale,
+                        float rotation = 0.0f,
+                        float alpha = 1.0f) = 0;
 
-        /**
-         * @brief Shutdown the renderer and release resources.
-         *
-         * Called once when the renderer is no longer needed. Implementations
-         * must free memory, destroy contexts, and clean up any allocated
-         * graphics resources.
-         */
-        virtual void shutdown() = 0;
+            // Called after all Render() calls are finished
+            virtual void Show() = 0;
+            
+            /**
+             * @brief Shutdown the renderer and release resources.
+             *
+             * Called once when the renderer is no longer needed. Implementations
+             * must free memory, destroy contexts, and clean up any allocated
+             * graphics resources.
+             */
+            virtual void shutdown() = 0;
 
-        /**
-         * @brief Virtual destructor.
-         *
-         * Ensures proper cleanup when deleting derived renderer objects
-         * through a base class pointer.
-         */
-        virtual ~IRenderer() = default;
+            /**
+             * @brief Virtual destructor.
+             *
+             * Ensures proper cleanup when deleting derived renderer objects
+             * through a base class pointer.
+             */
+            virtual ~IRenderer() = default;
+
     };
 
 } // namespace retronomicon::graphics::renderer
