@@ -2,11 +2,11 @@
 #pragma once
 
 #include <memory>
-#include "input_state.h"
+#include "retronomicon/input/input_state.h"
 #include "retronomicon/component/component.h"
 
 namespace retronomicon::component {
-
+    using retronomicon::input::InputState;
     /**
      * @brief Base class for input-aware ECS components.
      * - Stores pointer to global InputState (from GameEngine).

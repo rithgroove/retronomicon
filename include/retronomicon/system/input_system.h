@@ -2,16 +2,18 @@
 
 #include <vector>
 #include <memory>
-#include "input_state.h"
+#include "retronomicon/input/input_state.h"
 #include "retronomicon/entity/entity.h"
 #include "retronomicon/system/system.h"
-
+#include "retronomicon/component/input_component.h"
 /**
  * @brief This namespace is for handling input
  */
-namespace retronomicon::input {
+namespace retronomicon::system {
     using retronomicon::system::System;
     using retronomicon::entity::Entity;
+    using retronomicon::input::InputState;
+    using retronomicon::component::InputComponent;
     
     /**
      * @brief A system that handles input. fill up input state from sdl and pass it to all input components
