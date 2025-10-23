@@ -11,9 +11,10 @@ add_subdirectory(math)
 add_subdirectory(asset)
 add_subdirectory(animation)
 add_subdirectory(input)
+add_subdirectory(audio)
 add_subdirectory(engine)
-#add_subdirectory(audio)
-#add_subdirectory(scene)
+add_subdirectory(audio)
+add_subdirectory(scene)
 
 # Define the main retronomicon engine library
 add_library(retronomicon)
@@ -29,9 +30,9 @@ target_link_libraries(retronomicon
         retronomicon-asset
         retronomicon-animation
         retronomicon-input
-        retronomicon-scene
         #retronomicon-audio
-        #retronomicon-engine
+        retronomicon-engine
+        retronomicon-scene
 )
 
 # Global engine include path
