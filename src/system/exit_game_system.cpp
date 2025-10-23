@@ -1,12 +1,13 @@
-#include "retronomicon/engine/exit_game_system.h"
-#include "retronomicon/engine/exit_game_component.h"
+#include "retronomicon/system/exit_game_system.h"
+#include "retronomicon/component/exit_game_component.h"
 
 #include <sstream>
 #include <iostream>
 /**
  * @brief The namespace for animation utilities
  */
-namespace retronomicon::engine{
+namespace retronomicon::system{
+    using retronomicon::component::ExitGameComponent;
     /***************************** Constructor *****************************/
     
     /**
@@ -38,15 +39,16 @@ namespace retronomicon::engine{
      * @param dt time interval since last update
      * @param entity the parent entity, will call this method recursively
      */
-    void ExitGameSystem::update(float dt, retronomicon::core::ecs::Entity* entity){
-        auto egc = entity->getComponent<ExitGameComponent>();
-        if (egc && egc->isActivated()){
-            m_gameEngine->stop();
-        }
+    void ExitGameSystem::update(float dt, std::weak_ptr<Entity> entity){
+        if (auto e = entity.lock()) { // lock() returns a shared_ptr if still valid
+            auto egc = e->getComponent<ExitGameComponent>();
+            if (egc && egc->isActivated()) {
+                m_gameEngine->stop();
+            }
 
-        for (Entity* obj : entity->getChilds()) {
-            // render logic
-             this->update(dt,obj);
+            for (auto& child : e->getChildren()) {
+                this->update(dt, child);
+            }
         }
     }
 }

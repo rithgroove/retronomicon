@@ -1,18 +1,21 @@
 #pragma once
 #include <vector>
 
-#include "retronomicon/core/ecs/system.h"
-#include "retronomicon/core/ecs/entity.h"
-#include "game_engine.h"
+#include "retronomicon/system/system.h"
+#include "retronomicon/entity/entity.h"
+#include "retronomicon/engine/game_engine.h"
 /**
  * @brief The namespace for animation utilities
  */
-namespace retronomicon::engine{
+namespace retronomicon::system{
+    using retronomicon::entity::Entity;
+    using retronomicon::engine::GameEngine;
+
     /**
      * @brief The Animation System which loops all animation component and update it
      */
     using retronomicon::engine::GameEngine;
-    class ExitGameSystem : public retronomicon::core::ecs::System {
+    class ExitGameSystem : public System {
         public:
             /***************************** Constructor *****************************/
 
@@ -51,7 +54,7 @@ namespace retronomicon::engine{
              * @param dt time interval since last update
              * @param objects the game objects (might change to Entity Later)
              */
-            void update(float dt, retronomicon::core::ecs::Entity* entities)  override;
+            void update(float dt, std::weak_ptr<Entity>  entities)  override;
 
         private:
             

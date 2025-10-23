@@ -97,7 +97,7 @@ namespace retronomicon::engine {
 
         private:
             /***************************** Attribute *****************************/
-            std::shared_ptr<RenderManager>
+            std::shared_ptr<RenderManager> m_renderManager;
             std::shared_ptr<InputState> m_inputState;
             std::unique_ptr<retronomicon::graphics::IWindow> m_window;
             std::shared_ptr<Scene> m_activeScene;

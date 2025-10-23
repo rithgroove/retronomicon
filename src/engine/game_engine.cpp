@@ -3,7 +3,7 @@
 #include "retronomicon/engine/game_engine.h"
 
 namespace retronomicon::engine {
-    using retronomicon::graphic::Window;
+    using retronomicon::graphics::IWindow;
     /***************************** Constructor *****************************/
     
     /**
@@ -30,7 +30,7 @@ namespace retronomicon::engine {
             setScene(nextScene);
         } else {
             // Log or handle error: unknown scene name
-            SDL_Log("Failed to change scene: %s", name.c_str());
+            // SDL_Log("Failed to change scene: %s", name.c_str());
         }
     }
 
@@ -42,9 +42,9 @@ namespace retronomicon::engine {
      */
     bool GameEngine::init(const char* title, int width, int height) {
         try{
-            m_inputState = std::make_shared<InputState>();
-            m_window = std::make_unique<Window>(title, width, height);
-            m_running = true;
+            // m_inputState = std::make_shared<InputState>();
+            // m_window = std::make_unique<Window>(title, width, height);
+            // m_running = true;
         }catch (const std::runtime_error &e){
             std::cerr << "Failure to init game engine: " << e.what() << std::endl;
             return false;
@@ -63,19 +63,19 @@ namespace retronomicon::engine {
     void GameEngine::run() {
 
         // const float targetDelta = 1.0f / 60.0f; //should be used as target, but the code doesn't use it at all.
-        Uint32 lastTime = SDL_GetTicks();
+        // Uint32 lastTime = SDL_GetTicks();
 
-        while (m_running) {
-            Uint32 currentTime = SDL_GetTicks();
-            float deltaTime = (currentTime - lastTime) / 1000.0f;
-            lastTime = currentTime;
+        // while (m_running) {
+        //     Uint32 currentTime = SDL_GetTicks();
+        //     float deltaTime = (currentTime - lastTime) / 1000.0f;
+        //     lastTime = currentTime;
 
-            handleEvents();
-            update(deltaTime);
-            render();
+        //     handleEvents();
+        //     update(deltaTime);
+        //     render();
 
-            SDL_Delay(1); // slight delay to prevent CPU spin
-        }
+        //     SDL_Delay(1); // slight delay to prevent CPU spin
+        // }
     }
 
     /***************************** Main Private Methods *****************************/
@@ -83,14 +83,14 @@ namespace retronomicon::engine {
      * @brief method to pool event before updating
      */
     void GameEngine::handleEvents() {
-        SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT)
-                m_running = false;
+        // SDL_Event event;
+        // while (SDL_PollEvent(&event)) {
+        //     if (event.type == SDL_QUIT)
+        //         m_running = false;
 
-            // if (m_activeScene)
-            //     m_activeScene->handleInput(event);
-        }
+        //     // if (m_activeScene)
+        //     //     m_activeScene->handleInput(event);
+        // }
     }
 
     /**
@@ -100,22 +100,22 @@ namespace retronomicon::engine {
      */
     void GameEngine::update(float dt) {
         
-        m_inputState->updateFromSDL();
-        if (m_activeScene)
-            m_activeScene->update(dt);
+        // m_inputState->updateFromSDL();
+        // if (m_activeScene)
+        //     m_activeScene->update(dt);
     }
 
     /**
      * @brief the render method
      */
     void GameEngine::render() {
-        // clear
-        m_window->clear();
+        // // clear
+        // m_window->clear();
 
-        if (m_activeScene)
-            m_activeScene->render();
+        // if (m_activeScene)
+        //     m_activeScene->render();
 
-        m_window->present();
+        // m_window->present();
     }
 
 

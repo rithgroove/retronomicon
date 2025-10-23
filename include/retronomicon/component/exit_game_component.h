@@ -1,12 +1,12 @@
 #pragma once
 
-#include "retronomicon/core/ecs/component.h"   // your base Component class
+#include "retronomicon/component/component.h"   // your base Component class
 
 /**
  * @brief The namespace for the core engine features of retronomicon
  */
-namespace retronomicon::engine {
-    using retronomicon::core::ecs::Component;
+namespace retronomicon::component {
+    using retronomicon::component::Component;
     /**
      * @brief Component to signal that the game should exit.
      * 
