@@ -9,7 +9,7 @@ namespace retronomicon::engine {
     /**
      * @brief default constructor
      */
-    GameEngine::GameEngine(){
+    GameEngine::GameEngine(std::shared_ptr<RenderManager> renderManager):m_renderManager(renderManager){
     }
 
     /***************************** Destructor *****************************/

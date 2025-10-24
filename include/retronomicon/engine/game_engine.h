@@ -25,7 +25,7 @@ namespace retronomicon::engine {
              * @brief default constructor
              * initiate m_inputState 
              */
-            GameEngine();
+            GameEngine(std::shared_ptr<RenderManager> renderManager);
 
             /***************************** Destructor *****************************/
 
