@@ -10,8 +10,7 @@ namespace retronomicon::scene::splash {
     using retronomicon::graphics::renderer::IRenderer;
     using retronomicon::asset::ImageAsset;
     using retronomicon::entity::Entity;
-    class SplashScene : public retronomicon::scene::Scene,
-                        public std::enable_shared_from_this<SplashScene> {
+    class SplashScene : public retronomicon::scene::Scene{
     public:
         SplashScene(std::shared_ptr<IRenderer> renderer,
                     const std::string& imagePath,
@@ -19,7 +18,6 @@ namespace retronomicon::scene::splash {
 
         void start() override;
         void update(float dt) override;
-        void render() override;
         void shutdown() override;
 
     private:

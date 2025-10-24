@@ -43,7 +43,7 @@ namespace retronomicon::scene {
      */    
     void Scene::update(float dt) {
         for (auto& system : m_systems) {
-            system->update(dt, std::enable_shared_from_this<Scene>::shared_from_this());  
+            system->update(dt, shared_from_this());  
         }
     }
 

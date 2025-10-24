@@ -49,18 +49,8 @@ namespace retronomicon::entity{
      */
     void Entity::addChildEntity(const std::shared_ptr<Entity>& child) {
         if (!child) return;
-
-        std::shared_ptr<Entity> self;
-        try {
-            self = shared_from_this();
-        } catch (const std::bad_weak_ptr&) {
-            std::cerr << "[Entity] ⚠️ Parent entity not managed by shared_ptr. Skipping setParent().\n";
-            m_childEntities.push_back(child);
-            return;
-        }
-
-        child->setParent(self);
-        m_childEntities.push_back(child);
+        child->setParent(shared_from_this());
+        this->m_childEntities.push_back(child);
     }
 
     /**

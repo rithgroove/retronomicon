@@ -15,7 +15,7 @@ namespace retronomicon::scene {
     /*
      * @brief abstract scene class
      */
-    class Scene : public Entity, public std::enable_shared_from_this<Scene>  {
+    class Scene : public Entity {
         public:
             /***************************** Constructor *****************************/
 
@@ -88,6 +88,14 @@ namespace retronomicon::scene {
              * @param a system to be registered
              */
             void addSystem(std::unique_ptr<System> system);
+
+
+            template <typename T, typename... Args>
+            static std::shared_ptr<T> create(Args&&... args) {
+                static_assert(std::is_base_of_v<Scene, T>,
+                    "Scene::create<T>() must be called with a subclass of Scene");
+                return std::make_shared<T>(std::forward<Args>(args)...);
+            }
 
         protected:
             /***************************** Attribute *****************************/
