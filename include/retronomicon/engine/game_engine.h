@@ -13,6 +13,7 @@ namespace retronomicon::engine {
     using retronomicon::input::InputState;
     using retronomicon::scene::Scene;
     using retronomicon::manager::RenderManager;
+    using retronomicon::scene::SceneManager;
     /**
      * @brief Game Engine class (the main class that you need to run)
      */
@@ -25,7 +26,7 @@ namespace retronomicon::engine {
              * @brief default constructor
              * initiate m_inputState 
              */
-            GameEngine(std::shared_ptr<RenderManager> renderManager);
+            GameEngine(std::shared_ptr<RenderManager> renderManager, std::shared_ptr<SceneManager> sceneManager);
 
             /***************************** Destructor *****************************/
 
@@ -52,7 +53,7 @@ namespace retronomicon::engine {
              * @param newScene the shared pointer of the new scene we wanted to register
              */
             void registerScene(const std::string &name , std::shared_ptr<Scene> newScene) noexcept{
-                m_sceneManager.registerScene(name,newScene);
+                m_sceneManager->registerScene(name,newScene);
             }
 
 
@@ -103,7 +104,7 @@ namespace retronomicon::engine {
             std::shared_ptr<Scene> m_activeScene;
 
             bool m_running = false; 
-            retronomicon::scene::SceneManager m_sceneManager;
+            std::shared_ptr<SceneManager> m_sceneManager;
 
             /***************************** Main Private Methods *****************************/
 

@@ -9,7 +9,7 @@ namespace retronomicon::engine {
     /**
      * @brief default constructor
      */
-    GameEngine::GameEngine(std::shared_ptr<RenderManager> renderManager):m_renderManager(renderManager){
+    GameEngine::GameEngine(std::shared_ptr<RenderManager> renderManager, std::shared_ptr<SceneManager> sceneManager):m_renderManager(renderManager),m_sceneManager(sceneManager){
     }
 
     /***************************** Destructor *****************************/
@@ -24,7 +24,7 @@ namespace retronomicon::engine {
      * @param name the scene name to switch to
      */
     void GameEngine::changeScene(const std::string& name) {
-        auto nextScene = m_sceneManager.changeScene(name);
+        auto nextScene = m_sceneManager->changeScene(name);
         if (nextScene) {
             // m_activeScene.reset();
             setScene(nextScene);
