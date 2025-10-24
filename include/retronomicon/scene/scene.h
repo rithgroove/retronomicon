@@ -15,7 +15,7 @@ namespace retronomicon::scene {
     /*
      * @brief abstract scene class
      */
-    class Scene : public Entity {
+    class Scene : public Entity, public std::enable_shared_from_this<Scene>  {
         public:
             /***************************** Constructor *****************************/
 

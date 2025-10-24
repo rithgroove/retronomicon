@@ -3,6 +3,7 @@
 #include "retronomicon/component/renderable.h"
 #include <algorithm> // for std::remove
 #include <vector>
+#include <iostream>
 /**
  * @brief The namespace for entities, scene etc
  */
@@ -47,10 +48,19 @@ namespace retronomicon::entity{
      * @param args the child entity
      */
     void Entity::addChildEntity(const std::shared_ptr<Entity>& child) {
-        if (child) {
-            child->setParent(shared_from_this());
+        if (!child) return;
+
+        std::shared_ptr<Entity> self;
+        try {
+            self = shared_from_this();
+        } catch (const std::bad_weak_ptr&) {
+            std::cerr << "[Entity] ⚠️ Parent entity not managed by shared_ptr. Skipping setParent().\n";
             m_childEntities.push_back(child);
+            return;
         }
+
+        child->setParent(self);
+        m_childEntities.push_back(child);
     }
 
     /**
