@@ -1,6 +1,9 @@
+#include "retronomicon/engine/game_engine.h"
+
 #include <iostream>
 #include <stdexcept>
-#include "retronomicon/engine/game_engine.h"
+#include <chrono>
+#include <thread>
 
 namespace retronomicon::engine {
     using retronomicon::graphics::IWindow;
@@ -29,6 +32,7 @@ namespace retronomicon::engine {
             // m_activeScene.reset();
             setScene(nextScene);
         } else {
+            m_running =false;
             // Log or handle error: unknown scene name
             // SDL_Log("Failed to change scene: %s", name.c_str());
         }
@@ -60,22 +64,36 @@ namespace retronomicon::engine {
     /**
      * @brief method to start mainloop
      */
+
     void GameEngine::run() {
+        using clock = std::chrono::steady_clock;
+        using namespace std::chrono_literals;
 
-        // const float targetDelta = 1.0f / 60.0f; //should be used as target, but the code doesn't use it at all.
-        // Uint32 lastTime = SDL_GetTicks();
+        const double targetDelta = 1.0 / 60.0; // 60 FPS target
+        auto lastTime = clock::now();
 
-        // while (m_running) {
-        //     Uint32 currentTime = SDL_GetTicks();
-        //     float deltaTime = (currentTime - lastTime) / 1000.0f;
-        //     lastTime = currentTime;
+        m_running = true;
 
-        //     handleEvents();
-        //     update(deltaTime);
-        //     render();
+        while (m_running) {
+            auto currentTime = clock::now();
+            std::chrono::duration<double> elapsed = currentTime - lastTime;
+            double deltaTime = elapsed.count();
+            lastTime = currentTime;
 
-        //     SDL_Delay(1); // slight delay to prevent CPU spin
-        // }
+            // --- Engine core loop ---
+            handleEvents();
+            update(static_cast<float>(deltaTime));
+            render();
+            // ------------------------
+
+            // Frame limiting (avoid CPU spin)
+            auto frameDuration = clock::now() - currentTime;
+            double frameTime = frameDuration.count();
+            if (frameTime < targetDelta) {
+                auto sleepDuration = std::chrono::duration<double>(targetDelta - frameTime);
+                std::this_thread::sleep_for(std::chrono::duration_cast<std::chrono::milliseconds>(sleepDuration));
+            }
+        }
     }
 
     /***************************** Main Private Methods *****************************/
@@ -99,10 +117,11 @@ namespace retronomicon::engine {
      * @param dt, the delta time since last update
      */
     void GameEngine::update(float dt) {
-        
+        //renderer->clear();
         // m_inputState->updateFromSDL();
-        // if (m_activeScene)
-        //     m_activeScene->update(dt);
+        if (m_activeScene)
+            m_activeScene->update(dt);
+        //renderer->show();
     }
 
     /**
@@ -111,9 +130,10 @@ namespace retronomicon::engine {
     void GameEngine::render() {
         // // clear
         // m_window->clear();
-
-        // if (m_activeScene)
-        //     m_activeScene->render();
+        m_renderManager->clear();
+        if (m_activeScene)
+            m_renderManager->render(m_activeScene);
+        m_renderManager->show();
 
         // m_window->present();
     }

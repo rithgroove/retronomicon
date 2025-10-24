@@ -5,14 +5,13 @@
 #include <vector>
 #include "retronomicon/entity/entity.h"
 #include "retronomicon/system/system.h"
-#include "retronomicon/manager/render_manager.h"
 /**
  * @brief namespace for scene
  */
 namespace retronomicon::scene {
     using retronomicon::entity::Entity;
     using retronomicon::system::System;
-    using retronomicon::manager::RenderManager;
+
     /*
      * @brief abstract scene class
      */

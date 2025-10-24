@@ -25,6 +25,9 @@ namespace retronomicon::manager {
              * @param entity Weak pointer to the entity root.
              */
             virtual void render(std::weak_ptr<Entity> entity);
+
+            void clear(){m_renderer->clear();}
+            void show(){m_renderer->show();}
         private:
 
             std::shared_ptr<IRenderer> m_renderer;

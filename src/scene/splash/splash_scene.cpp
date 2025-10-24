@@ -34,7 +34,7 @@ namespace retronomicon::scene::splash{
                       << e.what() << " (" << m_imagePath << ")\n";
         }
 
-        createLogoEntity();
+        // createLogoEntity();
 
         // Register systems in correct order
         // addSystem(std::make_unique<animation::AnimationSystem>());
