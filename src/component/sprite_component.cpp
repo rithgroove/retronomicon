@@ -11,7 +11,7 @@ namespace retronomicon::component {
         : m_image(image) 
     {
         if (m_image) {
-            m_texture = m_image->createTexture(); // Factory method on ImageAsset
+            // m_texture = m_image->createTexture(); // Factory method on ImageAsset
         }
     }
 
