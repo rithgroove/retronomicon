@@ -62,7 +62,7 @@ namespace retronomicon::scene::splash{
         // logoAnimationComponent->setListener(new SplashAnimationListener()); // setup listener so it set scene changecomponent to true
 
         // m_logoEntity->addComponent<SceneChangeComponent>(m_nextScene);
-
+        m_logoEntity->start();
         addChildEntity(m_logoEntity);
     }
 

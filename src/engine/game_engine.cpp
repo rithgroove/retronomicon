@@ -29,6 +29,7 @@ namespace retronomicon::engine {
     void GameEngine::changeScene(const std::string& name) {
         auto nextScene = m_sceneManager->changeScene(name);
         if (nextScene) {
+
             // m_activeScene.reset();
             setScene(nextScene);
         } else {
@@ -130,9 +131,11 @@ namespace retronomicon::engine {
     void GameEngine::render() {
         // // clear
         // m_window->clear();
+            // std::cout<<"hello" << std::endl;
         m_renderManager->clear();
-        if (m_activeScene)
+        if (m_activeScene){
             m_renderManager->render(m_activeScene);
+        }
         m_renderManager->show();
 
         // m_window->present();

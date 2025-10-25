@@ -8,11 +8,11 @@
 namespace retronomicon::component {
 
     SpriteComponent::SpriteComponent(std::shared_ptr<asset::ImageAsset> image)
-        : m_image(std::move(image)) 
+        : m_image(image) 
     {
-        // if (m_image) {
-        //     m_texture = m_image->createTexture(); // Factory method on ImageAsset
-        // }
+        if (m_image) {
+            m_texture = m_image->createTexture(); // Factory method on ImageAsset
+        }
     }
 
     void SpriteComponent::start() {
@@ -29,8 +29,10 @@ namespace retronomicon::component {
         // Animation state checks could go here (optional)
     }
     
-    void SpriteComponent::render(retronomicon::graphics::renderer::IRenderer& renderer)  {
-        // if (!m_transform || !m_texture) return;
+    void SpriteComponent::render(std::shared_ptr<IRenderer> renderer)  { 
+        std::cout<<"hallo1"<<std::endl;
+        if (!m_transform || !m_texture) return;
+        std::cout<<"hallo2"<<std::endl;
 
         // if (m_animation) {
         //     // Render current animation frame
@@ -40,8 +42,9 @@ namespace retronomicon::component {
         //         currentFrame.getRect()
         //     );
         // } else {
-        //     // Render static image
-        //     m_texture->draw(*m_transform);
+            // Render static image
+            renderer->render(m_texture, Vec2(0.0f,0.0f), Vec2(1.0f,1.0f), 0.0f, 1.0f);
+            // m_texture->draw(*m_transform);
         // }
     }
 

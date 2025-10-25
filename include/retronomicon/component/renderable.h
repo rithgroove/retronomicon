@@ -1,9 +1,11 @@
 #pragma once
 #include "retronomicon/graphics/renderer/i_renderer.h"
+#include <memory>
 /**
  * @brief The namespace for ECS libraries that will be the building blocks for the engine
  */
 namespace retronomicon::component{
+    using retronomicon::graphics::renderer::IRenderer;
     /**
      * @brief Optional interface for components that can be rendered.
      */
@@ -14,7 +16,7 @@ namespace retronomicon::component{
             /**
              * @brief Called when rendering
              */
-            virtual void render(retronomicon::graphics::renderer::IRenderer& renderer) = 0;
+            virtual void render(std::shared_ptr<IRenderer> renderer) = 0;
 
             bool isVisible() {return m_isVisible;}
 

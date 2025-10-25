@@ -34,14 +34,14 @@ namespace retronomicon::component {
 
         void start() override;                ///< Cache Transform + Animation
         void update(float dt) override;       ///< Hook for animation triggers
-        void render(retronomicon::graphics::renderer::IRenderer& renderer)  override;               ///< Delegates to backend renderer
+        void render(std::shared_ptr<IRenderer> renderer)  override;               ///< Delegates to backend renderer
 
         /// Swap sprite image at runtime (e.g., skin or asset change)
         void changeAsset(std::shared_ptr<asset::ImageAsset> asset);
 
     private:
         std::shared_ptr<asset::ImageAsset> m_image = nullptr;
-        std::unique_ptr<Texture> m_texture = nullptr; ///< Backend texture
+        std::shared_ptr<Texture> m_texture = nullptr; ///< Backend texture
 
         // Cached pointers (owned by ECS, safe to cache)
         std::shared_ptr<TransformComponent> m_transform = nullptr;

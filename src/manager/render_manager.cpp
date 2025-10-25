@@ -1,5 +1,5 @@
 #include "retronomicon/manager/render_manager.h"
-
+#include <iostream>
 /**
  * @brief The namespace for ECS libraries that will be the building blocks for the engine
  */
@@ -12,12 +12,13 @@ namespace retronomicon::manager {
             // Render components that are also Renderable
             for (auto& comp : e->getComponents()) {
                 if (auto renderable = dynamic_cast<Renderable*>(comp.get())) {
+                    renderable->render(m_renderer);
                     // renderable->render();
                 }
             }
 
             // Recurse into children
-            for (auto& child : e->getChildren()) {
+            for (auto& child : e->getChildren()) { 
                 render(child);
             }
         }
