@@ -56,5 +56,8 @@ namespace retronomicon::component {
         //     m_texture.reset();
         // }
     }
-
+    
+    void SpriteComponent::generateTexture(std::shared_ptr<TextureManager> textureManager){
+        m_texture= textureManager->createTexture(m_image);
+    }
 } // namespace retronomicon::graphics

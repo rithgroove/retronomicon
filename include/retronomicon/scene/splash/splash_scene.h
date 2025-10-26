@@ -5,14 +5,17 @@
 // NOTE: IRenderer lives in retronomicon::graphics per core docs.
 #include <retronomicon/graphics/renderer/i_renderer.h>
 #include <retronomicon/asset/image_asset.h>
+#include "retronomicon/manager/texture_manager.h"
 
 namespace retronomicon::scene::splash {
     using retronomicon::graphics::renderer::IRenderer;
     using retronomicon::asset::ImageAsset;
     using retronomicon::entity::Entity;
+    using retronomicon::manager::TextureManager;
     class SplashScene : public retronomicon::scene::Scene{
     public:
         SplashScene(std::shared_ptr<IRenderer> renderer,
+                    std::shared_ptr<TextureManager> textureManager,
                     const std::string& imagePath,
                     const std::string& nextScene = "");
 
@@ -27,6 +30,7 @@ namespace retronomicon::scene::splash {
         std::shared_ptr<IRenderer> m_renderer;
         std::shared_ptr<ImageAsset> m_logoImage;
         std::shared_ptr<Entity> m_logoEntity;
+        std::shared_ptr<TextureManager> m_textureManager;
 
         std::string m_imagePath;
         std::string m_nextScene;

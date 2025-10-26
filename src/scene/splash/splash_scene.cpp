@@ -14,10 +14,12 @@ namespace retronomicon::scene::splash{
     using namespace retronomicon::system;
 
     SplashScene::SplashScene(std::shared_ptr<IRenderer> renderer,
+                             std::shared_ptr<TextureManager> textureManager,
                              const std::string& imagePath,
                              const std::string& nextScene)
         : Scene("SplashScene")
         , m_renderer(std::move(renderer))
+        , m_textureManager(std::move(textureManager))
         , m_imagePath(imagePath)
         , m_nextScene(nextScene)
     {}
@@ -51,7 +53,8 @@ namespace retronomicon::scene::splash{
         m_logoEntity->addComponent<TransformComponent>(0.0f, 0.0f);
 
         // Attach renderable using the image asset
-        m_logoEntity->addComponent<SpriteComponent>(m_logoImage);
+        auto spriteComponent = m_logoEntity->addComponent<SpriteComponent>(m_logoImage);
+        spriteComponent->generateTexture(m_textureManager);
 
         // Simple animation + scene change
         // ---------------- setup animation component using m_duration as wait time ------------------------

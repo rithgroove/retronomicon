@@ -9,6 +9,7 @@
 #include "retronomicon/asset/image_asset.h"
 #include "retronomicon/graphics/texture.h"
 #include "retronomicon/math/rect.h"
+#include "retronomicon/manager/texture_manager.h"
 // Forward declarations
 // namespace retronomicon::core::ecs { 
 //     class TransformComponent; 
@@ -20,6 +21,7 @@
 namespace retronomicon::component {
     using retronomicon::math::Rect;
     using retronomicon::graphics::Texture;
+    using retronomicon::manager::TextureManager;
     /**
      * @brief A drawable sprite that optionally supports animation.
      *
@@ -38,7 +40,7 @@ namespace retronomicon::component {
 
         /// Swap sprite image at runtime (e.g., skin or asset change)
         void changeAsset(std::shared_ptr<asset::ImageAsset> asset);
-
+        void generateTexture(std::shared_ptr<TextureManager> textureManager);
     private:
         std::shared_ptr<asset::ImageAsset> m_image = nullptr;
         std::shared_ptr<Texture> m_texture = nullptr; ///< Backend texture
