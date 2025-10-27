@@ -14,6 +14,8 @@ namespace retronomicon::manager {
      */
     class TextureManager {
         public:
+
+            virtual ~TextureManager(); // must NOT be inline
             virtual std::shared_ptr<Texture> createTexture(std::shared_ptr<ImageAsset> imageAsset);
     };
 
