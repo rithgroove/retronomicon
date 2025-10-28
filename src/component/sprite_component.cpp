@@ -34,18 +34,7 @@ namespace retronomicon::component {
         if (!m_transform || !m_texture) return;
         std::cout<<"hallo2"<<std::endl;
 
-        // if (m_animation) {
-        //     // Render current animation frame
-        //     const auto& currentFrame = m_animation->getCurrentFrame();
-        //     m_texture->draw(
-        //         *m_transform,
-        //         currentFrame.getRect()
-        //     );
-        // } else {
-            // Render static image
-            renderer->render(m_texture, Vec2(0.0f,0.0f), Vec2(1.0f,1.0f), 0.0f, 1.0f);
-            // m_texture->draw(*m_transform);
-        // }
+        renderer->render(m_texture, Vec2(0.0f,0.0f), Vec2(1.0f,1.0f), 0.0f, 1.0f);
     }
 
     void SpriteComponent::changeAsset(std::shared_ptr<asset::ImageAsset> asset) {

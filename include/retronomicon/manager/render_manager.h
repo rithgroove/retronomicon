@@ -4,6 +4,8 @@
 #include "retronomicon/component/component.h"  
 #include "retronomicon/component/renderable.h"
 
+#include <iostream>
+
 /**
  * @brief The namespace for ECS libraries that will be the building blocks for the engine
  */
@@ -27,7 +29,10 @@ namespace retronomicon::manager {
             virtual void render(std::weak_ptr<Entity> entity);
 
             void clear(){m_renderer->clear();}
-            void show(){m_renderer->show();}
+            void show(){
+                m_renderer->show();
+                std::cout<<"show render manager"<<std::endl;
+            }
         private:
 
             std::shared_ptr<IRenderer> m_renderer;

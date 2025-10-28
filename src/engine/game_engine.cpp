@@ -136,6 +136,7 @@ namespace retronomicon::engine {
         if (m_activeScene){
             m_renderManager->render(m_activeScene);
         }
+        std::cout<<"show game_engine"<<std::endl;
         m_renderManager->show();
 
         // m_window->present();
