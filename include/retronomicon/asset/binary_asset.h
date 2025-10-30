@@ -8,7 +8,7 @@
 /**
  * @brief The namespace for assets and loaders
  */
-namespace retronomicon::lib::asset {
+namespace retronomicon::asset {
 
     /**
      * @brief Represents a raw binary file loaded into memory.

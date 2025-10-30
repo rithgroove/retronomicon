@@ -1,4 +1,4 @@
-#include "retronomicon/lib/asset/binary_asset.h"
+#include "retronomicon/asset/binary_asset.h"
 
 #include <fstream>
 #include <stdexcept>
@@ -7,7 +7,7 @@
 /**
  * @brief The namespace for assets and loaders
  */
-namespace retronomicon::lib::asset {
+namespace retronomicon::asset {
 
     /***************************** Constructor *****************************/
 
@@ -17,9 +17,7 @@ namespace retronomicon::lib::asset {
      * @param path path the file
      * @param name the given name for this font
      */
-    BinaryAsset::BinaryAsset(const std::string& path,const std::string& name) {
-        m_path = path;
-        m_name = name;
+    BinaryAsset::BinaryAsset(const std::string& path,const std::string& name) : Asset(path,name){
 
         std::ifstream file(path, std::ios::binary);
         if (!file) {
