@@ -1,11 +1,11 @@
 #pragma once
 
 #include <string>
-#include "retronomicon/lib/asset/asset.h"
+#include "asset.h"
 /**
  * @brief The namespace for assets and loaders
  */
-namespace retronomicon::lib::asset {
+namespace retronomicon::asset {
 
     /**
      * @brief Represents a text-based asset loaded from file (e.g., .txt, .json).

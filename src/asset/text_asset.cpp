@@ -1,11 +1,11 @@
-#include "retronomicon/lib/asset/text_asset.h"
+#include "retronomicon/asset/text_asset.h"
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
 /**
  * @brief The namespace for assets and loaders
  */
-namespace retronomicon::lib::asset {
+namespace retronomicon::asset {
    /***************************** Constructor *****************************/
     
     /**
@@ -14,7 +14,7 @@ namespace retronomicon::lib::asset {
      * @param path the path to the text file
      * @param name the name of the text file
      */
-    TextAsset::TextAsset(const std::string& path,const std::string& name){
+    TextAsset::TextAsset(const std::string& path,const std::string& name):Asset(path,name){
         m_path = path;
         m_name = name;
         std::ifstream file(path);
