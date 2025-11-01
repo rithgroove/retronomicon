@@ -34,7 +34,7 @@ namespace retronomicon::component {
         if (!m_transform || !m_texture) return;
         std::cout<<"hallo2"<<std::endl;
 
-        renderer->render(m_texture, Vec2(0.0f,0.0f), Vec2(1.0f,1.0f), 0.0f, 1.0f);
+        renderer->render(m_texture, Vec2(400.0f,300.0f), Vec2(400.0f,300.0f), 0.0f, 1.0f);
     }
 
     void SpriteComponent::changeAsset(std::shared_ptr<asset::ImageAsset> asset) {
