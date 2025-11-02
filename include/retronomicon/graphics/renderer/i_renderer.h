@@ -69,6 +69,9 @@ namespace retronomicon::graphics::renderer {
              */
             virtual ~IRenderer() = default;
 
+            virtual int getWidth() const = 0;
+
+            virtual int getHeight() const = 0;
     };
 
 } // namespace retronomicon::graphics::renderer

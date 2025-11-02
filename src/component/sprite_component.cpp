@@ -2,7 +2,7 @@
 #include "retronomicon/entity/entity.h"
 #include "retronomicon/component/transform_component.h"
 #include "retronomicon/component/animation_component.h"
-
+#include "retronomicon/graphics/i_window.h"
 #include <iostream>
 
 namespace retronomicon::component {
@@ -34,7 +34,14 @@ namespace retronomicon::component {
         if (!m_transform || !m_texture) return;
         std::cout<<"hallo2"<<std::endl;
 
-        renderer->render(m_texture, Vec2(400.0f,300.0f), Vec2(400.0f,300.0f), 0.0f, 1.0f);
+        float width = m_image->getWidth();
+        float height = m_image->getHeight();
+
+        int windowWidth = renderer->getWidth();
+        int windowHeight = renderer->getHeight();
+
+
+        renderer->render(m_texture, Vec2(((float(windowWidth)-width)/2.0f) ,((float(windowHeight)-height)/2.0f)), Vec2(1.0f,1.0f), 0.0f, 1.0f);
     }
 
     void SpriteComponent::changeAsset(std::shared_ptr<asset::ImageAsset> asset) {
