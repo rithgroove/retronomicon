@@ -46,7 +46,7 @@ namespace retronomicon::component{
     Vec2 TransformComponent::getRenderPosition() const {
         // Start with our local position
         Vec2 worldPos = this->getPosition();
-        return worldPos;
+
         // std::shared_ptr<Entity>  owner = this->getOwner();
         // auto renderable = owner->getMainRenderableComponent();
         // if (renderable){
@@ -54,6 +54,10 @@ namespace retronomicon::component{
         //     worldPos.x -= size.getWidth()*this->m_anchorX;
         //     worldPos.y -= size.getHeight()*this->m_anchorY;
         // }
+
+
+        
+        // // return worldPos;
         
         // // get owner
         // std::shared_ptr<Entity> parent = this->getOwner()->getParent();
@@ -82,7 +86,7 @@ namespace retronomicon::component{
         //     worldPos += parentTransform->getRenderPosition();            
         // }
 
-        // return worldPos;
+        return worldPos;
     }
     float TransformComponent::getRotation() const { return m_rotation; }
     float TransformComponent::getScaleX() const { return m_scaleX; }

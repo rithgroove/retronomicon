@@ -40,7 +40,20 @@ namespace retronomicon::component {
         int windowWidth = renderer->getWidth();
         int windowHeight = renderer->getHeight();
 
+        Vec2 renderPosition = m_transform->getRenderPosition();
+        int x = static_cast<int>(renderPosition.x);
+        int y = static_cast<int>(renderPosition.y);
 
+
+        if (m_animation) {
+
+        } else {
+            int w = static_cast<int>(m_image->getWidth() * m_transform->getScaleX());
+            int h = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
+            int centerX = static_cast<int>(w * m_transform->getAnchorX());
+            int centerY = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
+
+        }
         renderer->render(m_texture, Vec2(((float(windowWidth)-width)/2.0f) ,((float(windowHeight)-height)/2.0f)), Vec2(1.0f,1.0f), 0.0f, 1.0f);
     }
 
