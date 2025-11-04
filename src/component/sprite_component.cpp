@@ -52,9 +52,20 @@ namespace retronomicon::component {
             int h = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
             int centerX = static_cast<int>(w * m_transform->getAnchorX());
             int centerY = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
-
+            std::cout << "x : " << x << std::endl;
+            std::cout << "y : " << y << std::endl;
+            x-=centerX;
+            y-=centerY;
+            std::cout << "x after : " << x << std::endl;
+            std::cout << "y after : " << y << std::endl;
+            std::cout << "w : " << w << std::endl;
+            std::cout << "h : " << h << std::endl;
+            std::cout << "center x : " << centerX << std::endl;
+            std::cout << "center y : " << centerY << std::endl;
+            std::cout << "scale x : " << m_transform->getScaleX() << std::endl;
+            std::cout << "scale y : " << m_transform->getScaleY() << std::endl;
         }
-        renderer->render(m_texture, Vec2(((float(windowWidth)-width)/2.0f) ,((float(windowHeight)-height)/2.0f)), Vec2(1.0f,1.0f), 0.0f, 1.0f);
+        renderer->render(m_texture, Vec2(float(x) ,float(y)), Vec2(m_transform->getScaleX(),m_transform->getScaleY()), 0.0f, 1.0f);
     }
 
     void SpriteComponent::changeAsset(std::shared_ptr<asset::ImageAsset> asset) {

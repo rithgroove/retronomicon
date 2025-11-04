@@ -49,8 +49,12 @@ namespace retronomicon::scene::splash{
     void SplashScene::createLogoEntity() {
         m_logoEntity = std::make_shared<Entity>("SplashLogo");
 
+
+        int windowWidth = m_renderer->getWidth();
+        int windowHeight = m_renderer->getHeight();
+
         // Place logo at center (temporary)
-        m_logoEntity->addComponent<TransformComponent>(0.0f, 0.0f);
+        m_logoEntity->addComponent<TransformComponent>(windowWidth/2.0f, windowHeight/ 2.0f);
 
         // Attach renderable using the image asset
         auto spriteComponent = m_logoEntity->addComponent<SpriteComponent>(m_logoImage);
