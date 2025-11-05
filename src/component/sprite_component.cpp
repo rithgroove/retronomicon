@@ -51,7 +51,7 @@ namespace retronomicon::component {
             int w = static_cast<int>(m_image->getWidth() * m_transform->getScaleX());
             int h = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
             int centerX = static_cast<int>(w * m_transform->getAnchorX());
-            int centerY = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
+            int centerY = static_cast<int>(h * m_transform->getAnchorY());
             std::cout << "x : " << x << std::endl;
             std::cout << "y : " << y << std::endl;
             x-=centerX;
