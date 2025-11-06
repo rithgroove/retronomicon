@@ -54,7 +54,8 @@ namespace retronomicon::scene::splash{
         int windowHeight = m_renderer->getHeight();
 
         // Place logo at center (temporary)
-        m_logoEntity->addComponent<TransformComponent>(windowWidth/2.0f, windowHeight/ 2.0f);
+        auto transformComponent = m_logoEntity->addComponent<TransformComponent>(windowWidth/2.0f, windowHeight/ 2.0f);
+        transformComponent->setScale(1.0f,1.0f);
 
         // Attach renderable using the image asset
         auto spriteComponent = m_logoEntity->addComponent<SpriteComponent>(m_logoImage);

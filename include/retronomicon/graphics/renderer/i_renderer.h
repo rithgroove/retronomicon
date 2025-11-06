@@ -4,6 +4,7 @@
 
 #include "retronomicon/graphics/texture.h"
 #include "retronomicon/math/vec2.h"
+#include "retronomicon/math/rect.h"
 /**
  * @brief Defines the IRenderer interface for graphics backends.
  *
@@ -45,6 +46,19 @@ namespace retronomicon::graphics::renderer {
                         const Vec2& scale,
                         float rotation = 0.0f,
                         float alpha = 1.0f) = 0;
+
+            // /**
+            //  * @brief Perform rendering operations.
+            //  *
+            //  * Called every frame to issue draw commands and present
+            //  * graphics to the screen. The exact behavior depends on the
+            //  * underlying graphics API.
+            //  */
+            // virtual void renderQuad(std::shared_ptr<Texture> texture,
+            //             const Rect* target,
+            //             const Rect* source,
+            //             float rotation = 0.0f,
+            //             float alpha = 1.0f) = 0;
 
             // Called after all Render() calls are finished
             virtual void show() = 0;
