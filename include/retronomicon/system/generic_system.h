@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <iostream>
 #include "retronomicon/entity/entity.h"
 #include "retronomicon/component/component.h"
 #include "system.h"
@@ -26,6 +27,7 @@ namespace retronomicon::system {
          * @param entity weak_ptr to the entity
          */
         virtual void update(float dt, std::weak_ptr<Entity> entity) {
+            // std::cout<<"generic system called"<<std::endl;
             if (auto e = entity.lock()) {
                 auto comp = e->getComponent<T>();
                 if (comp) {

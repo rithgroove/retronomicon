@@ -3,10 +3,12 @@
 #include "retronomicon/component/transform_component.h"
 #include "retronomicon/component/animation_component.h"
 #include "retronomicon/graphics/i_window.h"
+#include "retronomicon/math/rect.h"
 #include <iostream>
 
 namespace retronomicon::component {
-
+    using retronomicon::math::Rect;
+    using retronomicon::math::Point;
     SpriteComponent::SpriteComponent(std::shared_ptr<asset::ImageAsset> image)
         : m_image(image) 
     {
@@ -26,6 +28,8 @@ namespace retronomicon::component {
     }
 
     void SpriteComponent::update(float /*dt*/) {
+    std::cout<<"sprite component update called" <<std::endl;
+        m_transform->setRotation(m_transform->getRotation()+1.0);
         // Animation state checks could go here (optional)
     }
     
@@ -43,19 +47,20 @@ namespace retronomicon::component {
         Vec2 renderPosition = m_transform->getRenderPosition();
         int x = static_cast<int>(renderPosition.x);
         int y = static_cast<int>(renderPosition.y);
+        int w = static_cast<int>(m_image->getWidth() * m_transform->getScaleX());
+        int h = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
+
+        Rect source(0.0f,0.0f,width,height) ;
+        Rect destination(Point(x,y),Point(m_transform->getAnchorX(),m_transform->getAnchorY()),w,h) ;
+        // std::cout<<destination<<std::endl;
+        std::cout<<"rotation: " << m_transform->getRotation()<<std::endl;
+        // if (m_animation) {
+
+        // } else {
 
 
-        if (m_animation) {
-
-        } else {
-            int w = static_cast<int>(m_image->getWidth() * m_transform->getScaleX());
-            int h = static_cast<int>(m_image->getHeight() * m_transform->getScaleY());
-            int centerX = static_cast<int>(w * m_transform->getAnchorX());
-            int centerY = static_cast<int>(h * m_transform->getAnchorY());
-            x-=centerX;
-            y-=centerY;
-        }
-        renderer->render(m_texture, Vec2(float(x) ,float(y)), Vec2(m_transform->getScaleX(),m_transform->getScaleY()), 0.0f, 1.0f);
+        // }   
+        renderer->renderQuad(m_texture, destination, source, m_transform->getRotation(), 1.0f);
     }
 
     void SpriteComponent::changeAsset(std::shared_ptr<asset::ImageAsset> asset) {

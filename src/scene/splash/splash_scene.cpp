@@ -7,6 +7,7 @@
 #include "retronomicon/system/animation_system.h"
 #include "retronomicon/system/input_system.h"
 #include "retronomicon/system/scene_change_system.h"
+#include "retronomicon/system/generic_system.h"
 #include "retronomicon/component/sprite_component.h"
 #include <iostream>
 namespace retronomicon::scene::splash{
@@ -40,6 +41,8 @@ namespace retronomicon::scene::splash{
 
         // Register systems in correct order
         addSystem(std::make_unique<AnimationSystem>());
+        addSystem(std::make_unique<GenericSystem<SpriteComponent>>());
+// GenericSystem<TransformComponent> transformSystem;
         // addSystem(std::make_unique<InputSystem>());
         // addSystem(std::make_unique<SceneChangeSystem>());
 
