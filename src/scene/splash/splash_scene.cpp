@@ -9,6 +9,7 @@
 #include "retronomicon/system/scene_change_system.h"
 #include "retronomicon/system/generic_system.h"
 #include "retronomicon/component/sprite_component.h"
+#include "retronomicon/component/bound_component.h"
 #include <iostream>
 namespace retronomicon::scene::splash{
     using namespace retronomicon::component;
@@ -58,6 +59,7 @@ namespace retronomicon::scene::splash{
 
         // Place logo at center (temporary)
         auto transformComponent = m_logoEntity->addComponent<TransformComponent>(windowWidth/2.0f, windowHeight/ 2.0f);
+        auto boundComponent = m_logoEntity->addComponent<BoundComponent>(400, 300);
         transformComponent->setScale(1.0f,1.0f);
 
         // Attach renderable using the image asset

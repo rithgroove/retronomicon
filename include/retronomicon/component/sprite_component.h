@@ -5,6 +5,7 @@
 #include "component.h"
 #include "transform_component.h"
 #include "animation_component.h"
+#include "bound_component.h"
 #include "renderable.h"
 #include "retronomicon/asset/image_asset.h"
 #include "retronomicon/graphics/texture.h"
@@ -47,6 +48,7 @@ namespace retronomicon::component {
 
         // Cached pointers (owned by ECS, safe to cache)
         std::shared_ptr<TransformComponent> m_transform = nullptr;
+        std::shared_ptr<BoundComponent> m_bound = nullptr;
         std::shared_ptr<AnimationComponent> m_animation = nullptr;
     };
 
