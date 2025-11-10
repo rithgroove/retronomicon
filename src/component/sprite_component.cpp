@@ -62,13 +62,11 @@ namespace retronomicon::component {
 
         Rect source(0.0f,0.0f,width,height) ;
         Rect destination(Point(x,y),Point(m_transform->getAnchorX(),m_transform->getAnchorY()),w,h) ;
-        // std::cout<<destination<<std::endl;
-        // if (m_animation) {
-
-        // } else {
-
-
-        // }   
+        std::cout<<destination<<std::endl;
+        if (m_animation) {
+            auto animationFrame  = m_animation->getCurrentFrame();
+            source = animationFrame.getRect();
+        }   
         renderer->renderQuad(m_texture, destination, source, m_transform->getRotation(), 1.0f);
     }
 
