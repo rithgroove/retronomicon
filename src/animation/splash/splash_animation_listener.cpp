@@ -1,19 +1,19 @@
 #include <sstream>
 #include <memory>
 #include <iostream>
-#include "retronomicon/lib/scene/splash/splash_animation_listener.h"
-#include "retronomicon/lib/scene/scene_change_component.h"
-#include "retronomicon/lib/core/entity.h"
+#include "retronomicon/animation/splash/splash_animation_listener.h"
+#include "retronomicon/component/scene_change_component.h"
+#include "retronomicon/entity/entity.h"
 
-namespace retronomicon::lib::scene::splash{
-	using retronomicon::lib::core::Entity;
-	using retronomicon::lib::scene::SceneChangeComponent;
+namespace retronomicon::animation::splash{
+	using retronomicon::entity::Entity;
+	using retronomicon::component::SceneChangeComponent;
 	void SplashAnimationListener::onAnimationFinished(AnimationComponent* sender){
-		Entity *owner = sender->getOwner();
+		auto owner = sender->getOwner();
 
 		if (owner->hasComponent<SceneChangeComponent>()){
-			auto* scc = owner->getComponent<SceneChangeComponent>();
-			scc->triggered = true;
+			auto scc = owner->getComponent<SceneChangeComponent>();
+			scc->trigger();
 		}else{
 			std::cerr<<"The AnimationComponent's Entity (owner) that this class listen to, does not have SceneChangeComponent sibling.";
 		}

@@ -4,6 +4,7 @@
 #include "retronomicon/component/renderable.h"
 #include "retronomicon/component/animation_component.h"
 #include "retronomicon/component/scene_change_component.h"
+#include "retronomicon/animation/splash/splash_animation_listener.h"
 #include "retronomicon/system/animation_system.h"
 #include "retronomicon/system/input_system.h"
 #include "retronomicon/system/scene_change_system.h"
@@ -14,6 +15,7 @@
 namespace retronomicon::scene::splash{
     using namespace retronomicon::component;
     using namespace retronomicon::system;
+    using retronomicon::animation::splash::SplashAnimationListener;
 
     SplashScene::SplashScene(std::shared_ptr<IRenderer> renderer,
                              std::shared_ptr<TextureManager> textureManager,
@@ -68,11 +70,11 @@ namespace retronomicon::scene::splash{
 
         // Simple animation + scene change
         // ---------------- setup animation component using m_duration as wait time ------------------------
-        // std::vector<AnimationFrame> frames; // array of frame
-        // frames.emplace_back(0, 0, m_logoImage->getWidth(), m_logoImage->getHeight(), this->m_duration); // create a single frame 
-        // auto clip = std::make_shared<AnimationClip>(frames, std::string("logo_wait"), false);  // create animation clip 
-        // auto logoAnimationComponent = m_logoEntity->addComponent<AnimationComponent>(clip); // create animation component
-        // logoAnimationComponent->setListener(new SplashAnimationListener()); // setup listener so it set scene changecomponent to true
+        std::vector<AnimationFrame> frames; // array of frame
+        frames.emplace_back(0, 0, m_logoImage->getWidth(), m_logoImage->getHeight(), this->m_duration); // create a single frame 
+        auto clip = std::make_shared<AnimationClip>(frames, std::string("logo_wait"), false);  // create animation clip 
+        auto logoAnimationComponent = m_logoEntity->addComponent<AnimationComponent>(clip); // create animation component
+        logoAnimationComponent->setListener(new SplashAnimationListener()); // setup listener so it set scene changecomponent to true
 
         // m_logoEntity->addComponent<SceneChangeComponent>(m_nextScene);
         m_logoEntity->start();
