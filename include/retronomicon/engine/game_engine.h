@@ -95,7 +95,9 @@ namespace retronomicon::engine {
              * @brief method to set m_running to false which will trigger the engine to exit mainloop.
              */
             void stop() noexcept {m_running = false;}
+            
             std::shared_ptr<IRenderer> getRenderer(){return m_renderManager->getRenderer();}
+            std::shared_ptr<Scene> getCurrentScene(){return m_sceneManager->getCurrentScene();}
 
         private:
             /***************************** Attribute *****************************/
