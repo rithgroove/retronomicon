@@ -6,15 +6,17 @@
 #include <retronomicon/graphics/renderer/i_renderer.h>
 #include <retronomicon/asset/image_asset.h>
 #include "retronomicon/manager/texture_manager.h"
+#include "retronomicon/engine/game_engine.h"
 
 namespace retronomicon::scene::splash {
     using retronomicon::graphics::renderer::IRenderer;
     using retronomicon::asset::ImageAsset;
     using retronomicon::entity::Entity;
     using retronomicon::manager::TextureManager;
+    using retronomicon::engine::GameEngine;
     class SplashScene : public retronomicon::scene::Scene{
     public:
-        SplashScene(std::shared_ptr<IRenderer> renderer,
+        SplashScene(std::shared_ptr<GameEngine> gameEngine,
                     std::shared_ptr<TextureManager> textureManager,
                     const std::string& imagePath,
                     const std::string& nextScene = "");
@@ -27,6 +29,7 @@ namespace retronomicon::scene::splash {
         void createLogoEntity();
 
     private:
+        std::shared_ptr<GameEngine> m_gameEngine;
         std::shared_ptr<IRenderer> m_renderer;
         std::shared_ptr<ImageAsset> m_logoImage;
         std::shared_ptr<Entity> m_logoEntity;

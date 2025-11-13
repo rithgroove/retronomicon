@@ -17,13 +17,14 @@ namespace retronomicon::scene::splash{
     using namespace retronomicon::system;
     using retronomicon::animation::splash::SplashAnimationListener;
 
-    SplashScene::SplashScene(std::shared_ptr<IRenderer> renderer,
+    SplashScene::SplashScene(std::shared_ptr<GameEngine> gameEngine,
                              std::shared_ptr<TextureManager> textureManager,
                              const std::string& imagePath,
                              const std::string& nextScene)
         : Scene("SplashScene")
-        , m_renderer(std::move(renderer))
-        , m_textureManager(std::move(textureManager))
+        , m_gameEngine(gameEngine)
+        , m_renderer(gameEngine->getRenderer())
+        , m_textureManager(textureManager)
         , m_imagePath(imagePath)
         , m_nextScene(nextScene)
     {}
@@ -46,8 +47,8 @@ namespace retronomicon::scene::splash{
         addSystem(std::make_unique<AnimationSystem>());
         addSystem(std::make_unique<GenericSystem<SpriteComponent>>());
 // GenericSystem<TransformComponent> transformSystem;
-        // addSystem(std::make_unique<InputSystem>());
-        // addSystem(std::make_unique<SceneChangeSystem>());
+        addSystem(std::make_unique<InputSystem>());
+        addSystem(std::make_unique<SceneChangeSystem>(m_gameEngine));
 
         m_isActive = true;
     }
@@ -76,7 +77,7 @@ namespace retronomicon::scene::splash{
         auto logoAnimationComponent = m_logoEntity->addComponent<AnimationComponent>(clip); // create animation component
         logoAnimationComponent->setListener(new SplashAnimationListener()); // setup listener so it set scene changecomponent to true
 
-        // m_logoEntity->addComponent<SceneChangeComponent>(m_nextScene);
+        m_logoEntity->addComponent<SceneChangeComponent>(m_nextScene);
         m_logoEntity->start();
         addChildEntity(m_logoEntity);
     }
@@ -86,7 +87,7 @@ namespace retronomicon::scene::splash{
 
         m_elapsedTime += dt;
 
-        if (m_skipRequested || m_elapsedTime >= 3.0f) {
+        if (m_skipRequested || m_elapsedTime >= m_duration) {
             if (auto sceneChange = m_logoEntity->getComponent<SceneChangeComponent>()) {
                 sceneChange->trigger();
             }
@@ -94,6 +95,7 @@ namespace retronomicon::scene::splash{
     }
     
     void SplashScene::shutdown() {
+        m_elapsedTime = 0.0;
         m_logoEntity.reset();
         m_logoImage.reset();
         Scene::shutdown();

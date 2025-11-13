@@ -35,9 +35,9 @@ namespace retronomicon::component {
     }
     
     void SpriteComponent::render(std::shared_ptr<IRenderer> renderer)  { 
-        std::cout<<"hallo1"<<std::endl;
+        // std::cout<<"hallo1"<<std::endl;
         if (!m_transform || !m_texture) return;
-        std::cout<<"hallo2"<<std::endl;
+        // std::cout<<"hallo2"<<std::endl;
 
         float width = m_image->getWidth();
         float height = m_image->getHeight();
@@ -62,7 +62,7 @@ namespace retronomicon::component {
 
         Rect source(0.0f,0.0f,width,height) ;
         Rect destination(Point(x,y),Point(m_transform->getAnchorX(),m_transform->getAnchorY()),w,h) ;
-        std::cout<<destination<<std::endl;
+        // std::cout<<destination<<std::endl;
         if (m_animation) {
             auto animationFrame  = m_animation->getCurrentFrame();
             source = animationFrame.getRect();

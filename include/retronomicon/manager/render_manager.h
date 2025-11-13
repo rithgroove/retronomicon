@@ -31,8 +31,10 @@ namespace retronomicon::manager {
             void clear(){m_renderer->clear();}
             void show(){
                 m_renderer->show();
-                std::cout<<"show render manager"<<std::endl;
+                // std::cout<<"show render manager"<<std::endl;
             }
+
+            std::shared_ptr<IRenderer> getRenderer(){return m_renderer;}
         private:
 
             std::shared_ptr<IRenderer> m_renderer;

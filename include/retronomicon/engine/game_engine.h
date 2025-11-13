@@ -6,6 +6,7 @@
 #include "retronomicon/graphics/i_window.h"
 #include "retronomicon/input/input_state.h"
 #include "retronomicon/manager/render_manager.h"
+#include "retronomicon/graphics/renderer/i_renderer.h"
 /**
  * @brief The namespace for the core engine features of retronomicon
  */
@@ -14,6 +15,7 @@ namespace retronomicon::engine {
     using retronomicon::scene::Scene;
     using retronomicon::manager::RenderManager;
     using retronomicon::scene::SceneManager;
+    using retronomicon::graphics::renderer::IRenderer;
     /**
      * @brief Game Engine class (the main class that you need to run)
      */
@@ -93,8 +95,7 @@ namespace retronomicon::engine {
              * @brief method to set m_running to false which will trigger the engine to exit mainloop.
              */
             void stop() noexcept {m_running = false;}
-
-
+            std::shared_ptr<IRenderer> getRenderer(){return m_renderManager->getRenderer();}
 
         private:
             /***************************** Attribute *****************************/
