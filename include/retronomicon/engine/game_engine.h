@@ -5,6 +5,8 @@
 #include "retronomicon/scene/scene_manager.h"
 #include "retronomicon/graphics/i_window.h"
 #include "retronomicon/input/input_state.h"
+#include "retronomicon/input/input_map.h"
+#include "retronomicon/input/raw_input.h"
 #include "retronomicon/manager/render_manager.h"
 #include "retronomicon/graphics/renderer/i_renderer.h"
 /**
@@ -12,6 +14,8 @@
  */
 namespace retronomicon::engine {
     using retronomicon::input::InputState;
+    using retronomicon::input::InputMap;
+    using retronomicon::input::RawInput;
     using retronomicon::scene::Scene;
     using retronomicon::manager::RenderManager;
     using retronomicon::scene::SceneManager;
@@ -58,6 +62,10 @@ namespace retronomicon::engine {
                 m_sceneManager->registerScene(name,newScene);
             }
 
+            void setInputModule(std::shared_ptr<InputMap> inputMap, std::shared_ptr<RawInput> rawInput){
+                m_inputMap = inputMap;
+                m_rawInput = rawInput;
+            }
 
             /***************************** Getter *****************************/
 
@@ -105,6 +113,8 @@ namespace retronomicon::engine {
             std::shared_ptr<InputState> m_inputState;
             std::unique_ptr<retronomicon::graphics::IWindow> m_window;
             std::shared_ptr<Scene> m_activeScene;
+            std::shared_ptr<InputMap> m_inputMap;
+            std::shared_ptr<RawInput> m_rawInput;
 
             bool m_running = false; 
             std::shared_ptr<SceneManager> m_sceneManager;
