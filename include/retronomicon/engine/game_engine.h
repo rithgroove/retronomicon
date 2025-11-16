@@ -76,6 +76,20 @@ namespace retronomicon::engine {
              */
             std::shared_ptr<InputState>  getInputState() noexcept {return m_inputState;}    
 
+            /**
+             * @brief method to get InputState
+             * 
+             * @return inputState
+             */
+            std::shared_ptr<InputMap>  getInputMap() noexcept {return m_inputMap;}    
+
+            /**
+             * @brief method to get InputState
+             * 
+             * @return inputState
+             */
+            std::shared_ptr<RawInput>  getRawInput() noexcept {return m_rawInput;}    
+
 
             /***************************** Main Methods *****************************/
 

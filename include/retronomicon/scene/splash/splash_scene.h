@@ -7,12 +7,16 @@
 #include <retronomicon/asset/image_asset.h>
 #include "retronomicon/manager/texture_manager.h"
 #include "retronomicon/engine/game_engine.h"
+#include "retronomicon/input/input_map.h"
+#include "retronomicon/input/raw_input.h"
 
 namespace retronomicon::scene::splash {
     using retronomicon::graphics::renderer::IRenderer;
     using retronomicon::asset::ImageAsset;
     using retronomicon::entity::Entity;
     using retronomicon::manager::TextureManager;
+    using retronomicon::input::InputMap;
+    using retronomicon::input::RawInput;
     using retronomicon::engine::GameEngine;
     class SplashScene : public retronomicon::scene::Scene{
     public:
@@ -33,6 +37,8 @@ namespace retronomicon::scene::splash {
         std::shared_ptr<IRenderer> m_renderer;
         std::shared_ptr<ImageAsset> m_logoImage;
         std::shared_ptr<Entity> m_logoEntity;
+        std::shared_ptr<InputMap> m_inputMap;
+        std::shared_ptr<RawInput> m_rawInput;
         std::shared_ptr<TextureManager> m_textureManager;
 
         std::string m_imagePath;

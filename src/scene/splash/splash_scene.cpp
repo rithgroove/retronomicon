@@ -25,6 +25,8 @@ namespace retronomicon::scene::splash{
         , m_gameEngine(gameEngine)
         , m_renderer(gameEngine->getRenderer())
         , m_textureManager(textureManager)
+        , m_inputMap(gameEngine->getInputMap())
+        , m_rawInput(gameEngine->getRawInput())
         , m_imagePath(imagePath)
         , m_nextScene(nextScene)
     {}
@@ -32,6 +34,8 @@ namespace retronomicon::scene::splash{
     void SplashScene::start() {
         // Always call base version
         Scene::start();
+
+        
 
         // Construct ImageAsset directly — it loads during construction
         try {
@@ -46,12 +50,26 @@ namespace retronomicon::scene::splash{
         // Register systems in correct order
         addSystem(std::make_unique<AnimationSystem>());
         addSystem(std::make_unique<GenericSystem<SpriteComponent>>());
+        addSystem(std::make_unique<GenericSystem<InputComponent>>());
 // GenericSystem<TransformComponent> transformSystem;
-        addSystem(std::make_unique<InputSystem>());
         addSystem(std::make_unique<SceneChangeSystem>(m_gameEngine));
 
         m_isActive = true;
     }
+
+    // InputMap* MenuScene::generateInputMap(){
+    //     std::cout << "[Splash Scene] setup input map" <<std::endl;
+    //     InputMap* inputMap = new InputMap();
+    //     inputMap->bindAction(SDL_SCANCODE_SPACE, "confirm");
+    //     inputMap->bindAction(SDL_SCANCODE_RETURN, "confirm");
+    //     inputMap->bindAction(SDL_SCANCODE_A, "left");
+    //     inputMap->bindAction(SDL_SCANCODE_W, "up");
+    //     inputMap->bindAction(SDL_SCANCODE_S, "down");
+    //     inputMap->bindAction(SDL_SCANCODE_D, "right");
+    //     inputMap->bindAction(SDL_SCANCODE_ESCAPE,"quit");
+    //     return inputMap;        
+    // }
+
 
     void SplashScene::createLogoEntity() {
         m_logoEntity = std::make_shared<Entity>("SplashLogo");
