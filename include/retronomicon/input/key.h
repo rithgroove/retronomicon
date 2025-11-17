@@ -88,3 +88,13 @@ namespace retronomicon::input {
     };
 
 } // namespace retronomicon::input
+
+
+namespace std {
+    template<>
+    struct hash<retronomicon::input::Key> {
+        std::size_t operator()(const retronomicon::input::Key& k) const noexcept {
+            return static_cast<std::size_t>(k);
+        }
+    };
+}

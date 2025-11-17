@@ -6,20 +6,15 @@
 #include <utility>
 #include <ostream>
 #include <sstream>
+#include "retronomicon/input/key.h"
 
-/**
- * @brief This namespace is for handling input
- */
 namespace retronomicon::input {
 
     /**
-     * @brief Generic key identifier (backend translates into this)
-     */
-    using KeyCode = int; 
-    // Could later be replaced with a strong enum if you want type safety
-
-    /**
-     * @brief input mapping class
+     * @brief Maps engine Key enums to actions and movement axes.
+     *
+     * This is a pure data container; RawInput handles current key states,
+     * while InputMap translates key presses into named actions or axes.
      */
     class InputMap {
     public:
@@ -27,12 +22,12 @@ namespace retronomicon::input {
         InputMap() = default;
 
         /***************************** Getter *****************************/
-        const std::unordered_map<KeyCode, std::string>& getActionBindings() const { 
-            return m_actionBindings; 
+        const std::unordered_map<Key, std::string>& getActionBindings() const {
+            return m_actionBindings;
         }
 
-        const std::unordered_map<std::string, std::vector<std::pair<KeyCode, float>>>& getAxisBindings() const { 
-            return m_axisBindings; 
+        const std::unordered_map<std::string, std::vector<std::pair<Key, float>>>& getAxisBindings() const {
+            return m_axisBindings;
         }
 
         /***************************** Operator Overload *****************************/
@@ -44,34 +39,36 @@ namespace retronomicon::input {
         std::string to_string() const {
             std::ostringstream oss;
             oss << "[InputMap]\n";
+
             oss << "Actions:\n";
-            for (const auto& it : m_actionBindings) {
-                oss << " - Key " << it.first << " -> " << it.second << "\n";
-            }
+            for (const auto& it : m_actionBindings)
+                oss << " - Key " << static_cast<int>(it.first) << " -> " << it.second << "\n";
+
             oss << "Axes:\n";
             for (const auto& axis : m_axisBindings) {
                 oss << " - " << axis.first << ":";
-                for (const auto& binding : axis.second) {
-                    oss << " (Key " << binding.first << " = " << binding.second << ")";
-                }
+                for (const auto& binding : axis.second)
+                    oss << " (Key " << static_cast<int>(binding.first) << " = " << binding.second << ")";
                 oss << "\n";
             }
+
             return oss.str();
         }
 
-        /***************************** Main methods *****************************/
-        void bindAction(KeyCode key, const std::string& actionName) {
+        /***************************** Action Bindings *****************************/
+        void bindAction(Key key, const std::string& actionName) {
             m_actionBindings[key] = actionName;
         }
 
-        void bindAxis(KeyCode key, const std::string& axisName, float weight) {
+        /***************************** Axis Bindings *****************************/
+        void bindAxis(Key key, const std::string& axisName, float weight) {
             m_axisBindings[axisName].emplace_back(key, weight);
         }
 
     private:
-        /***************************** Attribute *****************************/
-        std::unordered_map<KeyCode, std::string> m_actionBindings;
-        std::unordered_map<std::string, std::vector<std::pair<KeyCode, float>>> m_axisBindings;
+        /***************************** Attributes *****************************/
+        std::unordered_map<Key, std::string> m_actionBindings;
+        std::unordered_map<std::string, std::vector<std::pair<Key, float>>> m_axisBindings;
     };
 
-} // namespace retronomicon::lib::input
+} // namespace retronomicon::input
