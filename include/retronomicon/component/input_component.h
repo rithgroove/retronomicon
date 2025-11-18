@@ -1,31 +1,43 @@
-// InputComponent.hpp
 #pragma once
 
 #include <memory>
-#include "retronomicon/input/input_state.h"
-#include "retronomicon/component/component.h"
+#include <string>
+#include <unordered_map>
+
+#include "retronomicon/input/input_action.h"
+#include "component.h"
 
 namespace retronomicon::component {
-    using retronomicon::input::InputState;
+
     /**
-     * @brief Base class for input-aware ECS components.
-     * - Stores pointer to global InputState (from GameEngine).
-     * - Subclasses read from the state during update().
+     * @brief Component holding input-triggered actions for an entity.
+     *
+     * InputSystem invokes the bound InputAction instances when their
+     * corresponding engine actions are triggered.
      */
     class InputComponent : public retronomicon::component::Component {
     public:
-        explicit InputComponent(std::shared_ptr<InputState> state)
-            : m_inputState(std::move(state)) {}
-
+        InputComponent() = default;
         virtual ~InputComponent() = default;
 
         /**
-         * @brief Subclasses implement how input affects the entity.
+         * @brief Bind an action name to an InputAction handler.
          */
-        void update(float dt) override = 0;
+        void bindAction(const std::string& actionName,
+                        std::unique_ptr<retronomicon::input::InputAction> action);
 
-    protected:
-        std::shared_ptr<InputState> m_inputState; ///< Shared global state
+        /**
+         * @brief Retrieve the action handler for a given name.
+         * Returns nullptr if not found.
+         */
+        retronomicon::input::InputAction*
+        getAction(const std::string& actionName) const;
+        const auto& getBindings() const { return m_actions; }       
+
+    private:
+        // e.g. "Jump" -> JumpAction, "Shoot" -> ShootAction
+        std::unordered_map<std::string,
+            std::unique_ptr<retronomicon::input::InputAction>> m_actions;
     };
 
-} // namespace retronomicon::lib::input
+} // namespace retronomicon::component

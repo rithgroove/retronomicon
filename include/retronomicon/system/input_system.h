@@ -1,83 +1,29 @@
 #pragma once
 
-#include <vector>
 #include <memory>
-#include "retronomicon/input/input_state.h"
-#include "retronomicon/entity/entity.h"
+#include <string>
 #include "retronomicon/system/system.h"
+#include "retronomicon/entity/entity.h"
+#include "retronomicon/input/input_state.h"
 #include "retronomicon/component/input_component.h"
-/**
- * @brief This namespace is for handling input
- */
+
 namespace retronomicon::system {
-    using retronomicon::system::System;
-    using retronomicon::entity::Entity;
-    using retronomicon::input::InputState;
-    using retronomicon::component::InputComponent;
-    
-    /**
-     * @brief A system that handles input. fill up input state from sdl and pass it to all input components
-     */
+
     class InputSystem : public System {
-        public:
-            /***************************** Constructor *****************************/
+    public:
+        InputSystem();
+        explicit InputSystem(std::shared_ptr<retronomicon::input::InputState> state);
+        ~InputSystem() override = default;
 
-            /**
-             * @brief default constructor
-             */
-            InputSystem();
+        std::string to_string() const;
 
-            /**
-             * @brief constructor with input map
-             */
-            InputSystem(std::shared_ptr<InputState> state);
+        /**
+         * @brief Main ECS update. Traverses the entity tree and triggers input actions.
+         */
+        void update(float dt, std::weak_ptr<retronomicon::entity::Entity> entity) override;
 
-            /***************************** Destructor *****************************/
-
-            ~InputSystem(); //default destructor
-
-            /***************************** Operator Overload *****************************/
-
-            /**
-             * @brief overloading operator << to call to_string()
-             */
-            friend std::ostream& operator<<(std::ostream& os, const InputSystem& obj) {
-                return os << obj.to_string();
-            }
-            
-            /***************************** Getter *****************************/
-            /**
-             * @brief get state for specific key
-             * might remove this method in the future.
-             * 
-             * @param key in string format (action)
-             */
-            bool getInputStateForKey(const string& key){
-                return  m_inputState->isActionActive(key);
-            }
-        
-            /***************************** To String *****************************/
-
-            /**
-             * @brief a method to help people debug this object
-             * 
-             * @return Brief summary of this object in string
-             */
-            virtual std::string to_string() const;
-
-            /***************************** Override Method *****************************/
-
-            /**
-             * @brief method to update all component
-             * 
-             * @param dt time interval since last update
-             * @param objects the game objects (might change to Entity Later)
-             */
-            void update(float dt, std::weak_ptr<Entity> entity) override;
-        private:
-            /***************************** Attribute *****************************/
-            std::shared_ptr<InputState> m_inputState;
-            bool m_isUpdating= false;
+    private:
+        std::shared_ptr<retronomicon::input::InputState> m_inputState;
     };
 
-} // namespace retronomicon::lib::core::system
+} // namespace retronomicon::system

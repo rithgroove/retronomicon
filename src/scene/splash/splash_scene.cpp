@@ -49,8 +49,8 @@ namespace retronomicon::scene::splash{
 
         // Register systems in correct order
         addSystem(std::make_unique<AnimationSystem>());
+        addSystem(std::make_unique<InputSystem>());
         addSystem(std::make_unique<GenericSystem<SpriteComponent>>());
-        addSystem(std::make_unique<GenericSystem<InputComponent>>());
 // GenericSystem<TransformComponent> transformSystem;
         addSystem(std::make_unique<SceneChangeSystem>(m_gameEngine));
 
@@ -87,8 +87,8 @@ namespace retronomicon::scene::splash{
         addChildEntity(m_logoEntity);
 
 
-        auto continueComponent = this->addComponent<InputComponent>(m_gameEngine->getInputState());
-        continueComponent
+        // auto continueComponent = this->addComponent<InputComponent>(m_gameEngine->getInputState());
+        // continueComponent
     }
 
     void SplashScene::update(float dt) {
