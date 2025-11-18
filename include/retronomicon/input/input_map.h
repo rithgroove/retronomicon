@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include <vector>
+#include <memory>
 #include <string>
 #include <utility>
 #include <ostream>
@@ -72,7 +73,7 @@ namespace retronomicon::input {
         /**
          * @brief Update InputState using any RawInput backend.
          */
-        void updateFromRawInput(const RawInput& raw, InputState& state) const;
+        void updateFromRawInput(std::shared_ptr<RawInput> raw, std::shared_ptr<InputState> state) const;
 
     private:
         std::unordered_map<Key, std::string> m_actionBindings;

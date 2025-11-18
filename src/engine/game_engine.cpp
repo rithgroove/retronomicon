@@ -102,14 +102,9 @@ namespace retronomicon::engine {
      * @brief method to pool event before updating
      */
     void GameEngine::handleEvents() {
-        // SDL_Event event;
-        // while (SDL_PollEvent(&event)) {
-        //     if (event.type == SDL_QUIT)
-        //         m_running = false;
-
-        //     // if (m_activeScene)
-        //     //     m_activeScene->handleInput(event);
-        // }
+        if (m_inputMap && m_rawInput && m_inputState){
+            m_inputMap->updateFromRawInput(m_rawInput,m_inputState);
+        }
     }
 
     /**

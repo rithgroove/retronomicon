@@ -2,12 +2,12 @@
 
 namespace retronomicon::input {
 
-    void InputMap::updateFromRawInput(const RawInput& raw, InputState& state) const
+    void InputMap::updateFromRawInput(std::shared_ptr<RawInput> raw, std::shared_ptr<InputState> state) const
     {
         // --- Actions ---
         for (const auto& [key, actionName] : m_actionBindings) {
-            bool pressed = raw.isKeyPressed(key);
-            state.setAction(actionName, pressed);
+            bool pressed = raw->isKeyPressed(key);
+            state->setAction(actionName, pressed);
         }
 
         // --- Axes ---
@@ -15,12 +15,12 @@ namespace retronomicon::input {
             float value = 0.f;
 
             for (const auto& [key, weight] : bindings) {
-                if (raw.isKeyPressed(key)) {
+                if (raw->isKeyPressed(key)) {
                     value += weight;
                 }
             }
 
-            state.setAxis(axisName, value);
+            state->setAxis(axisName, value);
         }
     }
 

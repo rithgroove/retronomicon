@@ -57,19 +57,6 @@ namespace retronomicon::scene::splash{
         m_isActive = true;
     }
 
-    // InputMap* MenuScene::generateInputMap(){
-    //     std::cout << "[Splash Scene] setup input map" <<std::endl;
-    //     InputMap* inputMap = new InputMap();
-    //     inputMap->bindAction(SDL_SCANCODE_SPACE, "confirm");
-    //     inputMap->bindAction(SDL_SCANCODE_RETURN, "confirm");
-    //     inputMap->bindAction(SDL_SCANCODE_A, "left");
-    //     inputMap->bindAction(SDL_SCANCODE_W, "up");
-    //     inputMap->bindAction(SDL_SCANCODE_S, "down");
-    //     inputMap->bindAction(SDL_SCANCODE_D, "right");
-    //     inputMap->bindAction(SDL_SCANCODE_ESCAPE,"quit");
-    //     return inputMap;        
-    // }
-
 
     void SplashScene::createLogoEntity() {
         m_logoEntity = std::make_shared<Entity>("SplashLogo");
@@ -98,6 +85,10 @@ namespace retronomicon::scene::splash{
         m_logoEntity->addComponent<SceneChangeComponent>(m_nextScene);
         m_logoEntity->start();
         addChildEntity(m_logoEntity);
+
+
+        auto continueComponent = this->addComponent<InputComponent>(m_gameEngine->getInputState());
+        continueComponent
     }
 
     void SplashScene::update(float dt) {
