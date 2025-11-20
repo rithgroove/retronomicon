@@ -11,10 +11,13 @@
 #include "retronomicon/system/generic_system.h"
 #include "retronomicon/component/sprite_component.h"
 #include "retronomicon/component/bound_component.h"
+#include "retronomicon/input/splash/splash_input_action.h"
+
 #include <iostream>
 namespace retronomicon::scene::splash{
     using namespace retronomicon::component;
     using namespace retronomicon::system;
+    using retronomicon::input::splash::SplashInputAction;
     using retronomicon::animation::splash::SplashAnimationListener;
 
     SplashScene::SplashScene(std::shared_ptr<GameEngine> gameEngine,
@@ -49,7 +52,7 @@ namespace retronomicon::scene::splash{
 
         // Register systems in correct order
         addSystem(std::make_unique<AnimationSystem>());
-        addSystem(std::make_unique<InputSystem>());
+        addSystem(std::make_unique<InputSystem>(m_gameEngine->getInputState()));
         addSystem(std::make_unique<GenericSystem<SpriteComponent>>());
 // GenericSystem<TransformComponent> transformSystem;
         addSystem(std::make_unique<SceneChangeSystem>(m_gameEngine));
@@ -86,8 +89,13 @@ namespace retronomicon::scene::splash{
         m_logoEntity->start();
         addChildEntity(m_logoEntity);
 
+        auto inputComp = this->addComponent<InputComponent>();
 
-        // auto continueComponent = this->addComponent<InputComponent>(m_gameEngine->getInputState());
+        // Bind the action named "Confirm"
+        inputComp->bindAction(
+            "confirm",
+            std::make_unique<SplashInputAction>() // pass next scene
+        );
         // continueComponent
     }
 
