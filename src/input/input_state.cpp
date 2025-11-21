@@ -35,11 +35,18 @@ namespace retronomicon::input {
     /***************************** Lifecycle *****************************/
 
     void InputState::beginFrame() {
-        // Save last frame actions before new input arrives
+        // Store last-frame actions
         m_prevActions = m_actions;
-        // Reset all axes/actions (backend repopulates)
-        clear();
+
+        // Reset axes only, but DO NOT clear actions fully.
+        // Instead, mark all actions as false. Backend will re-enable pressed ones.
+        for (auto& it : m_actions) {
+            it.second = false;
+        }
+
+        m_axes.clear();
     }
+
 
     void InputState::clear() {
         m_axes.clear();

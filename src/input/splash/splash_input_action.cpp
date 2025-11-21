@@ -6,6 +6,7 @@ namespace retronomicon::input::splash {
     void SplashInputAction::execute(std::weak_ptr<Entity> entity,
                                     const InputState& state)
     {
+        std::cout <<"execute called"<<std::endl;
         // Attempt to lock the entity
         auto e = entity.lock();
         if (!e) {

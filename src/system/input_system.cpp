@@ -11,7 +11,9 @@ namespace retronomicon::system {
     InputSystem::InputSystem() {}
 
     InputSystem::InputSystem(std::shared_ptr<InputState> state)
-        : m_inputState(std::move(state)) {}
+        : m_inputState(std::move(state)) {
+
+        }
 
     std::string InputSystem::to_string() const {
         return "[InputSystem]\n";
@@ -30,7 +32,7 @@ namespace retronomicon::system {
                     if (!actionPtr) continue;
 
                     // Check the current input state
-                    if (m_inputState->isActionActive(actionName)) {
+                    if (m_inputState->wasActionJustPressed(actionName)) {
                         actionPtr->execute(e, *m_inputState);
                     }
                 }

@@ -89,7 +89,7 @@ namespace retronomicon::scene::splash{
         m_logoEntity->start();
         addChildEntity(m_logoEntity);
 
-        auto inputComp = this->addComponent<InputComponent>();
+        auto inputComp = m_logoEntity->addComponent<InputComponent>();
 
         // Bind the action named "Confirm"
         inputComp->bindAction(

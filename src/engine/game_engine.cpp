@@ -12,7 +12,11 @@ namespace retronomicon::engine {
     /**
      * @brief default constructor
      */
-    GameEngine::GameEngine(std::shared_ptr<RenderManager> renderManager, std::shared_ptr<SceneManager> sceneManager):m_renderManager(renderManager),m_sceneManager(sceneManager){
+    GameEngine::GameEngine(std::shared_ptr<RenderManager> renderManager, 
+            std::shared_ptr<SceneManager> sceneManager):
+            m_renderManager(renderManager),
+            m_sceneManager(sceneManager){
+        m_inputState = std::make_shared<InputState> ();
     }
 
     /***************************** Destructor *****************************/
@@ -103,7 +107,9 @@ namespace retronomicon::engine {
      */
     void GameEngine::handleEvents() {
         if (m_inputMap && m_rawInput && m_inputState){
-            m_inputMap->updateFromRawInput(m_rawInput,m_inputState);
+            // m_rawInput->beginFrame();       // optional depending on backend
+            m_inputState->beginFrame();
+            m_inputMap->updateFromRawInput(m_rawInput, m_inputState);
         }
     }
 
