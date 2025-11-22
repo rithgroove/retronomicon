@@ -34,14 +34,14 @@ namespace retronomicon::component {
         /**
          * @brief Whether this component has been activated (e.g., user pressed the button).
          */
-        [[nodiscard]] bool isActivated() const noexcept { return m_activated; }
+        [[nodiscard]] bool isTriggered() const noexcept { return m_activated; }
 
         /***************************** Setter *****************************/
 
         /**
          * @brief Activate the exit signal.
          */
-        void activate() noexcept { m_activated = true; }
+        void trigger() noexcept { m_activated = true; }
 
         /**
          * @brief Reset the activation state.

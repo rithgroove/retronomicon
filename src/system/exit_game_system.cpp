@@ -13,7 +13,7 @@ namespace retronomicon::system{
     /**
      * @brief default constructor
      */
-    ExitGameSystem::ExitGameSystem(GameEngine* gameEngine):m_gameEngine(gameEngine) {}
+    ExitGameSystem::ExitGameSystem(std::shared_ptr<GameEngine> gameEngine):m_gameEngine(gameEngine) {}
 
     /***************************** Destructor *****************************/
 
@@ -40,9 +40,10 @@ namespace retronomicon::system{
      * @param entity the parent entity, will call this method recursively
      */
     void ExitGameSystem::update(float dt, std::weak_ptr<Entity> entity){
+        
         if (auto e = entity.lock()) { // lock() returns a shared_ptr if still valid
             auto egc = e->getComponent<ExitGameComponent>();
-            if (egc && egc->isActivated()) {
+            if (egc && egc->isTriggered()) {
                 m_gameEngine->stop();
             }
 

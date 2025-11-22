@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <memory>
 
 #include "retronomicon/system/system.h"
 #include "retronomicon/entity/entity.h"
@@ -22,7 +23,7 @@ namespace retronomicon::system{
             /**
              * @brief default constructor
              */
-            ExitGameSystem(GameEngine* game_engine);
+            ExitGameSystem(std::shared_ptr<GameEngine> game_engine);
 
             /***************************** Destructor *****************************/
 
@@ -60,6 +61,6 @@ namespace retronomicon::system{
             
             /***************************** Attribute *****************************/
 
-            GameEngine* m_gameEngine = nullptr;
+            std::shared_ptr<GameEngine> m_gameEngine = nullptr;
     };
 }

@@ -33,7 +33,7 @@ namespace retronomicon::system {
 
                     // Check the current input state
                     if (m_inputState->wasActionJustPressed(actionName)) {
-                        actionPtr->execute(e, *m_inputState);
+                        actionPtr->execute(e, m_inputState);
                     }
                 }
             }

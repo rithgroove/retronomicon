@@ -24,7 +24,7 @@ namespace retronomicon::input {
          * @param state  The current InputState (pressed, held, axis data).
          */
         virtual void execute(std::weak_ptr<Entity> entity,
-                             const InputState& state) = 0;
+                             std::shared_ptr<InputState> state) = 0;
     };
 
 } // namespace retronomicon::input

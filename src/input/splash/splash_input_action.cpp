@@ -1,10 +1,11 @@
 #include "retronomicon/input/splash/splash_input_action.h"
+#include "retronomicon/component/exit_game_component.h"
 #include <iostream>
 
 namespace retronomicon::input::splash {
-
+    using namespace retronomicon::component;
     void SplashInputAction::execute(std::weak_ptr<Entity> entity,
-                                    const InputState& state)
+                                    std::shared_ptr<InputState> state)
     {
         std::cout <<"execute called"<<std::endl;
         // Attempt to lock the entity
@@ -15,17 +16,32 @@ namespace retronomicon::input::splash {
         }
 
         // Ensure SceneChangeComponent exists
-        if (!e->hasComponent<retronomicon::component::SceneChangeComponent>()) {
-            std::cerr << "[SplashInputAction] SceneChangeComponent not found on entity "
-                      << e->getName() << "\n";
-            return;
+        if (state->wasActionJustPressed("confirm")) {
+            // Retrieve component
+            std::cout <<"confirm called"<<std::endl;
+            if (!e->hasComponent<SceneChangeComponent>()) {
+                std::cerr << "[SplashInputAction] SceneChangeComponent not found on entity "
+                          << e->getName() << "\n";
+                return;
+            }
+            auto comp = e->getComponent<SceneChangeComponent>();
+
+            // Trigger the scene change
+            comp->trigger();
+        }else if (state->wasActionJustPressed("exit")) {
+            // Retrieve component
+            std::cout <<"exit called"<<std::endl;
+            if (!e->hasComponent<ExitGameComponent>()) {
+                std::cerr << "[SplashInputAction] ExitGameComponent not found on entity "
+                          << e->getName() << "\n";
+                return;
+            }
+            auto comp = e->getComponent<ExitGameComponent>();
+
+            // Trigger the scene change
+            comp->trigger();
         }
 
-        // Retrieve component
-        auto comp = e->getComponent<retronomicon::component::SceneChangeComponent>();
-
-        // Trigger the scene change
-        comp->trigger();
     }
 
 } // namespace retronomicon::input::splash

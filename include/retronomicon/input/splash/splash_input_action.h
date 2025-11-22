@@ -17,7 +17,7 @@ namespace retronomicon::input::splash {
             : m_targetScene() {}
 
         void execute(std::weak_ptr<Entity> entity,
-                     const InputState& state) override;
+                     std::shared_ptr<InputState> state) override;
 
     private:
         std::string m_targetScene;
