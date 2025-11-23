@@ -59,9 +59,9 @@ namespace retronomicon::scene::splash{
         addSystem(std::make_unique<InputSystem>(m_gameEngine->getInputState()));
         addSystem(std::make_unique<GenericSystem<SpriteComponent>>());
 // GenericSystem<TransformComponent> transformSystem;
+        addSystem(std::make_unique<AudioSystem>(m_gameEngine->getAudioPlayer()));
         addSystem(std::make_unique<ExitGameSystem>(m_gameEngine));
         addSystem(std::make_unique<SceneChangeSystem>(m_gameEngine));
-        addSystem(std::make_unique<AudioSystem>(m_gameEngine->getAudioPlayer()));
         m_isActive = true;
     }
 
