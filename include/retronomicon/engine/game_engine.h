@@ -9,6 +9,7 @@
 #include "retronomicon/input/raw_input.h"
 #include "retronomicon/manager/render_manager.h"
 #include "retronomicon/graphics/renderer/i_renderer.h"
+#include "retronomicon/audio/i_audio_player.h"
 /**
  * @brief The namespace for the core engine features of retronomicon
  */
@@ -20,6 +21,7 @@ namespace retronomicon::engine {
     using retronomicon::manager::RenderManager;
     using retronomicon::scene::SceneManager;
     using retronomicon::graphics::renderer::IRenderer;
+    using retronomicon::audio::IAudioPlayer;
     /**
      * @brief Game Engine class (the main class that you need to run)
      */
@@ -68,6 +70,8 @@ namespace retronomicon::engine {
                 m_inputState->setInputMap(inputMap);
                 m_inputState->setRawInput(rawInput);
             }
+
+            void setAudioPlayer(std::shared_ptr<IAudioPlayer> audioPlayer){m_audioPlayer = audioPlayer;}
 
             /***************************** Getter *****************************/
 
@@ -122,7 +126,7 @@ namespace retronomicon::engine {
             
             std::shared_ptr<IRenderer> getRenderer(){return m_renderManager->getRenderer();}
             std::shared_ptr<Scene> getCurrentScene(){return m_sceneManager->getCurrentScene();}
-
+            std::shared_ptr<IAudioPlayer> getAudioPlayer() {return m_audioPlayer;}
         private:
             /***************************** Attribute *****************************/
             std::shared_ptr<RenderManager> m_renderManager;
@@ -131,6 +135,7 @@ namespace retronomicon::engine {
             std::shared_ptr<Scene> m_activeScene;
             std::shared_ptr<InputMap> m_inputMap;
             std::shared_ptr<RawInput> m_rawInput;
+            std::shared_ptr<IAudioPlayer> m_audioPlayer;
 
             bool m_running = false; 
             std::shared_ptr<SceneManager> m_sceneManager;

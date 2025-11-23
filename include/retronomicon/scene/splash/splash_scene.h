@@ -9,6 +9,7 @@
 #include "retronomicon/engine/game_engine.h"
 #include "retronomicon/input/input_map.h"
 #include "retronomicon/input/raw_input.h"
+#include "retronomicon/asset/sound_effect_asset.h"
 
 namespace retronomicon::scene::splash {
     using retronomicon::graphics::renderer::IRenderer;
@@ -18,6 +19,7 @@ namespace retronomicon::scene::splash {
     using retronomicon::input::InputMap;
     using retronomicon::input::RawInput;
     using retronomicon::engine::GameEngine;
+    using retronomicon::asset::SoundEffectAsset;
     class SplashScene : public retronomicon::scene::Scene{
     public:
         SplashScene(std::shared_ptr<GameEngine> gameEngine,
@@ -29,10 +31,10 @@ namespace retronomicon::scene::splash {
         void update(float dt) override;
         void shutdown() override;
 
-    private:
-        void createLogoEntity();
+        void setSFX(std::shared_ptr<SoundEffectAsset> sfx){m_sfx = sfx;}
 
-    private:
+    protected:
+        void createLogoEntity();
         std::shared_ptr<GameEngine> m_gameEngine;
         std::shared_ptr<IRenderer> m_renderer;
         std::shared_ptr<ImageAsset> m_logoImage;
@@ -40,6 +42,7 @@ namespace retronomicon::scene::splash {
         std::shared_ptr<InputMap> m_inputMap;
         std::shared_ptr<RawInput> m_rawInput;
         std::shared_ptr<TextureManager> m_textureManager;
+        std::shared_ptr<SoundEffectAsset> m_sfx;
 
         std::string m_imagePath;
         std::string m_nextScene;

@@ -4,12 +4,14 @@
 #include "retronomicon/component/renderable.h"
 #include "retronomicon/component/animation_component.h"
 #include "retronomicon/component/scene_change_component.h"
+#include "retronomicon/component/sound_effect_component.h"
 #include "retronomicon/animation/splash/splash_animation_listener.h"
 #include "retronomicon/system/animation_system.h"
 #include "retronomicon/system/input_system.h"
 #include "retronomicon/system/scene_change_system.h"
 #include "retronomicon/system/exit_game_system.h"
 #include "retronomicon/system/generic_system.h"
+#include "retronomicon/system/audio_system.h"
 #include "retronomicon/component/sprite_component.h"
 #include "retronomicon/component/bound_component.h"
 #include "retronomicon/component/exit_game_component.h"
@@ -59,7 +61,7 @@ namespace retronomicon::scene::splash{
 // GenericSystem<TransformComponent> transformSystem;
         addSystem(std::make_unique<ExitGameSystem>(m_gameEngine));
         addSystem(std::make_unique<SceneChangeSystem>(m_gameEngine));
-
+        // addSystem(std::make_unique<AudioSystem>(m_gameEngine->getAudioPlayer()));
         m_isActive = true;
     }
 
@@ -103,6 +105,12 @@ namespace retronomicon::scene::splash{
             "exit",
             std::make_unique<SplashInputAction>() // pass next scene
         );
+
+        if (m_sfx){
+            auto sfx = m_logoEntity->addComponent<SoundEffectComponent>(m_sfx.get(),0);
+            sfx->play();
+        }
+              
 
         addChildEntity(m_logoEntity);
         m_logoEntity->start();
