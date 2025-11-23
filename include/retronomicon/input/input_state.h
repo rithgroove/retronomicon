@@ -21,6 +21,7 @@ namespace retronomicon::input {
         /***************************** Constructor *****************************/
         InputState();
 
+        InputState(std::shared_ptr<RawInput> rawInput,std::shared_ptr<InputMap >inputMap);
         /***************************** Lifecycle *****************************/
         void beginFrame();   // Called at start of each frame
         void clear();        // Clears actions & axes
@@ -28,6 +29,8 @@ namespace retronomicon::input {
         /***************************** Mutators *****************************/
         void setAction(const std::string& name, bool pressed);
         void setAxis(const std::string& name, float value);
+        void setRawInput(std::shared_ptr<RawInput> rawInput){m_rawInput= rawInput;}
+        void setInputMap(std::shared_ptr<InputMap> inputMap){m_inputMap= inputMap;}
 
         /***************************** Query Methods *****************************/
         bool isActionActive(const std::string& name) const;
@@ -39,8 +42,8 @@ namespace retronomicon::input {
         std::string to_string() const;
 
     private:
-        RawInput* m_rawInput;     // Injected backend raw input
-        InputMap* m_inputMap;     // Maps raw input -> game actions/axes
+        std::shared_ptr<RawInput> m_rawInput;     // Injected backend raw input
+        std::shared_ptr<InputMap >m_inputMap;     // Maps raw input -> game actions/axes
 
         std::unordered_map<std::string, bool> m_actions;
         std::unordered_map<std::string, bool> m_prevActions;

@@ -65,6 +65,8 @@ namespace retronomicon::engine {
             void setInputModule(std::shared_ptr<InputMap> inputMap, std::shared_ptr<RawInput> rawInput){
                 m_inputMap = inputMap;
                 m_rawInput = rawInput;
+                m_inputState->setInputMap(inputMap);
+                m_inputState->setRawInput(rawInput);
             }
 
             /***************************** Getter *****************************/

@@ -4,6 +4,7 @@ namespace retronomicon::input {
 
     void InputMap::updateFromRawInput(std::shared_ptr<RawInput> raw, std::shared_ptr<InputState> state) const
     {
+
         // --- Actions ---
         for (const auto& [key, actionName] : m_actionBindings) {
             bool pressed = raw->isKeyPressed(key);

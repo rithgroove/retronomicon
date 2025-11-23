@@ -12,6 +12,13 @@ namespace retronomicon::input {
         // RawInput must be injected by backend (SDL, Vulkan, etc.)
     }
 
+    InputState::InputState(
+        std::shared_ptr<RawInput> rawInput,
+        std::shared_ptr<InputMap >inputMap)
+    : m_rawInput(rawInput), 
+      m_inputMap(inputMap) {
+
+    }
     /***************************** To String *****************************/
 
     std::string InputState::to_string() const {
@@ -35,6 +42,9 @@ namespace retronomicon::input {
     /***************************** Lifecycle *****************************/
 
     void InputState::beginFrame() {
+        if (m_rawInput){
+            m_rawInput->poll(); 
+        }
         // Store last-frame actions
         m_prevActions = m_actions;
 
