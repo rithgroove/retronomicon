@@ -3,6 +3,7 @@
 #include "retronomicon/component/sound_effect_component.h"
 
 #include <sstream>
+#include <iostream>
 
 namespace retronomicon::system {
     using retronomicon::component::MusicComponent;
