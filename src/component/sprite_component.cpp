@@ -29,7 +29,7 @@ namespace retronomicon::component {
     }
 
     void SpriteComponent::update(float /*dt*/) {
-    std::cout<<"sprite component update called" <<std::endl;
+    // std::cout<<"sprite component update called" <<std::endl;
         m_transform->setRotation(m_transform->getRotation()+1.0);
         // Animation state checks could go here (optional)
     }

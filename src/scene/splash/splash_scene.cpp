@@ -107,6 +107,7 @@ namespace retronomicon::scene::splash{
         );
 
         if (m_sfx){
+            std::cout<<"setup sfx"<<std::endl;
             auto sfx = m_logoEntity->addComponent<SoundEffectComponent>(m_sfx.get(),0);
             sfx->play();
         }
