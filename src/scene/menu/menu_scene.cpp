@@ -1,4 +1,4 @@
-#include "retronomicon/scene/splash/splash_scene.h"
+#include "retronomicon/scene/menu/menu_scene.h"
 
 #include "retronomicon/component/transform_component.h"
 #include "retronomicon/component/renderable.h"
@@ -18,17 +18,17 @@
 #include "retronomicon/input/splash/splash_input_action.h"
 
 #include <iostream>
-namespace retronomicon::scene::splash{
+namespace retronomicon::scene::menu{
     using namespace retronomicon::component;
     using namespace retronomicon::system;
     using retronomicon::input::splash::SplashInputAction;
     using retronomicon::animation::splash::SplashAnimationListener;
 
-    SplashScene::SplashScene(std::shared_ptr<GameEngine> gameEngine,
+    MenuScene::MenuScene(std::shared_ptr<GameEngine> gameEngine,
                              std::shared_ptr<TextureManager> textureManager,
                              const std::string& imagePath,
                              const std::string& nextScene)
-        : Scene("SplashScene")
+        : Scene("MenuScene")
         , m_gameEngine(gameEngine)
         , m_renderer(gameEngine->getRenderer())
         , m_textureManager(textureManager)
@@ -38,7 +38,7 @@ namespace retronomicon::scene::splash{
         , m_nextScene(nextScene)
     {}
 
-    void SplashScene::start() {
+    void MenuScene::start() {
         // Always call base version
         Scene::start();
 
@@ -46,7 +46,7 @@ namespace retronomicon::scene::splash{
         try {
             m_logoImage = std::make_shared<ImageAsset>(m_imagePath);
         } catch (const std::exception& e) {
-            std::cerr << "[SplashScene] Failed to create ImageAsset: "
+            std::cerr << "[Menu Scene] Failed to create ImageAsset: "
                       << e.what() << " (" << m_imagePath << ")\n";
         }
 
@@ -55,7 +55,7 @@ namespace retronomicon::scene::splash{
         m_isActive = true;
     }
 
-    void SplashScene::initiateSystems(){
+    void MenuScene::initiateSystems(){
         // Register systems in correct order
         addSystem(std::make_unique<AnimationSystem>());
         addSystem(std::make_unique<InputSystem>(m_gameEngine->getInputState()));
@@ -66,7 +66,7 @@ namespace retronomicon::scene::splash{
     }
 
 
-    void SplashScene::createLogoEntity() {
+    void MenuScene::createLogoEntity() {
         m_logoEntity = std::make_shared<Entity>("SplashLogo");
 
 
@@ -118,7 +118,7 @@ namespace retronomicon::scene::splash{
         // continueComponent
     }
 
-    void SplashScene::update(float dt) {
+    void MenuScene::update(float dt) {
         Scene::update(dt);
 
         m_elapsedTime += dt;
@@ -130,7 +130,7 @@ namespace retronomicon::scene::splash{
         }
     }
     
-    void SplashScene::shutdown() {
+    void MenuScene::shutdown() {
         m_elapsedTime = 0.0;
         m_logoEntity.reset();
         m_logoImage.reset();

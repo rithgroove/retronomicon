@@ -11,7 +11,7 @@
 #include "retronomicon/input/raw_input.h"
 #include "retronomicon/asset/sound_effect_asset.h"
 
-namespace retronomicon::scene::splash {
+namespace retronomicon::scene::menu {
     using retronomicon::graphics::renderer::IRenderer;
     using retronomicon::asset::ImageAsset;
     using retronomicon::entity::Entity;
@@ -20,9 +20,9 @@ namespace retronomicon::scene::splash {
     using retronomicon::input::RawInput;
     using retronomicon::engine::GameEngine;
     using retronomicon::asset::SoundEffectAsset;
-    class SplashScene : public retronomicon::scene::Scene{
+    class MenuScene : public retronomicon::scene::Scene{
     public:
-        SplashScene(std::shared_ptr<GameEngine> gameEngine,
+        MenuScene(std::shared_ptr<GameEngine> gameEngine,
                     std::shared_ptr<TextureManager> textureManager,
                     const std::string& imagePath,
                     const std::string& nextScene = "");
