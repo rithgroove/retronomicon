@@ -34,7 +34,7 @@ namespace retronomicon::scene::splash {
         void setSFX(std::shared_ptr<SoundEffectAsset> sfx){m_sfx = sfx;}
 
     protected:
-        void createLogoEntity();
+        void initiateEntities();
         void initiateSystems();
         std::shared_ptr<GameEngine> m_gameEngine;
         std::shared_ptr<IRenderer> m_renderer;

@@ -31,9 +31,9 @@ namespace retronomicon::scene::splash{
         : Scene("SplashScene")
         , m_gameEngine(gameEngine)
         , m_renderer(gameEngine->getRenderer())
-        , m_textureManager(textureManager)
         , m_inputMap(gameEngine->getInputMap())
         , m_rawInput(gameEngine->getRawInput())
+        , m_textureManager(textureManager)
         , m_imagePath(imagePath)
         , m_nextScene(nextScene)
     {}
@@ -50,7 +50,7 @@ namespace retronomicon::scene::splash{
                       << e.what() << " (" << m_imagePath << ")\n";
         }
 
-        createLogoEntity();
+        initiateEntities();
         initiateSystems();
         m_isActive = true;
     }
@@ -66,7 +66,7 @@ namespace retronomicon::scene::splash{
     }
 
 
-    void SplashScene::createLogoEntity() {
+    void SplashScene::initiateEntities() {
         m_logoEntity = std::make_shared<Entity>("SplashLogo");
 
 

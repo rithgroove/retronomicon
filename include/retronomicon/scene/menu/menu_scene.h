@@ -24,8 +24,7 @@ namespace retronomicon::scene::menu {
     public:
         MenuScene(std::shared_ptr<GameEngine> gameEngine,
                     std::shared_ptr<TextureManager> textureManager,
-                    const std::string& imagePath,
-                    const std::string& nextScene = "");
+                    const std::string& imagePath);
 
         void start() override;
         void update(float dt) override;
@@ -34,12 +33,12 @@ namespace retronomicon::scene::menu {
         void setSFX(std::shared_ptr<SoundEffectAsset> sfx){m_sfx = sfx;}
 
     protected:
-        void createLogoEntity();
+        void initiateEntities();
         void initiateSystems();
         std::shared_ptr<GameEngine> m_gameEngine;
         std::shared_ptr<IRenderer> m_renderer;
-        std::shared_ptr<ImageAsset> m_logoImage;
-        std::shared_ptr<Entity> m_logoEntity;
+        std::shared_ptr<ImageAsset> m_backgroundImage;
+        std::shared_ptr<Entity> m_backgroundEntity;
         std::shared_ptr<InputMap> m_inputMap;
         std::shared_ptr<RawInput> m_rawInput;
         std::shared_ptr<TextureManager> m_textureManager;

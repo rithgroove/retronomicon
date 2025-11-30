@@ -1,9 +1,13 @@
 #pragma once
 
 #include "component.h"
-//#include "retronomicon/graphics/texture.h"
 
 namespace retronomicon::component {
+
+    enum class ScaleMode {
+        Contain, // Fit entirely inside the bounds (no cropping)
+        Cover    // Fill the bounds completely (may crop)
+    };
 
     /**
      * @brief Component defining the spatial bounds (size and offset) of an entity.
@@ -18,21 +22,22 @@ namespace retronomicon::component {
         /// Setters
         void setSize(float width, float height);
         void setOffset(float offsetX, float offsetY);
+        void setScaleMode(ScaleMode mode);
 
         /// Getters
         float getWidth() const;
         float getHeight() const;
         float getOffsetX() const;
         float getOffsetY() const;
-
-        /// Fit bounds to a texture’s dimensions
-        //void fitToTexture(const retronomicon::graphics::Texture& texture);
+        ScaleMode getScaleMode() const;
 
     private:
         float m_width;
         float m_height;
         float m_offsetX;
         float m_offsetY;
+
+        ScaleMode m_scaleMode = ScaleMode::Contain;
     };
 
-} // namespace retronomicon::core::ecs
+} // namespace retronomicon::component

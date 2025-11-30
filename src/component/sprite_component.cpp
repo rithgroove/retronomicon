@@ -30,7 +30,7 @@ namespace retronomicon::component {
 
     void SpriteComponent::update(float /*dt*/) {
     // std::cout<<"sprite component update called" <<std::endl;
-        m_transform->setRotation(m_transform->getRotation()+1.0);
+        // m_transform->setRotation(m_transform->getRotation()+1.0);
         // Animation state checks could go here (optional)
     }
     
@@ -51,13 +51,25 @@ namespace retronomicon::component {
         float w = m_image->getWidth() * m_transform->getScaleX();
         float h = m_image->getHeight() * m_transform->getScaleY();
 
-        if (m_bound && (w > m_bound->getWidth() || h> m_bound->getHeight())){
-            float widthScale = m_bound->getWidth()/w;
-            float heightScale = m_bound->getHeight()/h;
-            float mainScale = std::min(widthScale,heightScale);
+        if (m_bound){
+            float boundW = m_bound->getWidth();
+            float boundH = m_bound->getHeight();
 
-            w = mainScale*w;
-            h = mainScale*h;
+            if (boundW > 0 && boundH > 0){
+                float widthScale  = boundW / w;
+                float heightScale = boundH / h;
+
+                float mainScale = 1.0f;
+
+                if (m_bound->getScaleMode() == ScaleMode::Contain) {
+                    mainScale = std::min(widthScale, heightScale);  // Fit inside
+                } else {
+                    mainScale = std::max(widthScale, heightScale);  // Fill bounds
+                }
+
+                w *= mainScale;
+                h *= mainScale;
+            }
         }
 
         Rect source(0.0f,0.0f,width,height) ;

@@ -26,8 +26,7 @@ namespace retronomicon::scene::menu{
 
     MenuScene::MenuScene(std::shared_ptr<GameEngine> gameEngine,
                              std::shared_ptr<TextureManager> textureManager,
-                             const std::string& imagePath,
-                             const std::string& nextScene)
+                             const std::string& imagePath)
         : Scene("MenuScene")
         , m_gameEngine(gameEngine)
         , m_renderer(gameEngine->getRenderer())
@@ -35,7 +34,6 @@ namespace retronomicon::scene::menu{
         , m_inputMap(gameEngine->getInputMap())
         , m_rawInput(gameEngine->getRawInput())
         , m_imagePath(imagePath)
-        , m_nextScene(nextScene)
     {}
 
     void MenuScene::start() {
@@ -44,13 +42,13 @@ namespace retronomicon::scene::menu{
 
         // Construct ImageAsset directly — it loads during construction
         try {
-            m_logoImage = std::make_shared<ImageAsset>(m_imagePath);
+            m_backgroundImage = std::make_shared<ImageAsset>(m_imagePath);
         } catch (const std::exception& e) {
             std::cerr << "[Menu Scene] Failed to create ImageAsset: "
                       << e.what() << " (" << m_imagePath << ")\n";
         }
 
-        createLogoEntity();
+        initiateEntities();
         initiateSystems();
         m_isActive = true;
     }
@@ -65,56 +63,54 @@ namespace retronomicon::scene::menu{
         addSystem(std::make_unique<SceneChangeSystem>(m_gameEngine));
     }
 
-
-    void MenuScene::createLogoEntity() {
-        m_logoEntity = std::make_shared<Entity>("SplashLogo");
-
+    void MenuScene::initiateEntities() {
+        m_backgroundEntity = std::make_shared<Entity>("SplashLogo");
 
         int windowWidth = m_renderer->getWidth();
         int windowHeight = m_renderer->getHeight();
 
         // Place logo at center (temporary)
-        auto transformComponent = m_logoEntity->addComponent<TransformComponent>(windowWidth/2.0f, windowHeight/ 2.0f);
-        auto boundComponent = m_logoEntity->addComponent<BoundComponent>(400, 300);
+        auto transformComponent = m_backgroundEntity->addComponent<TransformComponent>(windowWidth/2.0f, windowHeight/ 2.0f);
+        auto boundComponent = m_backgroundEntity->addComponent<BoundComponent>(windowWidth, windowHeight);
+        boundComponent->setScaleMode(ScaleMode::Cover);
         transformComponent->setScale(1.0f,1.0f);
 
         // Attach renderable using the image asset
-        auto spriteComponent = m_logoEntity->addComponent<SpriteComponent>(m_logoImage);
-        spriteComponent->generateTexture(m_textureManager);
+        auto backgroundComponent = m_backgroundEntity->addComponent<SpriteComponent>(m_backgroundImage);
+        backgroundComponent->generateTexture(m_textureManager);
 
-        // Simple animation + scene change
-        // ---------------- setup animation component using m_duration as wait time ------------------------
-        std::vector<AnimationFrame> frames; // array of frame
-        frames.emplace_back(0, 0, m_logoImage->getWidth(), m_logoImage->getHeight(), this->m_duration); // create a single frame 
-        auto clip = std::make_shared<AnimationClip>(frames, std::string("logo_wait"), false);  // create animation clip 
-        auto logoAnimationComponent = m_logoEntity->addComponent<AnimationComponent>(clip); // create animation component
-        logoAnimationComponent->setListener(new SplashAnimationListener()); // setup listener so it set scene changecomponent to true
+        // // Simple animation + scene change
+        // // ---------------- setup animation component using m_duration as wait time ------------------------
+        // std::vector<AnimationFrame> frames; // array of frame
+        // frames.emplace_back(0, 0, m_backgroundImage->getWidth(), m_backgroundImage->getHeight(), this->m_duration); // create a single frame 
+        // auto clip = std::make_shared<AnimationClip>(frames, std::string("logo_wait"), false);  // create animation clip 
+        // auto logoAnimationComponent = m_backgroundEntity->addComponent<AnimationComponent>(clip); // create animation component
+        // logoAnimationComponent->setListener(new SplashAnimationListener()); // setup listener so it set scene changecomponent to true
 
-        m_logoEntity->addComponent<SceneChangeComponent>(m_nextScene);
-        m_logoEntity->addComponent<ExitGameComponent>();
+        m_backgroundEntity->addComponent<SceneChangeComponent>(m_nextScene);
+        m_backgroundEntity->addComponent<ExitGameComponent>();
         
-        auto inputComp = m_logoEntity->addComponent<InputComponent>();
+        auto inputComp = m_backgroundEntity->addComponent<InputComponent>();
 
-        // Bind the action named "Confirm"
-        inputComp->bindAction(
-            "confirm",
-            std::make_unique<SplashInputAction>() // pass next scene
-        );
+        // // Bind the action named "Confirm"
+        // inputComp->bindAction(
+        //     "confirm",
+        //     std::make_unique<SplashInputAction>() // pass next scene
+        // );
 
-        inputComp->bindAction(
-            "exit",
-            std::make_unique<SplashInputAction>() // pass next scene
-        );
+        // inputComp->bindAction(
+        //     "exit",
+        //     std::make_unique<SplashInputAction>() // pass next scene
+        // );
 
-        if (m_sfx){
-            std::cout<<"setup sfx"<<std::endl;
-            auto sfx = m_logoEntity->addComponent<SoundEffectComponent>(m_sfx.get(),0);
-            sfx->play();
-        }
-              
+        // if (m_sfx){
+        //     std::cout<<"setup sfx"<<std::endl;
+        //     auto sfx = m_logoEntity->addComponent<SoundEffectComponent>(m_sfx.get(),0);
+        //     sfx->play();
+        // }
 
-        addChildEntity(m_logoEntity);
-        m_logoEntity->start();
+        addChildEntity(m_backgroundEntity);
+        m_backgroundEntity->start();
         // continueComponent
     }
 
@@ -124,7 +120,7 @@ namespace retronomicon::scene::menu{
         m_elapsedTime += dt;
 
         if (m_skipRequested || m_elapsedTime >= m_duration) {
-            if (auto sceneChange = m_logoEntity->getComponent<SceneChangeComponent>()) {
+            if (auto sceneChange = m_backgroundEntity->getComponent<SceneChangeComponent>()) {
                 sceneChange->trigger();
             }
         }
@@ -132,8 +128,8 @@ namespace retronomicon::scene::menu{
     
     void MenuScene::shutdown() {
         m_elapsedTime = 0.0;
-        m_logoEntity.reset();
-        m_logoImage.reset();
+        m_backgroundEntity.reset();
+        m_backgroundImage.reset();
         Scene::shutdown();
     }
 
