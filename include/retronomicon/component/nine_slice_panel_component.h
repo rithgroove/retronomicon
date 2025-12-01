@@ -3,55 +3,40 @@
 #include <memory>
 #include "retronomicon/component/component.h"
 #include "retronomicon/component/renderable.h"
-#include "retronomicon/graphics/renderer/i_renderer.h"
 #include "retronomicon/component/transform_component.h"
 #include "retronomicon/asset/image_asset.h"
 #include "retronomicon/math/rect.h"
+#include "retronomicon/graphics/texture.h"
+#include "retronomicon/manager/texture_manager.h"
 
 namespace retronomicon::component {
 
     using retronomicon::asset::ImageAsset;
+    using retronomicon::graphics::Texture;
+    using retronomicon::manager::TextureManager;
     using retronomicon::math::Rect;
     using retronomicon::graphics::renderer::IRenderer;
 
-    /**
-     * @brief Backend-agnostic 9-slice UI panel component.
-     *
-     * Stores margins, size, and an image asset. Rendering is performed by
-     * backend-specific renderers (OpenGL, SDL, etc.) via IRenderer.
-     */
     class NineSlicePanelComponent : public Component,
                                     public Renderable {
     public:
-        NineSlicePanelComponent();
+        NineSlicePanelComponent(std::shared_ptr<ImageAsset> imageAsset);
         ~NineSlicePanelComponent() override = default;
 
-        void setImageAsset(std::shared_ptr<ImageAsset> asset);
+        void start() override;
+        void render(std::shared_ptr<IRenderer> renderer) override;
+
         void setSlices(int left, int right, int top, int bottom);
         void setSize(int width, int height);
 
-        std::shared_ptr<ImageAsset> getAsset() const { return m_imageAsset; }
-
-        int getWidth() const { return m_width; }
-        int getHeight() const { return m_height; }
-
-        int getLeft() const { return m_sliceLeft; }
-        int getRight() const { return m_sliceRight; }
-        int getTop() const { return m_sliceTop; }
-        int getBottom() const { return m_sliceBottom; }
-
-        void start() override;
-        // Rect getSize() override;
-
-        /**
-         * @brief Calls into backend renderer. Core component never depends on SDL/OpenGL.
-         */
-        void render(IRenderer& renderer) override;
+        void setAsset(std::shared_ptr<ImageAsset> asset);
+        void generateTexture(std::shared_ptr<TextureManager> textureManager);
 
     private:
-        std::shared_ptr<ImageAsset> m_imageAsset;
+        std::shared_ptr<ImageAsset> m_image = nullptr;
+        std::shared_ptr<Texture>    m_texture = nullptr;
 
-        TransformComponent* m_transform = nullptr;
+        std::shared_ptr<TransformComponent>  m_transform = nullptr;
 
         int m_sliceLeft   = 0;
         int m_sliceRight  = 0;
@@ -62,4 +47,4 @@ namespace retronomicon::component {
         int m_height = 0;
     };
 
-} // namespace retronomicon::component
+}
