@@ -1,57 +1,63 @@
 #pragma once
 
-#include <string>
 #include <memory>
-#include <SDL.h>
+#include <string>
+#include <vector>
 
 #include "retronomicon/component/component.h"
 #include "retronomicon/component/renderable.h"
+#include "retronomicon/component/transform_component.h"
+#include "retronomicon/component/bound_component.h"
+
 #include "retronomicon/asset/font_asset.h"
+#include "retronomicon/graphics/texture.h"
+#include "retronomicon/graphics/color.h"
 #include "retronomicon/math/rect.h"
+#include "retronomicon/manager/texture_manager.h"
+
 namespace retronomicon::component {
 
-    using retronomicon::lib::math::Rect;
     using retronomicon::asset::FontAsset;
-    /**
-     * @brief A simple text label component that can be attached to an entity.
-     */
+    using retronomicon::graphics::Texture;
+    using retronomicon::graphics::Color;
+    using retronomicon::math::Rect;
+    using retronomicon::manager::TextureManager;
+
     class TextLabelComponent : public Component, public Renderable {
     public:
-        TextLabelComponent(const std::string& text,
-                           std::shared_ptr<asset::FontAsset> font,
-                           SDL_Color color = {255, 255, 255, 255},
-                           int width = 0,
-                           int height = 0,
-                           int paddingX = 0,
-                           int paddingY = 0);
+        TextLabelComponent(std::shared_ptr<FontAsset> font,
+                           const std::string& text = "",
+                           const Color& color = Color::White());
 
-        ~TextLabelComponent() override;
+        ~TextLabelComponent() override = default;
 
-        void setText(const std::string& newText);
-        void setColor(SDL_Color newColor);
-        void setFont(std::shared_ptr<FontAsset> newFont);
-        void setPadding(int horizontal, int vertical);
-        Rect getSize() override;
+        void start() override;
+        void update(float dt) override {}
 
-        const std::string& getText() const;
-        SDL_Color getColor() const;
-        std::shared_ptr<FontAsset> getFont() const;
+        void render(std::shared_ptr<retronomicon::graphics::renderer::IRenderer> renderer) override;
 
-        void render(SDL_Renderer* renderer) override;
+        void setText(const std::string& text);
+        void setColor(const Color& color);
+        void setFont(std::shared_ptr<FontAsset> font);
+
+        const std::string& getText() const { return m_text; }
+        const Color& getColor() const { return m_color; }
+        std::shared_ptr<FontAsset> getFont() const { return m_font; }
+
+        // Backend generates texture atlas using TextureManager
+        void generateTexture(std::shared_ptr<TextureManager> textureManager);
 
     private:
-        std::string text;
-        SDL_Color color;
-        int paddingX;
-        int paddingY;
+        std::shared_ptr<FontAsset> m_font = nullptr;
+        std::shared_ptr<Texture>   m_texture = nullptr;
 
-        std::shared_ptr<FontAsset> font;
+        std::shared_ptr<TransformComponent> m_transform = nullptr;
+        std::shared_ptr<BoundComponent>     m_bound = nullptr;
 
-        SDL_Texture* texture = nullptr;
-        int width = 0;
-        int height = 0;
+        std::string m_text;
+        Color       m_color;
 
-        void regenerateTexture();
+        float m_lineSpacing = 0.0f;
     };
 
-} // namespace retronomicon::lib::ui
+} // namespace retronomicon::component
