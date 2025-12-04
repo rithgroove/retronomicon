@@ -1,31 +1,66 @@
 #pragma once
 #include "retronomicon/graphics/renderer/i_renderer.h"
 #include <memory>
+
 /**
- * @brief The namespace for ECS libraries that will be the building blocks for the engine
+ * @brief ECS component utilities for the Retronomicon engine.
  */
-namespace retronomicon::component{
+namespace retronomicon::component {
+
     using retronomicon::graphics::renderer::IRenderer;
+
     /**
-     * @brief Optional interface for components that can be rendered.
+     * @class Renderable
+     * @brief Interface for components capable of being rendered.
+     *
+     * This interface allows an ECS component to participate in the rendering
+     * pipeline. Any component inheriting from Renderable must implement the
+     * render() method, which is invoked by the rendering system each frame.
+     *
+     * Visibility can be toggled using show() and hide(), allowing systems to
+     * render or skip components without removing them from the ECS structure.
      */
     class Renderable {
-        public:
+    public:
+        /**
+         * @brief Virtual destructor for safe polymorphic cleanup.
+         */
+        virtual ~Renderable() = default;
 
-            virtual ~Renderable() = default;
-            /**
-             * @brief Called when rendering
-             */
-            virtual void render(std::shared_ptr<IRenderer> renderer) = 0;
+        /**
+         * @brief Render the component.
+         *
+         * Implementations should use the provided renderer to draw themselves.
+         *
+         * @param renderer Shared pointer to the active renderer.
+         */
+        virtual void render(std::shared_ptr<IRenderer> renderer) = 0;
 
-            bool isVisible() {return m_isVisible;}
+        /**
+         * @brief Check if the component is currently visible.
+         * @return true if visible, false if hidden.
+         */
+        bool isVisible() { return m_isVisible; }
 
-            void hide(){m_isVisible = false;}
+        /**
+         * @brief Hide the component from rendering.
+         *
+         * The component remains active in ECS but will be skipped during rendering.
+         */
+        void hide() { m_isVisible = false; }
 
-            void show(){m_isVisible = true;}
-        private:
+        /**
+         * @brief Show the component during rendering.
+         */
+        void show() { m_isVisible = true; }
 
-            bool m_isVisible = true;
+    private:
+        /**
+         * @brief Whether the component should be rendered.
+         *
+         * The rendering system checks this flag before invoking render().
+         */
+        bool m_isVisible = true;
     };
 
-} // namespace retronomicon::core::ecs
+} // namespace retronomicon::component
