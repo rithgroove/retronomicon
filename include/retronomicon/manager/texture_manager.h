@@ -23,13 +23,13 @@ namespace retronomicon::manager {
      */
     class TextureManager {
     public:
-        virtual ~TextureManager(); // must NOT be inline
+        virtual ~TextureManager() = default; // must NOT be inline
 
         /**
          * @brief Create a backend texture from an ImageAsset.
          *        (Used by SpriteComponent)
          */
-        virtual std::shared_ptr<Texture> createTexture(std::shared_ptr<ImageAsset> imageAsset);
+        virtual std::shared_ptr<Texture> createTexture(std::shared_ptr<ImageAsset> imageAsset) = 0;
 
         /**
          * @brief Create a backend texture from a FontAsset atlas.
@@ -38,7 +38,7 @@ namespace retronomicon::manager {
          * Core does not know how the atlas is produced — backends fill
          * FontAsset glyph metrics + atlas data, then construct a Texture.
          */
-        virtual std::shared_ptr<Texture> createTexture(std::shared_ptr<FontAsset> fontAsset);
+        virtual std::shared_ptr<Texture> createTexture(std::shared_ptr<FontAsset> fontAsset) = 0;
     };
 
 } // namespace retronomicon::manager
