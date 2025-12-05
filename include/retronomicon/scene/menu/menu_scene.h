@@ -31,13 +31,18 @@ namespace retronomicon::scene::menu {
         void shutdown() override;
 
         void setSFX(std::shared_ptr<SoundEffectAsset> sfx){m_sfx = sfx;}
+        void setNineSliceImage(const std::string& imagePath){
+            m_nineSliceImage = std::make_shared<ImageAsset>(imagePath);
+        }
 
     protected:
         void initiateEntities();
         void initiateSystems();
+        void buildNineSliceMenu();
         std::shared_ptr<GameEngine> m_gameEngine;
         std::shared_ptr<IRenderer> m_renderer;
         std::shared_ptr<ImageAsset> m_backgroundImage;
+        std::shared_ptr<ImageAsset> m_nineSliceImage;
         std::shared_ptr<Entity> m_backgroundEntity;
         std::shared_ptr<InputMap> m_inputMap;
         std::shared_ptr<RawInput> m_rawInput;

@@ -16,13 +16,14 @@
 #include "retronomicon/component/bound_component.h"
 #include "retronomicon/component/exit_game_component.h"
 #include "retronomicon/input/splash/splash_input_action.h"
+#include "retronomicon/component/nine_slice_panel_component.h"
 
 #include <iostream>
 namespace retronomicon::scene::menu{
     using namespace retronomicon::component;
     using namespace retronomicon::system;
-    using retronomicon::input::splash::SplashInputAction;
-    using retronomicon::animation::splash::SplashAnimationListener;
+    // using retronomicon::input::splash::SplashInputAction;
+    // using retronomicon::animation::splash::SplashAnimationListener;
 
     MenuScene::MenuScene(std::shared_ptr<GameEngine> gameEngine,
                              std::shared_ptr<TextureManager> textureManager,
@@ -110,6 +111,9 @@ namespace retronomicon::scene::menu{
         // }
 
         addChildEntity(m_backgroundEntity);
+
+        this->buildNineSliceMenu();
+
         m_backgroundEntity->start();
         // continueComponent
     }
@@ -125,7 +129,84 @@ namespace retronomicon::scene::menu{
             }
         }
     }
-    
+
+    void MenuScene::buildNineSliceMenu(){
+        if (m_nineSliceImage){
+            std::cout << "[Menu Scene] Creating 9-slice menu panel" << std::endl;
+
+            // -------------- Create entity for panel------------------
+            std::shared_ptr<Entity> panel = std::make_shared<Entity>("nine slice panel");
+
+            // ----------------- Panel size (customize later)--------------------
+            int windowWidth = m_renderer->getWidth();
+            int windowHeight = m_renderer->getHeight();
+            int panelWidth = windowWidth/2;
+            int panelHeight = windowHeight/2;
+
+            // -------------- Add transform component -----------------------
+            std::shared_ptr<TransformComponent> transform = panel->addComponent<TransformComponent>(
+                windowWidth / 2.0f, windowHeight - 100, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform->setAnchor(0.5f, 1.0f); // anchor bottom middle
+            transform->setRotation(0.0f); // no rotation
+
+            // --------------- Add NineSlicePanelComponent ----------------------
+            std::shared_ptr<NineSlicePanelComponent> nineSlice = panel->addComponent<NineSlicePanelComponent>(this->m_nineSliceImage);
+            nineSlice->setSlices(16, 16, 16, 16); // default slice sizes, adjust as needed
+            nineSlice->setSize(panelWidth, panelHeight);
+
+            // //--------- add newGameEntity -------------------
+            // auto* newGameEntity = new Entity("New Game");
+            // newGameEntity->addComponent<MenuItemComponent>("New Game",m_fontAsset);
+            // newGameEntity->addComponent<SceneChangeComponent>("New Game");
+            // newGameEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
+            // transform = newGameEntity->addComponent<TransformComponent>(50, 30, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            // transform->setAnchor(0.0f, 0.0f); // anchor top left
+            // transform->setRotation(0.0f); // no rotation
+            // newGameEntity->start();
+            // panel->addChildEntity(newGameEntity);
+
+            // //--------- add loadProgressEntity -------------------
+            // auto* loadProgressEntity = new Entity("Load Progress");
+            // loadProgressEntity->addComponent<MenuItemComponent>("Load Progress",m_fontAsset);
+            // loadProgressEntity->addComponent<SceneChangeComponent>("Splash");
+            // loadProgressEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
+            // transform = loadProgressEntity->addComponent<TransformComponent>(50, 80, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            // transform->setAnchor(0.0f, 0.0f); // anchor top left
+            // transform->setRotation(0.0f); // no rotation
+            // loadProgressEntity->start();
+            // panel->addChildEntity(loadProgressEntity);
+
+            // //--------- add optionEntity -------------------
+            // auto* optionEntity = new Entity("Option");
+            // optionEntity->addComponent<MenuItemComponent>("Option",m_fontAsset);
+            // optionEntity->addComponent<SceneChangeComponent>("Splash");
+            // optionEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
+            // transform = optionEntity->addComponent<TransformComponent>(50, 130, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            // transform->setAnchor(0.0f, 0.0f); // anchor top left
+            // transform->setRotation(0.0f); // no rotation
+            // optionEntity->start();
+            // panel->addChildEntity(optionEntity);
+
+            // //--------- add exitEntity -------------------
+            // auto* exitEntity = new Entity("Exit Game");
+            // exitEntity->addComponent<MenuItemComponent>("Exit Game",m_fontAsset);
+            // exitEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
+            // exitEntity->addComponent<ExitGameComponent>();
+            // transform = exitEntity->addComponent<TransformComponent>(50, 180, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            // transform->setAnchor(0.0f, 0.0f); // anchor top left
+            // transform->setRotation(0.0f); // no rotation
+            // exitEntity->start();
+            // panel->addChildEntity(exitEntity);
+
+
+            //--------- initiate panel -------------------
+            panel->start();
+
+            //--------- add nine slice panel as child entity -------------------
+            this->addChildEntity(panel);
+
+        }
+    }
     void MenuScene::shutdown() {
         m_elapsedTime = 0.0;
         m_backgroundEntity.reset();
