@@ -41,7 +41,7 @@ namespace retronomicon::component{
              * 
              * @param listener the animation listeneer class
              */
-            inline void setListener(AnimationListener* listener) noexcept{ m_listener = listener; }
+            inline void setListener(std::shared_ptr<AnimationListener> listener) noexcept{ m_listener = listener; }
 
             /***************************** Getter *****************************/
 
@@ -71,7 +71,7 @@ namespace retronomicon::component{
              * 
              * @return current animation listener
              */
-            [[nodiscard]] inline AnimationListener* getListener() const noexcept { return m_listener; }
+            [[nodiscard]] inline std::shared_ptr<AnimationListener> getListener() const noexcept { return m_listener; }
 
             /***************************** Utility *****************************/
 
@@ -173,7 +173,7 @@ namespace retronomicon::component{
             std::queue<std::shared_ptr<AnimationClip>> m_animationClipsQueue;
             std::shared_ptr<AnimationClip> m_currentClip;
             std::shared_ptr<AnimationClip> m_defaultClip;
-            AnimationListener* m_listener = nullptr; //not owning
+            std::shared_ptr<AnimationListener> m_listener = nullptr; //not owning
             bool m_paused = false;
     };
 }

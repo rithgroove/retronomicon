@@ -10,6 +10,7 @@ namespace retronomicon::system{
             auto sceneChange = e->getComponent<SceneChangeComponent>();
             if (sceneChange && sceneChange->isTriggered()) {
                 // get current scene before change
+
                 std::shared_ptr<Scene> currentScene = m_engine->getCurrentScene();
 
                 // change the scene first so the pointer is to the new scene

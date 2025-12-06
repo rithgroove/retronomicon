@@ -65,7 +65,7 @@ namespace retronomicon::scene::menu{
     }
 
     void MenuScene::initiateEntities() {
-        m_backgroundEntity = std::make_shared<Entity>("SplashLogo");
+        m_backgroundEntity = std::make_shared<Entity>("MenuBackground");
 
         int windowWidth = m_renderer->getWidth();
         int windowHeight = m_renderer->getHeight();
@@ -120,14 +120,6 @@ namespace retronomicon::scene::menu{
 
     void MenuScene::update(float dt) {
         Scene::update(dt);
-
-        m_elapsedTime += dt;
-
-        if (m_skipRequested || m_elapsedTime >= m_duration) {
-            if (auto sceneChange = m_backgroundEntity->getComponent<SceneChangeComponent>()) {
-                sceneChange->trigger();
-            }
-        }
     }
 
     void MenuScene::buildNineSliceMenu(){

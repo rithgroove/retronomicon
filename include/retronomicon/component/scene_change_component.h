@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+#include <iostream>
 #include "component.h"
 namespace retronomicon::component {
     class SceneChangeComponent : public Component {
@@ -14,7 +15,7 @@ namespace retronomicon::component {
                 m_nextScene = nextScene;
             }
 
-            void trigger() { m_triggered = true; }
+            void trigger() { m_triggered = true;}
             void resetTrigger() { m_triggered = false; }
 
             // Mark as const since it doesn't modify state

@@ -88,7 +88,7 @@ namespace retronomicon::scene::splash{
         frames.emplace_back(0, 0, m_logoImage->getWidth(), m_logoImage->getHeight(), this->m_duration); // create a single frame 
         auto clip = std::make_shared<AnimationClip>(frames, std::string("logo_wait"), false);  // create animation clip 
         auto logoAnimationComponent = m_logoEntity->addComponent<AnimationComponent>(clip); // create animation component
-        logoAnimationComponent->setListener(new SplashAnimationListener()); // setup listener so it set scene changecomponent to true
+        logoAnimationComponent->setListener(std::make_shared<SplashAnimationListener>()); // setup listener so it set scene changecomponent to true
 
         m_logoEntity->addComponent<SceneChangeComponent>(m_nextScene);
         m_logoEntity->addComponent<ExitGameComponent>();
@@ -120,14 +120,6 @@ namespace retronomicon::scene::splash{
 
     void SplashScene::update(float dt) {
         Scene::update(dt);
-
-        m_elapsedTime += dt;
-
-        if (m_skipRequested || m_elapsedTime >= m_duration) {
-            if (auto sceneChange = m_logoEntity->getComponent<SceneChangeComponent>()) {
-                sceneChange->trigger();
-            }
-        }
     }
     
     void SplashScene::shutdown() {
