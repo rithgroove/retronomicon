@@ -78,8 +78,8 @@ namespace retronomicon::component {
             Rect(m_sliceLeft + centerSrcW, m_sliceTop + centerSrcH, m_sliceRight, m_sliceBottom)
         };
 
-        float x = pos.x;
-        float y = pos.y;
+        float x = pos.x -(m_width*m_transform->getAnchorX());
+        float y = pos.y -(m_height*m_transform->getAnchorY());
 
         // --- 9 destination rects ---
         Rect dst[9] = {
@@ -98,6 +98,7 @@ namespace retronomicon::component {
 
         // Render using existing backend quad rendering
         for (int i = 0; i < 9; ++i) {
+            // std::cout<<dst<<std::endl;
             renderer->renderQuad(m_texture, dst[i], src[i], m_transform->getRotation(), 1.0f);
         }
     }

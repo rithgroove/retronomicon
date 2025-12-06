@@ -137,7 +137,7 @@ namespace retronomicon::scene::menu{
 
             // -------------- Add transform component -----------------------
             std::shared_ptr<TransformComponent> transform = panel->addComponent<TransformComponent>(
-                windowWidth / 2.0f, windowHeight - 100, 0.0f, 1.0f, 1.0f); //100 pixel from below
+                windowWidth / 2.0f, windowHeight - 50, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.5f, 1.0f); // anchor bottom middle
             transform->setRotation(0.0f); // no rotation
 
@@ -145,6 +145,7 @@ namespace retronomicon::scene::menu{
             std::shared_ptr<NineSlicePanelComponent> nineSlice = panel->addComponent<NineSlicePanelComponent>(this->m_nineSliceImage);
             nineSlice->setSlices(16, 16, 16, 16); // default slice sizes, adjust as needed
             nineSlice->setSize(panelWidth, panelHeight);
+            nineSlice->generateTexture(m_textureManager);
 
             // //--------- add newGameEntity -------------------
             // auto* newGameEntity = new Entity("New Game");
