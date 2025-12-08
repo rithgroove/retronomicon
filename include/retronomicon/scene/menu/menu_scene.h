@@ -10,10 +10,12 @@
 #include "retronomicon/input/input_map.h"
 #include "retronomicon/input/raw_input.h"
 #include "retronomicon/asset/sound_effect_asset.h"
+#include "retronomicon/asset/font_asset.h"
 
 namespace retronomicon::scene::menu {
     using retronomicon::graphics::renderer::IRenderer;
     using retronomicon::asset::ImageAsset;
+    using retronomicon::asset::FontAsset;
     using retronomicon::entity::Entity;
     using retronomicon::manager::TextureManager;
     using retronomicon::input::InputMap;
@@ -34,6 +36,9 @@ namespace retronomicon::scene::menu {
         void setNineSliceImage(const std::string& imagePath){
             m_nineSliceImage = std::make_shared<ImageAsset>(imagePath);
         }
+        void setFont(const std::shared_ptr<FontAsset> font){
+            m_font = font;
+        }
 
     protected:
         void initiateEntities();
@@ -43,6 +48,7 @@ namespace retronomicon::scene::menu {
         std::shared_ptr<IRenderer> m_renderer;
         std::shared_ptr<ImageAsset> m_backgroundImage;
         std::shared_ptr<ImageAsset> m_nineSliceImage;
+        std::shared_ptr<FontAsset> m_font;
         std::shared_ptr<Entity> m_backgroundEntity;
         std::shared_ptr<InputMap> m_inputMap;
         std::shared_ptr<RawInput> m_rawInput;
