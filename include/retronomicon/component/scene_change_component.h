@@ -3,31 +3,70 @@
 
 #include <iostream>
 #include "component.h"
+
 namespace retronomicon::component {
+
+    /**
+     * @brief Signals the engine to switch to another scene.
+     *
+     * This component is typically consumed by a `SceneChangeSystem`.
+     * When `trigger()` is called, the system:
+     *  - reads the target scene name,
+     *  - instructs the `SceneManager` to load or reset that scene,
+     *  - clears or reuses this component depending on game logic.
+     *
+     * Use cases:
+     *  - Player enters a door / portal.
+     *  - UI button requests scene transition.
+     *  - Cutscene or script triggers a scene load.
+     */
     class SceneChangeComponent : public Component {
-        public:
-            explicit SceneChangeComponent(const std::string& next)
-                : m_nextScene(next)
-            {}
+    public:
+        /**
+         * @brief Construct with the name of the scene to switch to.
+         *
+         * @param next Name of the target scene.
+         */
+        explicit SceneChangeComponent(const std::string& next)
+            : m_nextScene(next)
+        {}
 
-            // Take const reference to avoid unnecessary copy
-            void setNextScene(const std::string& nextScene) {
-                m_nextScene = nextScene;
-            }
+        /**
+         * @brief Update the target scene name.
+         *
+         * @param nextScene New scene identifier.
+         */
+        void setNextScene(const std::string& nextScene) {
+            m_nextScene = nextScene;
+        }
 
-            void trigger() { m_triggered = true;}
-            void resetTrigger() { m_triggered = false; }
+        /**
+         * @brief Mark this component as requesting a scene change.
+         */
+        void trigger() { m_triggered = true; }
 
-            // Mark as const since it doesn't modify state
-            const std::string& getNextScene() const {
-                return m_nextScene;
-            }
+        /**
+         * @brief Clear the trigger flag after the scene system processes it.
+         */
+        void resetTrigger() { m_triggered = false; }
 
-            bool isTriggered() const { return m_triggered; }
+        /**
+         * @brief Get the name of the target scene.
+         *
+         * @return Const reference to the stored scene name.
+         */
+        const std::string& getNextScene() const {
+            return m_nextScene;
+        }
 
-        private:
-            std::string m_nextScene;
-            bool m_triggered = false;
+        /**
+         * @brief Check whether a scene change was requested.
+         */
+        bool isTriggered() const { return m_triggered; }
+
+    private:
+        std::string m_nextScene; ///< Name of the scene that should be loaded.
+        bool m_triggered = false; ///< True when a transition has been triggered.
     };
 
-} // namespace retronomicon::core::ecs
+} // namespace retronomicon::component
