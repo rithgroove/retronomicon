@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+
 #include "retronomicon/scene/scene.h"
 #include "retronomicon/scene/scene_manager.h"
 #include "retronomicon/graphics/i_window.h"
@@ -10,155 +11,206 @@
 #include "retronomicon/manager/render_manager.h"
 #include "retronomicon/graphics/renderer/i_renderer.h"
 #include "retronomicon/audio/i_audio_player.h"
+
 /**
- * @brief The namespace for the core engine features of retronomicon
+ * @brief Core runtime namespace for the Retronomicon engine.
  */
 namespace retronomicon::engine {
+
     using retronomicon::input::InputState;
     using retronomicon::input::InputMap;
     using retronomicon::input::RawInput;
     using retronomicon::scene::Scene;
-    using retronomicon::manager::RenderManager;
     using retronomicon::scene::SceneManager;
+    using retronomicon::manager::RenderManager;
     using retronomicon::graphics::renderer::IRenderer;
     using retronomicon::audio::IAudioPlayer;
+
     /**
-     * @brief Game Engine class (the main class that you need to run)
+     * @brief The main engine class that coordinates rendering, scenes, input, and the game loop.
+     *
+     * GameEngine owns or references the major subsystems:
+     *  - Window and renderer (via RenderManager)
+     *  - Scene management (SceneManager)
+     *  - Input system (InputState, InputMap, RawInput)
+     *  - Audio playback (IAudioPlayer)
+     *
+     * Typical usage:
+     * @code
+     * auto engine = std::make_shared<GameEngine>(renderManager, sceneManager);
+     * engine->setInputModule(inputMap, rawInput);
+     * engine->init("My Game", 1280, 720);
+     * engine->registerScene("menu", std::make_shared<MenuScene>());
+     * engine->changeScene("menu");
+     * engine->run();
+     * @endcode
+     *
+     * Lifecycle overview:
+     *  1. Construct engine with render + scene managers.
+     *  2. Register scenes or set an initial active scene.
+     *  3. Call init() to create window and initialize subsystems.
+     *  4. Call run() to enter the main loop (events → update → render).
+     *  5. Call stop() to break out of the loop and shut down.
      */
     class GameEngine {
-        public:
+    public:
 
-            /***************************** Constructor *****************************/
+        /***************************** Constructor *****************************/
 
-            /**
-             * @brief default constructor
-             * initiate m_inputState 
-             */
-            GameEngine(std::shared_ptr<RenderManager> renderManager, std::shared_ptr<SceneManager> sceneManager);
+        /**
+         * @brief Construct the engine with rendering + scene systems preconfigured.
+         *
+         * Initializes the InputState object internally.
+         *
+         * @param renderManager Responsible for creating the renderer and managing frame rendering.
+         * @param sceneManager  Manages scene registration, loading, and transitions.
+         */
+        GameEngine(std::shared_ptr<RenderManager> renderManager,
+                   std::shared_ptr<SceneManager> sceneManager);
 
-            /***************************** Destructor *****************************/
+        /***************************** Scene Management *****************************/
 
-            /**
-             * @brief destructor (calls shutdown when killed)
-             */
-            // ~GameEngine();
+        /**
+         * @brief Immediately set the active scene (bypasses SceneManager logic).
+         *
+         * Used sparingly — normally `changeScene()` is preferred.
+         *
+         * @param newScene Scene instance to activate.
+         */
+        void setScene(std::shared_ptr<Scene> newScene) noexcept {
+            m_activeScene = std::move(newScene);
+        }
 
-            /***************************** Setter *****************************/
+        /**
+         * @brief Register a scene into the SceneManager so it can be accessed by name.
+         *
+         * @param name     Human-readable identifier for the scene.
+         * @param newScene Scene instance to associate with that name.
+         */
+        void registerScene(const std::string &name, std::shared_ptr<Scene> newScene) noexcept {
+            m_sceneManager->registerScene(name, newScene);
+        }
 
-            /**
-             * @brief set active scene
-             * 
-             * @param newScene the shared pointer of the new scene we wanted to set
-             */
-            void setScene(std::shared_ptr<Scene> newScene) noexcept {
-                m_activeScene = std::move(newScene);
-            }
+        /**
+         * @brief Request a change to a named scene.
+         *
+         * This handles initialization, reset logic, and returning the
+         * correct instance from SceneManager.
+         *
+         * @param name Name of the scene to switch to.
+         */
+        void changeScene(const std::string& name);
 
-            /**
-             * @brief register scene in m_sceneManager. so we could use scene manager to change scene by keyword
-             * 
-             * @param name the name of this scene
-             * @param newScene the shared pointer of the new scene we wanted to register
-             */
-            void registerScene(const std::string &name , std::shared_ptr<Scene> newScene) noexcept{
-                m_sceneManager->registerScene(name,newScene);
-            }
+        /***************************** Input System *****************************/
 
-            void setInputModule(std::shared_ptr<InputMap> inputMap, std::shared_ptr<RawInput> rawInput){
-                m_inputMap = inputMap;
-                m_rawInput = rawInput;
-                m_inputState->setInputMap(inputMap);
-                m_inputState->setRawInput(rawInput);
-            }
+        /**
+         * @brief Attach input modules to the engine.
+         *
+         * @param inputMap  Defines logical input bindings (e.g., jump, move).
+         * @param rawInput  Supplies raw hardware input data.
+         */
+        void setInputModule(std::shared_ptr<InputMap> inputMap,
+                            std::shared_ptr<RawInput> rawInput) {
+            m_inputMap = inputMap;
+            m_rawInput = rawInput;
+            m_inputState->setInputMap(inputMap);
+            m_inputState->setRawInput(rawInput);
+        }
 
-            void setAudioPlayer(std::shared_ptr<IAudioPlayer> audioPlayer){m_audioPlayer = audioPlayer;}
+        /**
+         * @brief Assign the audio playback backend.
+         *
+         * @param audioPlayer Audio system implementation.
+         */
+        void setAudioPlayer(std::shared_ptr<IAudioPlayer> audioPlayer) {
+            m_audioPlayer = audioPlayer;
+        }
 
-            /***************************** Getter *****************************/
+        /***************************** Getters *****************************/
 
-            /**
-             * @brief method to get InputState
-             * 
-             * @return inputState
-             */
-            std::shared_ptr<InputState>  getInputState() noexcept {return m_inputState;}    
+        /// @return The current InputState (merged logical + raw input).
+        std::shared_ptr<InputState> getInputState() noexcept { return m_inputState; }
 
-            /**
-             * @brief method to get InputState
-             * 
-             * @return inputState
-             */
-            std::shared_ptr<InputMap>  getInputMap() noexcept {return m_inputMap;}    
+        /// @return The current InputMap.
+        std::shared_ptr<InputMap> getInputMap() noexcept { return m_inputMap; }
 
-            /**
-             * @brief method to get InputState
-             * 
-             * @return inputState
-             */
-            std::shared_ptr<RawInput>  getRawInput() noexcept {return m_rawInput;}    
+        /// @return The raw input provider (keyboard, controller, touchscreen, etc.).
+        std::shared_ptr<RawInput> getRawInput() noexcept { return m_rawInput; }
 
+        /// @return The active renderer provided by the RenderManager.
+        std::shared_ptr<IRenderer> getRenderer() { return m_renderManager->getRenderer(); }
 
-            /***************************** Main Methods *****************************/
+        /// @return The scene currently active in the SceneManager.
+        std::shared_ptr<Scene> getCurrentScene() { return m_sceneManager->getCurrentScene(); }
 
-            /**
-             * @brief changes scene using scene manager (with reset/initialization logic)
-             * 
-             * @param name the scene name to switch to
-             */
-            void changeScene(const std::string& name);
+        /// @return The active audio backend.
+        std::shared_ptr<IAudioPlayer> getAudioPlayer() { return m_audioPlayer; }
 
-            /**
-             * @brief method to init all necessary components
-             * @params title title of the game
-             * @params width the window width 
-             * @params height the window height
-             */
-            bool init(const char* title, int width, int height);
+        /***************************** Initialization *****************************/
 
-            /**
-             * @brief method to start mainloop
-             */
-            void run();
-                 
-            /**
-             * @brief method to set m_running to false which will trigger the engine to exit mainloop.
-             */
-            void stop() noexcept {m_running = false;}
-            
-            std::shared_ptr<IRenderer> getRenderer(){return m_renderManager->getRenderer();}
-            std::shared_ptr<Scene> getCurrentScene(){return m_sceneManager->getCurrentScene();}
-            std::shared_ptr<IAudioPlayer> getAudioPlayer() {return m_audioPlayer;}
-        private:
-            /***************************** Attribute *****************************/
-            std::shared_ptr<RenderManager> m_renderManager;
-            std::shared_ptr<InputState> m_inputState;
-            std::unique_ptr<retronomicon::graphics::IWindow> m_window;
-            std::shared_ptr<Scene> m_activeScene;
-            std::shared_ptr<InputMap> m_inputMap;
-            std::shared_ptr<RawInput> m_rawInput;
-            std::shared_ptr<IAudioPlayer> m_audioPlayer;
+        /**
+         * @brief Initialize window, renderer, and subsystem state.
+         *
+         * @param title  Window title string.
+         * @param width  Window width in pixels.
+         * @param height Window height in pixels.
+         *
+         * @return True if initialization succeeded.
+         */
+        bool init(const char* title, int width, int height);
 
-            bool m_running = false; 
-            std::shared_ptr<SceneManager> m_sceneManager;
+        /***************************** Main Loop *****************************/
 
-            /***************************** Main Private Methods *****************************/
+        /**
+         * @brief Begin the engine's main loop.
+         *
+         * Loop sequence:
+         *  - Poll + process input events (`handleEvents()`)
+         *  - Compute dt and call `update(dt)`
+         *  - Render the current scene (`render()`)
+         */
+        void run();
 
-            /**
-             * @brief method to pool event before updating
-             */
-            void handleEvents();
+        /**
+         * @brief Stop the main loop on next iteration.
+         */
+        void stop() noexcept { m_running = false; }
 
+    private:
 
-            /**
-             * @brief method to pool event before updating
-             * 
-             * @param dt, the delta time since last update
-             */
-            void update(float dt);
+        /***************************** Subsystems *****************************/
+        std::shared_ptr<RenderManager> m_renderManager;  ///< Responsible for renderer creation + frame orchestration.
+        std::shared_ptr<SceneManager>  m_sceneManager;   ///< Handles scene instances and transitions.
+        std::shared_ptr<InputState>    m_inputState;     ///< Unified input state object.
+        std::unique_ptr<retronomicon::graphics::IWindow> m_window; ///< Game window implementation.
 
-            /**
-             * @brief the render method
-             */
-            void render();
+        std::shared_ptr<Scene>         m_activeScene;    ///< Direct active scene pointer (may mirror SceneManager).
+        std::shared_ptr<InputMap>      m_inputMap;       ///< Logical input mapping.
+        std::shared_ptr<RawInput>      m_rawInput;       ///< Raw device input.
+        std::shared_ptr<IAudioPlayer>  m_audioPlayer;    ///< Audio backend.
+
+        bool m_running = false; ///< Controls main loop execution.
+
+        /***************************** Internal Loop Helpers *****************************/
+
+        /**
+         * @brief Poll and process pending input events.
+         */
+        void handleEvents();
+
+        /**
+         * @brief Update the active scene.
+         *
+         * @param dt Delta time since previous frame (in seconds).
+         */
+        void update(float dt);
+
+        /**
+         * @brief Render the current frame.
+         *
+         * Delegates to the RenderManager → Renderer → Scene rendering.
+         */
+        void render();
     };
 
-} // namespace retronomicon::core
+} // namespace retronomicon::engine
