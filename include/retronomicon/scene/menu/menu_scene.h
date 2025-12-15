@@ -11,10 +11,12 @@
 #include "retronomicon/input/raw_input.h"
 #include "retronomicon/asset/sound_effect_asset.h"
 #include "retronomicon/asset/font_asset.h"
+#include "retronomicon/graphics/color.h"
 
 namespace retronomicon::scene::menu {
 
     using retronomicon::graphics::renderer::IRenderer;
+    using retronomicon::graphics::Color;
     using retronomicon::asset::ImageAsset;
     using retronomicon::asset::FontAsset;
     using retronomicon::asset::SoundEffectAsset;
@@ -98,6 +100,13 @@ namespace retronomicon::scene::menu {
             m_font = font;
         }
 
+        /**
+         * @brief Set font color used for titles, labels, and menu text.
+         */
+        void setFontColor(const std::shared_ptr<Color> idleColor,  const std::shared_ptr<Color> selectedColor) {
+            m_idleColor = idleColor;
+            m_selectedColor = selectedColor;
+        }
     protected:
         /**
          * @brief Create all ECS entities required by the menu.
@@ -143,6 +152,9 @@ namespace retronomicon::scene::menu {
         // --------------------------------------------------------------------
         std::shared_ptr<InputMap> m_inputMap; ///< Input bindings for menu actions.
         std::shared_ptr<RawInput> m_rawInput; ///< Raw hardware input.
+
+        std::shared_ptr<Color> m_idleColor;
+        std::shared_ptr<Color> m_selectedColor;
 
         // --------------------------------------------------------------------
         // Internal State

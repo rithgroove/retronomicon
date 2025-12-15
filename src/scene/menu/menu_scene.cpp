@@ -17,6 +17,7 @@
 #include "retronomicon/component/exit_game_component.h"
 #include "retronomicon/input/splash/splash_input_action.h"
 #include "retronomicon/component/nine_slice_panel_component.h"
+#include "retronomicon/component/text_label_component.h"
 
 #include <iostream>
 namespace retronomicon::scene::menu{
@@ -148,15 +149,17 @@ namespace retronomicon::scene::menu{
             nineSlice->generateTexture(m_textureManager);
 
             // //--------- add newGameEntity -------------------
-            // auto* newGameEntity = new Entity("New Game");
+            auto newGameEntity = std::make_shared<Entity>("New Game");
+            auto newGameLabelComponent = newGameEntity->addComponent<TextLabelComponent>(m_font,m_idleColor,"New Game");
+            newGameLabelComponent->generateTexture(m_textureManager);
             // newGameEntity->addComponent<MenuItemComponent>("New Game",m_fontAsset);
             // newGameEntity->addComponent<SceneChangeComponent>("New Game");
             // newGameEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
-            // transform = newGameEntity->addComponent<TransformComponent>(50, 30, 0.0f, 1.0f, 1.0f); //100 pixel from below
-            // transform->setAnchor(0.0f, 0.0f); // anchor top left
-            // transform->setRotation(0.0f); // no rotation
-            // newGameEntity->start();
-            // panel->addChildEntity(newGameEntity);
+            transform = newGameEntity->addComponent<TransformComponent>(50, 30, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform->setAnchor(0.0f, 0.0f); // anchor top left
+            transform->setRotation(0.0f); // no rotation
+            newGameEntity->start();
+            panel->addChildEntity(newGameEntity);
 
             // //--------- add loadProgressEntity -------------------
             // auto* loadProgressEntity = new Entity("Load Progress");

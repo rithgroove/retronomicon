@@ -26,8 +26,8 @@ namespace retronomicon::component {
     class TextLabelComponent : public Component, public Renderable {
     public:
         TextLabelComponent(std::shared_ptr<FontAsset> font,
-                           const std::string& text = "",
-                           const Color& color = Color::White());
+                           std::shared_ptr<Color> color,
+                           const std::string& text = "");
 
         ~TextLabelComponent() override = default;
 
@@ -37,11 +37,11 @@ namespace retronomicon::component {
         void render(std::shared_ptr<retronomicon::graphics::renderer::IRenderer> renderer) override;
 
         void setText(const std::string& text);
-        void setColor(const Color& color);
+        void setColor(std::shared_ptr<Color> color);
         void setFont(std::shared_ptr<FontAsset> font);
 
         const std::string& getText() const { return m_text; }
-        const Color& getColor() const { return m_color; }
+        const std::shared_ptr<Color> getColor() const { return m_color; }
         std::shared_ptr<FontAsset> getFont() const { return m_font; }
 
         // Backend generates texture atlas using TextureManager
@@ -55,7 +55,7 @@ namespace retronomicon::component {
         std::shared_ptr<BoundComponent>     m_bound = nullptr;
 
         std::string m_text;
-        Color       m_color;
+        std::shared_ptr<Color> m_color;
 
         float m_lineSpacing = 0.0f;
     };

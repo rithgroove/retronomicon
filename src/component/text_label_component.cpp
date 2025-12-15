@@ -10,8 +10,8 @@ using retronomicon::graphics::renderer::IRenderer;
 
 TextLabelComponent::TextLabelComponent(
     std::shared_ptr<FontAsset> font,
-    const std::string& text,
-    const Color& color)
+    std::shared_ptr<Color> color,
+    const std::string& text)
     : m_font(std::move(font))
     , m_text(text)
     , m_color(color)
@@ -30,7 +30,7 @@ void TextLabelComponent::setText(const std::string& t) {
     m_text = t;
 }
 
-void TextLabelComponent::setColor(const Color& c) {
+void TextLabelComponent::setColor(std::shared_ptr<Color> c) {
     m_color = c;
 }
 
@@ -103,8 +103,8 @@ void TextLabelComponent::render(std::shared_ptr<IRenderer> renderer) {
             dst,
             src,
             rotation,
-            m_color.a(),
-            m_color
+            m_color->a(),
+            *(m_color.get())
         );
 
         cursorX += gm->advanceX * scaleX;
