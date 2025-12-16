@@ -47,44 +47,42 @@ namespace retronomicon::component{
         // Start with our local position
         Vec2 worldPos = this->getPosition();
 
-        // std::shared_ptr<Entity>  owner = this->getOwner();
-        // auto renderable = owner->getMainRenderableComponent();
+        std::shared_ptr<Entity>  owner = this->getOwner();
+        // auto renderable = owner->getRenderPosition();
         // if (renderable){
         //     auto size= renderable->getSize();
         //     worldPos.x -= size.getWidth()*this->m_anchorX;
         //     worldPos.y -= size.getHeight()*this->m_anchorY;
         // }
-
-
         
-        // // return worldPos;
+        // return worldPos;
         
-        // // get owner
-        // std::shared_ptr<Entity> parent = this->getOwner()->getParent();
+        // get owner
+        std::shared_ptr<Entity> parent = owner->getParent();
 
-        // /*
-        // * since there is posibilities that owner doesnt not have transform,
-        // * we traverse to find owner that have transform component (
-        // * (or stop when we find the owner that doesn't have parent)
-        // */ 
-        // while (parent->hasParent()) {
-        //     // check if it has transform component
-        //     if (parent->hasComponent<TransformComponent>()) {
-        //         // if have, break from loop
-        //         break; 
-        //     }else{
-        //         // if not set owner as their parent
-        //         parent = parent->getParent();
-        //     }
-        // }
+        /*
+        * since there is posibilities that owner doesnt not have transform,
+        * we traverse to find owner that have transform component (
+        * (or stop when we find the owner that doesn't have parent)
+        */ 
+        while (parent->hasParent()) {
+            // check if it has transform component
+            if (parent->hasComponent<TransformComponent>()) {
+                // if have, break from loop
+                break; 
+            }else{
+                // if not set owner as their parent
+                parent = parent->getParent();
+            }
+        }
 
-        // // check if the owner doesn't have transform component
-        // // this means we're at the scene level
-        // if (parent->hasComponent<TransformComponent>()){
-        //     // if we have, gather it, and call recursively
-        //     const auto& parentTransform = parent->getComponent<TransformComponent>();
-        //     worldPos += parentTransform->getRenderPosition();            
-        // }
+        // check if the owner doesn't have transform component
+        // this means we're at the scene level
+        if (parent->hasComponent<TransformComponent>()){
+            // if we have, gather it, and call recursively
+            const auto& parentTransform = parent->getComponent<TransformComponent>();
+            worldPos += parentTransform->getRenderPosition();            
+        }
 
         return worldPos;
     }

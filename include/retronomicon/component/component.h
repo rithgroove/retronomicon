@@ -1,7 +1,8 @@
 #pragma once
 #include <memory>
 
-namespace retronomicon::entity { class Entity; }
+#include "retronomicon/entity/entity.h"
+// namespace retronomicon::entity { class Entity; }
 
 /**
  * @brief The namespace for core components
