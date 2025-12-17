@@ -60,9 +60,6 @@ void TextLabelComponent::render(std::shared_ptr<IRenderer> renderer) {
     float cursorX = 0.0f;
     float cursorY = 0.0f;
 
-    int atlasW = m_texture->getWidth();
-    int atlasH = m_texture->getHeight();
-
     for (char c : m_text) {
         if (c == '\n') {
             cursorX = 0.0f;
@@ -71,29 +68,28 @@ void TextLabelComponent::render(std::shared_ptr<IRenderer> renderer) {
         }
 
         const auto* gm = m_font->getGlyph(c);
-        if (!gm) {
-            cursorX += m_font->getPointSize() * 0.5f;
+        if (!gm) continue;
+        if (gm->width == 0 || gm->height == 0) {
+            cursorX += gm->advanceX * scaleX;
             continue;
         }
 
         float glyphW = gm->width * scaleX;
         float glyphH = gm->height * scaleY;
 
-        float destX = pos.x + cursorX - anchorX;
-        float destY = pos.y + cursorY - anchorY;
+        float destX = pos.x + cursorX + gm->bearingX * scaleX
+                      - glyphW * anchorX;
+        float destY = pos.y + cursorY - gm->bearingY * scaleY;
 
-        // Source rectangle in atlas
         Rect src(
-            static_cast<float>(gm->atlasX),
-            static_cast<float>(gm->atlasY),
-            static_cast<float>(gm->width),
-            static_cast<float>(gm->height)
+            (float)gm->atlasX,
+            (float)gm->atlasY,
+            (float)gm->width,
+            (float)gm->height
         );
-
-        // Destination rectangle in world space
         Rect dst(
-            Point(destX, destY),
-            Point(0.0f, 0.0f),
+            destX,
+            destY,
             glyphW,
             glyphH
         );
@@ -104,11 +100,12 @@ void TextLabelComponent::render(std::shared_ptr<IRenderer> renderer) {
             src,
             rotation,
             m_color->a(),
-            *(m_color.get())
+            *m_color
         );
 
         cursorX += gm->advanceX * scaleX;
     }
+
 }
 
 } // namespace retronomicon::component
