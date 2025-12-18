@@ -78,8 +78,8 @@ namespace retronomicon::scene::menu{
         transformComponent->setScale(1.0f,1.0f);
 
         // Attach renderable using the image asset
-        // auto backgroundComponent = m_backgroundEntity->addComponent<SpriteComponent>(m_backgroundImage);
-        // backgroundComponent->generateTexture(m_textureManager);
+        auto backgroundComponent = m_backgroundEntity->addComponent<SpriteComponent>(m_backgroundImage);
+        backgroundComponent->generateTexture(m_textureManager);
 
         // // Simple animation + scene change
         // // ---------------- setup animation component using m_duration as wait time ------------------------
@@ -143,10 +143,10 @@ namespace retronomicon::scene::menu{
             transform->setRotation(0.0f); // no rotation
 
             // --------------- Add NineSlicePanelComponent ----------------------
-            // std::shared_ptr<NineSlicePanelComponent> nineSlice = panel->addComponent<NineSlicePanelComponent>(this->m_nineSliceImage);
-            // nineSlice->setSlices(16, 16, 16, 16); // default slice sizes, adjust as needed
-            // nineSlice->setSize(panelWidth, panelHeight);
-            // nineSlice->generateTexture(m_textureManager);
+            std::shared_ptr<NineSlicePanelComponent> nineSlice = panel->addComponent<NineSlicePanelComponent>(this->m_nineSliceImage);
+            nineSlice->setSlices(16, 16, 16, 16); // default slice sizes, adjust as needed
+            nineSlice->setSize(panelWidth, panelHeight);
+            nineSlice->generateTexture(m_textureManager);
 
             // //--------- add newGameEntity -------------------
             auto newGameEntity = std::make_shared<Entity>("New Game");
