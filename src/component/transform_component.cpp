@@ -8,6 +8,9 @@ namespace retronomicon::component{
         m_anchorX = 0.5;
         m_anchorY = 0.5;
     }
+    void TransformComponent::start() {
+        m_bound = getOwner()->getComponent<BoundComponent>();
+    }
 
     TransformComponent::TransformComponent(float x, float y, float rotation, float scaleX, float scaleY)
         : m_x(x), m_y(y), m_rotation(rotation), m_scaleX(scaleX), m_scaleY(scaleY) {
@@ -49,11 +52,10 @@ namespace retronomicon::component{
 
         std::shared_ptr<Entity>  owner = this->getOwner();
         // auto renderable = owner->getRenderPosition();
-        // if (renderable){
-        //     auto size= renderable->getSize();
-        //     worldPos.x -= size.getWidth()*this->m_anchorX;
-        //     worldPos.y -= size.getHeight()*this->m_anchorY;
-        // }
+        if (m_bound){
+            worldPos.x -= m_bound->getWidth()*this->m_anchorX;
+            worldPos.y -= m_bound->getHeight()*this->m_anchorY;
+        }
         
         // return worldPos;
         

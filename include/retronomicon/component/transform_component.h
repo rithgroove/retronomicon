@@ -1,6 +1,7 @@
-#pragma once
+ #pragma once
 
 #include "component.h"
+#include "bound_component.h"
 #include "retronomicon/math/vec2.h"
 /**
  * @brief The namespace for core components
@@ -123,6 +124,7 @@ namespace retronomicon::component{
              */
             Vec2 getRenderPosition() const ;
 
+            void start();
         private:
             float m_x = 0.0f;
             float m_y = 0.0f;
@@ -131,6 +133,7 @@ namespace retronomicon::component{
             float m_scaleY = 0.0f;
             float m_anchorX = 0.5f;
             float m_anchorY = 0.5f;
+            std::shared_ptr<BoundComponent> m_bound = nullptr;
     };
 
 } // namespace retronomicon
