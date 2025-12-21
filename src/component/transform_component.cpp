@@ -46,13 +46,13 @@ namespace retronomicon::component{
         return Vec2{m_x,m_y};
     }
 
-    Vec2 TransformComponent::getRenderPosition() const {
+    Vec2 TransformComponent::getRenderPosition(bool first) const {
         // Start with our local position
         Vec2 worldPos = this->getPosition();
 
         std::shared_ptr<Entity>  owner = this->getOwner();
         // auto renderable = owner->getRenderPosition();
-        if (m_bound){
+        if (!first && m_bound){
             worldPos.x -= m_bound->getWidth()*this->m_anchorX;
             worldPos.y -= m_bound->getHeight()*this->m_anchorY;
         }
@@ -83,7 +83,7 @@ namespace retronomicon::component{
         if (parent->hasComponent<TransformComponent>()){
             // if we have, gather it, and call recursively
             const auto& parentTransform = parent->getComponent<TransformComponent>();
-            worldPos += parentTransform->getRenderPosition();            
+            worldPos += parentTransform->getRenderPosition(false);            
         }
 
         return worldPos;

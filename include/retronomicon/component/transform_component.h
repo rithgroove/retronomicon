@@ -122,7 +122,7 @@ namespace retronomicon::component{
              * 
              * @return Vec2 of the render position
              */
-            Vec2 getRenderPosition() const ;
+            Vec2 getRenderPosition(bool first = true) const ;
 
             void start();
         private:

@@ -136,7 +136,26 @@ namespace retronomicon::asset {
         const std::unordered_map<char, GlyphMetrics>& glyphTable() const noexcept {
             return m_glyphs;
         }
+        int getMaxGlyphHeight() const noexcept {
+            if (m_metricsDirty) {
+                recomputeMetricsCache();
+            }
+            return m_cachedMaxGlyphHeight;
+        }
 
+        int getMaxAscent() const noexcept {
+            if (m_metricsDirty) {
+                recomputeMetricsCache();
+            }
+            return m_cachedMaxAscent;
+        }
+
+        int getMaxVerticalExtent() const noexcept {
+            if (m_metricsDirty) {
+                recomputeMetricsCache();
+            }
+            return m_cachedMaxVerticalExtent;
+        }
         // --------------------------------------------------------------------
         // Debug helper
         // --------------------------------------------------------------------
@@ -151,9 +170,37 @@ namespace retronomicon::asset {
                    ", glyphs=" + std::to_string(m_glyphs.size()) + ")";
         }
 
+        void recomputeMetricsCache() const noexcept {
+            int maxHeight = 0;
+            
+            int maxAscent = 0;
+            int top = 0;
+            int bottom = 0;
+
+            for (const auto& [_, glyph] : m_glyphs) {
+                maxHeight = std::max(maxHeight, glyph.height);
+                maxAscent = std::max(maxAscent, glyph.bearingY);
+
+                top = std::max(top, glyph.bearingY);
+                bottom = std::min(bottom, glyph.bearingY - glyph.height);
+            }
+
+            m_cachedMaxGlyphHeight = maxHeight;
+            m_cachedMaxAscent = maxAscent;
+            m_cachedMaxVerticalExtent = top - bottom;
+
+            m_metricsDirty = false;
+        }
     protected:
         int m_pointSize = 0;  ///< Requested point size used during rasterization.
+        mutable bool m_metricsDirty = true;
 
+        mutable int m_cachedMaxGlyphHeight   = 0;
+        mutable int m_cachedMaxAscent        = 0;
+        mutable int m_cachedMaxVerticalExtent = 0;
+        void markMetricsDirty() const noexcept {
+            m_metricsDirty = true;
+        }
         /**
          * @brief Populated by the backend after font loading/rasterization.
          *

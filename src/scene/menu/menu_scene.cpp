@@ -147,6 +147,7 @@ namespace retronomicon::scene::menu{
             nineSlice->setSlices(16, 16, 16, 16); // default slice sizes, adjust as needed
             nineSlice->setSize(panelWidth, panelHeight);
             nineSlice->generateTexture(m_textureManager);
+            panel->addComponent<BoundComponent>(panelWidth,panelHeight);
 
             // //--------- add newGameEntity -------------------
             auto newGameEntity = std::make_shared<Entity>("New Game");
@@ -155,7 +156,7 @@ namespace retronomicon::scene::menu{
             // newGameEntity->addComponent<MenuItemComponent>("New Game",m_fontAsset);
             // newGameEntity->addComponent<SceneChangeComponent>("New Game");
             // newGameEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
-            transform = newGameEntity->addComponent<TransformComponent>(50, 30, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform = newGameEntity->addComponent<TransformComponent>(30, 30, 0.0f, 1.0f, 1.0f); //100 pixel from below
             transform->setAnchor(0.0f, 0.0f); // anchor top left
             transform->setRotation(0.0f); // no rotation
             newGameEntity->start();
