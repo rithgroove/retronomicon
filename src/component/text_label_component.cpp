@@ -80,15 +80,6 @@ void TextLabelComponent::render(std::shared_ptr<IRenderer> renderer) {
 
         float destX = pos.x + cursorX + gm->bearingX * scaleX - glyphW * anchorX;
         float destY = pos.y + cursorY - (gm->bearingY * scaleY) + m_font->getMaxGlyphHeight() - glyphH * anchorY ;
-        if (c == 'N' || c == 'w'){
-            std::cout<< "[char = " << c  << "]"<<std::endl;
-            std::cout<< "pos.y = " << pos.y <<std::endl;
-            std::cout<< "cursorY = " << cursorY <<std::endl;
-            std::cout<< "gm->bearingY = " << gm->bearingY <<std::endl;
-            std::cout<< "scaleY = " << scaleY <<std::endl;
-            std::cout<< "glyphH = " << glyphH <<std::endl;
-            std::cout<< "getMaxGlyphHeight = " << m_font->getMaxGlyphHeight() <<std::endl;
-        }
 
         Rect src(
             (float)gm->atlasX,
