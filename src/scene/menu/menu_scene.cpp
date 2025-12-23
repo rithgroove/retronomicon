@@ -163,37 +163,43 @@ namespace retronomicon::scene::menu{
             panel->addChildEntity(newGameEntity);
 
             // //--------- add loadProgressEntity -------------------
-            // auto* loadProgressEntity = new Entity("Load Progress");
+            auto loadProgressEntity = std::make_shared<Entity>("Load Progress");
+            auto loadProgressLabelComponent = loadProgressEntity->addComponent<TextLabelComponent>(m_font,m_idleColor,"Load Progress");
+            loadProgressLabelComponent->generateTexture(m_textureManager);
             // loadProgressEntity->addComponent<MenuItemComponent>("Load Progress",m_fontAsset);
             // loadProgressEntity->addComponent<SceneChangeComponent>("Splash");
             // loadProgressEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
-            // transform = loadProgressEntity->addComponent<TransformComponent>(50, 80, 0.0f, 1.0f, 1.0f); //100 pixel from below
-            // transform->setAnchor(0.0f, 0.0f); // anchor top left
-            // transform->setRotation(0.0f); // no rotation
-            // loadProgressEntity->start();
-            // panel->addChildEntity(loadProgressEntity);
+            transform = loadProgressEntity->addComponent<TransformComponent>(30, 80, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform->setAnchor(0.0f, 0.0f); // anchor top left
+            transform->setRotation(0.0f); // no rotation
+            loadProgressEntity->start();
+            panel->addChildEntity(loadProgressEntity);
 
             // //--------- add optionEntity -------------------
-            // auto* optionEntity = new Entity("Option");
+            auto optionEntity = std::make_shared<Entity>("Option");
+            auto optionLabelComponent = optionEntity->addComponent<TextLabelComponent>(m_font,m_idleColor,"Option");
+            optionLabelComponent->generateTexture(m_textureManager);
             // optionEntity->addComponent<MenuItemComponent>("Option",m_fontAsset);
             // optionEntity->addComponent<SceneChangeComponent>("Splash");
             // optionEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
-            // transform = optionEntity->addComponent<TransformComponent>(50, 130, 0.0f, 1.0f, 1.0f); //100 pixel from below
-            // transform->setAnchor(0.0f, 0.0f); // anchor top left
-            // transform->setRotation(0.0f); // no rotation
-            // optionEntity->start();
-            // panel->addChildEntity(optionEntity);
+            transform = optionEntity->addComponent<TransformComponent>(30, 130, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform->setAnchor(0.0f, 0.0f); // anchor top left
+            transform->setRotation(0.0f); // no rotation
+            optionEntity->start();
+            panel->addChildEntity(optionEntity);
 
             // //--------- add exitEntity -------------------
-            // auto* exitEntity = new Entity("Exit Game");
+            auto exitEntity = std::make_shared<Entity>("Exit Game");
+            auto exitLabelComponent = exitEntity->addComponent<TextLabelComponent>(m_font,m_idleColor,"Exit Game");
+            exitLabelComponent->generateTexture(m_textureManager);
             // exitEntity->addComponent<MenuItemComponent>("Exit Game",m_fontAsset);
             // exitEntity->addComponent<SoundEffectComponent>(m_soundEffectAsset.get(),0);
             // exitEntity->addComponent<ExitGameComponent>();
-            // transform = exitEntity->addComponent<TransformComponent>(50, 180, 0.0f, 1.0f, 1.0f); //100 pixel from below
-            // transform->setAnchor(0.0f, 0.0f); // anchor top left
-            // transform->setRotation(0.0f); // no rotation
-            // exitEntity->start();
-            // panel->addChildEntity(exitEntity);
+            transform = exitEntity->addComponent<TransformComponent>(30, 180, 0.0f, 1.0f, 1.0f); //100 pixel from below
+            transform->setAnchor(0.0f, 0.0f); // anchor top left
+            transform->setRotation(0.0f); // no rotation
+            exitEntity->start();
+            panel->addChildEntity(exitEntity);
 
 
             //--------- initiate panel -------------------
