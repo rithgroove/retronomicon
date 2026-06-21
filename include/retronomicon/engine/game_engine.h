@@ -149,13 +149,17 @@ namespace retronomicon::engine {
         /***************************** Initialization *****************************/
 
         /**
-         * @brief Initialize window, renderer, and subsystem state.
+         * @brief Validate that required injected subsystems are present.
+         *
+         * Core does not create concrete windows, renderers, input providers, or
+         * audio devices. Backend modules own that setup and inject the results
+         * before the engine loop starts.
          *
          * @param title  Window title string.
          * @param width  Window width in pixels.
          * @param height Window height in pixels.
          *
-         * @return True if initialization succeeded.
+         * @return True if required core subsystems are available.
          */
         bool init(const char* title, int width, int height);
 
@@ -170,6 +174,18 @@ namespace retronomicon::engine {
          *  - Render the current scene (`render()`)
          */
         void run();
+
+        /**
+         * @brief Advance one engine frame.
+         *
+         * This is the testable form of the main loop body. Runtime code should
+         * normally call run(); tests and tooling can call tick() to verify input,
+         * scene update, and render coordination without opening a platform window
+         * or entering an infinite loop.
+         *
+         * @param dt Delta time to pass to the active scene.
+         */
+        void tick(float dt);
 
         /**
          * @brief Stop the main loop on next iteration.

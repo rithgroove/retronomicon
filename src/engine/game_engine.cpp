@@ -50,10 +50,29 @@ namespace retronomicon::engine {
      * @params height the window height
      */
     bool GameEngine::init(const char* title, int width, int height) {
+        (void)title;
+        (void)width;
+        (void)height;
+
         try{
-            // m_inputState = std::make_shared<InputState>();
-            // m_window = std::make_unique<Window>(title, width, height);
-            // m_running = true;
+            if (!m_renderManager) {
+                std::cerr << "Failure to init game engine: render manager is not configured." << std::endl;
+                return false;
+            }
+
+            if (!m_renderManager->getRenderer()) {
+                std::cerr << "Failure to init game engine: renderer is not configured." << std::endl;
+                return false;
+            }
+
+            if (!m_sceneManager) {
+                std::cerr << "Failure to init game engine: scene manager is not configured." << std::endl;
+                return false;
+            }
+
+            if (!m_inputState) {
+                m_inputState = std::make_shared<InputState>();
+            }
         }catch (const std::runtime_error &e){
             std::cerr << "Failure to init game engine: " << e.what() << std::endl;
             return false;
@@ -85,11 +104,7 @@ namespace retronomicon::engine {
             double deltaTime = elapsed.count();
             lastTime = currentTime;
 
-            // --- Engine core loop ---
-            handleEvents();
-            update(static_cast<float>(deltaTime));
-            render();
-            // ------------------------
+            tick(static_cast<float>(deltaTime));
 
             // Frame limiting (avoid CPU spin)
             auto frameDuration = clock::now() - currentTime;
@@ -99,6 +114,12 @@ namespace retronomicon::engine {
                 std::this_thread::sleep_for(std::chrono::duration_cast<std::chrono::milliseconds>(sleepDuration));
             }
         }
+    }
+
+    void GameEngine::tick(float dt) {
+        handleEvents();
+        update(dt);
+        render();
     }
 
     /***************************** Main Private Methods *****************************/
